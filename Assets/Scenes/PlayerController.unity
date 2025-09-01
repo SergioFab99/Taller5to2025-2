@@ -270,7 +270,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1343971543}
-  - {fileID: 424062178}
   m_Father: {fileID: 950165083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &347065355
@@ -347,12 +346,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424062177}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 253768622}
+  m_Father: {fileID: 950165083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532222872
 GameObject:
@@ -495,6 +494,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 424062178}
   - {fileID: 253768622}
   m_Father: {fileID: 1333725515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -611,7 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989436751}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: CameraCMTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
