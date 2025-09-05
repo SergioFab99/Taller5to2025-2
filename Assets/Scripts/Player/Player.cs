@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
             Rotation = playerCamera._camera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
             Jump = input.Jump.WasPressedThisFrame(),
-            Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None
+            Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
+            Dash = Input.GetKeyDown(KeyCode.Z)
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();

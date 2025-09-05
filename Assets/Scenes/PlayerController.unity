@@ -530,6 +530,8 @@ MonoBehaviour:
   standHeight: 2
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
+  dashSpeed: 50
+  dashDuration: 0.2
   _state:
     Grounded: 0
     Stance: 0
