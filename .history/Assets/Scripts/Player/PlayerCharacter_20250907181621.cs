@@ -35,7 +35,6 @@ public enum MovementState
 public enum BehaviourState
 {
     Default,
-    HoldingObject,
 }
 [System.Serializable]
 public struct CharacterState
@@ -51,13 +50,6 @@ public struct CharacterState
 
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
-    private Transform _cameraTransform; // Reference to the real camera transform
-    // Grab & Throw fields
-    [Header("Grab & Throw")]
-    [SerializeField] private float grabRange = 2f;
-    [SerializeField] private Transform holdPoint;
-    [SerializeField] private float throwForce = 10f;
-    private GameObject _heldObject;
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] protected Transform cameraTarget; // child of Character
     [Space]
@@ -107,14 +99,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private Collider[] _uncrouchOverlapResults = new Collider[8];
 
-    public void Initialize(Transform cameraTransform = null)
+    public void Initialize()
     {
         _state.Stance = Stance.Stand;
         _lastState = _state;
         motor.CharacterController = this;
         motor.GroundDetectionExtraDistance = 0.1f;
-        if (cameraTransform != null)
-            _cameraTransform = cameraTransform;
     }
 
     public void UpdateInput(CharacterInput input)
@@ -149,57 +139,13 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
 
         
-        // Only allow grab/throw in valid states
-        bool canGrabOrThrow = _state.BehaviourState == BehaviourState.Default || _state.BehaviourState == BehaviourState.HoldingObject;
-
-        // Use the real camera transform for raycast direction
-        Transform cam = _cameraTransform != null ? _cameraTransform : cameraTarget;
-
-        if (input.Grab && canGrabOrThrow)
+        if (input.Grab)
         {
-            if (_heldObject == null && _state.BehaviourState == BehaviourState.Default)
-            {
-                // Try to grab
-                Ray ray = new Ray(cam.position, cam.forward);
-                if (Physics.Raycast(ray, out RaycastHit hit, grabRange))
-                {
-                    var grabbable = hit.collider.GetComponent<GrabbableObject>();
-                    if (grabbable != null)
-                    {
-                        _heldObject = grabbable.gameObject;
-                        // Parent to hold point
-                        _heldObject.transform.SetParent(holdPoint);
-                        _heldObject.transform.localPosition = Vector3.zero;
-                        _heldObject.transform.localRotation = Quaternion.identity;
-                        // Disable physics
-                        var rb = _heldObject.GetComponent<Rigidbody>();
-                        if (rb != null) { rb.isKinematic = true; rb.velocity = Vector3.zero; }
-                        _state.BehaviourState = BehaviourState.HoldingObject;
-                    }
-                }
-            }
-            else if (_heldObject != null && _state.BehaviourState == BehaviourState.HoldingObject)
-            {
-                // Drop
-                var rb = _heldObject.GetComponent<Rigidbody>();
-                if (rb != null) rb.isKinematic = false;
-                _heldObject.transform.SetParent(null);
-                _heldObject = null;
-                _state.BehaviourState = BehaviourState.Default;
-            }
+            
         }
-        if (input.Throw && _heldObject != null && _state.BehaviourState == BehaviourState.HoldingObject)
+        if (input.Throw)
         {
-            // Throw
-            var rb = _heldObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = false;
-                _heldObject.transform.SetParent(null);
-                rb.AddForce(cam.forward * throwForce, ForceMode.Impulse);
-            }
-            _heldObject = null;
-            _state.BehaviourState = BehaviourState.Default;
+            
         }
     }
     public void UpdateBody()
@@ -207,13 +153,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch(_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
+
                 var currentHeight = motor.Capsule.height;
                 var cameraTargetHeight = currentHeight *
                 (
                    _state.Stance is Stance.Stand ? BodyStandSettings.CameraHeight : BodyCrouchSettings.CameraHeight
                 );
+
                 cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
+
                 break;
         }
        
@@ -224,7 +172,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 //Uncrouch
                 if (!_requestedCrouch && _state.Stance is not Stance.Stand)
@@ -276,7 +223,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 _tempState = _state;
                 //Crouching
@@ -322,7 +268,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Sliding)
                 {
@@ -344,7 +289,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 var forward = Vector3.ProjectOnPlane(
                 _requestedRotation * Vector3.forward,
@@ -363,7 +307,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 _state.Acceleration = Vector3.zero;
                 if (motor.GroundingStatus.IsStableOnGround)

@@ -207,13 +207,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch(_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
+
                 var currentHeight = motor.Capsule.height;
                 var cameraTargetHeight = currentHeight *
                 (
                    _state.Stance is Stance.Stand ? BodyStandSettings.CameraHeight : BodyCrouchSettings.CameraHeight
                 );
+
                 cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
+
                 break;
         }
        
@@ -224,7 +226,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 //Uncrouch
                 if (!_requestedCrouch && _state.Stance is not Stance.Stand)
@@ -276,7 +277,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 _tempState = _state;
                 //Crouching
@@ -322,7 +322,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Sliding)
                 {
@@ -344,7 +343,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 var forward = Vector3.ProjectOnPlane(
                 _requestedRotation * Vector3.forward,
@@ -363,7 +361,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            case BehaviourState.HoldingObject:
 
                 _state.Acceleration = Vector3.zero;
                 if (motor.GroundingStatus.IsStableOnGround)
