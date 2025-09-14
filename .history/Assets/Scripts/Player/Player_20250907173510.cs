@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
-    playerCharacter.Initialize(playerCamera._camera.transform);
+        playerCharacter.Initialize();
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
     }
 
