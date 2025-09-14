@@ -26,14 +26,17 @@ public class AlertState : IEnemyState
             if (alertTimer >= maxAlertTime)
             {
                 ai.SetState(ai.GetIdleState());
-            }                
+            }
+            return;
         }
-        else
+
+        Vector3 dir = (ai.target.position - ai.transform.position).normalized;
+        dir.y = 0f;
+        ai.transform.position += dir * ai.moveSpeed * Time.deltaTime;
+
+        if (ai.Attacking())
         {
-            if (ai.Attacking())
-            {
-                ai.SetState(ai.GetEngagingState());
-            }                
+            ai.SetState(ai.GetAttackState());
         }
     }
 

@@ -9,19 +9,27 @@ public class EnemyMain : MonoBehaviour
 
     private IEnemyState currentState;
 
+    public float stunDuration = 2f;
+    public float knockbackForce = 5f;
+
     private IdleState idle;
     private AlertState alert;
     private AttackState attack;
     private DeadState dead;
+    private StunState stunned;
 
+    public Rigidbody rb;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         idle = new IdleState(this);
         alert = new AlertState(this);
         attack = new AttackState(this);
         dead = new DeadState(this);
+        stunned = new StunState(this);
 
         SetState(idle);
+
     }
 
     void Update()
@@ -38,8 +46,9 @@ public class EnemyMain : MonoBehaviour
 
     public IEnemyState GetIdleState() => idle;
     public IEnemyState GetAlertState() => alert;
-    public IEnemyState GetEngagingState() => attack;
+    public IEnemyState GetAttackState() => attack;
     public IEnemyState GetDeadState() => dead;
+    public IEnemyState GetStunState() => stunned;
 
     public bool Watching()
     {
@@ -57,5 +66,16 @@ public class EnemyMain : MonoBehaviour
             return false;
         }
         return Vector3.Distance(transform.position, target.position) <= attackRange;
+    }
+
+    public void StopMovement()
+    {
+        rb.linearVelocity = Vector3.zero;
+    }
+
+    public void Knockback(Vector3 hitDirection)
+    {
+        hitDirection.y = 0f;
+        rb.AddForce(hitDirection.normalized * knockbackForce, ForceMode.Impulse);
     }
 }
