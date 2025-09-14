@@ -173,7 +173,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                         _heldObject.transform.localRotation = Quaternion.identity;
                         // Disable physics
                         var rb = _heldObject.GetComponent<Rigidbody>();
-                        if (rb != null) { rb.isKinematic = true; rb.velocity = Vector3.zero; }
+                        if (rb != null) { rb.isKinematic = true; rb.linearVelocity = Vector3.zero; }
                         _state.BehaviourState = BehaviourState.HoldingObject;
                     }
                 }
