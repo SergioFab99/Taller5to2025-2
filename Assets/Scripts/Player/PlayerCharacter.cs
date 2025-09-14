@@ -9,7 +9,6 @@ public struct CharacterInput
     public CrouchInput Crouch;
     public bool Grab;
     public bool Throw;
-    public bool Dash;
 }
 
 public enum CrouchInput
@@ -30,6 +29,7 @@ public enum MovementState
 {
     Idle,
     Moving,
+
 }
 
 public enum BehaviourState
@@ -48,6 +48,7 @@ public struct CharacterState
     public Vector3 Acceleration;
 }
 
+
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
     private Transform _cameraTransform; // Reference to the real camera transform
@@ -58,7 +59,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float throwForce = 10f;
     private GameObject _heldObject;
     [SerializeField] private KinematicCharacterMotor motor;
-    [SerializeField] protected Transform cameraTarget;
+    [SerializeField] protected Transform cameraTarget; // child of Character
     [Space]
 
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
@@ -86,16 +87,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Space]
 
 
-    [SerializeField] private float dashSpeed = 80f;
-    [SerializeField] private float dashDuration = 1f;
-    private bool _isDashing;
-    private float _dashTimeRemaining;
-    private Vector3 _dashDirection;
-
     [SerializeField] public CharacterState _state;
 
     private CharacterState _lastState;
     private CharacterState _tempState;
+
 
     private Vector3 _externalForces;
     private Vector3 _externalExplosiveForces;
@@ -205,15 +201,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _heldObject = null;
             _state.BehaviourState = BehaviourState.Default;
         }
-        if (input.Dash && !_isDashing && _state.Grounded && _requestedMovement.magnitude > 0.1f)
-            {
-                _isDashing = true;
-                _dashTimeRemaining = dashDuration;
-                _dashDirection = _requestedMovement.normalized;
-                motor.ForceUnground();
-            }
     }
-
     public void UpdateBody()
     {
         switch(_state.BehaviourState)
@@ -234,7 +222,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void AfterCharacterUpdate(float deltaTime)
     {
         switch (_state.BehaviourState)
-        if (!_requestedCrouch && _state.Stance is not Stance.Stand)
         {
             case BehaviourState.Default:
             case BehaviourState.HoldingObject:
@@ -282,21 +269,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
                
 
-        _state.Grounded = motor.GroundingStatus.IsStableOnGround;
-        _state.Velocity = motor.Velocity;
-        if (_requestedMovement.magnitude >= 0.1f)
-        {
-            _state.MovementState = MovementState.Moving;
-        }
-        else { _state.MovementState = MovementState.Idle; }
-        _lastState = _tempState;
     }
 
     public void BeforeCharacterUpdate(float deltaTime)
     {
         switch (_state.BehaviourState)
-        _tempState = _state;
-        if (_requestedCrouch && _state.Stance is Stance.Stand)
         {
             case BehaviourState.Default:
             case BehaviourState.HoldingObject:
@@ -390,27 +367,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 _state.Acceleration = Vector3.zero;
                 if (motor.GroundingStatus.IsStableOnGround)
-            if (_isDashing)
-            {
-                _dashTimeRemaining -= deltaTime;
-                if (_dashTimeRemaining > 0f)
-                {
-                    var dashVel = Vector3.ProjectOnPlane(_dashDirection, motor.CharacterUp).normalized * dashSpeed;
-                    currentVelocity = dashVel;
-                    return;
-                }
-                else
-                {
-                    _isDashing = false;
-                }
-            }
-
-            {
-                bool moving = groundedMovement.sqrMagnitude > 0f;
-                var crouching = _state.Stance is Stance.Crouch;
-                var wasStanding = _lastState.Stance is Stance.Stand;
-                var wasInAir = !_lastState.Grounded;
-                if (moving && crouching && (wasStanding || wasInAir))
                 {
                     _timeSinceUngrounded = 0f;
                     _ungroundedDueToJump = false;
@@ -421,9 +377,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     ) * _requestedMovement.magnitude;
 
                     //Start Sliding
-                    Debug.DrawRay(transform.position, _lastState.Velocity, Color.red, 5f);
-                    _state.Stance = Stance.Sliding;
-                    if (wasInAir)
                     {
                         bool moving = groundedMovement.sqrMagnitude > 0f;
                         var crouching = _state.Stance is Stance.Crouch;
@@ -453,109 +406,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                             Debug.Log("IsSliding");
                             var slideSpeed = Mathf.Max(effectiveSlideStartSpeed, currentVelocity.magnitude);
                             currentVelocity = motor.GetDirectionTangentToSurface
-                }
-            }
-
-            if (_state.Stance is Stance.Stand or Stance.Crouch)
-            {
-
-                float speed = _state.Stance is Stance.Stand ? walkSpeed : crouchSpeed;
-
-                float response = _state.Stance is Stance.Stand ? walkResponse : crouchResponse;
-
-                Vector3 targetVelocity = groundedMovement * speed;
-                Vector3 moveVelocity = Vector3.Lerp
-                    (
-                        a: currentVelocity,
-                        b: targetVelocity,
-                        t: 1f - Mathf.Exp(-response * deltaTime)
-                    );
-                _state.Acceleration = moveVelocity - currentVelocity;
-                currentVelocity = moveVelocity;
-            }
-            else
-            {
-                Debug.Log("Continuing sliding");
-                currentVelocity -= currentVelocity * (slideFriction * deltaTime);
-
-                {
-                    var force = Vector3.ProjectOnPlane
-                    (
-                        vector: -motor.CharacterUp,
-                        planeNormal: motor.GroundingStatus.GroundNormal
-                    ) * slideGravity;
-
-                    currentVelocity -= force * deltaTime;
-                }
-
-                {
-                    var currentSpeed = currentVelocity.magnitude;
-                    var targetVelocity = groundedMovement * currentSpeed;
-                    var steerVelocity = currentVelocity;
-                    var steerForce = (targetVelocity - steerVelocity) * slideSteerAcceleration * deltaTime;
-                    steerVelocity += steerForce;
-                    steerVelocity = Vector3.ClampMagnitude(steerVelocity, currentSpeed);
-
-                    _state.Acceleration = (steerVelocity - currentVelocity) / deltaTime;
-                    currentVelocity = steerVelocity;
-                }
-
-                if (currentVelocity.magnitude < slideEndSpeed)
-                {
-                    _state.Stance = Stance.Crouch;
-                    Debug.Log("Crouching");
-                    Debug.Log("Stop sliding");
-                }
-            }
-
-
-        }
-        else
-        {
-            _timeSinceUngrounded += deltaTime;
-            if (_requestedMovement.sqrMagnitude > 0f)
-            {
-                var planarMovement = Vector3.ProjectOnPlane
-                (
-                    vector: _requestedMovement,
-                    planeNormal: motor.CharacterUp
-                ) * _requestedMovement.magnitude;
-
-                var currentPlanarVelocity = Vector3.ProjectOnPlane
-                (
-                    vector: currentVelocity,
-                    planeNormal: motor.CharacterUp
-                );
-
-                var movementForce = planarMovement * airAcceleration * deltaTime;
-
-                if (currentPlanarVelocity.magnitude < airSpeed)
-                {
-                    var targetPlanarVelocity = currentPlanarVelocity + movementForce;
-
-                    targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, airSpeed);
-                    movementForce = targetPlanarVelocity - currentPlanarVelocity;
-                }
-
-                else if (Vector3.Dot(currentPlanarVelocity, movementForce) > 0f)
-                {
-                    var contrainedMovementForce = Vector3.ProjectOnPlane
-                    (
-                        vector: movementForce,
-                        planeNormal: currentPlanarVelocity.normalized
-                    );
-                    movementForce = contrainedMovementForce;
-
-                }
-
-                if (motor.GroundingStatus.FoundAnyGround)
-                {
-                    if (Vector3.Dot(movementForce, currentVelocity + movementForce) > 0f)
-                    {
-                        var obstructedNormal = Vector3.Cross
-                        (
-                            motor.CharacterUp,
-                            Vector3.Cross
                             (
                                 direction: currentVelocity,
                                 surfaceNormal: motor.GroundingStatus.GroundNormal
@@ -746,60 +596,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
 
        
-        if (_requestedJump)
-        {
-            var grounded = motor.GroundingStatus.IsStableOnGround;
-            bool canCoyoteTime = _timeSinceUngrounded < coyoteTime && !_ungroundedDueToJump;
-            if (grounded || canCoyoteTime)
-            {
-                Debug.Log("Jumping");
-                _requestedJump = false;
-                _requestedCrouch = false;
-                _requestedCrouchOnAir = false;
-
-                motor.ForceUnground(time: 0.1f);
-                _ungroundedDueToJump = true;
-
-                var currentVerticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp);
-                var targetVerticalSpeed = Mathf.Max(currentVerticalSpeed, jumpSpeed);
-
-                currentVelocity += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
-
-            }
-            else
-            {
-                _timeSinceJumpRequest += deltaTime;
-                bool canJumpLater = _timeSinceJumpRequest < (coyoteTime * 0.16);
-                _requestedJump = canJumpLater;
-
-
-            }
-        }
-
-        if (_externalExplosiveForces.magnitude > 0f)
-        {
-            motor.ForceUnground();
-            float currentVerticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp);
-            float explosiveVerticalSpeed = Vector3.Dot(_externalExplosiveForces, motor.CharacterUp);
-
-            if (explosiveVerticalSpeed > currentVerticalSpeed)
-            {
-                currentVelocity += motor.CharacterUp * (explosiveVerticalSpeed - currentVerticalSpeed);
-            }
-
-            Vector3 explosiveHorizontal = Vector3.ProjectOnPlane(_externalExplosiveForces, motor.CharacterUp);
-            currentVelocity += explosiveHorizontal;
-
-            _externalExplosiveForces = Vector3.zero;
-
-        }
-
-        if (_externalForces.magnitude > 0)
-        {
-            motor.ForceUnground();
-            currentVelocity += _externalForces;
-            _externalForces = Vector3.zero;
-        }
     }
 
     public void SetPosition(Vector3 position, bool killvelocity = true)
@@ -818,6 +614,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public Vector3 GetCharacterUp() => motor.CharacterUp;
 
     public Transform GetCameraTarget() => cameraTarget;
+
 
     public void AddExternalExplosiveForce(Vector3 force)
     {
