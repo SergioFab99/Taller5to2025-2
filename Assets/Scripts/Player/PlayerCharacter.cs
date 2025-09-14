@@ -9,6 +9,7 @@ public struct CharacterInput
     public CrouchInput Crouch;
     public bool Grab;
     public bool Throw;
+    public bool Dash;
 }
 
 public enum CrouchInput
@@ -51,8 +52,8 @@ public struct CharacterState
 
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
-    private Transform _cameraTransform; // Reference to the real camera transform
-    // Grab & Throw fields
+    private Transform _cameraTransform; 
+
     [Header("Grab & Throw")]
     [SerializeField] private float grabRange = 2f;
     [SerializeField] private Transform holdPoint;
@@ -78,6 +79,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeReference]
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
     public DefaultSlideSettings DefaultSlideSettings;
+
+    [SerializeReference]
+    [FoldoutGroup("DefaultMovementBehaviourSettings")]
+    public DefaultDashSettings DefaultDashSettings;
 
     [FoldoutGroup("BodySettings")]
     [SerializeField] private CharacterBodySettings BodyStandSettings;
@@ -148,9 +153,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _requestedCrouchOnAir = false;
         }
 
+        if (input.Dash && !DefaultDashSettings._isDashing && _state.Grounded && _requestedMovement.magnitude > 0.1f)
+        {
+
+        }
+
         
         // Only allow grab/throw in valid states
-        bool canGrabOrThrow = _state.BehaviourState == BehaviourState.Default || _state.BehaviourState == BehaviourState.HoldingObject;
+            bool canGrabOrThrow = _state.BehaviourState == BehaviourState.Default || _state.BehaviourState == BehaviourState.HoldingObject;
 
         // Use the real camera transform for raycast direction
         Transform cam = _cameraTransform != null ? _cameraTransform : cameraTarget;
@@ -375,6 +385,21 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                       direction: _requestedMovement,
                       surfaceNormal: motor.GroundingStatus.GroundNormal
                     ) * _requestedMovement.magnitude;
+
+
+                    //Dashing
+                    if (DefaultDashSettings._isDashing)
+                    {
+                        var dashVel = Vector3.ProjectOnPlane(DefaultDashSettings._dashDirection, motor.CharacterUp).normalized * DefaultDashSettings.dashSpeed;
+                        currentVelocity = dashVel;
+                        return;
+                    }
+                    else
+                    {
+                        DefaultDashSettings._isDashing = false;
+                    }
+                
+                
 
                     //Start Sliding
                     {

@@ -37,7 +37,8 @@ public class Player : MonoBehaviour
             Jump = input.Jump.WasPressedThisFrame(),
             Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
             Grab = input.Grab.WasPressedThisFrame(),
-            Throw = input.Throw.WasPressedThisFrame()
+            Throw = input.Throw.WasPressedThisFrame(),
+            Dash = input.Dash.WasPressedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
