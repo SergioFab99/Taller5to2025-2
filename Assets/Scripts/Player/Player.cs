@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
             Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
             Grab = input.Grab.WasPressedThisFrame(),
             Throw = input.Throw.WasPressedThisFrame()
+            Dash = Input.GetKeyDown(KeyCode.Z)
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
