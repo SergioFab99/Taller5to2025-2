@@ -138,11 +138,25 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _requestedCrouchOnAir = false;
         }
 
-        if (input.Dash && !_isDashing && _state.Grounded && _requestedMovement.magnitude > 0.1f)
+        if (input.Dash && !_isDashing && _state.Grounded)
         {
+            Vector3 dashDirection;
+            
+            // If player is moving, dash in movement direction
+            if (_requestedMovement.magnitude > 0.1f)
+            {
+                dashDirection = _requestedMovement.normalized;
+            }
+            // If player is idle, dash forward where camera is looking
+            else
+            {
+                Vector3 forward = input.Rotation * Vector3.forward;
+                dashDirection = new Vector3(forward.x, 0f, forward.z).normalized;
+            }
+            
             _isDashing = true;
             _dashTimeRemaining = dashDuration;
-            _dashDirection = _requestedMovement.normalized;
+            _dashDirection = dashDirection;
             motor.ForceUnground();
         }
     }
