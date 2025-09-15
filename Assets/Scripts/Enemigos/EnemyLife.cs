@@ -7,13 +7,11 @@ public class EnemyLife : MonoBehaviour
     public int vidasActuales;
     public bool estaMuerto = false;
 
-    [Header("Referencias")]
-    public ExperimentalEnemy movimiento;
+
 
     void Awake()
     {
-        if (movimiento == null)
-            movimiento = GetComponent<ExperimentalEnemy>();
+
     }
 
     void Start()
@@ -38,28 +36,17 @@ public class EnemyLife : MonoBehaviour
     {
         if (estaMuerto) return;
         estaMuerto = true;
-        if (movimiento != null)
-        {
-            movimiento.enabled = false;
-        }
+
         Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("bullet"))
-        {
-            TakeDamage();
-            Destroy(other.collider.gameObject);
-        }
+
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("bullet"))
-        {
-            TakeDamage();
-            Destroy(other.gameObject);
-        }
+
     }
 }
