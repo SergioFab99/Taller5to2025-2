@@ -1,16 +1,13 @@
 using UnityEngine;
-
-public class ArmAnimation : MonoBehaviour
+using Unity.Cinemachine;
+public class PlayerAttack : MonoBehaviour
 {
     Animator anim;
     float timer;
     bool startTime;
     public int attack;
-
-    CombatState state;
-
-    public float punchTimeModifier;
-
+    [SerializeField] float shakeForce;
+    [SerializeField] Vector3 velocity;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -27,28 +24,37 @@ public class ArmAnimation : MonoBehaviour
 
     void Attack()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            startTime = true;
-            attack++;
-            anim.SetInteger("Attack", attack);
+
+            if (timer >= 1)
+            {
+                attack = 1;
+                anim.SetInteger("Attack", attack);
+                timer = 0;
+            }
+            else
+            {
+                startTime = true;
+                attack++;
+                anim.SetInteger("Attack", attack);
+            }
+            
+            
             //anim.SetBool("Attacking", true);
+
             if (attack >= 2)
             {
-                attack = 2;
-                if(timer >= 1)
-                {
-                    attack = 1;
-                    anim.SetInteger("Attack", attack);
-                    timer = 0;
-                }
+                attack = 0;
+                timer = 0;
+                startTime = false;
             }
         }
         /*if (timer >= 1)
         {
             anim.SetBool("Attacking", false);
         }*/
-        if (timer >= 1.5f)
+        if (timer >= 2)
         {
             startTime = false;
             attack = 0;
@@ -61,10 +67,9 @@ public class ArmAnimation : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
-
-    public void PunchAnimation(int side)
+    void Shake()
     {
-        anim.SetInteger("Attack", side);
-    }
+        CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
 
+    }
 }
