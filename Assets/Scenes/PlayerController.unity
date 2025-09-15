@@ -527,6 +527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2818819692114964058, guid: 25ef79b12ccab5a42a661da08eee30d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -718,6 +722,7 @@ GameObject:
   - component: {fileID: 950165084}
   - component: {fileID: 950165086}
   - component: {fileID: 950165085}
+  - component: {fileID: 950165087}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -764,6 +769,7 @@ MonoBehaviour:
   DefaultCrouchSettings: {fileID: 11400000, guid: 6bb7cd64b57055e488ccade2382eaa31, type: 2}
   DefaultAirSettings: {fileID: 11400000, guid: 896dc30e4ec40f141918f3caddf7f7b0, type: 2}
   DefaultSlideSettings: {fileID: 11400000, guid: 84db2e1379aa75e49b887db7ef47a999, type: 2}
+  DefaultDashSettings: {fileID: 11400000, guid: d1c40231ab386bf4fbfb149763062904, type: 2}
   BodyStandSettings: {fileID: 11400000, guid: 608cbd82ec67ad945bda34d7fc9f3168, type: 2}
   BodyCrouchSettings: {fileID: 11400000, guid: 846de5abb533abf4585705b17bc2d1b9, type: 2}
   _state:
@@ -838,6 +844,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &950165087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950165082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f055a900bd2b91468850d86468f59c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodgeDistance: 3
+  dodgeDuration: 0.2
+  blockAngle: 120
+  blockDamageMultiplier: 0.5
 --- !u!1 &989436750
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 950165084}
   playerCamera: {fileID: 347065357}
+  actionStateMachine: {fileID: 950165087}
   _characterState:
     Grounded: 0
     Stance: 0
@@ -1050,7 +1073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1761791707
 Transform:
   m_ObjectHideFlags: 0
