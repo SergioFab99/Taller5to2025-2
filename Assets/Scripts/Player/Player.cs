@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] CharacterState _characterState;
     [SerializeField] CharacterState _lastCharacterState;
-
+    [Header("CameraShake")]
+    [SerializeField] float shakeForce;
+    [SerializeField] Vector3 velocity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,7 +41,10 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
-
+        if (characterInput.Move != new Vector3(0,0,0))
+        {
+            CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
+        }
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
