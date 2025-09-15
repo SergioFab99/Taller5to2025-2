@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
-            if (timer >= 1)
+            if (timer >= 1.5)
             {
                 attack = 1;
                 anim.SetInteger("Attack", attack);

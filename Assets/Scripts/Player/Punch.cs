@@ -19,6 +19,10 @@ public class Punch : MonoBehaviour
     }
     public void FixedUpdate()
     {
+        if (hitDone)
+        {
+            return;
+        }
         Vector3 currentPos = transform.position;
         dir = currentPos - lastPos;
         float dist = dir.magnitude;
@@ -28,7 +32,6 @@ public class Punch : MonoBehaviour
 
             if (Physics.SphereCast(transform.position, radius, transform.forward, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
             {
-                hitDone = true;
                 if (isActive)
                 {
                     PerformOnHit(hit.collider, hit.point, hit.normal);
@@ -44,11 +47,16 @@ public class Punch : MonoBehaviour
         {
             Debug.Log("Hitted");
             col.gameObject.GetComponent<EnemyLife>().TakeDamage();
+            hitDone = true;
         }
     }
 
     public void ActivateOrDeactivePunch(bool trigger)
     {
         isActive = trigger;
+        if(isActive)
+        {
+            hitDone = false;
+        }
     }
 }
