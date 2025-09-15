@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class ArmAnimation : MonoBehaviour
 {
     Animator anim;
     float timer;
     bool startTime;
     public int attack;
+
+    CombatState state;
+
+    public float punchTimeModifier;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -43,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
         {
             anim.SetBool("Attacking", false);
         }*/
-        if (timer >= 2)
+        if (timer >= 1.5f)
         {
             startTime = false;
             attack = 0;
@@ -56,4 +61,10 @@ public class PlayerAttack : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
+
+    public void PunchAnimation(int side)
+    {
+        anim.SetInteger("Attack", side);
+    }
+
 }

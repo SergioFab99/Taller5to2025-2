@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerCharacter playerCharacter;
     [SerializeField] PlayerCamera playerCamera;
-
+    [SerializeField] PlayerCombat playerCombat;
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -18,8 +18,9 @@ public class Player : MonoBehaviour
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
-    playerCharacter.Initialize(playerCamera._camera.transform);
+        playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
+        playerCombat.Initialize();
     }
 
     private void OnDestroy()
@@ -45,6 +46,13 @@ public class Player : MonoBehaviour
 
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
+
+        var combatInput = new CombatInput
+        {
+            BaseAttack = input.Attack.WasPressedThisFrame()
+        };
+        playerCombat.UpdateInput(combatInput);
+        playerCombat.CombatTickUpdate(Time.deltaTime);
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
