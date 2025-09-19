@@ -9,14 +9,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 785599868092975815}
+  - component: {fileID: 5220082463321312711}
   - component: {fileID: 2675362004375986385}
   - component: {fileID: -5799709250588722812}
   - component: {fileID: 5632540663317755476}
   - component: {fileID: 2927419992476601300}
   - component: {fileID: 6897472832235123178}
+  - component: {fileID: 2057096193057976012}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,6 +38,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5220082463321312711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2818819692114964058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d9e4b9d2c23a3429acab309f5d0abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  playerStats:
+    maxLives: 5
+    currentLives: 0
+  enemyStats:
+    maxLives: 0
+    currentLives: 0
+  playerSlider: {fileID: 0}
+  enemySlider: {fileID: 0}
+  damageCooldown: 0.5
+  playerLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  useProximityDetection: 1
 --- !u!33 &2675362004375986385
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59,6 +87,8 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 3
   rotateSpeed: 5
+  useNavMeshIfAvailable: 1
+  navUpdateInterval: 0.1
   playerTag: Player
 --- !u!23 &5632540663317755476
 MeshRenderer:
@@ -153,3 +183,17 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2057096193057976012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2818819692114964058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - {fileID: 11400000, guid: 23882b482681bbc4ba315af5c093efdf, type: 2}
