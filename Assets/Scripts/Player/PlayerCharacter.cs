@@ -38,6 +38,7 @@ public enum BehaviourState
     Default,
     HoldingObject,
 }
+
 [System.Serializable]
 public struct CharacterState
 {

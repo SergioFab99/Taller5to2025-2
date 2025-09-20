@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerCharacter playerCharacter;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerCombat playerCombat;
+    [SerializeField] PlayerAnimation playerAnimation;
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
         playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
         playerCombat.Initialize();
+
+        playerAnimation.Initialize(playerCombat);
     }
 
     private void OnDestroy()
@@ -45,10 +48,11 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
-        if (characterInput.Move != new Vector3(0,0,0))
+
+      /*  if (characterInput.Move != new Vector3(0,0,0))
         {
             CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
-        }
+        } */
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public struct CombatInput
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField]private Punch RigthArm;
-    [SerializeField] private Punch LeftArm;
+    [SerializeField]private Punch LeftArm;
     public CombatState _state;
 
     public float timeBetweenAttacks;
@@ -33,6 +34,11 @@ public class PlayerCombat : MonoBehaviour
 
     private float timeSinceLastPunch;
     private bool requestAttack;
+
+
+    public event PunchSide OnAttack;
+    public delegate void PunchSide(int hand); 
+
 
     public void Initialize()
     {
@@ -77,6 +83,8 @@ public class PlayerCombat : MonoBehaviour
                 StartCoroutine(ResetCanAttack(timeBetweenAttacks));
                 timeSinceLastPunch = Time.time;
 
+                OnAttack?.Invoke(1);
+
                 RigthArm.ActivateOrDeactivePunch(true);
                 StartCoroutine(DeactivePunch(RigthArm, punchDuration));
                 break;
@@ -86,15 +94,19 @@ public class PlayerCombat : MonoBehaviour
                 _state.CanAttack = false;
                 StartCoroutine(ResetCanAttack(timeBetweenAttacks));
                 timeSinceLastPunch = Time.time;
+
+                OnAttack?.Invoke(2);
                 RigthArm.ActivateOrDeactivePunch(true);
                 StartCoroutine(DeactivePunch(RigthArm, punchDuration));
-
                 break;
 
             case CombatHand.Left:
+                _state.currentHand = CombatHand.Right;
                 _state.CanAttack = false;
                 StartCoroutine(ResetCanAttack(timeBetweenAttacks));
                 timeSinceLastPunch = Time.time;
+
+                OnAttack?.Invoke(1);
                 LeftArm.ActivateOrDeactivePunch(true);
                 StartCoroutine(DeactivePunch(LeftArm, punchDuration));
 

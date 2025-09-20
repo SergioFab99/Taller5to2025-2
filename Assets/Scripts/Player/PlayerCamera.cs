@@ -28,12 +28,8 @@ public class PlayerCamera : MonoBehaviour
 
     }
    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
+    
     public void UpdateRotation(CameraInput input)
     {
         _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility; 

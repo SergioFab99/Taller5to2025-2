@@ -8,14 +8,17 @@ public class CameraShake : MonoBehaviour
     public static CameraShake cameraShakeInstance;
     public bool wantShake;
     private NoiseSettings[] mySignals;
+
     private void Awake()
     {
         cameraShakeInstance = this;
     }
+
     public static CameraShake GetInstance()
     {
         return cameraShakeInstance;
     }
+
     void Start()
     {
         impulse = GetComponent<CinemachineImpulseSource>();

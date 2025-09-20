@@ -3169,6 +3169,7 @@ MonoBehaviour:
   playerCharacter: {fileID: 1696335799}
   playerCamera: {fileID: 604208993}
   playerCombat: {fileID: 1123035754}
+  playerAnimation: {fileID: 0}
   _characterState:
     Grounded: 0
     Stance: 0
@@ -12019,7 +12020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: 0
+  Damping: 0.1
 --- !u!1 &1705172463
 GameObject:
   m_ObjectHideFlags: 0
@@ -12067,6 +12068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdd12490460d854792801ad5d8f2fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   attack: 0
   shakeForce: 0.125
   velocity: {x: -1, y: 0, z: 0}
