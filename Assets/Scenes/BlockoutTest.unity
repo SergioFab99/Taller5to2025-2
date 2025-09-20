@@ -3169,7 +3169,7 @@ MonoBehaviour:
   playerCharacter: {fileID: 1696335799}
   playerCamera: {fileID: 604208993}
   playerCombat: {fileID: 1123035754}
-  playerAnimation: {fileID: 0}
+  playerAnimation: {fileID: 1705172465}
   _characterState:
     Grounded: 0
     Stance: 0
@@ -7965,8 +7965,8 @@ MonoBehaviour:
   _state:
     currentHand: 0
     CanAttack: 0
-  timeBetweenAttacks: 1.5
-  timeToDoublePunch: 3
+  timeBetweenAttacks: 0.8
+  timeToDoublePunch: 2
   punchDuration: 1
 --- !u!4 &1123035755
 Transform:
@@ -12068,10 +12068,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdd12490460d854792801ad5d8f2fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 1705172466}
   attack: 0
-  shakeForce: 0.125
-  velocity: {x: -1, y: 0, z: 0}
+  shakeForceAttack: 0
+  velocityAttack: {x: 0, y: 0, z: 0}
 --- !u!95 &1705172466
 Animator:
   serializedVersion: 7
