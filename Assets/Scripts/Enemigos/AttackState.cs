@@ -5,9 +5,7 @@ public class AttackState : IEnemyState
     private EnemyMain ai;
     private IEnemyAttack attack;
 
-    private float attackCooldown = 0.5f; 
-    private float attackTimer = 0f;
-    private float disengageBuffer = 1.5f; // para tener consistencia xd
+    private float disengageBuffer = 5.5f;
 
     public AttackState(EnemyMain main)
     {
@@ -17,7 +15,6 @@ public class AttackState : IEnemyState
 
     public void OnEnter()
     {
-        attackTimer = 0f;
         Debug.Log("engaging");
     }
 
@@ -29,38 +26,44 @@ public class AttackState : IEnemyState
             return;
         }
 
-        if (attack == null)
+        float dist = Vector3.Distance(ai.transform.position, ai.target.position);
+
+        if (attack.IsFinished)
+        {
+            if (attack.WasInterrupted)
+            {
+                attack.ResetAttackCycle();
+                ai.SetState(ai.GetExposedState());
+            }
+            else
+            {
+                attack.ResetAttackCycle();
+                ai.SetState(ai.GetRecoverState());
+            }
+            return;
+        }
+
+        if (attack.IsAttacking)
+            return;
+
+        if (dist > attack.AttackRange + disengageBuffer)
         {
             ai.SetState(ai.GetAlertState());
             return;
         }
 
-        float distanceToTarget = Vector3.Distance(ai.transform.position, ai.target.position);
-
-        if (distanceToTarget > attack.AttackRange + disengageBuffer)
-        {
-            ai.SetState(ai.GetAlertState());
-            return;
-        }
-
-        if (distanceToTarget > attack.AttackRange)
-        {
-            Vector3 dir = (ai.target.position - ai.transform.position).normalized;
-            dir.y = 0f;
-            ai.transform.position += dir * ai.moveSpeed * Time.deltaTime;
-            return;
-        }
-
-        attackTimer -= Time.deltaTime;
-        if (attackTimer <= 0f)
+        if (dist <= attack.AttackRange)
         {
             attack.Execute();
-            attackTimer = attackCooldown;
+        }
+        else
+        {
+            ai.MoveTowardsTarget();
         }
     }
 
     public void OnExit()
     {
-        Debug.Log("disengaging");
+        Debug.Log("exiting attack state");
     }
 }

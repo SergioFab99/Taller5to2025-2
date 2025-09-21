@@ -30,13 +30,15 @@ public class AlertState : IEnemyState
             return;
         }
 
-        Vector3 dir = (ai.target.position - ai.transform.position).normalized;
-        dir.y = 0f;
-        ai.transform.position += dir * ai.moveSpeed * Time.deltaTime;
+        ai.MoveTowardsTarget();
 
         if (ai.Attacking())
         {
-            ai.SetState(ai.GetAttackState());
+            if (!(ai.GetCurrentState() is AttackState))
+            {
+                ai.SetState(ai.GetAttackState());
+            }
+
         }
     }
 
