@@ -54,9 +54,18 @@ public class Punch : MonoBehaviour
     public void ActivateOrDeactivePunch(bool trigger)
     {
         isActive = trigger;
-        if(isActive)
+        if (isActive)
         {
             hitDone = false;
+            var col = Physics.OverlapSphere(transform.position, radius, hitMask.value, QueryTriggerInteraction.Ignore);
+            if (col != null && col.Length > 0)
+            {
+                var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized; 
+                PerformOnHit(col[0], col[0].ClosestPoint(transform.position),distance);
+            }
+
+            
         }
+
     }
 }

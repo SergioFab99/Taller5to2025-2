@@ -7966,7 +7966,7 @@ MonoBehaviour:
     currentHand: 0
     CanAttack: 0
   timeBetweenAttacks: 0.8
-  timeToDoublePunch: 2
+  timeToDoublePunch: 3
   punchDuration: 1
 --- !u!4 &1123035755
 Transform:
@@ -12070,8 +12070,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1705172466}
   attack: 0
-  shakeForceAttack: 0
-  velocityAttack: {x: 0, y: 0, z: 0}
+  shakeForce: 0.125
+  velocity: {x: -1, y: 0, z: 0}
 --- !u!95 &1705172466
 Animator:
   serializedVersion: 7
