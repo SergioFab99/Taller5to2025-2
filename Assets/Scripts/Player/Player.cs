@@ -1,9 +1,11 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerCharacter playerCharacter;
     [SerializeField] PlayerCamera playerCamera;
+    [SerializeField] CharacterTarget CharacterCameraTarget;
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] PlayerAnimation playerAnimation;
     PlayerInputActions _inputActions;
@@ -23,8 +25,8 @@ public class Player : MonoBehaviour
 
         playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
+        CharacterCameraTarget.Initialize(playerCamera.transform);
         playerCombat.Initialize();
-
         playerAnimation.Initialize(playerCombat);
     }
 
@@ -85,8 +87,7 @@ public class Player : MonoBehaviour
         _characterState = playerCharacter.GetState();
         _lastCharacterState = playerCharacter.GetLastState();
         playerCamera.UpdatePosition(cameraTarget);
-
-       
+        CharacterCameraTarget.UpdateRotation(playerCamera.transform);
 
     }
     public void Teleport(Vector3 position)
