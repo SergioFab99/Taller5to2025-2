@@ -26,11 +26,16 @@ public class EnemyMain : MonoBehaviour
     public Rigidbody rb;
     public Renderer rend;
     private NavMeshAgent agent;
+
+    private HealthController healthController;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
+        healthController = GetComponent<HealthController>();
+        healthController.OnDead += CheckifLive;
         agent.speed = moveSpeed;
         agent.stoppingDistance = attackRange - 3f;
 
@@ -47,6 +52,11 @@ public class EnemyMain : MonoBehaviour
 
     }
 
+    private void CheckifLive()
+    {
+        healthController.OnDead -= CheckifLive;
+        Destroy(gameObject);
+    }
     void Update()
     {
         agent.speed = moveSpeed;

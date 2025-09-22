@@ -9,7 +9,8 @@ public class HealthController : MonoBehaviour
 
     public event LifeChangued OnLifeChangue;
     public delegate void LifeChangued(float changue);
-
+    public event Live OnDead;
+    public delegate void Live();
     public void AddHealth(float lifeAdded)
     {
 
@@ -20,8 +21,12 @@ public class HealthController : MonoBehaviour
 
     public void TakeDamague(float damague)
     {
-        var damaged = health + damague;
+        var damaged = health - damague;
         health = Mathf.Min(0, damaged);
         OnLifeChangue?.Invoke(damaged);
+        if(health == 0)
+        {
+            OnDead?.Invoke();
+        }
     }
 }
