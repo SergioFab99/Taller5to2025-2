@@ -15,7 +15,7 @@ public class CameraSpring : MonoBehaviour
     public void UpdateSpring(Transform camera, float deltaTime)
     {
         targetPosition = camera.position;
-        
+        transform.rotation = camera.transform.rotation;
         var currentPos = transform.position;
 
         SpringUtils.CalcDampedSpringMotionParams(ref springParams, deltaTime, frecuency, damping);

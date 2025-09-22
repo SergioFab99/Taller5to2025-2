@@ -5,11 +5,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerCharacter playerCharacter;
     [SerializeField] PlayerCamera playerCamera;
-<<<<<<< Updated upstream
+
     [SerializeField] CharacterTarget CharacterCameraTarget;
-=======
+
     [SerializeField] CameraSpring cameraSpring;
->>>>>>> Stashed changes
+
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] PlayerAnimation playerAnimation;
     PlayerInputActions _inputActions;
@@ -94,12 +94,12 @@ public class Player : MonoBehaviour
         _characterState = playerCharacter.GetState();
         _lastCharacterState = playerCharacter.GetLastState();
         playerCamera.UpdatePosition(cameraTarget);
-<<<<<<< Updated upstream
+
         CharacterCameraTarget.UpdateRotation(playerCamera.transform);
-=======
+
         cameraSpring.UpdateSpring(playerCamera.transform,deltaTime);
 
->>>>>>> Stashed changes
+
 
     }
     public void Teleport(Vector3 position)
