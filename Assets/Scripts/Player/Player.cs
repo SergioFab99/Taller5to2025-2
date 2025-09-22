@@ -61,6 +61,15 @@ public class Player : MonoBehaviour
                     actionStateMachine.StartDodge(moveDir.normalized);
                 }
             }
+
+            // --- COUNTERATTACK --- //
+            if (actionStateMachine.CurrentState == PlayerActionState.CounterAttack || actionStateMachine.CurrentState == PlayerActionState.Blocking)
+            {
+                if (input.Attack.WasPressedThisFrame())
+                {
+                    actionStateMachine.TryCounterAttack();
+                }
+            }
         }
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);

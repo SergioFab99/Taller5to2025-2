@@ -125,13 +125,13 @@ public class PlayerActionStateMachine : MonoBehaviour
     
     public void TryCounterAttack()
     {
-        if (canCounter)
-        {
+        //if (canCounter)
+        //{
             SetState(PlayerActionState.CounterAttack);
             canCounter = false;
             counterTimer = 0f;
             Debug.Log("¡Contraataque ejecutado!");
             
-        }
+        //}
     }
 }
