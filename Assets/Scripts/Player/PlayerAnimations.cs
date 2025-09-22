@@ -9,8 +9,8 @@ public class PlayerAnimation : MonoBehaviour
     float timer;
     bool startTime;
     public int attack;
-    [SerializeField] float shakeForce;
-    [SerializeField] Vector3 velocity;
+    [SerializeField] float shakeForceAttack;
+    [SerializeField] Vector3 velocityAttack;
 
     public void Initialize(PlayerCombat playerCombat)
     {
@@ -36,12 +36,10 @@ public class PlayerAnimation : MonoBehaviour
         }
            
     }
-       
 
-   
     void Shake()
     {
-        CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
+        CameraShake.cameraShakeInstance.Shake(shakeForceAttack, velocityAttack);
 
     }
 }

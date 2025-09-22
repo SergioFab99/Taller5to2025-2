@@ -62,6 +62,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private GameObject _heldObject;
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] protected Transform cameraTarget; // child of Character
+
     [Space]
 
     [FoldoutGroup("DefaultMovementBehaviourSettings")]

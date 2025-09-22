@@ -49,7 +49,7 @@ public class Punch : MonoBehaviour
         if (col.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
         {
             Debug.Log("Hitted");
-            col.gameObject.GetComponent<EnemyLife>().TakeDamage();
+            col.gameObject.GetComponent<HealthController>().TakeDamague(1f);
             hitDone = true;
         }
     }
