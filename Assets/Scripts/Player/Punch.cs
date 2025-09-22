@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,7 +31,7 @@ public class Punch : MonoBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.SphereCast(transform.position, radius, transform.forward, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
+            if (Physics.SphereCast(transform.position, radius, dir.normalized, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
             {
                 if (isActive)
                 {
@@ -39,6 +40,8 @@ public class Punch : MonoBehaviour
                 }
             }
         }
+        lastPos = currentPos;
+        
     }
 
     public void PerformOnHit(Collider col, Vector3 hitPoint, Vector3 hitNormal)
@@ -60,12 +63,32 @@ public class Punch : MonoBehaviour
             var col = Physics.OverlapSphere(transform.position, radius, hitMask.value, QueryTriggerInteraction.Ignore);
             if (col != null && col.Length > 0)
             {
-                var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized; 
-                PerformOnHit(col[0], col[0].ClosestPoint(transform.position),distance);
+                var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
+                PerformOnHit(col[0], col[0].ClosestPoint(transform.position), distance);
             }
 
-            
+
         }
 
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+         // Dibuja la esfera inicial
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        // Dibuja el tubo del SphereCast usando la última dirección y distancia calculada
+        Vector3 direction = dir.normalized;
+        float dist = dir.magnitude;
+         int steps = 10;
+         
+        for (int i = 1; i <= steps; i++)
+        {
+            float t = (dist / steps) * i;
+            Vector3 center = transform.position + direction * t;
+            Gizmos.DrawWireSphere(center, radius);
+        }
     }
 }

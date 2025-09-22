@@ -7,6 +7,8 @@ public class EnemyLife : MonoBehaviour
     public int vidasActuales;
     public bool estaMuerto = false;
 
+    public Animator animation;
+
 
 
     void Awake()
@@ -22,14 +24,7 @@ public class EnemyLife : MonoBehaviour
 
     public void TakeDamage(int cantidad = 1)
     {
-        if (estaMuerto) return;
-        cantidad = Mathf.Max(1, cantidad);
-        vidasActuales -= cantidad;
-        if (vidasActuales <= 0)
-        {
-            vidasActuales = 0;
-            Die();
-        }
+        animation.SetTrigger("Hit");
     }
 
     void Die()
