@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
+    //WIP aun le falta un monton
     public float attackRange = 15f;
     public float bulletDamage = 15f;
     public float fireCooldown = 1f;

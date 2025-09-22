@@ -3,36 +3,113 @@ using UnityEngine;
 public class MeleeAttack : MonoBehaviour, IEnemyAttack
 {
     public float attackRange = 2f;
-    public float punchDamage = 20f;
-    public float punchCooldown = 1.2f;
 
-    private float cooldownTimer = 0f;
-    private EnemyMain enemy;
+    public float windupTime = 0.4f;
+    public float punchActiveTime = 0.2f;
+    public float comboGap = 0.3f;
+    public int maxCombo = 2;
 
-    public bool IsAttacking { get; private set; }
+    private EnemyMain ai;
+    private int currentPunch = 0;
+
+    private bool isAttacking = false;
+    private bool finished = false;
+    private bool interrupted = false;
+
     public float AttackRange => attackRange;
+    public bool IsAttacking => isAttacking;
+    public bool IsFinished => finished;
+    public bool WasInterrupted => interrupted;
 
     void Awake()
     {
-        enemy = GetComponent<EnemyMain>();
+        ai = GetComponent<EnemyMain>();
     }
 
     public void Execute()
     {
-        if (enemy.target == null) return;
+        if (ai.target == null) return;
+        if (isAttacking || !finished && currentPunch > 0) return;
 
-        cooldownTimer -= Time.deltaTime;
+        float dist = Vector3.Distance(transform.position, ai.target.position);
+        if (dist > attackRange) return;
 
-        if (Vector3.Distance(transform.position, enemy.target.position) <= attackRange && cooldownTimer <= 0f)
+        currentPunch = 0;
+        finished = false;
+        interrupted = false;
+
+        Windup();
+    }
+
+    private void Windup()
+    {
+        if (currentPunch >= maxCombo)
         {
-            IsAttacking = true;
-            cooldownTimer = punchCooldown;
+            finished = true;
+            return;
+        }
 
-            Debug.Log("punch");
+        isAttacking = true;
+        currentPunch++;
+
+        ai.StopMovement();
+        Debug.Log($"windup for punch {currentPunch}");
+
+        Invoke(nameof(PerformPunch), windupTime);
+    }
+
+    private void PerformPunch()
+    {
+        Debug.Log($"punch {currentPunch}");
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
+        bool hitLanded = false;
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                Debug.Log($"punch {currentPunch} hit");
+                hitLanded = true;
+                break;
+            }
+        }
+
+        if (!hitLanded)
+        {
+            Debug.Log("or miss, i guess they never miss huh");
+            ForceCancel();
+        }
+
+        Invoke(nameof(EndPunch), punchActiveTime);
+    }
+
+    private void EndPunch()
+    {
+        isAttacking = false;
+
+        if (currentPunch < maxCombo && !interrupted)
+        {
+            Invoke(nameof(Windup), comboGap);
         }
         else
         {
-            IsAttacking = false;
+            finished = true;
         }
+    }
+
+    public void ForceCancel()
+    {
+        CancelInvoke();
+        isAttacking = false;
+        finished = true;
+        interrupted = true;
+    }
+
+    public void ResetAttackCycle()
+    {
+        currentPunch = 0;
+        finished = false;
+        interrupted = false;
+        isAttacking = false;
     }
 }
