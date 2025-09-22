@@ -47,11 +47,11 @@ public class EnemyLife : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("bullet"))
+        /*if (other.collider.CompareTag("bullet"))
         {
             TakeDamage();
             Destroy(other.collider.gameObject);
-        }
+        }*/
     }
 
     void OnTriggerEnter(Collider other)

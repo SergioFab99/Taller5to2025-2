@@ -5,7 +5,8 @@ public enum PlayerActionState
     Normal,
     Blocking,
     Dodging,
-    // Future: Grabbing, Throwing, Attacking, etc.
+    CounterAttack,
+    
 }
 
 public class PlayerActionStateMachine : MonoBehaviour
@@ -16,26 +17,51 @@ public class PlayerActionStateMachine : MonoBehaviour
     private bool isDodging = false;
     private Vector3 dodgeDirection;
     private float dodgeTimer = 0f;
+
+    [Header("Block Settings")]
+    public float blockAngle = 120f;
+    public float blockDamageMultiplier = 0.5f;
+
+    [Header("Counter Settings")]
+    public float counterWindow = 0.5f;
+    private bool canCounter = false;
+    private float counterTimer = 0f;
+
+    public PlayerActionState CurrentState { get; private set; } = PlayerActionState.Normal;
+
     private void Update()
     {
+        // Dodge logic
         if (isDodging)
         {
             dodgeTimer += Time.deltaTime;
             float t = dodgeTimer / dodgeDuration;
             if (t < 1f)
             {
-                
                 transform.position += dodgeDirection * (dodgeDistance / dodgeDuration) * Time.deltaTime;
             }
             else
             {
                 isDodging = false;
                 dodgeTimer = 0f;
-                SetState(PlayerActionState.Blocking); 
+                SetState(PlayerActionState.Blocking);
+            }
+        }
+
+        
+        if (canCounter)
+        {
+            counterTimer += Time.deltaTime;
+            if (counterTimer > counterWindow)
+            {
+                canCounter = false;
+                counterTimer = 0f;
+                if (CurrentState == PlayerActionState.CounterAttack)
+                    SetState(PlayerActionState.Normal);
             }
         }
     }
-    
+
     public void StartDodge(Vector3 direction)
     {
         if (CurrentState == PlayerActionState.Blocking && !isDodging)
@@ -47,25 +73,16 @@ public class PlayerActionStateMachine : MonoBehaviour
             Debug.Log($"Dodge started in direction: {dodgeDirection}");
         }
     }
-    [Header("Block Settings")]
-    public float blockAngle = 120f; 
-    public float blockDamageMultiplier = 0.5f; 
 
-    public PlayerActionState CurrentState { get; private set; } = PlayerActionState.Normal;
-
-    
     public void SetBlockInput(bool isBlocking)
     {
-
         if (isBlocking)
         {
-
             if (CurrentState != PlayerActionState.Blocking)
             {
                 SetState(PlayerActionState.Blocking);
                 Debug.Log("Blocking Input Detected");
             }
-
         }
         else
         {
@@ -80,10 +97,8 @@ public class PlayerActionStateMachine : MonoBehaviour
     public void SetState(PlayerActionState newState)
     {
         CurrentState = newState;
-        
     }
 
-    
     public float CalculateDamage(Vector3 attackerPosition, bool isProjectile, float baseDamage)
     {
         if (CurrentState == PlayerActionState.Blocking && !isProjectile)
@@ -92,11 +107,31 @@ public class PlayerActionStateMachine : MonoBehaviour
             float angle = Vector3.Angle(transform.forward, toAttacker);
             if (angle < blockAngle * 0.5f)
             {
-                // Bloqueo exitoso: daño parcial
+                
                 return baseDamage * blockDamageMultiplier;
             }
         }
-        
         return baseDamage;
+    }
+
+    
+    public void OnAttackDodged()
+    {
+        canCounter = true;
+        counterTimer = 0f;
+        Debug.Log("¡Ventana de contraataque abierta!");
+    }
+
+    
+    public void TryCounterAttack()
+    {
+        if (canCounter)
+        {
+            SetState(PlayerActionState.CounterAttack);
+            canCounter = false;
+            counterTimer = 0f;
+            Debug.Log("¡Contraataque ejecutado!");
+            
+        }
     }
 }
