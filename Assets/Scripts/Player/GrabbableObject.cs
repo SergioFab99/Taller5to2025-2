@@ -8,6 +8,7 @@ public class GrabbableObject : MonoBehaviour
     [SerializeField] private int maxUses = 5;
     [SerializeField]private int usesLeft;
     public bool IsBroken { get; private set; } = false;
+    public event System.Action OnBrokenEvent; // Fired once when object breaks
     [Header("Configuración de Agarre")]
     [FormerlySerializedAs("tag")]
     [SerializeField] private string requiredTag = "Grabbable"; // Tag que debe tener el objeto (asegúrate de que esté asignado)
@@ -115,6 +116,7 @@ public class GrabbableObject : MonoBehaviour
     {
         Debug.Log($"{name} is broken!");
         // Add visual effects, disable object, etc.
+        OnBrokenEvent?.Invoke();
     }
 
     // Opcional: Evento para notificar que fue soltado

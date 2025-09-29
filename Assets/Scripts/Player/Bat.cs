@@ -25,13 +25,41 @@ public class Bat : MonoBehaviour
     public bool horizontalSwing = false;
 
     private Coroutine swingRoutine;
-    // Track enemies already hit during the current swing so we don't apply damage multiple times.
-    private readonly HashSet<EnemyLife> _enemiesHitThisSwing = new HashSet<EnemyLife>();
+    [Header("Hit Filtering")] 
+    [Tooltip("If true, the target must have a TagContainer with a tag named 'Damagable'. If false, any HealthController/EnemyLife is valid.")]
+    [SerializeField] private bool requireDamagableTag = true;
+    [Tooltip("Name of the tag in TagContainer to accept as damageable.")]
+    [SerializeField] private string damagableTagName = "Damagable";
+    [Tooltip("Optional layer mask filter for raycast & collision validation (ignored if set to Everything)." )]
+    [SerializeField] private LayerMask hitLayers = ~0;
+    [Tooltip("Extra sphere radius (0 = ray) used when calling Hit() to make contact more forgiving.")]
+    [SerializeField] private float hitAssistRadius = 0f;
+
+    // Track already hit targets (EnemyLife OR HealthController) during a swing
+    private readonly HashSet<UnityEngine.Object> _hitThisSwing = new HashSet<UnityEngine.Object>();
     private bool _isSwinging = false;
 
     private void Awake()
     {
         grabbable = GetComponent<GrabbableObject>();
+        if (grabbable != null)
+        {
+            grabbable.OnBrokenEvent += HandleBroken;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (grabbable != null)
+        {
+            grabbable.OnBrokenEvent -= HandleBroken;
+        }
+    }
+
+    private void HandleBroken()
+    {
+        // Optionally spawn particles or play sound here before destroy
+        Destroy(gameObject);
     }
 
     // Called by PlayerCombat when attack is performed
@@ -43,7 +71,16 @@ public class Bat : MonoBehaviour
             return;
         }
         RaycastHit hit;
-        if (Physics.Raycast(origin.position, direction, out hit, range))
+        bool gotHit = false;
+        if (hitAssistRadius > 0.001f)
+        {
+            gotHit = Physics.SphereCast(origin.position, hitAssistRadius, direction, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+        }
+        else
+        {
+            gotHit = Physics.Raycast(origin.position, direction, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+        }
+        if (gotHit)
         {
             TryApplyDamage(hit.collider);
         }
@@ -87,7 +124,7 @@ public class Bat : MonoBehaviour
 
         // Start swing tracking
         _isSwinging = true;
-        _enemiesHitThisSwing.Clear();
+    _hitThisSwing.Clear();
 
         // We'll rotate by computing delta quaternions around pivot, keeping manual control of position
         Vector3 pivotToBat = transform.position - pivot;
@@ -140,29 +177,64 @@ public class Bat : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (grabbable != null && grabbable.IsBroken) return;
-        TryApplyDamage(collision.collider);
+        if (((1 << collision.collider.gameObject.layer) & hitLayers) != 0)
+        {
+            TryApplyDamage(collision.collider);
+        }
     }
 
     // Centralized damage application with per-swing duplication guard.
     private void TryApplyDamage(Collider col)
     {
         if (col == null) return;
-        var tagContainer = col.GetComponent<TagContainer>();
-        if (tagContainer == null || !tagContainer.HasTag("Damagable")) return;
+        // Climb up hierarchy to find damage-relevant components
+        TagContainer tagContainer = col.GetComponent<TagContainer>();
+        if (tagContainer == null) tagContainer = col.GetComponentInParent<TagContainer>();
 
-        var enemy = col.GetComponent<EnemyLife>();
-        if (enemy == null) return;
+        EnemyLife enemyLife = col.GetComponent<EnemyLife>();
+        if (enemyLife == null) enemyLife = col.GetComponentInParent<EnemyLife>();
 
-        // Prevent multiple hits on same enemy during a single swing
-        if (_isSwinging && _enemiesHitThisSwing.Contains(enemy)) return;
-
-        if (_isSwinging)
+        HealthController health = null;
+        if (enemyLife != null)
         {
-            _enemiesHitThisSwing.Add(enemy);
+            health = enemyLife.healthController; // enemyLife ensures healthController is initialized
+        }
+        else
+        {
+            health = col.GetComponent<HealthController>();
+            if (health == null) health = col.GetComponentInParent<HealthController>();
         }
 
-        enemy.TakeDamage(); // (Optional: pass damage value if EnemyLife supports it)
+        // Filter by tag if required
+        if (requireDamagableTag)
+        {
+            if (tagContainer == null || !tagContainer.HasTag(damagableTagName)) return;
+        }
+        else
+        {
+            // If not requiring tag, still need some health target
+            if (enemyLife == null && health == null) return;
+        }
+
+        // Nothing to damage
+        if (enemyLife == null && health == null) return;
+
+        // Determine identity object for per-swing dedupe
+    UnityEngine.Object identity = (UnityEngine.Object)enemyLife ?? (UnityEngine.Object)health;
+        if (_isSwinging && _hitThisSwing.Contains(identity)) return;
+        if (_isSwinging) _hitThisSwing.Add(identity);
+
+        // Apply damage
+        if (enemyLife != null)
+        {
+            enemyLife.TakeDamage(damage); // passes explicit damage
+        }
+        else if (health != null)
+        {
+            health.TakeDamague(damage);
+        }
+
         if (grabbable != null) grabbable.Use();
-        Debug.Log($"Bat hit damagable: {col.name}");
+        Debug.Log($"Bat hit target: {identity.name} via collider {col.name}");
     }
 }
