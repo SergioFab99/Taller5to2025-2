@@ -4,6 +4,10 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody))]
 public class GrabbableObject : MonoBehaviour
 {
+    [Header("Durability")]
+    [SerializeField] private int maxUses = 5;
+    [SerializeField]private int usesLeft;
+    public bool IsBroken { get; private set; } = false;
     [Header("Configuración de Agarre")]
     [FormerlySerializedAs("tag")]
     [SerializeField] private string requiredTag = "Grabbable"; // Tag que debe tener el objeto (asegúrate de que esté asignado)
@@ -20,6 +24,9 @@ public class GrabbableObject : MonoBehaviour
 
     private void Awake()
     {
+        // Initialize durability
+        usesLeft = maxUses;
+        IsBroken = false;
         // Asegurar que tenga Rigidbody
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
@@ -49,15 +56,19 @@ public class GrabbableObject : MonoBehaviour
         {
             uiCanvas.gameObject.SetActive(false);
         }
+
+    // Initialize durability
+    usesLeft = maxUses;
+    IsBroken = false;
     }
 
     private void Update()
     {
-        // Comprobamos si debemos evaluar el raycast (para highlight y/o Canvas)
+        // Check if we need to evaluate raycast (for highlight and/or Canvas)
         bool needsCheck = ((showGlowWhenNear && _renderer != null) || (showCanvasWhenNear && uiCanvas != null));
         if (!needsCheck) return;
 
-        // Ray desde la cámara principal hacia adelante hasta interactionDistance
+        // Ray from main camera forward up to interactionDistance
         Camera mainCam = Camera.main;
         if (mainCam == null) return;
 
@@ -68,13 +79,13 @@ public class GrabbableObject : MonoBehaviour
             hitThis = (hit.collider.gameObject == gameObject);
         }
 
-        // Lógica de resaltado (igual que antes)
+        // Highlight logic
         if (showGlowWhenNear && _renderer != null)
         {
             _renderer.material = hitThis ? _highlightMaterial : _originalMaterial;
         }
 
-        // Lógica de UI Canvas: activar sólo si se mira este objeto
+        // UI Canvas logic: activate only if looking at this object
         if (uiCanvas != null)
         {
             uiCanvas.gameObject.SetActive(showCanvasWhenNear && hitThis);
@@ -84,16 +95,38 @@ public class GrabbableObject : MonoBehaviour
     // Opcional: Método público para permitir que otros sistemas interactúen
     public bool IsGrabbed() => _rigidbody.isKinematic;
 
+    // Use the object (durability)
+    // Use the object (durability)
+    public bool Use()
+    {
+        if (IsBroken) return false;
+        usesLeft--;
+        if (usesLeft <= 0)
+        {
+            IsBroken = true;
+            OnBroken();
+        }
+        return true;
+    }
+
+    public int GetUsesLeft() => usesLeft;
+
+    protected virtual void OnBroken()
+    {
+        Debug.Log($"{name} is broken!");
+        // Add visual effects, disable object, etc.
+    }
+
     // Opcional: Evento para notificar que fue soltado
     public void OnReleased()
     {
-        // Aquí puedes reproducir sonidos, partículas, etc.
-        Debug.Log($"{name} fue soltado!");
+    // You can play sounds, particles, etc.
+    Debug.Log($"{name} was released!");
     }
 
     // Opcional: Evento para notificar que fue agarrado
     public void OnGrabbed()
     {
-        Debug.Log($"{name} fue agarrado!");
+    Debug.Log($"{name} was grabbed!");
     }
 }

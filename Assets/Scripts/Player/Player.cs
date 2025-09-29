@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
 
     [SerializeField] HealthController healthController;
-    [SerializeField] PlayerActionStateMachine actionStateMachine; 
+    //[SerializeField] PlayerActionStateMachine actionStateMachine; 
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -85,7 +85,8 @@ public class Player : MonoBehaviour
         var combatInput = new CombatInput
         {
             BaseAttack = input.Attack.WasPressedThisFrame(),
-            Interact = input.Interact.WasPressedThisFrame(),            
+            Interact = input.Interact.WasPressedThisFrame(),      
+            Blocking = input.Block.IsPressed()   
         };
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
