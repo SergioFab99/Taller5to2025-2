@@ -1,3 +1,4 @@
+using KinematicCharacterController;
 using UnityEngine;
 
 public class ExposedState : IEnemyState
@@ -29,7 +30,7 @@ public class ExposedState : IEnemyState
 
         if (exposedTimer <= 0f)
         {
-            ai.SetBehaviourState(EnemyBehaviourState.Combat);
+            ai.SetBehaviourState(EnemyBehaviourState.Default);
         }
     }
 
@@ -37,4 +38,15 @@ public class ExposedState : IEnemyState
     {
         Debug.Log($"{ai.name} recovered from being exposed.");
     }
+
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return currentRotation;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        return currentVelocity;
+    }
+
 }

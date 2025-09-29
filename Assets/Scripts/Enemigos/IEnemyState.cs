@@ -7,14 +7,15 @@ public interface IEnemyState
     void Update();
     void OnExit();
 
-    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
-
+        return currentRotation;
+       
     }
 
-    public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList default_Settings)
+    public Vector3 UpdateVelocity( Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList default_Settings)
     {
-
+        return currentVelocity;
     }
 
 

@@ -1,3 +1,4 @@
+using KinematicCharacterController;
 using UnityEngine;
 
 public class BlockState : IEnemyState
@@ -31,7 +32,7 @@ public class BlockState : IEnemyState
 
         if (blockTimer <= 0f)
         {
-            ai.SetBehaviourState(EnemyBehaviourState.Combat);
+            ai.SetBehaviourState(EnemyBehaviourState.Default);
         }
     }
 
@@ -39,4 +40,15 @@ public class BlockState : IEnemyState
     {
         Debug.Log("lowered guard.");
     }
+
+    public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return currentRotation;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        return currentVelocity;
+    }
+
 }

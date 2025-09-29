@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a532cc532e66d489ea505e3ee512c1, type: 3}
-  m_Name: EnemyDefaultSettings
+  m_Script: {fileID: 11500000, guid: 780947a8862944d42bc85e7dafa85b9a, type: 3}
+  m_Name: EnemyAISettings
   m_EditorClassIdentifier: 
-  moveSettings: {fileID: 11400000, guid: b96e8001667670f4494eaa76a7012eb0, type: 2}
-  airSettings: {fileID: 11400000, guid: 8c536def6639ccc4e9898859173000c6, type: 2}
+  stopingDistance: 0.5
+  detectionDistance: 10.8
+  attackRange: 1
+  stunDuration: 1.5

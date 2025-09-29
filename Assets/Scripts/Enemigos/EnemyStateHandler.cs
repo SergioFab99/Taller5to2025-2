@@ -1,11 +1,14 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStateHandler : MonoBehaviour
 {
     public Transform Target;
 
-    private EnemyBehaviourState EnemyBehaviourState;
-    private IEnemyState currentState;
+    public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
+    
+    [SerializeField]private IEnemyState currentState;
     
 
 
@@ -22,7 +25,7 @@ public class EnemyStateHandler : MonoBehaviour
 
 
 
-    [SerializeField] public EnemySettingsList enemySettings;
+    [NonSerialized] public EnemySettingsList enemySettings;
 
     public void Initialize(EnemySettingsList enemySettings)
     {
@@ -38,6 +41,13 @@ public class EnemyStateHandler : MonoBehaviour
         SetState(idle);
     }
 
+    public void CurrentStateUpdate()
+    {
+        
+        currentState.Update();
+    }
+
+
     public void SetBehaviourState(EnemyBehaviourState enemyState)
     {
         EnemyBehaviourState = enemyState;
@@ -47,6 +57,9 @@ public class EnemyStateHandler : MonoBehaviour
     {
         return EnemyBehaviourState;
     }
+
+
+
 
   
     public void SetState(IEnemyState newState)
@@ -80,14 +93,7 @@ public class EnemyStateHandler : MonoBehaviour
     }
 
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.attackRange);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.detectionRange);
-    }
+   
 
     public IEnemyState GetCurrentState() => currentState;
     public IEnemyState GetIdleState() => idle;

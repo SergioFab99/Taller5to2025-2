@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class EnemyAiSettings : MonoBehaviour
+[CreateAssetMenu(fileName = "EnemyAISettings", menuName = "Scriptable Objects/EnemyAISettings")]
+public class EnemyAiSettings :ScriptableObject
 {
-    public float stopingDistance, detectionDistance, attackRange, detectionRange, stunDuration;
+    public float stopingDistance, detectionDistance, attackRange, stunDuration;
 }

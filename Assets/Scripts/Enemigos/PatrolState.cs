@@ -13,13 +13,13 @@ public class PatrolState : IEnemyState
      
     }
 
-    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime,Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime,Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
         var forward = Vector3.ProjectOnPlane(
                                       _requestedRotation,
                                       motor.CharacterUp);
 
-        currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
+       return currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
     }
 
     public void UpdateVelocity(ref Vector3 currentVelocity, EnemySettingsList Settings, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement)

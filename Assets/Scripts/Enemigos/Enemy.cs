@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public struct EnemyInput
 {
@@ -16,7 +17,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyCharacterState _lastCharacterState;
     [SerializeField] HealthController healthController;
     [SerializeField] EnemyStateHandler _stateHandler;
-
+    [SerializeField] NavMeshAgent agent;
 
     [SerializeField] EnemySettingsList EnemySettings;
     //[SerializeField] CombatManager
@@ -31,7 +32,9 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        character.Initialize(EnemySettings,_stateHandler.GetBehaviourState());
+        _stateHandler.Initialize(EnemySettings);
+
+        character.Initialize(EnemySettings,_stateHandler.GetBehaviourState(),_stateHandler.GetCurrentState());
 
 
     }
@@ -39,13 +42,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        agent.SetDestination(testTarget.position);
+        _stateHandler.CurrentStateUpdate();
+        character.SetState(_stateHandler.GetCurrentState());
         var enemyInput = new EnemyInput();
         switch(_stateHandler.GetBehaviourState())
         {
             case EnemyBehaviourState.Default:
 
                 float distance = Vector3.Distance(GetTarget(),character.transform.position);
-                Vector3 direction = (GetTarget() - character.transform.position).normalized;
+                Vector3 direction = (testTarget.position - character.transform.position).normalized;
                 if(distance > EnemySettings.AISettings.stopingDistance)
                 {
                     enemyInput = new EnemyInput
@@ -83,10 +89,21 @@ public class Enemy : MonoBehaviour
 
     public Vector3 GetTarget()
     {
-        Vector3 target = Vector3.zero;
-        target = testTarget.position;
-        return target;
+        return agent.steeringTarget;
     }
 
-    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(GetTarget(),0.1f);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, EnemySettings.AISettings.attackRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, EnemySettings.AISettings.detectionDistance);
+    }
+
 }

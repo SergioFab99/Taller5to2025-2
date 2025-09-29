@@ -22,7 +22,7 @@ public class AlertState : IEnemyState
     {
         alertTimer += Time.deltaTime;
 
-        if (!ai.CheckTargetOnView())
+        if (!ai.CheckTargetOnView(ai.Target))
         {
             if (alertTimer >= maxAlertTime)
             {
@@ -37,22 +37,22 @@ public class AlertState : IEnemyState
         {
             if (!(ai.GetCurrentState() is AttackState))
             {
-                ai.SetBehaviourState(EnemyBehaviourState.Combat);
+                ai.SetBehaviourState(EnemyBehaviourState.Default);
             }
 
         }
     }
 
-    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
         var forward = Vector3.ProjectOnPlane(
                                       _requestedRotation,
                                       motor.CharacterUp);
 
-        currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
+        return currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
     }
 
-    public void UpdateVelocity(ref Vector3 currentVelocity, EnemySettingsList Settings, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement)
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
 
         if (motor.GroundingStatus.IsStableOnGround)
@@ -130,7 +130,8 @@ public class AlertState : IEnemyState
             currentVelocity += motor.CharacterUp * Settings.AlertEnemySettings.airSettings.Gravity * deltaTime;
 
         }
-
+        Debug.Log("Alert");
+        return currentVelocity;
     }
 
 

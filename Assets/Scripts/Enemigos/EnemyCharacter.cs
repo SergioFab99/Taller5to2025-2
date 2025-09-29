@@ -49,13 +49,14 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     private Vector3 _requestedMovement;
 
 
-    public void Initialize(EnemySettingsList enemySettings, EnemyBehaviourState enemyBehaviourState)
+    public void Initialize(EnemySettingsList enemySettings, EnemyBehaviourState enemyBehaviourState, IEnemyState EnemyState)
     {
         _lastState = _state;
         motor.CharacterController = this;
         motor.GroundDetectionExtraDistance = 0.1f;
         default_Settings = enemySettings;
         this.enemyBehaviourState = enemyBehaviourState;
+        currentState = EnemyState;
     }
 
     public void UpdateInputs(EnemyInput input, EnemyBehaviourState state)
@@ -65,7 +66,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = input.Move;
 
         enemyBehaviourState = state;
-
+        
     }
 
     public void AfterCharacterUpdate(float deltaTime)
@@ -139,7 +140,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         {
             case EnemyBehaviourState.Default:
 
-                currentState.UpdateRotation(ref currentRotation, deltaTime,_requestedRotation, motor);
+               currentRotation =  currentState.UpdateRotation( currentRotation, deltaTime,_requestedRotation, motor);
 
                 break;
             case EnemyBehaviourState.Combat:
@@ -155,7 +156,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         {
             case EnemyBehaviourState.Default:
 
-                currentState.UpdateVelocity(ref currentVelocity, deltaTime, motor, _requestedMovement, default_Settings);
+                currentVelocity =  currentState.UpdateVelocity( currentVelocity, deltaTime, motor, _requestedMovement, default_Settings);
 
 
 
@@ -242,5 +243,10 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public void SetTarget(Vector3 target)
     {
         this.target = target;
+    }
+
+    public void SetState(IEnemyState state)
+    {
+        currentState = state;
     }
 }
