@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
 
     [SerializeField] HealthController healthController;
+    //[SerializeField] PlayerActionStateMachine actionStateMachine; 
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+        
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
@@ -65,8 +67,6 @@ public class Player : MonoBehaviour
             Move = input.Move.ReadValue<Vector2>(),
             Jump = input.Jump.WasPressedThisFrame(),
             Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
-            Grab = input.Grab.WasPressedThisFrame(),
-            Throw = input.Throw.WasPressedThisFrame(),
             Dash = input.Dash.WasPressedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
@@ -76,14 +76,17 @@ public class Player : MonoBehaviour
         {
             CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
         } */
+       
+        
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
         
-
         var combatInput = new CombatInput
         {
-            BaseAttack = input.Attack.WasPressedThisFrame()
+            BaseAttack = input.Attack.WasPressedThisFrame(),
+            Interact = input.Interact.WasPressedThisFrame(),      
+            Blocking = input.Block.IsPressed()   
         };
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
