@@ -14,27 +14,39 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyCharacter character;
     [SerializeField] EnemyCharacterState _characterState;
     [SerializeField] EnemyCharacterState _lastCharacterState;
+    [SerializeField] HealthController healthController;
+    [SerializeField] EnemyStateHandler _stateHandler;
 
+
+    [SerializeField] EnemySettingsList EnemySettings;
+    //[SerializeField] CombatManager
+
+
+    
     public Transform testTarget;
 
+
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        character.Initialize();
+        character.Initialize(EnemySettings,_stateHandler.GetBehaviourState());
+
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         var enemyInput = new EnemyInput();
-        switch(_characterState.BehaviourState)
+        switch(_stateHandler.GetBehaviourState())
         {
             case EnemyBehaviourState.Default:
 
                 float distance = Vector3.Distance(GetTarget(),character.transform.position);
                 Vector3 direction = (GetTarget() - character.transform.position).normalized;
-                if(distance > character.default_Settings.stopingDistance)
+                if(distance > EnemySettings.AISettings.stopingDistance)
                 {
                     enemyInput = new EnemyInput
                     {
@@ -57,7 +69,9 @@ public class Enemy : MonoBehaviour
             case EnemyBehaviourState.Dead:
                 break;
         }
-         character.UpdateInputs(enemyInput);
+         character.UpdateInputs(enemyInput,_stateHandler.GetBehaviourState());
+
+
 
     }
 
@@ -73,4 +87,6 @@ public class Enemy : MonoBehaviour
         target = testTarget.position;
         return target;
     }
+
+    
 }

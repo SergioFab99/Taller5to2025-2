@@ -1,5 +1,7 @@
 using KinematicCharacterController;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public enum EnemyBehaviourState
@@ -13,7 +15,6 @@ public enum EnemyBehaviourState
 [System.Serializable]
 public struct EnemyCharacterState
 {
-    public EnemyBehaviourState BehaviourState;
     public MovementState MovementState;
 }
 
@@ -21,13 +22,21 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] private KinematicCharacterMotor motor;
 
-    public EnemySettings default_Settings;
+    private EnemySettingsList default_Settings;
 
 
+    private EnemyBehaviourState enemyBehaviourState;
+    IEnemyState currentState;
 
+    private IdleState idle;
+    private AlertState alert;
+    private StunState stunned;
+    private DeadState dead;
 
 
     private Vector3 target;
+
+
 
     public EnemyCharacterState _state;
     private EnemyCharacterState _lastState;
@@ -40,24 +49,28 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     private Vector3 _requestedMovement;
 
 
-    public void Initialize()
+    public void Initialize(EnemySettingsList enemySettings, EnemyBehaviourState enemyBehaviourState)
     {
         _lastState = _state;
         motor.CharacterController = this;
         motor.GroundDetectionExtraDistance = 0.1f;
+        default_Settings = enemySettings;
+        this.enemyBehaviourState = enemyBehaviourState;
     }
 
-    public void UpdateInputs(EnemyInput input)
+    public void UpdateInputs(EnemyInput input, EnemyBehaviourState state)
     {
         _requestedRotation = input.Direction;
        
         _requestedMovement = input.Move;
-        Debug.Log("Requested Movement: " + _requestedMovement.magnitude);
+
+        enemyBehaviourState = state;
+
     }
 
     public void AfterCharacterUpdate(float deltaTime)
     {
-        switch (_state.BehaviourState)
+        switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
                 break;
@@ -90,9 +103,10 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
     {
-        switch (_state.BehaviourState)
+        switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
+                
                 break;
             case EnemyBehaviourState.Combat:
                 break;
@@ -108,7 +122,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
     {
-        switch (_state.BehaviourState)
+        switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
                 break;
@@ -121,25 +135,11 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-       switch(_state.BehaviourState)
+       switch(enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
 
-                switch (_state.MovementState)
-                {
-                    case MovementState.Idle:
-                        break;
-                    case MovementState.Moving:
-
-                        var forward = Vector3.ProjectOnPlane(
-                                      _requestedRotation,
-                                      motor.CharacterUp);
-
-                       
-
-                        currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
-                        break;      
-                }
+                currentState.UpdateRotation(ref currentRotation, deltaTime,_requestedRotation, motor);
 
                 break;
             case EnemyBehaviourState.Combat:
@@ -151,98 +151,11 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        switch (_state.BehaviourState)
+        switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
 
-                switch (_state.MovementState)
-                {
-                    case MovementState.Idle:
-                        break;
-                    case MovementState.Moving:
-
-                        if (motor.GroundingStatus.IsStableOnGround)
-                        {
-
-                                var groundedMovement = motor.GetDirectionTangentToSurface
-                                (
-                                    direction: _requestedMovement,
-                                    surfaceNormal: motor.GroundingStatus.GroundNormal
-                                ) * _requestedMovement.magnitude;    
-
-                                currentVelocity = groundedMovement * default_Settings.walkSpeed;
-
-
-                        }
-                        else
-                        {
-                            if (_requestedMovement.sqrMagnitude > 0f)
-                            {
-                                var planarMovement = Vector3.ProjectOnPlane
-                                (
-                                    vector: _requestedMovement,
-                                    planeNormal: motor.CharacterUp
-                                ) * _requestedMovement.magnitude;
-
-                                var currentPlanarVelocity = Vector3.ProjectOnPlane
-                                (
-                                    vector: currentVelocity,
-                                    planeNormal: motor.CharacterUp
-                                );
-
-                                var movementForce = planarMovement * default_Settings.AirAcceleration * deltaTime;
-
-                                if (currentPlanarVelocity.magnitude < default_Settings.AirSpeed)
-                                {
-                                    var targetPlanarVelocity = currentPlanarVelocity + movementForce;
-
-                                    targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, default_Settings.AirSpeed);
-                                    movementForce = targetPlanarVelocity - currentPlanarVelocity;
-                                }
-
-                                else if (Vector3.Dot(currentPlanarVelocity, movementForce) > 0f)
-                                {
-                                    var contrainedMovementForce = Vector3.ProjectOnPlane
-                                    (
-                                        vector: movementForce,
-                                        planeNormal: currentPlanarVelocity.normalized
-                                    );
-                                    movementForce = contrainedMovementForce;
-
-                                }
-
-                                if (motor.GroundingStatus.FoundAnyGround) // prevent wall climbing in the air
-                                {
-                                    if (Vector3.Dot(movementForce, currentVelocity + movementForce) > 0f)
-                                    {
-                                        var obstructedNormal = Vector3.Cross
-                                        (
-                                            motor.CharacterUp,
-                                            Vector3.Cross
-                                            (
-                                                motor.CharacterUp,
-                                                motor.GroundingStatus.GroundNormal
-                                            )
-                                        ).normalized;
-                                        movementForce = Vector3.ProjectOnPlane(movementForce, obstructedNormal);
-                                    }
-                                }
-
-
-                                currentVelocity += movementForce;
-                            }
-
-
-                            currentVelocity += motor.CharacterUp * default_Settings.Gravity * deltaTime;
-
-                        }
-                
-
-
-
-
-                        break;
-                }
+                currentState.UpdateVelocity(ref currentVelocity, deltaTime, motor, _requestedMovement, default_Settings);
 
 
 

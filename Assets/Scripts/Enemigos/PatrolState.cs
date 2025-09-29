@@ -1,49 +1,19 @@
 using KinematicCharacterController;
 using UnityEngine;
 
-public class AlertState : IEnemyState
+public class PatrolState : IEnemyState
 {
-    private EnemyStateHandler ai;
-    private float alertTimer;
-    private float maxAlertTime = 3f;
-
-    public AlertState(EnemyStateHandler main)
-    {
-        ai = main;
-    }
-
     public void OnEnter()
     {
-        alertTimer = 0f;
-        Debug.Log("spotting");
+        Debug.Log("Patroling");
     }
 
-    public void Update()
+    public void OnExit()
     {
-        alertTimer += Time.deltaTime;
-
-        if (!ai.CheckTargetOnView())
-        {
-            if (alertTimer >= maxAlertTime)
-            {
-                ai.SetState(ai.GetIdleState());
-            }
-            return;
-        }
-
-       
-
-        if (ai.CheckTargetOnAttackRange())
-        {
-            if (!(ai.GetCurrentState() is AttackState))
-            {
-                ai.SetBehaviourState(EnemyBehaviourState.Combat);
-            }
-
-        }
+     
     }
 
-    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime,Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
         var forward = Vector3.ProjectOnPlane(
                                       _requestedRotation,
@@ -64,7 +34,7 @@ public class AlertState : IEnemyState
                 surfaceNormal: motor.GroundingStatus.GroundNormal
             ) * _requestedMovement.magnitude;
 
-            currentVelocity = groundedMovement * Settings.AlertEnemySettings.moveSettings.Speed;
+            currentVelocity = groundedMovement * Settings.DefaultEnemySettings.moveSettings.Speed;
 
 
         }
@@ -84,13 +54,13 @@ public class AlertState : IEnemyState
                     planeNormal: motor.CharacterUp
                 );
 
-                var movementForce = planarMovement * Settings.AlertEnemySettings.airSettings.AirAcceleration * deltaTime;
+                var movementForce = planarMovement * Settings.DefaultEnemySettings.airSettings.AirAcceleration * deltaTime;
 
-                if (currentPlanarVelocity.magnitude < Settings.AlertEnemySettings.airSettings.AirSpeed)
+                if (currentPlanarVelocity.magnitude < Settings.DefaultEnemySettings.airSettings.AirSpeed)
                 {
                     var targetPlanarVelocity = currentPlanarVelocity + movementForce;
 
-                    targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, Settings.AlertEnemySettings.airSettings.AirSpeed);
+                    targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, Settings.DefaultEnemySettings.airSettings.AirSpeed);
                     movementForce = targetPlanarVelocity - currentPlanarVelocity;
                 }
 
@@ -127,15 +97,15 @@ public class AlertState : IEnemyState
             }
 
 
-            currentVelocity += motor.CharacterUp * Settings.AlertEnemySettings.airSettings.Gravity * deltaTime;
+            currentVelocity += motor.CharacterUp * Settings.DefaultEnemySettings.airSettings.Gravity * deltaTime;
 
         }
 
     }
 
 
-    public void OnExit()
+    void IEnemyState.Update()
     {
-        Debug.Log("no longer spotting");
+       
     }
 }

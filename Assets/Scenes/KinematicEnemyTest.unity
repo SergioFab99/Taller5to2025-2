@@ -551,9 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 1407758664}
-  default_Settings: {fileID: 11400000, guid: 03b7d2efff5433a4691037988081a94a, type: 2}
   _state:
-    BehaviourState: 0
     MovementState: 0
 --- !u!1 &1466773083
 GameObject:
@@ -683,6 +681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022941564}
   - component: {fileID: 2022941565}
+  - component: {fileID: 2022941566}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -720,12 +719,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1407758666}
   _characterState:
-    BehaviourState: 0
     MovementState: 0
   _lastCharacterState:
-    BehaviourState: 0
     MovementState: 0
+  healthController: {fileID: 0}
+  _stateHandler: {fileID: 0}
+  EnemySettings: {fileID: 0}
   testTarget: {fileID: 1855379737}
+--- !u!114 &2022941566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022941563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12301a527224d4b4c9542e5f28f61751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  enemySettings: {fileID: 0}
 --- !u!1 &2144887046
 GameObject:
   m_ObjectHideFlags: 0

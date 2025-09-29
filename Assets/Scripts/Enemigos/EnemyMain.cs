@@ -39,14 +39,7 @@ public class EnemyMain : MonoBehaviour
         agent.speed = moveSpeed;
         agent.stoppingDistance = attackRange - 3f;
 
-        idle = new IdleState(this);
-        alert = new AlertState(this);
-        attack = new AttackState(this);
-        dead = new DeadState(this);
-        stunned = new StunState(this);
-        block = new BlockState(this);
-        exposed = new ExposedState(this);
-        recover = new RecoverState(this);
+        
 
         SetState(idle);
 

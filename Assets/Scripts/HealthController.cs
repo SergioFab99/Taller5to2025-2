@@ -22,8 +22,8 @@ public class HealthController : MonoBehaviour
     public void TakeDamague(float damague)
     {
         var damaged = health - damague;
-        health = Mathf.Min(0, damaged);
         OnLifeChangue?.Invoke(damaged);
+        health = damaged;
         if(health == 0)
         {
             OnDead?.Invoke();

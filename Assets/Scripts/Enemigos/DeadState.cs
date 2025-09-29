@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DeadState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
 
-    public DeadState(EnemyMain main)
+    public DeadState(EnemyStateHandler main)
     {
         ai = main;
     }

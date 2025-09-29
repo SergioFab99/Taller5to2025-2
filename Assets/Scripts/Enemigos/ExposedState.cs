@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ExposedState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
     private float exposedTimer;
     private float exposedDuration = 1.5f; 
 
-    public ExposedState(EnemyMain main)
+    public ExposedState(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -14,13 +14,12 @@ public class ExposedState : IEnemyState
     public void OnEnter()
     {
         exposedTimer = exposedDuration;
-        ai.StopMovement();
         Debug.Log("exposed");
     }
 
     public void Update()
     {
-        if (ai.target == null)
+        if (ai.Target == null)
         {
             ai.SetState(ai.GetIdleState());
             return;
@@ -30,7 +29,7 @@ public class ExposedState : IEnemyState
 
         if (exposedTimer <= 0f)
         {
-            ai.SetState(ai.GetRecoverState());
+            ai.SetBehaviourState(EnemyBehaviourState.Combat);
         }
     }
 

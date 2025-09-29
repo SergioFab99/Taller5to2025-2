@@ -68,11 +68,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
 
     [SerializeReference]
-    public DefaultStanceSettings DefaultStandSettings;
+    public DefaultMoveSettings DefaultStandSettings;
 
     [SerializeReference]
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
-    public DefaultStanceSettings DefaultCrouchSettings;
+    public DefaultMoveSettings DefaultCrouchSettings;
 
     [SerializeReference]
     [FoldoutGroup("DefaultMovementBehaviourSettings")]

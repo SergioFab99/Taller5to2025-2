@@ -1,5 +1,7 @@
 using Unity.Cinemachine;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] PlayerAnimation playerAnimation;
+
+    [SerializeField] HealthController healthController;
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -20,9 +24,21 @@ public class Player : MonoBehaviour
     [SerializeField] float shakeForce;
     [SerializeField] Vector3 velocity;
 
+    public void OnDead()
+    {
+        
+        SceneManager.LoadScene("BlockOutTest");
+    }
+
+    private void OnDisable()
+    {
+        healthController.OnDead -= OnDead;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        healthController.OnDead += OnDead;
         Cursor.lockState = CursorLockMode.Locked;
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();

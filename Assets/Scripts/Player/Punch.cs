@@ -50,6 +50,10 @@ public class Punch : MonoBehaviour
         {
             Debug.Log("Hitted");
             col.gameObject.GetComponent<HealthController>().TakeDamague(1f);
+            if(col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
+            {
+                enemyLife.TakeDamage();
+            }
             hitDone = true;
         }
     }
