@@ -1,12 +1,15 @@
 using KinematicCharacterController;
 using UnityEngine;
+using System;
+using System.Collections;
+
 
 public class AlertState : IEnemyState
 {
     private EnemyStateHandler ai;
     private float alertTimer;
     private float maxAlertTime = 3f;
-
+    private bool canAttack;
     public AlertState(EnemyStateHandler main)
     {
         ai = main;
@@ -38,6 +41,16 @@ public class AlertState : IEnemyState
             if (!(ai.GetCurrentState() is AttackState))
             {
                 ai.SetBehaviourState(EnemyBehaviourState.Default);
+            }
+            if(canAttack)
+            {
+                ai.Target.TryGetComponent<HealthController>(out HealthController ht);
+                if(ht != null)
+                {
+                    ht.TakeDamague(10);
+                    canAttack = false;
+                }
+
             }
 
         }
@@ -138,5 +151,11 @@ public class AlertState : IEnemyState
     public void OnExit()
     {
         Debug.Log("no longer spotting");
+    }
+
+    IEnumerator ResetCanAttack(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canAttack = true;
     }
 }
