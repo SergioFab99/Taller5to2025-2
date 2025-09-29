@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
 
     [SerializeField] HealthController healthController;
+    [SerializeField] PlayerActionStateMachine actionStateMachine; 
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+        
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
@@ -76,6 +78,33 @@ public class Player : MonoBehaviour
         {
             CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
         } */
+        // --- BLOQUEO --- //
+        if (actionStateMachine != null)
+        {
+        bool isBlocking = input.Block.IsPressed();
+        actionStateMachine.SetBlockInput(isBlocking);
+
+            // --- DODGE --- //
+            if (actionStateMachine.CurrentState == PlayerActionState.Blocking && !Mathf.Approximately(characterInput.Move.sqrMagnitude, 0f))
+            {
+                Vector3 moveDir = new Vector3(characterInput.Move.x, 0, characterInput.Move.y);
+                moveDir = playerCamera._camera.transform.TransformDirection(moveDir);
+                moveDir.y = 0f;
+                if (moveDir.sqrMagnitude > 0.01f)
+                {
+                    actionStateMachine.StartDodge(moveDir.normalized);
+                }
+            }
+
+            // --- COUNTERATTACK --- //
+            if (actionStateMachine.CurrentState == PlayerActionState.CounterAttack || actionStateMachine.CurrentState == PlayerActionState.Blocking)
+            {
+                if (input.Attack.WasPressedThisFrame())
+                {
+                    actionStateMachine.TryCounterAttack();
+                }
+            }
+        }
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
