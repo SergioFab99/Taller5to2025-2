@@ -67,8 +67,6 @@ public class Player : MonoBehaviour
             Move = input.Move.ReadValue<Vector2>(),
             Jump = input.Jump.WasPressedThisFrame(),
             Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
-            Grab = input.Grab.WasPressedThisFrame(),
-            Throw = input.Throw.WasPressedThisFrame(),
             Dash = input.Dash.WasPressedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
@@ -78,41 +76,16 @@ public class Player : MonoBehaviour
         {
             CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
         } */
-        // --- BLOQUEO --- //
-        if (actionStateMachine != null)
-        {
-        bool isBlocking = input.Block.IsPressed();
-        actionStateMachine.SetBlockInput(isBlocking);
-
-            // --- DODGE --- //
-            if (actionStateMachine.CurrentState == PlayerActionState.Blocking && !Mathf.Approximately(characterInput.Move.sqrMagnitude, 0f))
-            {
-                Vector3 moveDir = new Vector3(characterInput.Move.x, 0, characterInput.Move.y);
-                moveDir = playerCamera._camera.transform.TransformDirection(moveDir);
-                moveDir.y = 0f;
-                if (moveDir.sqrMagnitude > 0.01f)
-                {
-                    actionStateMachine.StartDodge(moveDir.normalized);
-                }
-            }
-
-            // --- COUNTERATTACK --- //
-            if (actionStateMachine.CurrentState == PlayerActionState.CounterAttack || actionStateMachine.CurrentState == PlayerActionState.Blocking)
-            {
-                if (input.Attack.WasPressedThisFrame())
-                {
-                    actionStateMachine.TryCounterAttack();
-                }
-            }
-        }
+       
+        
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
         
-
         var combatInput = new CombatInput
         {
-            BaseAttack = input.Attack.WasPressedThisFrame()
+            BaseAttack = input.Attack.WasPressedThisFrame(),
+            Interact = input.Interact.WasPressedThisFrame(),            
         };
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
