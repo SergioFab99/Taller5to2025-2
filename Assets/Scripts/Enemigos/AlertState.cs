@@ -9,7 +9,7 @@ public class AlertState : IEnemyState
     private EnemyStateHandler ai;
     private float alertTimer;
     private float maxAlertTime = 3f;
-    private bool canAttack;
+    private bool canAttack = true;
     public AlertState(EnemyStateHandler main)
     {
         ai = main;
@@ -25,29 +25,15 @@ public class AlertState : IEnemyState
     public void Update()
     {
         alertTimer += Time.deltaTime;
-
-        if (!ai.CheckTargetOnView(ai.Target))
+        if (ai.CheckTargetOnAttackRange(ai.Target))
         {
-            if (alertTimer >= maxAlertTime)
-            {
-                ai.SetState(ai.GetIdleState());
-            }
-            return;
-        }
-
-       
-
-        if (ai.CheckTargetOnAttackRange())
-        {
-            if (!(ai.GetCurrentState() is AttackState))
-            {
-                ai.SetBehaviourState(EnemyBehaviourState.Default);
-            }
+          
+            Debug.Log("onAttackRange");
             if (canAttack)
             {
                 Debug.Log("trygettingcomponetnAttacking");
-                ai.Target.TryGetComponent<HealthController>(out HealthController ht);
-                if (ht != null)
+               
+                if (ai.Target.TryGetComponent<HealthController>(out HealthController ht))
                 {
                     Debug.Log("Attacking target");
                     ht.TakeDamague(10);
@@ -62,6 +48,19 @@ public class AlertState : IEnemyState
             }
 
         }
+
+       if (!ai.CheckTargetOnView(ai.Target))
+        {
+            
+            if (alertTimer >= maxAlertTime)
+            {
+                ai.SetState(ai.GetIdleState());
+            }
+           
+        }
+
+       
+
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)

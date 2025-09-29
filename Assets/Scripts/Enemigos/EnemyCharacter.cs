@@ -26,7 +26,9 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
 
     private EnemyBehaviourState enemyBehaviourState;
-    IEnemyState currentState;
+    private  IEnemyState  currentState;
+
+
 
     private IdleState idle;
     private AlertState alert;
@@ -245,8 +247,17 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         this.target = target;
     }
 
-    public void SetState(IEnemyState state)
+    public void UpdateState(IEnemyState state)
     {
         currentState = state;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,default_Settings.AISettings.attackRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, default_Settings.AISettings.detectionDistance);
     }
 }

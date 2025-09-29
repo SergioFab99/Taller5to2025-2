@@ -32,19 +32,27 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _stateHandler.Initialize(EnemySettings);
+        _stateHandler.Initialize(EnemySettings,character.transform);
 
         character.Initialize(EnemySettings,_stateHandler.GetBehaviourState(),_stateHandler.GetCurrentState());
 
-
+        healthController.OnDead += Ondead;
     }
 
+    public void Ondead()
+    {
+        healthController.OnDead -= Ondead;
+        Destroy(gameObject);
+    }
+    public void Update()
+    {
+        _stateHandler.CurrentStateUpdate();
+        agent.SetDestination(testTarget.position);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        agent.SetDestination(testTarget.position);
-        _stateHandler.CurrentStateUpdate();
-        character.SetState(_stateHandler.GetCurrentState());
+        character.UpdateState(_stateHandler.GetCurrentState());
         var enemyInput = new EnemyInput();
         switch(_stateHandler.GetBehaviourState())
         {
@@ -97,13 +105,6 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawSphere(GetTarget(),0.1f);
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, EnemySettings.AISettings.attackRange);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, EnemySettings.AISettings.detectionDistance);
-    }
+    
 
 }
