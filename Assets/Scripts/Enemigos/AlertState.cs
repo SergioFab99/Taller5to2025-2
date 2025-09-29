@@ -21,6 +21,12 @@ public class AlertState : IEnemyState
     {
         alertTimer += Time.deltaTime;
 
+        if (ai.HasStatus(StatusEffect.Blind))
+        {
+            ai.StopMovement();
+            return;
+        }
+
         if (!ai.Watching())
         {
             if (alertTimer >= maxAlertTime)
@@ -30,7 +36,7 @@ public class AlertState : IEnemyState
             return;
         }
 
-        ai.MoveTowardsTarget();
+        ai.Movement();
 
         if (ai.Attacking())
         {
