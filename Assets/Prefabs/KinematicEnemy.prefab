@@ -132,9 +132,11 @@ GameObject:
   - component: {fileID: 1031900099500125176}
   - component: {fileID: 7629848248302835578}
   - component: {fileID: 4371702188072939900}
+  - component: {fileID: 5248539640219187796}
+  - component: {fileID: 3112315337628804585}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,6 +259,34 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5248539640219187796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305063760046091379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - {fileID: 11400000, guid: 23882b482681bbc4ba315af5c093efdf, type: 2}
+--- !u!114 &3112315337628804585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305063760046091379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  health: 5
 --- !u!1 &4406669422065707575
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,10 +298,9 @@ GameObject:
   - component: {fileID: 6457089281944685867}
   - component: {fileID: 2738161865839390191}
   - component: {fileID: 2217880525943380656}
-  - component: {fileID: 4396669549389829683}
   m_Layer: 0
   m_Name: KinematicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,7 +338,7 @@ MonoBehaviour:
     MovementState: 0
   _lastCharacterState:
     MovementState: 0
-  healthController: {fileID: 4396669549389829683}
+  healthController: {fileID: 3112315337628804585}
   _stateHandler: {fileID: 2217880525943380656}
   agent: {fileID: 4371702188072939900}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
@@ -328,20 +357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   EnemyBehaviourState: 0
---- !u!114 &4396669549389829683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4406669422065707575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
 --- !u!1 &7560746649115550840
 GameObject:
   m_ObjectHideFlags: 0

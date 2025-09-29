@@ -18,6 +18,7 @@ public class AlertState : IEnemyState
     public void OnEnter()
     {
         alertTimer = 0f;
+        canAttack = true;
         Debug.Log("spotting");
     }
 
@@ -42,13 +43,20 @@ public class AlertState : IEnemyState
             {
                 ai.SetBehaviourState(EnemyBehaviourState.Default);
             }
-            if(canAttack)
+            if (canAttack)
             {
+                Debug.Log("trygettingcomponetnAttacking");
                 ai.Target.TryGetComponent<HealthController>(out HealthController ht);
-                if(ht != null)
+                if (ht != null)
                 {
+                    Debug.Log("Attacking target");
                     ht.TakeDamague(10);
                     canAttack = false;
+                    ai.StartCoroutine(ResetCanAttack(1.0f));
+                }
+                else
+                {
+                    Debug.Log("No HealthController found on target.");
                 }
 
             }
@@ -143,7 +151,7 @@ public class AlertState : IEnemyState
             currentVelocity += motor.CharacterUp * Settings.AlertEnemySettings.airSettings.Gravity * deltaTime;
 
         }
-        Debug.Log("Alert");
+        //Debug.Log("Alert");
         return currentVelocity;
     }
 

@@ -30,7 +30,7 @@ public class EnemyTargetHUD : MonoBehaviour
 
     [Header("Behaviour")] 
     [Tooltip("Hide bar when the enemy is at full health.")]
-    [SerializeField] private bool hideWhenFull = true;
+    [SerializeField] private bool hideWhenFull = false;
     [Tooltip("Seconds the bar remains visible after you stop looking at the enemy.")]
     [SerializeField] private float lingerTime = 0.35f;
     [Tooltip("Fade speed for showing / hiding.")]

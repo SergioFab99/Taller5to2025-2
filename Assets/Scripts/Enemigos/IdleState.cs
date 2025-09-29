@@ -35,7 +35,7 @@ public class IdleState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
-        Debug.Log("NEW");
+        //Debug.Log("NEW");
         return Vector3.zero;
     }
 
