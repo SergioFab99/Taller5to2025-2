@@ -7,7 +7,7 @@ public class EnemyStateHandler : MonoBehaviour
     public Transform Target;
     private Transform Character;
     public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
-    
+    public float knockbackForce;
     [SerializeField]private IEnemyState currentState;
     
 

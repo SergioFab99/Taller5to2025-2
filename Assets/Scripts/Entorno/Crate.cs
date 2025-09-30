@@ -50,12 +50,12 @@ public class Crate : MonoBehaviour
         {
             if (broken) return;
 
-            EnemyMain enemy = collision.collider.GetComponent<EnemyMain>();
+            EnemyStateHandler enemy = collision.collider.GetComponentInParent<EnemyStateHandler>();
             if (enemy != null)
             {
                 Vector3 hitDir = (enemy.transform.position - transform.position).normalized;
 
-                enemy.stunDuration = stunDuration;
+                enemy.enemySettings.AISettings.stunDuration = stunDuration;
                 enemy.knockbackForce = knockbackForce;
 
                 StunState stun = enemy.GetStunState() as StunState;
