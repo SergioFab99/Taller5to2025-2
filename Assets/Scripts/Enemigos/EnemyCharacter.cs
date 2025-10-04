@@ -254,10 +254,14 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,default_Settings.AISettings.attackRange);
+        if(default_Settings != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position,default_Settings.AISettings.attackRange);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, default_Settings.AISettings.detectionDistance);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, default_Settings.AISettings.detectionDistance);
+
+        }
     }
 }

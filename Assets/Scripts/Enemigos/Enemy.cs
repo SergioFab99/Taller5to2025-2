@@ -105,6 +105,10 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawSphere(GetTarget(),0.1f);
     }
 
+    public IEnemyState GetEnemyState()
+    {
+        return _stateHandler.GetCurrentState();
+    }
     
 
 }
