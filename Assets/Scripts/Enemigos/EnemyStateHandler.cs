@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyStateHandler : MonoBehaviour
 {
     public Transform Target;
-
+    private Transform Character;
     public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
-    
+    public float knockbackForce;
     [SerializeField]private IEnemyState currentState;
     
 
@@ -27,8 +27,9 @@ public class EnemyStateHandler : MonoBehaviour
 
     [NonSerialized] public EnemySettingsList enemySettings;
 
-    public void Initialize(EnemySettingsList enemySettings)
+    public void Initialize(EnemySettingsList enemySettings, Transform Character)
     {
+        this.Character = Character;
         this.enemySettings = enemySettings;
         idle = new IdleState(this);
         alert = new AlertState(this);
@@ -80,7 +81,7 @@ public class EnemyStateHandler : MonoBehaviour
     {
         if (target == null) return false;
        
-        return (Vector3.Distance(transform.position, target.position) <= enemySettings.AISettings.detectionDistance);
+        return (Vector3.Distance(Character.position, target.position) <= enemySettings.AISettings.detectionDistance);
     }
 
     public bool CheckTargetOnAttackRange(Transform target = null)
@@ -89,7 +90,7 @@ public class EnemyStateHandler : MonoBehaviour
         {
             return false;
         }
-        return Vector3.Distance(transform.position, target.position) <= enemySettings.AISettings.attackRange;
+        return Vector3.Distance(Character.position, target.position) <= enemySettings.AISettings.attackRange;
     }
 
 

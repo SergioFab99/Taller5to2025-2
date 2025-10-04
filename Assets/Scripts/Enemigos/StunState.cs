@@ -58,8 +58,17 @@ public class StunState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
+        if (ai.knockbackForce >0.1f)
+        {
+            motor.ForceUnground();
+            currentVelocity += (ai.knockbackForce * knockbackDir);
+            ai.knockbackForce = 0f;
+
+        }
         return currentVelocity;
+        
     }
+
 
 }
 

@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
 
     [SerializeField] HealthController healthController;
+    [Header("Damage Reception")]
+    [Tooltip("Damage taken when colliding/triggering with an enemy tagged 'Enemy'.")]
+    [SerializeField] private float contactDamage = 1f;
     //[SerializeField] PlayerActionStateMachine actionStateMachine; 
     PlayerInputActions _inputActions;
 
@@ -124,6 +127,30 @@ public class Player : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         playerCharacter.SetPosition(position);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("Enemy"))
+        {
+            ApplyContactDamage();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            ApplyContactDamage();
+        }
+    }
+
+    private void ApplyContactDamage()
+    {
+        if (healthController != null && contactDamage > 0f)
+        {
+            healthController.TakeDamague(contactDamage);
+        }
     }
 
 }
