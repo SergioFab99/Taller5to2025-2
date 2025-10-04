@@ -332,3 +332,8 @@ public class PlayerCombat : MonoBehaviour
     }
 
 }
+
+class Attack
+{
+
+}

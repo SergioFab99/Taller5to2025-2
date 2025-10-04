@@ -1,7 +1,29 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
+public struct HitInfo
+{ 
+    public Collider col;
+    public Vector3 hitpoint;
+    public Vector3 normal;
+    public int damague;
+    public IEnemyState enemyState;
+
+    public HitInfo(Collider col, Vector3 point, Vector3 normal, int damage, IEnemyState state = null)
+    {
+        this.col = col;
+        this.hitpoint = point;
+        this.normal = normal;
+        this.damague = damage;
+        this.enemyState = state;
+    }
+}
+
+
+
 
 public class Punch : MonoBehaviour
 {
@@ -13,6 +35,9 @@ public class Punch : MonoBehaviour
     private bool isActive;
 
     public int dmg;
+
+    public delegate void OnHitEvent(HitInfo hitInfo);
+    public event OnHitEvent OnHit;
 
     private void Start()
     {
@@ -35,7 +60,9 @@ public class Punch : MonoBehaviour
             {
                 if (isActive)
                 {
-                    PerformOnHit(hit.collider, hit.point, hit.normal);
+                    HitInfo hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, dmg);
+                    
+                    PerformOnHit(hitInfo);
 
                 }
             }
@@ -44,17 +71,98 @@ public class Punch : MonoBehaviour
         
     }
 
-    public void PerformOnHit(Collider col, Vector3 hitPoint, Vector3 hitNormal)
+    public void PerformOnHit(HitInfo hitInfo)
     {
-        if (col.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+        var enemyCharacter = hitInfo.col.GetComponentInParent<EnemyCharacter>().gameObject;
+        if (enemyCharacter != null) 
         {
-            Debug.Log("Hitted");
-            col.gameObject.GetComponent<HealthController>().TakeDamague(1f);
-            if(col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
+            
+            if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
             {
-                enemyLife.TakeDamage();
+                Debug.Log("Hitted");
+                var enemy = enemyCharacter.GetComponentInParent<Enemy>();
+                if (enemy != null)
+                {
+                    hitInfo.enemyState = enemy.GetEnemyState();
+                    enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
+                    OnHit?.Invoke(hitInfo);
+                    if (hitInfo.enemyState is BlockState)
+                    {
+                        lifeController.TakeDamague(dmg / 2);
+
+                    }
+                    else
+                    {
+                     
+                        lifeController.TakeDamague(dmg);
+
+                    }
+                }
+            
+                if(hitInfo.col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
+                {
+                    OnHit?.Invoke(hitInfo);
+                    if (hitInfo.enemyState is BlockState)
+                    {
+                        enemyLife.TakeDamage(dmg/2);
+
+                    }
+                    else
+                    {
+                        enemyLife.TakeDamage(dmg);
+
+                    }
+
+                }
+                hitDone = true;
             }
-            hitDone = true;
+        
+        }
+        else
+        {
+           enemyCharacter = hitInfo.col.GetComponent<EnemyCharacter>().gameObject;
+            if(enemyCharacter != null)
+            {
+                if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+                {
+                    Debug.Log("Hitted");
+                    var enemy = enemyCharacter.GetComponentInParent<Enemy>();
+                    if (enemy != null)
+                    {
+                        hitInfo.enemyState = enemy.GetEnemyState();
+                        enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
+                        OnHit?.Invoke(hitInfo);
+                        if (hitInfo.enemyState is BlockState)
+                        {
+                            lifeController.TakeDamague(dmg / 2);
+
+                        }
+                        else
+                        {
+
+                            lifeController.TakeDamague(dmg);
+
+                        }
+                    }
+
+                    if (hitInfo.col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
+                    {
+                        OnHit?.Invoke(hitInfo);
+                        if (hitInfo.enemyState is BlockState)
+                        {
+                            enemyLife.TakeDamage(dmg / 2);
+
+                        }
+                        else
+                        {
+                            enemyLife.TakeDamage(dmg);
+
+                        }
+
+                    }
+                    hitDone = true;
+                }
+            }
         }
     }
 
@@ -68,7 +176,9 @@ public class Punch : MonoBehaviour
             if (col != null && col.Length > 0)
             {
                 var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
-                PerformOnHit(col[0], col[0].ClosestPoint(transform.position), distance);
+                HitInfo hitInfo = new HitInfo(col[0], col[0].ClosestPoint(transform.position), distance, dmg);
+
+                PerformOnHit(hitInfo);
             }
 
 
