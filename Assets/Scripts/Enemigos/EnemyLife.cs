@@ -2,51 +2,73 @@ using UnityEngine;
 
 public class EnemyLife : MonoBehaviour
 {
-    [Header("Vida")]
+    [Header("Vida (Legacy)")]
     public int vidasIniciales = 2;
-    public int vidasActuales;
-    public bool estaMuerto = false;
+    [HideInInspector] public int vidasActuales;
+    [HideInInspector] public bool estaMuerto = false;
 
+    [Header("Components")]
+    public Animator enemyAnimator;
+    [Tooltip("Optional explicit HealthController. If null one will be searched or auto-created.")]
+    public HealthController healthController;
 
+    [Header("Damage Settings")] public int damagePerHit = 1;
 
-    void Awake()
+    private void Awake()
     {
-
-    }
-
-    void Start()
-    {
-        vidasIniciales = Mathf.Max(1, vidasIniciales);
-        vidasActuales = vidasIniciales;
-    }
-
-    public void TakeDamage(int cantidad = 1)
-    {
-        if (estaMuerto) return;
-        cantidad = Mathf.Max(1, cantidad);
-        vidasActuales -= cantidad;
-        if (vidasActuales <= 0)
+        if (healthController == null)
         {
-            vidasActuales = 0;
-            Die();
+            healthController = GetComponent<HealthController>();
+            if (healthController == null)
+            {
+                healthController = gameObject.AddComponent<HealthController>();
+                healthController.maxHealth = Mathf.Max(1, vidasIniciales);
+                healthController.health = healthController.maxHealth;
+            }
+        }
+        // Sync legacy fields
+        vidasIniciales = Mathf.Max(1, (int)healthController.maxHealth);
+        vidasActuales = (int)healthController.health;
+        healthController.OnDead += OnDeadHandler;
+        healthController.OnHealthUpdated += OnHealthUpdated;
+    }
+
+    private void OnDestroy()
+    {
+        if (healthController != null)
+        {
+            healthController.OnDead -= OnDeadHandler;
+            healthController.OnHealthUpdated -= OnHealthUpdated;
         }
     }
 
-    void Die()
+    private void OnHealthUpdated(float current, float max)
+    {
+        vidasActuales = (int)current;
+    }
+
+    public void TakeDamage(int cantidad = -1)
+    {
+        if (estaMuerto) return;
+        if (cantidad <= 0) cantidad = damagePerHit;
+    if (enemyAnimator != null) enemyAnimator.SetTrigger("Hit");
+        healthController.TakeDamague(cantidad);
+    }
+
+    private void OnDeadHandler()
+    {
+        Die();
+    }
+
+    private void Die()
     {
         if (estaMuerto) return;
         estaMuerto = true;
-
-        Destroy(gameObject);
+        // Optionally play death animation trigger here
+        Destroy(gameObject, 0.05f);
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-    }
+    // (Legacy hooks left for future bullet triggers etc.)
+    private void OnCollisionEnter(Collision other) { }
+    private void OnTriggerEnter(Collider other) { }
 }

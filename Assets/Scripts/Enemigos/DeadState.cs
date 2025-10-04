@@ -1,10 +1,11 @@
+using KinematicCharacterController;
 using UnityEngine;
 
 public class DeadState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
 
-    public DeadState(EnemyMain main)
+    public DeadState(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -21,4 +22,15 @@ public class DeadState : IEnemyState
     public void OnExit()
     {
     }
+
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return Quaternion.identity;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        return currentVelocity;
+    }
+
 }

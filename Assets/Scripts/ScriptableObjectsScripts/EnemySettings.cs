@@ -3,12 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySettings", menuName = "Scriptable Objects/EnemySettings")]
 public class EnemySettings : ScriptableObject
 {
-    public float walkSpeed,
-                 runSpeed;
-    public float AirSpeed,
-                 AirAcceleration,
-                 JumpSpeed,
-                 Gravity;
+    public DefaultMoveSettings moveSettings;
 
-public float stopingDistance;
+    public DefaultAirSettings airSettings;
+
+    
+
+
+
+
+
+
+    
 }

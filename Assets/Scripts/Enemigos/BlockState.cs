@@ -1,12 +1,13 @@
+using KinematicCharacterController;
 using UnityEngine;
 
 public class BlockState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
     private float blockTimer;
     private float blockDuration = 1.0f;  
 
-    public BlockState(EnemyMain main)
+    public BlockState(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -15,13 +16,13 @@ public class BlockState : IEnemyState
     {
         blockTimer = blockDuration;
 
-        ai.StopMovement();
+
         Debug.Log($"is blocking");
     }
 
     public void Update()
     {
-        if (ai.target == null)
+        if (ai.Target == null)
         {
             ai.SetState(ai.GetAlertState());
             return;
@@ -31,7 +32,7 @@ public class BlockState : IEnemyState
 
         if (blockTimer <= 0f)
         {
-            ai.SetState(ai.GetAttackState());
+            ai.SetBehaviourState(EnemyBehaviourState.Default);
         }
     }
 
@@ -39,4 +40,15 @@ public class BlockState : IEnemyState
     {
         Debug.Log("lowered guard.");
     }
+
+    public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return currentRotation;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        return currentVelocity;
+    }
+
 }

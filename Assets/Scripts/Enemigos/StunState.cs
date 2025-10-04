@@ -1,13 +1,14 @@
+using KinematicCharacterController;
 using UnityEngine;
 
 public class StunState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
     private float stunDuration;
     private float stunTimer;
     private Vector3 knockbackDir;
 
-    public StunState(EnemyMain main)
+    public StunState(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -19,13 +20,12 @@ public class StunState : IEnemyState
 
     public void OnEnter()
     {
-        stunDuration = ai.stunDuration;   
+        stunDuration = ai.enemySettings.AISettings.stunDuration;   
         stunTimer = 0f;
 
         Debug.Log("stunned");
 
-        ai.StopMovement();
-        ai.Knockback(knockbackDir);
+        
     }
 
     public void Update()
@@ -34,7 +34,7 @@ public class StunState : IEnemyState
 
         if (stunTimer >= stunDuration)
         {
-            if (ai.Watching())
+            if (ai.CheckTargetOnView(ai.Target))
             {
                 ai.SetState(ai.GetAlertState());
             }
@@ -50,5 +50,16 @@ public class StunState : IEnemyState
     {
         Debug.Log("recovered from stun");
     }
+
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return currentRotation;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        return currentVelocity;
+    }
+
 }
 

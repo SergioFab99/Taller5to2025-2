@@ -1,10 +1,11 @@
+using KinematicCharacterController;
 using UnityEngine;
-
+[System.Serializable]
 public class IdleState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyStateHandler ai;
 
-    public IdleState(EnemyMain main)
+    public IdleState(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -16,7 +17,7 @@ public class IdleState : IEnemyState
 
     public void Update()
     {
-        if (ai.Watching())
+        if (ai.CheckTargetOnView(ai.Target))
         {
             ai.SetState(ai.GetAlertState());
         }
@@ -26,4 +27,17 @@ public class IdleState : IEnemyState
     {
         Debug.Log("no longer idle lmao");
     }
+
+    public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    {
+        return currentRotation;
+    }
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    {
+        //Debug.Log("NEW");
+        return Vector3.zero;
+    }
+
+
 }

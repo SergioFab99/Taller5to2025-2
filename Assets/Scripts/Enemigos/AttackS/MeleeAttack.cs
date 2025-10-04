@@ -69,6 +69,7 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
             if (hit.CompareTag("Player"))
             {
                 Debug.Log($"punch {currentPunch} hit");
+                hit.gameObject.transform.parent.GetComponent<HealthController>().TakeDamague(10);
                 hitLanded = true;
                 break;
             }

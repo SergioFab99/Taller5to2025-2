@@ -1,10 +1,22 @@
+using Unity.Cinemachine;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerCharacter playerCharacter;
     [SerializeField] PlayerCamera playerCamera;
+
+    [SerializeField] CharacterTarget CharacterCameraTarget;
+
+    [SerializeField] CameraSpring cameraSpring;
+
     [SerializeField] PlayerCombat playerCombat;
+    [SerializeField] PlayerAnimation playerAnimation;
+
+    [SerializeField] HealthController healthController;
+    //[SerializeField] PlayerActionStateMachine actionStateMachine; 
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -13,16 +25,30 @@ public class Player : MonoBehaviour
     [SerializeField] float shakeForce;
     [SerializeField] Vector3 velocity;
 
+    public void OnDead()
+    {
+        
+        SceneManager.LoadScene("BlockOutTest");
+    }
+
+    private void OnDisable()
+    {
+        healthController.OnDead -= OnDead;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        healthController.OnDead += OnDead;
         Cursor.lockState = CursorLockMode.Locked;
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
         playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
+        CharacterCameraTarget.Initialize(playerCamera.transform);
         playerCombat.Initialize();
+        playerAnimation.Initialize(playerCombat);
     }
 
     private void OnDestroy()
@@ -31,7 +57,9 @@ public class Player : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+        
     {
+        float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
         var characterInput = new CharacterInput
         {
@@ -39,22 +67,26 @@ public class Player : MonoBehaviour
             Move = input.Move.ReadValue<Vector2>(),
             Jump = input.Jump.WasPressedThisFrame(),
             Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
-            Grab = input.Grab.WasPressedThisFrame(),
-            Throw = input.Throw.WasPressedThisFrame(),
             Dash = input.Dash.WasPressedThisFrame(),
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
-        if (characterInput.Move != new Vector3(0,0,0))
+
+      /*  if (characterInput.Move != new Vector3(0,0,0))
         {
             CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
-        }
+        } */
+       
+        
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
+        
         var combatInput = new CombatInput
         {
-            BaseAttack = input.Attack.WasPressedThisFrame()
+            BaseAttack = input.Attack.WasPressedThisFrame(),
+            Interact = input.Interact.WasPressedThisFrame(),      
+            Blocking = input.Block.IsPressed()   
         };
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
@@ -82,7 +114,11 @@ public class Player : MonoBehaviour
         _lastCharacterState = playerCharacter.GetLastState();
         playerCamera.UpdatePosition(cameraTarget);
 
-       
+        CharacterCameraTarget.UpdateRotation(playerCamera.transform);
+
+        cameraSpring.UpdateSpring(playerCamera.transform,deltaTime);
+
+
 
     }
     public void Teleport(Vector3 position)
