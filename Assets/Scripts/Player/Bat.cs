@@ -10,21 +10,11 @@ public class Bat : MonoBehaviour
     private GrabbableObject grabbable;
     public int damage = 2;
 
-    [Header("Simple Swing Settings")]
-    [Tooltip("Max rotation angle in degrees for the forward strike.")]
-    public float swingAngle = 95f;
-    [Tooltip("Time for forward (attack) phase.")]
-    public float forwardDuration = 0.11f;
-    [Tooltip("Time for return phase.")]
-    public float returnDuration = 0.14f;
-    [Tooltip("Easing curve for forward phase.")]
-    public AnimationCurve forwardCurve = AnimationCurve.EaseInOut(0,0,1,1);
-    [Tooltip("Easing curve for return phase.")]
-    public AnimationCurve returnCurve = AnimationCurve.EaseInOut(0,0,1,1);
-    [Tooltip("If true uses a horizontal (side) swing, else a downward (overhand) swing.")]
-    public bool horizontalSwing = false;
-
-    private Coroutine swingRoutine;
+    // Animación por código removida
+    // Si necesitas animación, usa Animator o Animation en el prefab
+    // El código de swing ha sido deshabilitado
+    //
+    // private Coroutine swingRoutine;
     [Header("Hit Filtering")] 
     [Tooltip("If true, the target must have a TagContainer with a tag named 'Damagable'. If false, any HealthController/EnemyLife is valid.")]
     [SerializeField] private bool requireDamagableTag = true;
@@ -87,91 +77,12 @@ public class Bat : MonoBehaviour
         // SwingBat coroutine should be triggered externally when the correct hand swings
     }
 
-    // Legacy simple swing (kept for fallback / debugging)
-    // Public entry point for a swing. Provide the player's facing (root or camera) transform.
-    public void PlaySwing(Transform facing)
+    // Animación por código removida
+    // Convierte el collider a trigger cuando el bat está agarrado
+    public void SetColliderTrigger(bool isTrigger)
     {
-        if (swingRoutine != null) StopCoroutine(swingRoutine);
-        swingRoutine = StartCoroutine(SwingRoutine(facing));
-    }
-
-    private IEnumerator SwingRoutine(Transform facing)
-    {
-        if (HoldPoint == null)
-        {
-            Debug.LogWarning("Bat swing called but HoldPoint is null.");
-            yield break;
-        }
-        if (facing == null) facing = transform; // fallback
-
-        // Determine axis based on desired style
-        Vector3 axis = horizontalSwing ? facing.up : facing.right;
-        Vector3 pivot = HoldPoint.position;
-
-        // Cache original local transform to guarantee perfect restore
-        Vector3 originalLocalPos = transform.localPosition;
-        Quaternion originalLocalRot = transform.localRotation;
-
-        // Prepare physics freeze if needed
-        Rigidbody rb = GetComponent<Rigidbody>();
-        bool hadRb = rb != null;
-        bool prevKin = false;
-        if (hadRb)
-        {
-            prevKin = rb.isKinematic;
-            rb.isKinematic = true;
-        }
-
-        // Start swing tracking
-        _isSwinging = true;
-    _hitThisSwing.Clear();
-
-        // We'll rotate by computing delta quaternions around pivot, keeping manual control of position
-        Vector3 pivotToBat = transform.position - pivot;
-        Quaternion batRot = transform.rotation;
-
-        float elapsed = 0f;
-        float lastAngle = 0f;
-        while (elapsed < forwardDuration)
-        {
-            float t = Mathf.Clamp01(elapsed / forwardDuration);
-            float eval = forwardCurve != null ? forwardCurve.Evaluate(t) : t;
-            float targetAngle = eval * swingAngle;
-            float delta = targetAngle - lastAngle;
-            Quaternion dq = Quaternion.AngleAxis(delta, axis);
-            pivotToBat = dq * pivotToBat;
-            batRot = dq * batRot;
-            transform.position = pivot + pivotToBat;
-            transform.rotation = batRot;
-            lastAngle = targetAngle;
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Return
-        elapsed = 0f;
-        while (elapsed < returnDuration)
-        {
-            float t = Mathf.Clamp01(elapsed / returnDuration);
-            float eval = returnCurve != null ? returnCurve.Evaluate(t) : t;
-            float targetAngle = Mathf.Lerp(swingAngle, 0f, eval);
-            float delta = targetAngle - lastAngle;
-            Quaternion dq = Quaternion.AngleAxis(delta, axis);
-            pivotToBat = dq * pivotToBat;
-            batRot = dq * batRot;
-            transform.position = pivot + pivotToBat;
-            transform.rotation = batRot;
-            lastAngle = targetAngle;
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Restore exactly
-        transform.localPosition = originalLocalPos;
-        transform.localRotation = originalLocalRot;
-        if (hadRb) rb.isKinematic = prevKin;
-        _isSwinging = false;
-        swingRoutine = null;
+        var col = GetComponent<Collider>();
+        if (col != null) col.isTrigger = isTrigger;
     }
 
     private void OnCollisionEnter(Collision collision)

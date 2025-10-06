@@ -225,11 +225,15 @@ public class GrabbableObject : MonoBehaviour
     {
     // You can play sounds, particles, etc.
     Debug.Log($"{name} was released!");
+    var bat = GetComponent<Bat>();
+    if (bat != null) bat.SetColliderTrigger(false);
     }
 
     // Opcional: Evento para notificar que fue agarrado
     public void OnGrabbed()
     {
     Debug.Log($"{name} was grabbed!");
+    var bat = GetComponent<Bat>();
+    if (bat != null) bat.SetColliderTrigger(true);
     }
 }

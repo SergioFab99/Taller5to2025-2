@@ -12,10 +12,15 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] float shakeForceAttack;
     [SerializeField] Vector3 velocityAttack;
 
+    public bool grab;
+
+
+
     public void Initialize(PlayerCombat playerCombat)
     {
-       _playerCombat = playerCombat;
-       _playerCombat.OnAttack += Attack;
+        _playerCombat = playerCombat;
+        _playerCombat.OnAttack += Attack;
+        
     }
 
 
@@ -26,15 +31,37 @@ public class PlayerAnimation : MonoBehaviour
 
     void Attack(int side)
     {
-        if(side == 1)
+       
+        if (_playerCombat._heldObject != null && _playerCombat._heldObject.GetComponent<Bat>() != null)
         {
-            anim.Play("armRight");
+            anim.SetTrigger("AttackBat");
         }
         else
         {
-            anim.Play("armLeft");
+            if (side == 1)
+            {
+                anim.Play("armRight");
+            }
+            else
+            {
+                anim.Play("armLeft");
+            }
         }
            
+    }
+    void Update()
+    {
+        if (_playerCombat._heldObject != null)
+        {
+            grab = true;
+        }
+        else
+        {
+            grab = false;
+        }
+            
+        anim.SetBool("GrabBat", grab);    
+        
     }
 
     void Shake()
