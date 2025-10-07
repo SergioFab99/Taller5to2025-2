@@ -2002,32 +2002,6 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
---- !u!1109 &-1537389802226702764
-AnimatorTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: ToLocomotionCrouching
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsCrouching
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsStopped
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsGrounded
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsJumping
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 6604365710422616744}
-  m_DstState: {fileID: 0}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 1
 --- !u!206 &-1285832947374115681
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2118,9 +2092,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: ToShuffleStanding
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: MovementInputTapped
-    m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: IsStrafing
     m_EventTreshold: 0
@@ -2578,24 +2549,6 @@ AnimatorController:
   m_Name: AC_Sidekick_Test
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: MovementInputTapped
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: MovementInputPressed
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: MovementInputHeld
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: MoveSpeed
     m_Type: 1
     m_DefaultFloat: 0
@@ -2899,15 +2852,6 @@ AnimatorStateTransition:
   m_Name: ToIdle
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: MovementInputPressed
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovementInputTapped
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovementInputHeld
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   - m_ConditionMode: 1
@@ -2974,9 +2918,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: ToStart
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: MovementInputTapped
-    m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: IsStrafing
     m_EventTreshold: 0.1
@@ -4498,7 +4439,7 @@ AnimatorStateMachine:
     m_Position: {x: -340, y: 610, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1790282451161604178}
-    m_Position: {x: -40, y: 380, z: 0}
+    m_Position: {x: -80, y: 370, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -5154619669261682928}
     m_Position: {x: 210, y: 390, z: 0}
@@ -4511,41 +4452,6 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -5154619669261682928}
-    second:
-    - {fileID: 3300079922274740214}
-    - {fileID: -7189439974797700697}
-    - {fileID: 2287159477214047374}
-    - {fileID: 2932082331911690083}
-  - first: {fileID: -604509978038405557}
-    second:
-    - {fileID: -2715779380421804842}
-    - {fileID: 3705668569526434236}
-  - first: {fileID: 1790282451161604178}
-    second:
-    - {fileID: -8118438887669713725}
-    - {fileID: 3219769585347100239}
-    - {fileID: 8207573239289224496}
-    - {fileID: -3263827556414112360}
-    - {fileID: -1537389802226702764}
-    - {fileID: -8454007508122442119}
-    - {fileID: -494253774927471600}
-  - first: {fileID: 3537954082607230901}
-    second:
-    - {fileID: -2177846080100714554}
-    - {fileID: 3452755659886607670}
-    - {fileID: 4348406899900917072}
-    - {fileID: -2710829411721907783}
-  - first: {fileID: 3652802291553319676}
-    second:
-    - {fileID: -8534850880604765477}
-    - {fileID: -4178063635055931915}
-  - first: {fileID: 5175383130503594698}
-    second:
-    - {fileID: 2939765361409422258}
-    - {fileID: 148739612534417992}
-    - {fileID: 3656533616568830837}
-    - {fileID: 7185925154260828547}
   - first: {fileID: 6604365710422616744}
     second:
     - {fileID: -3517661301517864862}
@@ -4554,6 +4460,40 @@ AnimatorStateMachine:
     - {fileID: 8729326463916878837}
     - {fileID: 5136232646514219606}
     - {fileID: 6949266989534911494}
+  - first: {fileID: -604509978038405557}
+    second:
+    - {fileID: -2715779380421804842}
+    - {fileID: 3705668569526434236}
+  - first: {fileID: 3537954082607230901}
+    second:
+    - {fileID: -2177846080100714554}
+    - {fileID: 3452755659886607670}
+    - {fileID: 4348406899900917072}
+    - {fileID: -2710829411721907783}
+  - first: {fileID: 1790282451161604178}
+    second:
+    - {fileID: -8118438887669713725}
+    - {fileID: 3219769585347100239}
+    - {fileID: 8207573239289224496}
+    - {fileID: -3263827556414112360}
+    - {fileID: -8454007508122442119}
+    - {fileID: -494253774927471600}
+  - first: {fileID: -5154619669261682928}
+    second:
+    - {fileID: 3300079922274740214}
+    - {fileID: -7189439974797700697}
+    - {fileID: 2287159477214047374}
+    - {fileID: 2932082331911690083}
+  - first: {fileID: 5175383130503594698}
+    second:
+    - {fileID: 2939765361409422258}
+    - {fileID: 148739612534417992}
+    - {fileID: 3656533616568830837}
+    - {fileID: 7185925154260828547}
+  - first: {fileID: 3652802291553319676}
+    second:
+    - {fileID: -8534850880604765477}
+    - {fileID: -4178063635055931915}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -20, y: -100, z: 0}
   m_EntryPosition: {x: -20, y: 0, z: 0}

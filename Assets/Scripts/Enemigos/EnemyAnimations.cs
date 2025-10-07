@@ -6,13 +6,9 @@ public class EnemyAnimations : MonoBehaviour
 
     BaseEnemyAnimState BaseState;
 
-
-
-
     #region Animation Variable Hashes
 
-    private readonly int _movementInputTappedHash = Animator.StringToHash("MovementInputTapped");
-    private readonly int _movementInputPressedHash = Animator.StringToHash("MovementInputPressed");
+   
     private readonly int _movementInputHeldHash = Animator.StringToHash("MovementInputHeld");
     private readonly int _shuffleDirectionXHash = Animator.StringToHash("ShuffleDirectionX");
     private readonly int _shuffleDirectionZHash = Animator.StringToHash("ShuffleDirectionZ");
@@ -75,20 +71,39 @@ public class EnemyAnimations : MonoBehaviour
 
     #endregion
 
+    #region Runtime Properties
+    private bool _isCrouching;
+    private bool _isGrounded = true;
+    private Vector3 _currentRotation = new Vector3(0f, 0f, 0f);
+    private Vector3 _moveDirection;
+
+    #endregion
+
     [SerializeField]
     private Animator _animator;
 
     
 
     // Update is called once per frame
-    void AnimUpdate(float deltaTime)
+    void AnimUpdate(float deltaTime, EnemyCharacter character)
     {
-        UpdateAnimatorController();
+        UpdateProperties(character);
         currentAimState.AnimStateUpdate();
+
     }
 
-    void UpdateAnimatorController()
+    void UpdateAnimatorController( EnemyCharacter character)
     {
 
     }
+
+    void UpdateProperties(EnemyCharacter character)
+    {
+        _moveDirection = character._state.Velocity;
+        _isGrounded = character._state.Grounded;
+        _currentRotation = character._state.Rotation.eulerAngles;
+
+    }
+
+
 }

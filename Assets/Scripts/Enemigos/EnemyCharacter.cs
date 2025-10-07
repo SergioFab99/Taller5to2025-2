@@ -15,7 +15,10 @@ public enum EnemyBehaviourState
 [System.Serializable]
 public struct EnemyCharacterState
 {
+    public bool Grounded;
     public MovementState MovementState;
+    public Vector3 Velocity;
+    public Quaternion Rotation;
 }
 
 public class EnemyCharacter : MonoBehaviour, ICharacterController
@@ -30,10 +33,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
 
 
-    private IdleState idle;
-    private AlertState alert;
-    private StunState stunned;
-    private DeadState dead;
+
 
 
     private Vector3 target;
@@ -76,6 +76,8 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
+                _state.Grounded = motor.GroundingStatus.IsStableOnGround;
+                _state.Velocity = motor.Velocity;
                 break;
             case EnemyBehaviourState.Combat:
                 break;
