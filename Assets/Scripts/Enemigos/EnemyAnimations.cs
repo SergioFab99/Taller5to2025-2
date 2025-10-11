@@ -22,6 +22,7 @@ public class EnemyAnimations : MonoBehaviour
     private readonly int _strafeDirectionZHash = Animator.StringToHash("StrafeDirectionZ");
 
     private readonly int _forwardStrafeHash = Animator.StringToHash("ForwardStrafe");
+    private readonly int _isStrafingHash = Animator.StringToHash("IsStrafing");
 
     private readonly int _isTurningInPlaceHash = Animator.StringToHash("IsTurningInPlace");
 
@@ -33,6 +34,7 @@ public class EnemyAnimations : MonoBehaviour
 
     private readonly int _isGroundedHash = Animator.StringToHash("IsGrounded");
 
+    
     private readonly int _leanValueHash = Animator.StringToHash("LeanValue");
     private readonly int _headLookXHash = Animator.StringToHash("HeadLookX");
     private readonly int _headLookYHash = Animator.StringToHash("HeadLookY");
