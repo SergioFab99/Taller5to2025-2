@@ -157,6 +157,9 @@ public class CameraPriority : MonoBehaviour
     private void EnsurePlayerCameraActive()
     {
         SetCameraStates(dollyActive: false, playerActive: true);
+        //reactivar el script del player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<Player>().enabled = true;
     }
 
     private void SetCameraStates(bool dollyActive, bool playerActive)
