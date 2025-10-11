@@ -9,9 +9,6 @@ public class EnemyAnimations : MonoBehaviour
     #region Animation Variable Hashes
 
    
-    private readonly int _movementInputHeldHash = Animator.StringToHash("MovementInputHeld");
-    private readonly int _shuffleDirectionXHash = Animator.StringToHash("ShuffleDirectionX");
-    private readonly int _shuffleDirectionZHash = Animator.StringToHash("ShuffleDirectionZ");
 
     private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
     private readonly int _currentGaitHash = Animator.StringToHash("CurrentGait");
@@ -25,8 +22,7 @@ public class EnemyAnimations : MonoBehaviour
     private readonly int _strafeDirectionZHash = Animator.StringToHash("StrafeDirectionZ");
 
     private readonly int _forwardStrafeHash = Animator.StringToHash("ForwardStrafe");
-    private readonly int _cameraRotationOffsetHash = Animator.StringToHash("CameraRotationOffset");
-    private readonly int _isStrafingHash = Animator.StringToHash("IsStrafing");
+
     private readonly int _isTurningInPlaceHash = Animator.StringToHash("IsTurningInPlace");
 
    
