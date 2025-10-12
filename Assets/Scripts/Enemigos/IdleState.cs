@@ -33,7 +33,7 @@ public class IdleState : IEnemyState
         return currentRotation;
     }
 
-    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
         //Debug.Log("NEW");
         return Vector3.zero;

@@ -72,7 +72,7 @@ public class AlertState : IEnemyState
         return currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
     }
 
-    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
 
         if (motor.GroundingStatus.IsStableOnGround)
@@ -86,10 +86,11 @@ public class AlertState : IEnemyState
 
             currentVelocity = groundedMovement * Settings.AlertEnemySettings.moveSettings.Speed;
 
-
+            _timeSinceUngrounded = 0f;
         }
         else
         {
+            _timeSinceUngrounded += deltaTime;
             if (_requestedMovement.sqrMagnitude > 0f)
             {
                 var planarMovement = Vector3.ProjectOnPlane

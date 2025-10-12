@@ -1,4 +1,5 @@
 using KinematicCharacterController;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -19,6 +20,7 @@ public struct EnemyCharacterState
     public MovementState MovementState;
     public Vector3 Velocity;
     public Quaternion Rotation;
+    public bool Jump;
 }
 
 public class EnemyCharacter : MonoBehaviour, ICharacterController
@@ -49,7 +51,10 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     private Vector3 _requestedRotation;
     private Vector3 _requestedMovement;
-
+    private bool _requestedJump;
+    [NonSerialized]public float _timeSinceUngrounded;
+    private float _timeSinceJumpRequest;
+    private bool _ungroundedDueToJump;
 
     public void Initialize(EnemySettingsList enemySettings, EnemyBehaviourState enemyBehaviourState, IEnemyState EnemyState)
     {
@@ -68,22 +73,22 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = input.Move;
 
         enemyBehaviourState = state;
-        
+        var wasResquestedJump = _requestedJump;
+        _requestedJump = _requestedJump || input.Jump;
+        if (_requestedJump && wasResquestedJump)
+        {
+            _timeSinceJumpRequest = 0f;
+        }
     }
 
     public void AfterCharacterUpdate(float deltaTime)
     {
-        switch (enemyBehaviourState)
-        {
-            case EnemyBehaviourState.Default:
-                _state.Grounded = motor.GroundingStatus.IsStableOnGround;
-                _state.Velocity = motor.Velocity;
-                break;
-            case EnemyBehaviourState.Combat:
-                break;
-            case EnemyBehaviourState.Dead:
-                break;
-        }
+        
+      _state.Velocity = motor.Velocity;
+      _state.Jump = _ungroundedDueToJump && _timeSinceUngrounded < 0.4f;
+     _state.MovementState = motor.Velocity.magnitude > 0.1f ? MovementState.Moving : MovementState.Idle;
+          
+   
     }
 
     public void BeforeCharacterUpdate(float deltaTime)
@@ -156,11 +161,20 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        if (motor.GroundingStatus.IsStableOnGround)
+        {
+        _state.Grounded =true;
+
+        }
+        else
+        {
+            _state.Grounded = false;
+        }
         switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
 
-                currentVelocity =  currentState.UpdateVelocity( currentVelocity, deltaTime, motor, _requestedMovement, default_Settings);
+                currentVelocity =  currentState.UpdateVelocity( currentVelocity, deltaTime, motor, _requestedMovement, default_Settings, ref _timeSinceUngrounded);
 
 
 

@@ -7,6 +7,7 @@ public struct EnemyInput
     public Vector3 Direction;
     public Vector3 Move;
     public CrouchInput Crouch;
+    public bool Jump;
 }
 
 
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] HealthController healthController;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] EnemyAnimations _animations;
 
     [SerializeField] EnemySettingsList EnemySettings;
     //[SerializeField] CombatManager
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
         character.Initialize(EnemySettings,_stateHandler.GetBehaviourState(),_stateHandler.GetCurrentState());
 
         healthController.OnDead += Ondead;
+
+        _animations.Initialize();
     }
 
     public void Ondead()
@@ -85,7 +89,7 @@ public class Enemy : MonoBehaviour
         }
          character.UpdateInputs(enemyInput,_stateHandler.GetBehaviourState());
 
-
+        _animations.AnimUpdate(Time.fixedDeltaTime, character);
 
     }
 

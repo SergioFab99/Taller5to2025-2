@@ -2090,32 +2090,32 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: LocomotionStartDirection
-    m_Type: 3
+  - m_Name: HeadLookY
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: HeadLookX
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: HeadLookY
-    m_Type: 3
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: BodyLookX
-    m_Type: 3
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: BodyLookY
-    m_Type: 3
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: LocomotionStartDirection
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -3082,7 +3082,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsTurningInPlace
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5282109680626036664}
   m_Solo: 0
@@ -3189,12 +3192,6 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -4340748916876034351}
-    second:
-    - {fileID: -7089081765562885612}
-    - {fileID: -6505875243418184577}
-    - {fileID: -2567189810601942269}
-    - {fileID: 4545745784344606304}
   - first: {fileID: -1208182119638116458}
     second:
     - {fileID: 4125167602301878414}
@@ -3204,6 +3201,12 @@ AnimatorStateMachine:
     second:
     - {fileID: -2408105351625537713}
     - {fileID: 6255107126364065766}
+  - first: {fileID: -4340748916876034351}
+    second:
+    - {fileID: -7089081765562885612}
+    - {fileID: -6505875243418184577}
+    - {fileID: -2567189810601942269}
+    - {fileID: 4545745784344606304}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 800, y: 10, z: 0}
   m_EntryPosition: {x: 310, y: -300, z: 0}

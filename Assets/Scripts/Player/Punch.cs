@@ -98,22 +98,6 @@ public class Punch : MonoBehaviour
 
                     }
                 }
-            
-                if(hitInfo.col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
-                {
-                    OnHit?.Invoke(hitInfo);
-                    if (hitInfo.enemyState is BlockState)
-                    {
-                        enemyLife.TakeDamage(dmg/2);
-
-                    }
-                    else
-                    {
-                        enemyLife.TakeDamage(dmg);
-
-                    }
-
-                }
                 hitDone = true;
             }
         
