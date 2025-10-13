@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 public class PlayerAnimation : MonoBehaviour
 {
      PlayerCombat _playerCombat;
@@ -14,7 +15,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public bool grab;
 
-
+    private bool wasGrappling = false;
 
     public void Initialize(PlayerCombat playerCombat)
     {
@@ -30,21 +31,41 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     void Attack(int side)
-    {
-       
+    {       
         if (_playerCombat._heldObject != null && _playerCombat._heldObject.GetComponent<Bat>() != null)
         {
             anim.SetTrigger("AttackBat");
         }
         else
         {
-            if (side == 1)
+            float camPitch = _playerCombat.cam.eulerAngles.x;
+            
+            if (camPitch > 180f) camPitch -= 360f;
+            
+            float threshold = 45f;
+            if (camPitch < threshold)
             {
-                anim.Play("armRight");
+               
+                if (side == 1)
+                {
+                    anim.Play("armRightUp");
+                }
+                else if (side == 2)
+                {
+                    anim.Play("armLeftUp");
+                }
             }
             else
             {
-                anim.Play("armLeft");
+                
+                if (side == 1)
+                {
+                    anim.Play("armRightDown");
+                }
+                else if (side == 2)
+                {
+                    anim.Play("armLeftDown");
+                }
             }
         }
            
@@ -59,9 +80,27 @@ public class PlayerAnimation : MonoBehaviour
         {
             grab = false;
         }
-            
-        anim.SetBool("GrabBat", grab);    
+        anim.SetBool("GrabBat", grab);
+
         
+        if (_playerCombat._state.isBlocking)
+        {
+            anim.SetBool("isBlocking", true);
+            anim.Play("Block");
+        }
+        else
+        {
+            anim.SetBool("isBlocking", false);
+        }
+
+        // Animación de agarre (Grapple) con Q (TEMPORAL)
+        bool isGrappling = Input.GetKey(KeyCode.Q);
+        anim.SetBool("Grapple", isGrappling);
+        if (isGrappling && !wasGrappling)
+        {
+            anim.Play("Grapple");
+        }
+        wasGrappling = isGrappling;
     }
 
     void Shake()
