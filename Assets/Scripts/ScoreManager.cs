@@ -16,15 +16,30 @@ public class ScoreManager: MonoBehaviour
     [SerializeField]
     private TMP_Text scoreText;
 
+    [SerializeField]
+    private int enemiesToDefeat = 11;
+
+    [SerializeField]
+    private GameObject rankPanel;
+
+    [SerializeField]
+    private TMP_Text rankPanelTitle;
+
+    [SerializeField]
+    private TMP_Text rankPanelDetails;
+
     private const float EnemyScanIntervalSeconds = 1f;
 
     private int totalScore;
+    private int defeatedEnemies;
     private bool hasWarnedForMissingScoreText;
     private bool hasWarnedForMissingEnemyTag;
+    private bool hasShownRankPanel;
 
     private void Start()
     {
         UpdateScoreDisplay();
+        HideRankPanel();
     }
 
     private void OnEnable()
@@ -160,6 +175,12 @@ public class ScoreManager: MonoBehaviour
         }
 
         AddScore();
+        defeatedEnemies++;
+
+        if (defeatedEnemies >= enemiesToDefeat)
+        {
+            ShowRankPanel();
+        }
     }
 
     private static string CalculateRank(int score)
@@ -185,6 +206,46 @@ public class ScoreManager: MonoBehaviour
         }
 
         return "D";
+    }
+
+    private void ShowRankPanel()
+    {
+        if (hasShownRankPanel)
+        {
+            return;
+        }
+
+        hasShownRankPanel = true;
+
+        if (EnemyScanIntervalSeconds > 0f)
+        {
+            CancelInvoke(nameof(ScanForEnemiesAndAttachReporter));
+        }
+
+        if (rankPanel != null)
+        {
+            rankPanel.SetActive(true);
+        }
+
+        var rank = GetRank();
+
+        if (rankPanelTitle != null)
+        {
+            rankPanelTitle.text = $"Rank: {rank}";
+        }
+
+        if (rankPanelDetails != null)
+        {
+            rankPanelDetails.text = "S = 5000+\nA = 3500+\nB = 2500+\nC = 1000+\nD = 0+\nTotal Score = " + totalScore;
+        }
+    }
+
+    private void HideRankPanel()
+    {
+        if (rankPanel != null)
+        {
+            rankPanel.SetActive(false);
+        }
     }
 }
 
