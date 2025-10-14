@@ -13,8 +13,8 @@ public struct EnemyInput
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyCharacter character;
-    [SerializeField] EnemyCharacterState _characterState;
-    [SerializeField] EnemyCharacterState _lastCharacterState;
+    //[SerializeField] EnemyCharacterState _characterState;
+    //[SerializeField] EnemyCharacterState _lastCharacterState;
     [SerializeField] HealthController healthController;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
@@ -23,18 +23,18 @@ public class Enemy : MonoBehaviour
     //[SerializeField] CombatManager
 
 
-    
+
     public Transform testTarget;
 
 
-   
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _stateHandler.Initialize(EnemySettings,character.transform);
+        _stateHandler.Initialize(EnemySettings, character.transform);
 
-        character.Initialize(EnemySettings,_stateHandler.GetBehaviourState(),_stateHandler.GetCurrentState());
+        character.Initialize(EnemySettings, _stateHandler.GetBehaviourState(), _stateHandler.GetCurrentState());
 
         healthController.OnDead += Ondead;
     }
@@ -47,52 +47,68 @@ public class Enemy : MonoBehaviour
     public void Update()
     {
         _stateHandler.CurrentStateUpdate();
-        agent.SetDestination(testTarget.position);
     }
-    // Update is called once per frame
     void FixedUpdate()
     {
         character.UpdateState(_stateHandler.GetCurrentState());
         var enemyInput = new EnemyInput();
-        switch(_stateHandler.GetBehaviourState())
+
+        switch (_stateHandler.GetBehaviourState())
         {
             case EnemyBehaviourState.Default:
-
-                float distance = Vector3.Distance(GetTarget(),character.transform.position);
-                Vector3 direction = (testTarget.position - character.transform.position).normalized;
-                if(distance > EnemySettings.AISettings.stopingDistance)
                 {
+                    float distance = Vector3.Distance(GetTarget(), character.transform.position);
+                    Vector3 direction = (testTarget.position - character.transform.position).normalized;
+
+                    if (distance > EnemySettings.AISettings.stopingDistance)
+                    {
+                        enemyInput = new EnemyInput
+                        {
+                            Direction = direction,
+                            Move = direction
+                        };
+                    }
+                    else
+                    {
+                        enemyInput = new EnemyInput
+                        {
+                            Direction = direction,
+                            Move = Vector3.zero
+                        };
+                    }
+
+                    character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
+                    break;
+                }
+
+            case EnemyBehaviourState.Combat:
+                {
+                    Vector3 direction = (testTarget.position - character.transform.position).normalized;
                     enemyInput = new EnemyInput
                     {
                         Direction = direction,
                         Move = direction
                     };
 
+                    character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
+                    break;
                 }
-                else
-                {
-                    enemyInput = new EnemyInput
-                    {
-                        Direction = direction,
-                        Move = Vector3.zero
-                    };
-                }
-                break;
-            case EnemyBehaviourState.Combat:
-                break;
+
             case EnemyBehaviourState.Dead:
+                enemyInput = new EnemyInput
+                {
+                    Direction = Vector3.zero,
+                    Move = Vector3.zero
+                };
+                character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
                 break;
         }
-         character.UpdateInputs(enemyInput,_stateHandler.GetBehaviourState());
-
-
-
     }
 
     private void LateUpdate()
     {
-        _characterState = character.GetState();
-        _lastCharacterState = character.GetLastState();
+        //_characterState = character.GetState();
+        //_lastCharacterState = character.GetLastState();
     }
 
     public Vector3 GetTarget()
@@ -102,13 +118,13 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(GetTarget(),0.1f);
+        Gizmos.DrawSphere(GetTarget(), 0.1f);
     }
 
     public IEnemyState GetEnemyState()
     {
         return _stateHandler.GetCurrentState();
     }
-    
+
 
 }

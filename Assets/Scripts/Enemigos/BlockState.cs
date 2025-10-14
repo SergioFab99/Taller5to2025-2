@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BlockState : IEnemyState
 {
-    private EnemyStateHandler ai;
+    private EnemyMain ai;
     private float blockTimer;
     private float blockDuration = 1.0f;  
 
-    public BlockState(EnemyStateHandler main)
+    public BlockState(EnemyMain main)
     {
         ai = main;
     }
@@ -22,7 +22,7 @@ public class BlockState : IEnemyState
 
     public void Update()
     {
-        if (ai.Target == null)
+        if (ai.Watching())
         {
             ai.SetState(ai.GetAlertState());
             return;
@@ -32,7 +32,6 @@ public class BlockState : IEnemyState
 
         if (blockTimer <= 0f)
         {
-            ai.SetBehaviourState(EnemyBehaviourState.Default);
         }
     }
 

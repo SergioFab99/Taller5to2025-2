@@ -1,46 +1,31 @@
 using KinematicCharacterController;
 using UnityEngine;
 
-public class ExposedState : IEnemyState
+public class DeadState1 : IEnemyState
 {
-    private EnemyMain ai;
-    private float exposedTimer;
-    private float exposedDuration = 1.5f; 
+    private EnemyStateHandler ai;
 
-    public ExposedState(EnemyMain main)
+    public DeadState1(EnemyStateHandler main)
     {
         ai = main;
     }
 
     public void OnEnter()
     {
-        exposedTimer = exposedDuration;
-        Debug.Log("exposed");
+        Debug.Log("dead lol");
     }
 
     public void Update()
     {
-        if (ai.Watching())
-        {
-            ai.SetState(ai.GetIdleState());
-            return;
-        }
-
-        exposedTimer -= Time.deltaTime;
-
-        if (exposedTimer <= 0f)
-        {
-        }
     }
 
     public void OnExit()
     {
-        Debug.Log($"{ai.name} recovered from being exposed.");
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
-        return currentRotation;
+        return Quaternion.identity;
     }
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
