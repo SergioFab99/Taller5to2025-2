@@ -159,6 +159,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         }
     }
 
+
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
         if (motor.GroundingStatus.IsStableOnGround)
