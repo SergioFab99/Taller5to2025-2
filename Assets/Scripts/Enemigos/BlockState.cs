@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class BlockState : IEnemyState
 {
-    private EnemyStateHandler ai;
+    private EnemyStateHandler handler;
+    private EnemyMain main;
     private float blockTimer;
     private float blockDuration = 1.0f;  
 
-    public BlockState(EnemyStateHandler main)
+    public BlockState(EnemyStateHandler handler)
     {
-        ai = main;
+        this.handler = handler;
+    }
+
+    public BlockState(EnemyMain main)
+    {
+        this.main = main;
     }
 
     public void OnEnter()
@@ -22,9 +28,31 @@ public class BlockState : IEnemyState
 
     public void Update()
     {
-        if (ai.Target == null)
+        if (handler != null)
         {
-            ai.SetState(ai.GetAlertState());
+            if (handler.Target == null)
+            {
+                handler.SetState(handler.GetAlertState());
+                return;
+            }
+
+            blockTimer -= Time.deltaTime;
+
+            if (blockTimer <= 0f)
+            {
+                handler.SetBehaviourState(EnemyBehaviourState.Default);
+            }
+            return;
+        }
+
+        if (main == null)
+        {
+            return;
+        }
+
+        if (main.target == null)
+        {
+            main.SetState(main.GetIdleState());
             return;
         }
 
@@ -32,7 +60,7 @@ public class BlockState : IEnemyState
 
         if (blockTimer <= 0f)
         {
-            ai.SetBehaviourState(EnemyBehaviourState.Default);
+            main.SetState(main.GetRecoverState());
         }
     }
 
@@ -43,11 +71,19 @@ public class BlockState : IEnemyState
 
     public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
+        if (handler == null)
+        {
+            return currentRotation;
+        }
         return currentRotation;
     }
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
+        if (handler == null)
+        {
+            return currentVelocity;
+        }
         return currentVelocity;
     }
 
