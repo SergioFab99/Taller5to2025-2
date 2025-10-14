@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMain : MonoBehaviour
+public abstract class EnemyMain : MonoBehaviour
 {
     public float detectionRange = 10f;
     public float attackRange = 5f;
@@ -25,35 +26,40 @@ public class EnemyMain : MonoBehaviour
 
     public Rigidbody rb;
     public Renderer rend;
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
-    private HealthController healthController;
-
+    private Dictionary<StatusEffect, float> activeEffects = new Dictionary<StatusEffect, float>();
+    public float bleedSpeedMultiplier = 0.7f;
+    public float bleedDamageMultiplier = 0.8f;
+    public float drunkDamageMultiplier = 1.5f;
+    public float drunkWeakness = 1.3f;
+    public bool isBlind = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
-        healthController = GetComponent<HealthController>();
-        healthController.OnDead += CheckifLive;
         agent.speed = moveSpeed;
         agent.stoppingDistance = attackRange - 3f;
 
-        
+        //idle = new IdleState(this);
+        //alert = new AlertState(this);
+        //attack = new AttackState(this);
+        //dead = new DeadState(this);
+        //stunned = new StunState(this);
+        //block = new BlockState(this);
+        //exposed = new ExposedState(this);
+        //recover = new RecoverState(this);
 
         SetState(idle);
 
     }
 
-    private void CheckifLive()
-    {
-        healthController.OnDead -= CheckifLive;
-        Destroy(gameObject);
-    }
     void Update()
     {
-        agent.speed = moveSpeed;
+        agent.speed = MoveSpeed();
         currentState?.Update();
+        StatusTimers();
     }
 
     public void SetState(IEnemyState newState)
@@ -100,7 +106,10 @@ public class EnemyMain : MonoBehaviour
 
     public void StopMovement()
     {
-        if (agent != null) agent.isStopped = true;
+        if (agent != null)
+        {
+            agent.isStopped = true;
+        }
         rb.linearVelocity = Vector3.zero;
     }
 
@@ -108,8 +117,11 @@ public class EnemyMain : MonoBehaviour
     {
         if (agent == null || target == null) return;
         agent.isStopped = false;
+        agent.speed = MoveSpeed();
         agent.SetDestination(target.position);
     }
+
+    public abstract void Movement();
 
     public void Knockback(Vector3 hitDirection)
     {
@@ -151,5 +163,87 @@ public class EnemyMain : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    public void ApplyStatus(StatusEffect type, float duration)
+    {
+        activeEffects[type] = duration;
+
+        if (type == StatusEffect.Blind)
+        {
+            isBlind = true;
+            StopMovement(); 
+        }
+    }
+
+    public void RemoveStatus(StatusEffect type)
+    {
+        if (activeEffects.ContainsKey(type))
+        {
+            activeEffects.Remove(type);
+        }
+
+
+        if (type == StatusEffect.Blind)
+        {
+            isBlind = false;
+        }
+    }
+
+    public bool HasStatus(StatusEffect type) => activeEffects.ContainsKey(type);
+
+    public void StatusTimers()
+    {
+        var keys = new List<StatusEffect>(activeEffects.Keys);
+        List<StatusEffect> expired = new List<StatusEffect>();
+
+        foreach (var key in keys)
+        {
+            activeEffects[key] -= Time.deltaTime;
+            if (activeEffects[key] <= 0)
+            {
+                expired.Add(key);
+            }
+        }
+
+        foreach (var e in expired)
+        {
+            RemoveStatus(e);
+        }
+    }
+
+    public float MoveSpeed()
+    {
+        float speed = moveSpeed;
+
+        if (HasStatus(StatusEffect.Bleeding))
+        {
+            speed *= bleedSpeedMultiplier;
+        }    
+        return speed;
+    }
+
+    public float EffectiveDamage(float baseDamage)
+    {
+        float damage = baseDamage;
+
+        if (HasStatus(StatusEffect.Bleeding))
+        {
+            damage *= bleedDamageMultiplier;
+        }
+
+
+        if (HasStatus(StatusEffect.Drunk))
+        {
+            damage *= drunkDamageMultiplier;
+        }
+
+
+        return damage;
+    }
+
+    public float DamageTakeMult()
+    {
+        return HasStatus(StatusEffect.Drunk) ? drunkWeakness : 1f;
     }
 }

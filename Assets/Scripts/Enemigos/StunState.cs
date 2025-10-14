@@ -3,14 +3,20 @@ using UnityEngine;
 
 public class StunState : IEnemyState
 {
-    private EnemyStateHandler ai;
+    private EnemyStateHandler handler;
+    private EnemyMain main;
     private float stunDuration;
     private float stunTimer;
     private Vector3 knockbackDir;
 
-    public StunState(EnemyStateHandler main)
+    public StunState(EnemyStateHandler handler)
     {
-        ai = main;
+        this.handler = handler;
+    }
+
+    public StunState(EnemyMain main)
+    {
+        this.main = main;
     }
 
     public void SetKnockback(Vector3 dir)
@@ -20,12 +26,20 @@ public class StunState : IEnemyState
 
     public void OnEnter()
     {
-        stunDuration = ai.enemySettings.AISettings.stunDuration;   
+        if (handler != null)
+        {
+            stunDuration = handler.enemySettings.AISettings.stunDuration;
+            stunTimer = 0f;
+            Debug.Log("stunned");
+            return;
+        }
+
+        if (main == null) return;
+
+        stunDuration = main.stunDuration;
         stunTimer = 0f;
-
+        main.StopMovement();
         Debug.Log("stunned");
-
-        
     }
 
     public void Update()
@@ -34,13 +48,28 @@ public class StunState : IEnemyState
 
         if (stunTimer >= stunDuration)
         {
-            if (ai.CheckTargetOnView(ai.Target))
+            if (handler != null)
             {
-                ai.SetState(ai.GetAlertState());
+                if (handler.CheckTargetOnView(handler.Target))
+                {
+                    handler.SetState(handler.GetAlertState());
+                }
+                else
+                {
+                    handler.SetState(handler.GetIdleState());
+                }
+                return;
+            }
+
+            if (main == null) return;
+
+            if (main.Watching())
+            {
+                main.SetState(main.GetAlertState());
             }
             else
             {
-                ai.SetState(ai.GetIdleState());
+                main.SetState(main.GetIdleState());
             }
                 
         }
@@ -58,8 +87,22 @@ public class StunState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
+        if (handler == null)
+        {
+            return currentVelocity;
+        }
+
+        if (handler.knockbackForce >0.1f)
+        {
+            motor.ForceUnground();
+            currentVelocity += (handler.knockbackForce * knockbackDir);
+            handler.knockbackForce = 0f;
+
+        }
         return currentVelocity;
+        
     }
+
 
 }
 

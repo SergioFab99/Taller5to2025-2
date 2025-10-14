@@ -49,7 +49,15 @@ public class AttackState : IEnemyState
         if (dist > attack.AttackRange + disengageBuffer)
         {
             ai.SetState(ai.GetAlertState());
-            return;
+            if (attack is RangedAttack gun)
+            {
+                gun.StartReload();
+            }
+            if(attack is TommyGunAttack gun2)
+            {
+                gun2.StartReload();
+            }
+                return;
         }
 
         if (dist <= attack.AttackRange)
@@ -58,7 +66,7 @@ public class AttackState : IEnemyState
         }
         else
         {
-            ai.MoveTowardsTarget();
+            ai.Movement();
         }
     }
 

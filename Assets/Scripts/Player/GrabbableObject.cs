@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.Serialization;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class GrabbableObject : MonoBehaviour
@@ -16,7 +20,27 @@ public class GrabbableObject : MonoBehaviour
     [SerializeField] private Color highlightColor = Color.yellow; // Color para resaltar cuando es agarrable
     [SerializeField] private bool showGlowWhenNear = true; // ¿Mostrar efecto visual cuando está cerca?
     [SerializeField] private bool showCanvasWhenNear = true; // ¿Activar/desactivar un Canvas de UI cuando esté enfocado?
-    [SerializeField] private Canvas uiCanvas; // Referencia al Canvas de UI (opcional)
+    [SerializeField] private Canvas uiCanvas; // (Legacy) Canvas world-space opcional (ya no necesario si usas overlay)
+
+    [Header("Prompt Overlay (TextMeshPro)")]
+    [Tooltip("Usar prompt overlay global en vez de un canvas world-space local.")]
+    [SerializeField] private bool useOverlayPrompt = true;
+    [Tooltip("Texto base que se mostrará junto a la tecla.")]
+    [SerializeField] private string promptVerb = "Agarrar";
+    [Tooltip("Formato para mostrar. {0}=tecla, {1}=verbo")] 
+    [SerializeField] private string promptFormat = "[{0}] {1}";
+    [Tooltip("Clave por defecto si no se puede resolver del Input System.")]
+    [SerializeField] private string fallbackKey = "E";
+
+    // Cache de clave de interacción
+    private static string _cachedInteractKey;
+    private static double _lastInteractKeyTime;
+    private const double KeyCacheRefreshSeconds = 2.0; // refrescar cada cierto tiempo por si cambia el dispositivo
+
+    private bool _wasLooking; // para detectar transición mostrar/ocultar
+    [Header("Debug Prompt")]
+    [SerializeField] private bool debugPrompt = false;
+    private static bool _reportedMissingPromptInstance = false;
 
     private Renderer _renderer;
     private Rigidbody _rigidbody;
@@ -55,7 +79,7 @@ public class GrabbableObject : MonoBehaviour
         // Asegurar que el Canvas de UI empiece desactivado
         if (uiCanvas != null)
         {
-            uiCanvas.gameObject.SetActive(false);
+            uiCanvas.gameObject.SetActive(false); // oculto por defecto
         }
 
     // Initialize durability
@@ -69,7 +93,7 @@ public class GrabbableObject : MonoBehaviour
         bool needsCheck = ((showGlowWhenNear && _renderer != null) || (showCanvasWhenNear && uiCanvas != null));
         if (!needsCheck) return;
 
-        // Ray from main camera forward up to interactionDistance
+    // Ray from main camera forward up to interactionDistance
         Camera mainCam = Camera.main;
         if (mainCam == null) return;
 
@@ -77,7 +101,9 @@ public class GrabbableObject : MonoBehaviour
         bool hitThis = false;
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            hitThis = (hit.collider.gameObject == gameObject);
+            // Aceptar colliders hijos: buscar componente en padres
+            var grabbed = hit.collider.GetComponentInParent<GrabbableObject>();
+            hitThis = (grabbed == this);
         }
 
         // Highlight logic
@@ -85,11 +111,39 @@ public class GrabbableObject : MonoBehaviour
         {
             _renderer.material = hitThis ? _highlightMaterial : _originalMaterial;
         }
-
-        // UI Canvas logic: activate only if looking at this object
-        if (uiCanvas != null)
+        
+        // World-space local canvas (legacy path)
+        if (!useOverlayPrompt && uiCanvas != null)
         {
             uiCanvas.gameObject.SetActive(showCanvasWhenNear && hitThis);
+        }
+
+        // Overlay prompt path
+        if (useOverlayPrompt)
+        {
+            if (hitThis)
+            {
+                string key = ResolveInteractKey();
+                string text = string.Format(promptFormat, key, promptVerb);
+                if (InteractionPromptExists())
+                {
+                    InteractionPrompt.Show(text);
+                }
+                else if (debugPrompt && !_reportedMissingPromptInstance)
+                {
+                    Debug.LogWarning("[GrabbableObject] No InteractionPrompt instance found in scene. Create one (Canvas + InteractionPrompt script).", this);
+                    _reportedMissingPromptInstance = true;
+                }
+                _wasLooking = true;
+            }
+            else if (_wasLooking)
+            {
+                if (InteractionPromptExists())
+                {
+                    InteractionPrompt.Hide(this);
+                }
+                _wasLooking = false;
+            }
         }
     }
 
@@ -119,16 +173,67 @@ public class GrabbableObject : MonoBehaviour
         OnBrokenEvent?.Invoke();
     }
 
+    private string ResolveInteractKey()
+    {
+#if ENABLE_INPUT_SYSTEM
+        // Cache to avoid string allocations cada frame
+        if (string.IsNullOrEmpty(_cachedInteractKey) || (Time.realtimeSinceStartupAsDouble - _lastInteractKeyTime) > KeyCacheRefreshSeconds)
+        {
+            try
+            {
+                var actions = _inputActions ?? (_inputActions = new PlayerInputActions());
+                if (!_inputActionsEnabled)
+                {
+                    actions.Enable();
+                    _inputActionsEnabled = true;
+                }
+                var interact = actions.Player.Interact;
+                // Intentar obtener binding legible (prioridad teclado)
+                string display = interact.GetBindingDisplayString(bindingMask: InputBinding.MaskByGroup("Keyboard&Mouse"));
+                if (string.IsNullOrEmpty(display))
+                {
+                    display = interact.GetBindingDisplayString();
+                }
+                _cachedInteractKey = string.IsNullOrEmpty(display) ? fallbackKey : display;
+                _lastInteractKeyTime = Time.realtimeSinceStartupAsDouble;
+            }
+            catch
+            {
+                _cachedInteractKey = fallbackKey;
+            }
+        }
+        return _cachedInteractKey;
+#else
+        return fallbackKey;
+#endif
+    }
+
+#if ENABLE_INPUT_SYSTEM
+    private static PlayerInputActions _inputActions;
+    private static bool _inputActionsEnabled;
+#endif
+
+    private bool InteractionPromptExists()
+    {
+        // Usa búsqueda rápida (solo si necesario) – la clase singleton controla duplicados
+        // Para evitar dependencias directas reflejamos a través de tipo
+        return UnityEngine.Object.FindFirstObjectByType<InteractionPrompt>() != null;
+    }
+
     // Opcional: Evento para notificar que fue soltado
     public void OnReleased()
     {
     // You can play sounds, particles, etc.
     Debug.Log($"{name} was released!");
+    var bat = GetComponent<Bat>();
+    if (bat != null) bat.SetColliderTrigger(false);
     }
 
     // Opcional: Evento para notificar que fue agarrado
     public void OnGrabbed()
     {
     Debug.Log($"{name} was grabbed!");
+    var bat = GetComponent<Bat>();
+    if (bat != null) bat.SetColliderTrigger(true);
     }
 }

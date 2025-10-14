@@ -72,7 +72,8 @@ public class PlayerCombat : MonoBehaviour
     public Transform HoldPoint;
 
     public Transform holdpoint2;//solucion xd revisar luego
-    [SerializeField] private GameObject _heldObject;
+    [SerializeField] public GameObject _heldObject;
+
     [Header("Hold Point Orientation Settings")] 
     [Tooltip("If true the HoldPoint will copy the camera rotation each frame.")]
     [SerializeField] private bool alignHoldPointWithCamera = true;
@@ -109,6 +110,7 @@ public class PlayerCombat : MonoBehaviour
         if (HoldPoint != null && holdpoint2 != null)
         {
             HoldPoint.position = holdpoint2.position;
+            HoldPoint.rotation = holdpoint2.rotation;
 
             // Determine target rotation source
             Quaternion targetRot = HoldPoint.rotation;
@@ -190,7 +192,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("Attacking");
+        
         // If holding an object, use bat logic or generic logic
         if (_heldObject != null)
         {
@@ -202,7 +204,7 @@ public class PlayerCombat : MonoBehaviour
                 if (_state.currentHand == CombatHand.None || _state.currentHand == CombatHand.Left)
                 {
                     Transform reference = bat.HoldPoint != null && bat.HoldPoint.parent != null ? bat.HoldPoint.parent : transform;
-                    bat.PlaySwing(reference);
+                    
                 }
             }
             else
@@ -222,7 +224,9 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
         }
-        switch(_state.currentHand)
+        
+        Debug.Log("Attacking");
+        switch (_state.currentHand)
         {
             case CombatHand.None:
                 _state.currentHand = CombatHand.Right;
@@ -256,7 +260,7 @@ public class PlayerCombat : MonoBehaviour
                 OnAttack?.Invoke(1);
                 LeftArm.ActivateOrDeactivePunch(true);
                 StartCoroutine(DeactivePunch(LeftArm, punchDuration));
-                
+
 
                 break;
         }
@@ -281,7 +285,8 @@ public class PlayerCombat : MonoBehaviour
                     batTransform.SetParent(HoldPoint);
                     // Set local position/rotation so batHoldPoint aligns with HoldPoint origin
                     batTransform.localPosition = -batHoldPoint.localPosition;
-                    batTransform.localRotation = Quaternion.Inverse(batHoldPoint.localRotation);
+                    // Alinear el bate: su eje Z apunta en la dirección del eje X del HoldPoint (hacia adelante)
+                    batTransform.rotation = Quaternion.LookRotation(HoldPoint.right, HoldPoint.up);
                 }
                 else
                 {
@@ -293,10 +298,14 @@ public class PlayerCombat : MonoBehaviour
                 var rb = _heldObject.GetComponent<Rigidbody>();
                 if (rb != null) { rb.isKinematic = true; rb.linearVelocity = Vector3.zero; }
                 _state.objectInteractionState = ObjectInteractionState.HoldingObject;
+
+                // Llama evento de agarre
+                grabbable.OnGrabbed();
             }
         }
         else if (_heldObject != null && _state.objectInteractionState == ObjectInteractionState.HoldingObject)
         {            
+            var grabbable = _heldObject.GetComponent<GrabbableObject>();
             var rb = _heldObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -304,6 +313,8 @@ public class PlayerCombat : MonoBehaviour
                 _heldObject.transform.SetParent(null);
                 rb.AddForce(cam.forward * DefaultGrabThrowSettings.throwForce, ForceMode.Impulse);
             }
+            // Llama evento de soltar
+            if (grabbable != null) grabbable.OnReleased();
             _heldObject = null;
             _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
         }

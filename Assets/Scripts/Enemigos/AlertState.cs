@@ -6,13 +6,19 @@ using System.Collections;
 
 public class AlertState : IEnemyState
 {
-    private EnemyStateHandler ai;
+    private EnemyStateHandler handler;
+    private EnemyMain main;
     private float alertTimer;
     private float maxAlertTime = 3f;
     private bool canAttack = true;
-    public AlertState(EnemyStateHandler main)
+    public AlertState(EnemyStateHandler handler)
     {
-        ai = main;
+        this.handler = handler;
+    }
+
+    public AlertState(EnemyMain main)
+    {
+        this.main = main;
     }
 
     public void OnEnter()
@@ -24,47 +30,80 @@ public class AlertState : IEnemyState
 
     public void Update()
     {
-        alertTimer += Time.deltaTime;
-        if (ai.CheckTargetOnAttackRange(ai.Target))
+        if (handler != null)
         {
-          
-            Debug.Log("onAttackRange");
-            if (canAttack)
+            alertTimer += Time.deltaTime;
+            if (handler.CheckTargetOnAttackRange(handler.Target))
             {
-                Debug.Log("trygettingcomponetnAttacking");
-               
-                if (ai.Target.TryGetComponent<HealthController>(out HealthController ht))
+                Debug.Log("onAttackRange");
+                if (canAttack)
                 {
-                    Debug.Log("Attacking target");
-                    ht.TakeDamague(10);
-                    canAttack = false;
-                    ai.StartCoroutine(ResetCanAttack(1.0f));
-                }
-                else
-                {
-                    Debug.Log("No HealthController found on target.");
+                    Debug.Log("trygettingcomponetnAttacking");
+
+                    if (handler.Target.TryGetComponent<HealthController>(out HealthController ht))
+                    {
+                        Debug.Log("Attacking target");
+                        ht.TakeDamague(10);
+                        canAttack = false;
+                        handler.StartCoroutine(ResetCanAttack(1.0f));
+                    }
+                    else
+                    {
+                        Debug.Log("No HealthController found on target.");
+                    }
+
                 }
 
             }
 
+            if (!handler.CheckTargetOnView(handler.Target))
+            {
+
+                if (alertTimer >= maxAlertTime)
+                {
+                    handler.SetState(handler.GetIdleState());
+                }
+
+            }
+
+            return;
         }
 
-       if (!ai.CheckTargetOnView(ai.Target))
+        if (main == null) return;
+
+        alertTimer += Time.deltaTime;
+        if (main.target == null)
         {
-            
+            main.SetState(main.GetIdleState());
+            return;
+        }
+
+        if (!main.Watching())
+        {
             if (alertTimer >= maxAlertTime)
             {
-                ai.SetState(ai.GetIdleState());
+                main.SetState(main.GetIdleState());
             }
-           
+            return;
         }
 
-       
+        alertTimer = 0f;
+        main.MoveTowardsTarget();
+
+        if (main.Attacking())
+        {
+            main.SetState(main.GetAttackState());
+        }
 
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
+        if (handler == null)
+        {
+            return currentRotation;
+        }
+
         var forward = Vector3.ProjectOnPlane(
                                       _requestedRotation,
                                       motor.CharacterUp);
@@ -74,6 +113,10 @@ public class AlertState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
+        if (handler == null)
+        {
+            return currentVelocity;
+        }
 
         if (motor.GroundingStatus.IsStableOnGround)
         {
