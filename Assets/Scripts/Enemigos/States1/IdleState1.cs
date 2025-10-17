@@ -1,41 +1,33 @@
 using KinematicCharacterController;
 using UnityEngine;
 
-public class ExposedState : IEnemyState
+[System.Serializable]
+public class IdleState1 : IEnemyState
 {
-    private EnemyMain ai;
-    private float exposedTimer;
-    private float exposedDuration = 1.5f; 
+    private EnemyStateHandler ai;
 
-    public ExposedState(EnemyMain main)
+    public IdleState1(EnemyStateHandler main)
     {
         ai = main;
     }
 
     public void OnEnter()
     {
-        exposedTimer = exposedDuration;
-        Debug.Log("exposed");
+        ai.ExitCombatMode();
+        Debug.Log($"{ai.name} is now idle.");
     }
 
     public void Update()
     {
-        if (ai.Watching())
+        if (ai.Target != null && ai.CheckTargetOnView())
         {
-            ai.SetState(ai.GetIdleState());
-            return;
-        }
-
-        exposedTimer -= Time.deltaTime;
-
-        if (exposedTimer <= 0f)
-        {
+            ai.SetState(ai.GetAlertState());
         }
     }
 
     public void OnExit()
     {
-        Debug.Log($"{ai.name} recovered from being exposed.");
+        Debug.Log($"{ai.name} left idle state.");
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
@@ -45,7 +37,6 @@ public class ExposedState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
-        return currentVelocity;
+        return Vector3.zero;
     }
-
 }

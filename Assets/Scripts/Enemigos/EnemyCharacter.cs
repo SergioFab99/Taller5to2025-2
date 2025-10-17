@@ -3,6 +3,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.AI;
 
 
 public enum EnemyBehaviourState
@@ -10,7 +11,13 @@ public enum EnemyBehaviourState
     Default,
     Combat,
     Dead,
-    
+
+}
+
+public enum MovementMode
+{
+    NavMesh,
+    KCC
 }
 
 [System.Serializable]
@@ -26,17 +33,16 @@ public struct EnemyCharacterState
 public class EnemyCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] private KinematicCharacterMotor motor;
+    public KinematicCharacterMotor Motor => motor;
 
     private EnemySettingsList default_Settings;
 
 
     private EnemyBehaviourState enemyBehaviourState;
-    private  IEnemyState  currentState;
+    private IEnemyState currentState;
 
 
-
-
-
+    public MovementMode CurrentMode { get; private set; } = MovementMode.NavMesh;
 
     private Vector3 target;
 
@@ -69,7 +75,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public void UpdateInputs(EnemyInput input, EnemyBehaviourState state)
     {
         _requestedRotation = input.Direction;
-       
+
         _requestedMovement = input.Move;
 
         enemyBehaviourState = state;
@@ -93,22 +99,22 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void BeforeCharacterUpdate(float deltaTime)
     {
-       
+
     }
 
     public bool IsColliderValidForCollisions(Collider coll)
     {
-       return true;
+        return true;
     }
 
     public void OnDiscreteCollisionDetected(Collider hitCollider)
     {
-        
+
     }
 
     public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
     {
-        
+
     }
 
     public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
@@ -116,7 +122,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
-                
+
                 break;
             case EnemyBehaviourState.Combat:
                 break;
@@ -127,7 +133,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void PostGroundingUpdate(float deltaTime)
     {
-        
+
     }
 
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
@@ -145,11 +151,11 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-       switch(enemyBehaviourState)
+        switch (enemyBehaviourState)
         {
             case EnemyBehaviourState.Default:
 
-               currentRotation =  currentState.UpdateRotation( currentRotation, deltaTime,_requestedRotation, motor);
+                currentRotation = currentState.UpdateRotation(currentRotation, deltaTime, _requestedRotation, motor);
 
                 break;
             case EnemyBehaviourState.Combat:
@@ -176,7 +182,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
             case EnemyBehaviourState.Default:
 
                 currentVelocity =  currentState.UpdateVelocity( currentVelocity, deltaTime, motor, _requestedMovement, default_Settings, ref _timeSinceUngrounded);
-
+               
 
 
 
@@ -239,7 +245,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
                     _externalForces = Vector3.zero;
                 }
                 break;
-            
+
             case EnemyBehaviourState.Dead:
                 break;
         }
@@ -271,14 +277,22 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     void OnDrawGizmosSelected()
     {
-        if(default_Settings != null)
+        if (default_Settings != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position,default_Settings.AISettings.attackRange);
+            Gizmos.DrawWireSphere(transform.position, default_Settings.AISettings.attackRange);
 
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, default_Settings.AISettings.detectionDistance);
 
         }
+    }
+
+    public void SetMovementMode(MovementMode mode)
+    {
+        CurrentMode = mode;
+        if (TryGetComponent(out NavMeshAgent agent))
+            agent.enabled = (mode == MovementMode.NavMesh);
+        motor.enabled = (mode == MovementMode.KCC);
     }
 }

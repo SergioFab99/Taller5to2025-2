@@ -1,14 +1,14 @@
 using KinematicCharacterController;
 using UnityEngine;
 
-public class StunState : IEnemyState
+public class StunState1 : IEnemyState
 {
-    private EnemyMain ai;
-    private float stunDuration;
+    private EnemyStateHandler ai;
     private float stunTimer;
+    private float stunDuration = 2.0f;
     private Vector3 knockbackDir;
 
-    public StunState(EnemyMain main)
+    public StunState1(EnemyStateHandler main)
     {
         ai = main;
     }
@@ -20,12 +20,10 @@ public class StunState : IEnemyState
 
     public void OnEnter()
     {
-        stunDuration = ai.stunDuration;   
         stunTimer = 0f;
-
-        Debug.Log("stunned");
-
-        
+        ai.ExitCombatMode(); 
+        ai.Knockback(knockbackDir);
+        Debug.Log($"{ai.name} is stunned!");
     }
 
     public void Update()
@@ -34,41 +32,22 @@ public class StunState : IEnemyState
 
         if (stunTimer >= stunDuration)
         {
-            if (ai.Watching())
-            {
+            if (ai.Target != null && ai.CheckTargetOnView())
                 ai.SetState(ai.GetAlertState());
-            }
             else
-            {
                 ai.SetState(ai.GetIdleState());
-            }
-                
         }
     }
 
     public void OnExit()
     {
-        Debug.Log("recovered from stun");
+        Debug.Log($"{ai.name} recovered from stun.");
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
-    {
-        return currentRotation;
-    }
+        => currentRotation;
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
-    {
-        //if (ai.knockbackForce >0.1f)
-        //{
-        //    motor.ForceUnground();
-        //    currentVelocity += (ai.knockbackForce * knockbackDir);
-        //    ai.knockbackForce = 0f;
-
-        //}
-        return currentVelocity;
-        
-    }
-
-
+        => currentVelocity;
 }
 

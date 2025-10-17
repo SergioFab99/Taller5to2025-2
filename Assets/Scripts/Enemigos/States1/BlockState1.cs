@@ -1,31 +1,43 @@
 using KinematicCharacterController;
 using UnityEngine;
-[System.Serializable]
-public class IdleState : IEnemyState
-{
-    private EnemyMain ai;
 
-    public IdleState(EnemyMain main)
+public class BlockState1 : IEnemyState
+{
+    private EnemyStateHandler ai;
+    private float blockTimer;
+    private float blockDuration = 1.0f;  
+
+    public BlockState1(EnemyStateHandler main)
     {
         ai = main;
     }
 
     public void OnEnter()
     {
-        Debug.Log("is now idle");
+        blockTimer = blockDuration;
+
+
+        Debug.Log($"is blocking");
     }
 
     public void Update()
     {
-        if (ai.Watching())
+        if (ai.Target != null)
         {
             ai.SetState(ai.GetAlertState());
+            return;
+        }
+
+        blockTimer -= Time.deltaTime;
+
+        if (blockTimer <= 0f)
+        {
         }
     }
 
     public void OnExit()
     {
-        Debug.Log("no longer idle lmao");
+        Debug.Log("lowered guard.");
     }
 
     public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
@@ -35,10 +47,7 @@ public class IdleState : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
-        //Debug.Log("NEW");
-        return Vector3.zero;
+        return currentVelocity;
     }
-
-
 
 }
