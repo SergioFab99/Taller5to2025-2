@@ -13,7 +13,7 @@ public class EnemyStateHandler : MonoBehaviour
     [Header("Behaviour / Settings")]
     public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
     [NonSerialized] public EnemySettingsList enemySettings;
-    [NonSerialized] public IEnemyAttack attackComponent;
+    [NonSerialized] public MeleeAttack attackComponent;
 
     private IEnemyState currentState;
     private bool isTransitioning;
@@ -46,14 +46,15 @@ public class EnemyStateHandler : MonoBehaviour
     private NavMeshAgent agent;
     [NonSerialized] public EnemyCharacter character;
 
+    //f
 
-    public void Initialize(EnemySettingsList settings, Transform characterTransform)
+    public void Initialize(EnemySettingsList settings, Transform characterTransform, EnemyCharacter charac, NavMeshAgent agent1, MeleeAttack attacc)
     {
         Character = characterTransform;
         enemySettings = settings;
-        attackComponent = GetComponent<IEnemyAttack>();
-        agent = GetComponent<NavMeshAgent>();
-        character = GetComponent<EnemyCharacter>();
+        attackComponent = attacc;
+        agent = agent1;
+        character = charac;
 
         idle = new IdleState1(this);
         alert = new AlertState1(this);
@@ -79,9 +80,6 @@ public class EnemyStateHandler : MonoBehaviour
     void LateUpdate()
     {
 
-        if (agent != null && agent.enabled && character.Motor.enabled)
-            Debug.LogWarning($"{name}: Both NavMesh and KCC active at once!");
-
         var pos = transform.position;
         if (Vector3.Distance(pos, _lastPos) > 0.05f)
             Debug.Log($"[{Time.frameCount}] {name} moved to {pos}");
@@ -103,7 +101,6 @@ public class EnemyStateHandler : MonoBehaviour
     // ------------------- HELPERS -------------------
     public EnemyBehaviourState GetBehaviourState() => EnemyBehaviourState;
     public void SetBehaviourState(EnemyBehaviourState newBehaviour) => EnemyBehaviourState = newBehaviour;
-
     public IEnemyState GetCurrentState() => currentState;
     public IEnemyState GetIdleState() => idle;
     public IEnemyState GetAlertState() => alert;
@@ -134,51 +131,51 @@ public class EnemyStateHandler : MonoBehaviour
     // ------------------- MOVEMENT -------------------
     public void EnterCombatMode()
     {
-        SyncAgentToTransform();
-        Debug.Log($"{name} agent synced. nextPos={agent.nextPosition} current={transform.position}");
+        //SyncAgentToTransform();
+        //Debug.Log($"{name} agent synced. nextPos={agent.nextPosition} current={transform.position}");
 
-        if (agent != null && agent.enabled)
-        {
-            agent.isStopped = true;
-            agent.ResetPath();
-            agent.enabled = false;
-        }
-        Debug.Log($"Motor pos before enable: {character.Motor.TransientPosition}");
-        if (character != null)
-        {
-            var motor = character.Motor;
-            if (motor != null)
-            {
-                motor.SetPosition(transform.position);   
-                motor.SetRotation(transform.rotation);
-            }
+        //if (agent != null && agent.enabled)
+        //{
+        //    agent.isStopped = true;
+        //    agent.ResetPath();
+        //    agent.enabled = false;
+        //}
+        //Debug.Log($"Motor pos before enable: {character.Motor.TransientPosition}");
+        //if (character != null)
+        //{
+        //    var motor = character.Motor;
+        //    if (motor != null)
+        //    {
+        //        motor.SetPosition(transform.position);   
+        //        motor.SetRotation(transform.rotation);
+        //    }
 
-            character.SetMovementMode(MovementMode.KCC);
-        }
+        //    character.SetMovementMode(MovementMode.KCC);
+        //}
 
         SetBehaviourState(EnemyBehaviourState.Combat);
     }
 
     public void ExitCombatMode()
     {
-        if (character != null)
-            character.SetMovementMode(MovementMode.NavMesh);
+        //if (character != null)
+        //    character.SetMovementMode(MovementMode.NavMesh);
 
-        if (agent != null)
-        {
-            if (!agent.isOnNavMesh)
-            {
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(transform.position, out hit, 2f, NavMesh.AllAreas))
-                    transform.position = hit.position;
-            }
+        //if (agent != null)
+        //{
+        //    if (!agent.isOnNavMesh)
+        //    {
+        //        NavMeshHit hit;
+        //        if (NavMesh.SamplePosition(transform.position, out hit, 2f, NavMesh.AllAreas))
+        //            transform.position = hit.position;
+        //    }
 
-            agent.enabled = true;
-            agent.Warp(transform.position);  
-            agent.updatePosition = true;
-            agent.updateRotation = true;
-            agent.isStopped = false;
-        }
+        //    agent.enabled = true;
+        //    agent.Warp(transform.position);  
+        //    agent.updatePosition = true;
+        //    agent.updateRotation = true;
+        //    agent.isStopped = false;
+        //}
 
         SetBehaviourState(EnemyBehaviourState.Default);
     }
@@ -191,9 +188,6 @@ public class EnemyStateHandler : MonoBehaviour
 
     public void MoveTowardsTarget()
     {
-        if (agent == null || Target == null) return;
-        if (!agent.enabled) return; 
-
         agent.isStopped = false;
         agent.speed = MoveSpeed();
         agent.SetDestination(Target.position);
@@ -209,6 +203,7 @@ public class EnemyStateHandler : MonoBehaviour
             character.AddExternalForce(hitDirection.normalized * knockbackForce);
         }
     }
+
 
     // ------------------- STATUS -------------------
     public void ApplyStatus(StatusEffect type, float duration)

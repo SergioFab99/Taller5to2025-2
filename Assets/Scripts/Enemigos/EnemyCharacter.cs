@@ -159,6 +159,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
                 break;
             case EnemyBehaviourState.Combat:
+                currentRotation = currentState.UpdateRotation(currentRotation, deltaTime, _requestedRotation, motor);
                 break;
             case EnemyBehaviourState.Dead:
                 break;
@@ -217,7 +218,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
             case EnemyBehaviourState.Combat:
 
-
+                currentVelocity = currentState.UpdateVelocity(currentVelocity, deltaTime, motor, _requestedMovement, default_Settings, ref _timeSinceUngrounded);
 
                 if (_externalExplosiveForces.magnitude > 0f)
                 {

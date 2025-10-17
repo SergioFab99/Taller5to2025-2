@@ -1,12 +1,14 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public struct EnemyInput
 {
     public Vector3 Direction;
     public Vector3 Move;
     public CrouchInput Crouch;
+    public bool Jump;
 }
 
 
@@ -16,9 +18,10 @@ public class Enemy : MonoBehaviour
     //[SerializeField] EnemyCharacterState _characterState;
     //[SerializeField] EnemyCharacterState _lastCharacterState;
     [SerializeField] HealthController healthController;
+    [SerializeField] EnemyAnimations _animations;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
-
+    [SerializeField] MeleeAttack attacc;
     [SerializeField] EnemySettingsList EnemySettings;
     //[SerializeField] CombatManager
 
@@ -32,11 +35,13 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _stateHandler.Initialize(EnemySettings, character.transform);
+        _stateHandler.Initialize(EnemySettings, character.transform, character, agent, attacc);
 
         character.Initialize(EnemySettings, _stateHandler.GetBehaviourState(), _stateHandler.GetCurrentState());
 
         healthController.OnDead += Ondead;
+
+        _animations.Initialize();
     }
 
     public void Ondead()
@@ -58,7 +63,7 @@ public class Enemy : MonoBehaviour
             case EnemyBehaviourState.Default:
                 {
                     float distance = Vector3.Distance(GetTarget(), character.transform.position);
-                    Vector3 direction = (testTarget.position - character.transform.position).normalized;
+                    Vector3 direction = (GetTarget() - character.transform.position).normalized;
 
                     if (distance > EnemySettings.AISettings.stopingDistance)
                     {
@@ -83,12 +88,24 @@ public class Enemy : MonoBehaviour
 
             case EnemyBehaviourState.Combat:
                 {
-                    Vector3 direction = (testTarget.position - character.transform.position).normalized;
-                    enemyInput = new EnemyInput
+                    float distance = Vector3.Distance(GetTarget(), character.transform.position);
+                    Vector3 direction = (GetTarget() - character.transform.position).normalized;
+                    if (distance > EnemySettings.AISettings.stopingDistance)
                     {
-                        Direction = direction,
-                        Move = direction
-                    };
+                        enemyInput = new EnemyInput
+                        {
+                            Direction = direction,
+                            Move = direction
+                        };
+                    }
+                    else
+                    {
+                        enemyInput = new EnemyInput
+                        {
+                            Direction = direction,
+                            Move = Vector3.zero
+                        };
+                    }
 
                     character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
                     break;
@@ -103,6 +120,8 @@ public class Enemy : MonoBehaviour
                 character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
                 break;
         }
+
+        _animations.AnimUpdate(Time.fixedDeltaTime, character);
     }
 
     private void LateUpdate()
@@ -113,7 +132,12 @@ public class Enemy : MonoBehaviour
 
     public Vector3 GetTarget()
     {
-        return agent.steeringTarget;
+        if (agent.path.corners.Length > 1)
+        {
+            var x = agent.path.corners;
+            return x[1];
+        }
+        else return Vector3.zero;
     }
 
     private void OnDrawGizmos()
