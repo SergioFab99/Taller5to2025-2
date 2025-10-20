@@ -4,7 +4,7 @@ public enum AttackStyle
 {
     Melee,
     Ranged,
-    Mobile    
+    Thrower   
 }
 
 [CreateAssetMenu(fileName = "EnemyAISettings", menuName = "Scriptable Objects/EnemyAISettings")]

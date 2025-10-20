@@ -100,7 +100,7 @@ public class AttackState1 : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {        
-        if (ai.enemySettings.AISettings.attackStyle == AttackStyle.Melee)
+        if (ai.enemySettings.AISettings.attackStyle == AttackStyle.Melee || ai.enemySettings.AISettings.attackStyle == AttackStyle.Thrower)
             return Vector3.zero;
 
         if (ai.enemySettings.AISettings.attackStyle == AttackStyle.Ranged)
