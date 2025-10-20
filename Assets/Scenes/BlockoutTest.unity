@@ -8872,7 +8872,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2785686904473621378, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 220237801}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1924115106}
   m_SourcePrefab: {fileID: 100100000, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
 --- !u!4 &411166531 stripped
 Transform:
@@ -16751,7 +16754,7 @@ Transform:
   m_GameObject: {fileID: 924005460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.709, y: 1, z: 2.32}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19630,6 +19633,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 669485781220847225, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_TagString
+      value: Golpe
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
       propertyPath: m_Name
       value: Golpe1
@@ -19637,6 +19644,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_TagString
+      value: Golpe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -34636,6 +34647,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.23, y: 0.23, z: 0.29}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1924115102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+  m_PrefabInstance: {fileID: 411166530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1924115106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924115102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c413aa57657c24dad3bc147f72639d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  "da\xF1oCuerpoSuperior": 30
+  "da\xF1oCuerpoMedio": 20
+  "da\xF1oCuerpoInferior": 10
+  estaMuerto: 0
+  mostrarMensajes: 1
 --- !u!1 &1924227075
 GameObject:
   m_ObjectHideFlags: 0
