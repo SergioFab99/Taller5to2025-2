@@ -1278,6 +1278,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.23, z: 0.31}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &107234762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8471627776687347318, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+  m_PrefabInstance: {fileID: 1080568687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &114263782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34671,6 +34676,8 @@ MonoBehaviour:
   "da\xF1oCuerpoInferior": 10
   estaMuerto: 0
   mostrarMensajes: 1
+  objetoColisionador: {fileID: 107234762}
+  normalPlanoArrastre: {x: 0, y: 1, z: 0}
 --- !u!1 &1924227075
 GameObject:
   m_ObjectHideFlags: 0
