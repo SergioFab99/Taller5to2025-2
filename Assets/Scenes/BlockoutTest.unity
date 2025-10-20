@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 237944727}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (5)
@@ -1114,6 +1118,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 2002455683}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (10)
@@ -1983,6 +1991,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 114263802}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (7)
@@ -7271,6 +7283,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 407153984}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (3)
@@ -7426,7 +7442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798cd920398b14d45ac252ad8679512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.2
+  radius: 0.3
   dir: {x: 0, y: 0, z: 0}
   hitMask:
     serializedVersion: 2
@@ -8821,6 +8837,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 220237814}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (1)
@@ -16632,7 +16652,7 @@ Transform:
   m_GameObject: {fileID: 924005460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.709, y: 1, z: 2.32}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16657,7 +16677,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.97
+  m_Radius: 0.67
   m_Height: 2.58
   m_Direction: 1
   m_Center: {x: 0, y: 0.22, z: 0.49}
@@ -16844,6 +16864,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 339761065}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (8)
@@ -19471,6 +19495,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 780059659}
     m_Modifications:
+    - target: {fileID: -8850371459948658808, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -19511,6 +19539,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8471627776687347318, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7346273688177247522, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669485781220847225, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
       propertyPath: m_Name
       value: Golpe1
@@ -19522,6 +19562,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4852528481542871708, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+    - {fileID: 8523772855540137367, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+    - {fileID: -5539764629200458662, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
+    - {fileID: -8418885108249170206, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -3694639897522847308, guid: f26996fd4deec7140a8342c1b1a980bc, type: 3}
       insertIndex: -1
@@ -19872,6 +19915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123035755}
   - component: {fileID: 1123035754}
+  - component: {fileID: 1123035756}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -19891,19 +19935,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9a79b3f363bbd489d25bb3e8fa4cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RigthArm: {fileID: 389411483}
-  LeftArm: {fileID: 1875060648}
+  weaponPos: {fileID: 1875060646}
+  rightPunchPos: {fileID: 389411481}
+  leftPunchPos: {fileID: 1875060646}
   _state:
     playerActionState: 0
     objectInteractionState: 0
-    currentHand: 0
     BlockState: 0
     CanAttack: 0
     CanGrabOrThrow: 0
     isBlocking: 0
-  timeBetweenAttacks: 0.4
-  timeToDoublePunch: 3
-  punchDuration: 1
+  currentWeapon: {fileID: 1123035756}
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 128
   DefaultGrabThrowSettings: {fileID: 11400000, guid: c5c6ed4d58c8ba64c9c325265b15756d, type: 2}
   cam: {fileID: 604208994}
   HoldPoint: {fileID: 481170035}
@@ -19929,6 +19974,23 @@ Transform:
   - {fileID: 481170035}
   m_Father: {fileID: 544003723}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123035756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123035753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ed8847525f33d4db75d919da713948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: e847e7030afe8694bbb25ae2c4fe8bef, type: 2}
+  currentHand: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1128641152
 GameObject:
   m_ObjectHideFlags: 0
@@ -20411,6 +20473,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 1648812168}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (2)
@@ -20796,6 +20862,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 1361606329}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (11)
@@ -21470,6 +21540,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 1696094545}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (9)
@@ -25483,6 +25557,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 693688888}
+    - target: {fileID: 4305063760046091379, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4406669422065707575, guid: f79a649c4070bcb458154ac0260ea41c, type: 3}
       propertyPath: m_Name
       value: KinematicEnemy (6)
@@ -31233,7 +31311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798cd920398b14d45ac252ad8679512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.2
+  radius: 0.3
   dir: {x: 0, y: 0, z: 0}
   hitMask:
     serializedVersion: 2

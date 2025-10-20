@@ -28,7 +28,6 @@ public struct CombatState
 {
     public PlayerActionState playerActionState;
     public ObjectInteractionState objectInteractionState;
-    public CombatHand currentHand;
     public PlayerBlockState BlockState;
     public bool CanAttack;
     public bool CanGrabOrThrow;
@@ -46,21 +45,27 @@ public struct CombatInput
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField]private Punch RigthArm;
-    [SerializeField]private Punch LeftArm;
+    public GameObject weaponPos;
+    public GameObject rightPunchPos;
+    public GameObject leftPunchPos;
+
     public CombatState _state;
 
-    public float timeBetweenAttacks;
-    public float timeToDoublePunch;
-    public float punchDuration;
+    public Weapon currentWeapon;
 
+
+    public LayerMask hitMask;
+    
+
+
+    #region
     private float timeSinceLastPunch;
     private bool requestAttack;
     private bool requestGrab;
     private bool requestThrow;
     private bool requestInteract;
     private bool requestBlocking;
-
+    #endregion
 
     public event PunchSide OnAttack;
     public delegate void PunchSide(int hand); 
@@ -87,10 +92,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void Initialize()
     {
-        _state.currentHand = CombatHand.None;
         _state.CanAttack = true;
         _state.CanGrabOrThrow = true;   
         _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
+        if (currentWeapon != null) currentWeapon.Initialize(this);
     }
 
     public void UpdateInput(CombatInput input)
@@ -154,11 +159,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void CombatTickUpdate(float deltaTime)
     {
-        if (Time.time - timeSinceLastPunch > timeToDoublePunch)
-        {
-            _state.currentHand = CombatHand.None;
-        }
 
+        currentWeapon.CombatTickUpdate(deltaTime);
         if (requestAttack && CheckIfCanAttack())
         {
             Attack();
@@ -201,11 +203,11 @@ public class PlayerCombat : MonoBehaviour
             {
                 bat.Hit(cam, cam.forward, 2.5f); // Example range, adjust as needed
                 // Bat handles its own durability, do not call Use() here
-                if (_state.currentHand == CombatHand.None || _state.currentHand == CombatHand.Left)
+                /*if (_state.currentHand == CombatHand.None || _state.currentHand == CombatHand.Left)
                 {
                     Transform reference = bat.HoldPoint != null && bat.HoldPoint.parent != null ? bat.HoldPoint.parent : transform;
                     
-                }
+                } */
             }
             else
             {
@@ -226,44 +228,10 @@ public class PlayerCombat : MonoBehaviour
         }
         
         Debug.Log("Attacking");
-        switch (_state.currentHand)
-        {
-            case CombatHand.None:
-                _state.currentHand = CombatHand.Right;
-                _state.CanAttack = false;
-                StartCoroutine(ResetCanAttack(timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
 
-                OnAttack?.Invoke(1);
+        currentWeapon.Attack();
 
-                RigthArm.ActivateOrDeactivePunch(true);
-                StartCoroutine(DeactivePunch(RigthArm, punchDuration));
-                break;
-
-            case CombatHand.Right:
-                _state.currentHand = CombatHand.Left;
-                _state.CanAttack = false;
-                StartCoroutine(ResetCanAttack(timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
-
-                OnAttack?.Invoke(2);
-                RigthArm.ActivateOrDeactivePunch(true);
-                StartCoroutine(DeactivePunch(RigthArm, punchDuration));
-                break;
-
-            case CombatHand.Left:
-                _state.currentHand = CombatHand.Right;
-                _state.CanAttack = false;
-                StartCoroutine(ResetCanAttack(timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
-
-                OnAttack?.Invoke(1);
-                LeftArm.ActivateOrDeactivePunch(true);
-                StartCoroutine(DeactivePunch(LeftArm, punchDuration));
-
-
-                break;
-        }
+       
     }
 
     void GrabNThrow()
@@ -330,21 +298,16 @@ public class PlayerCombat : MonoBehaviour
     
 
 
-    IEnumerator ResetCanAttack(float delay)
+    public IEnumerator ResetCanAttack(float delay)
     {
         yield return new WaitForSeconds(delay);
         _state.CanAttack = true;
     }
 
-    IEnumerator DeactivePunch(Punch punch,float duration)
+    public IEnumerator DeactivePunch(Punch punch,float duration)
     {
         yield return new WaitForSeconds(duration);
         punch.ActivateOrDeactivePunch(false);
     }
-
-}
-
-class Attack
-{
 
 }
