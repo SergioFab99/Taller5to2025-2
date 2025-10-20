@@ -1,42 +1,47 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public struct EnemyInput
 {
     public Vector3 Direction;
     public Vector3 Move;
     public CrouchInput Crouch;
+    public bool Jump;
 }
 
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyCharacter character;
-    [SerializeField] EnemyCharacterState _characterState;
-    [SerializeField] EnemyCharacterState _lastCharacterState;
+    //[SerializeField] EnemyCharacterState _characterState;
+    //[SerializeField] EnemyCharacterState _lastCharacterState;
     [SerializeField] HealthController healthController;
+    [SerializeField] EnemyAnimations _animations;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
-
+    [SerializeField] MeleeAttack attacc;
     [SerializeField] EnemySettingsList EnemySettings;
     //[SerializeField] CombatManager
 
 
-    
+
     public Transform testTarget;
 
 
-   
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _stateHandler.Initialize(EnemySettings,character.transform);
+        _stateHandler.Initialize(EnemySettings, character.transform, character, agent, attacc);
 
-        character.Initialize(EnemySettings,_stateHandler.GetBehaviourState(),_stateHandler.GetCurrentState());
+        character.Initialize(EnemySettings, _stateHandler.GetBehaviourState(), _stateHandler.GetCurrentState());
 
         healthController.OnDead += Ondead;
+
+        _animations.Initialize();
     }
 
     public void Ondead()
@@ -47,68 +52,129 @@ public class Enemy : MonoBehaviour
     public void Update()
     {
         _stateHandler.CurrentStateUpdate();
-        agent.SetDestination(testTarget.position);
     }
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //character.UpdateState(_stateHandler.GetCurrentState());
+        //var enemyInput = new EnemyInput();
+
+        //switch (_stateHandler.GetBehaviourState())
+        //{
+        //    case EnemyBehaviourState.Default:
+        //        {
+        //            float distance = Vector3.Distance(GetTarget(), character.transform.position);
+        //            Vector3 direction = (GetTarget() - character.transform.position).normalized;
+
+        //            if (distance > EnemySettings.AISettings.stopingDistance)
+        //            {
+        //                enemyInput = new EnemyInput
+        //                {
+        //                    Direction = direction,
+        //                    Move = direction
+        //                };
+        //            }
+        //            else
+        //            {
+        //                enemyInput = new EnemyInput
+        //                {
+        //                    Direction = direction,
+        //                    Move = Vector3.zero
+        //                };
+        //            }
+
+        //            character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
+        //            break;
+        //        }
+
+        //    case EnemyBehaviourState.Combat:
+        //        {
+        //            float distance = Vector3.Distance(GetTarget(), character.transform.position);
+        //            Vector3 direction = (GetTarget() - character.transform.position).normalized;
+        //            if (distance > EnemySettings.AISettings.stopingDistance)
+        //            {
+        //                enemyInput = new EnemyInput
+        //                {
+        //                    Direction = direction,
+        //                    Move = direction
+        //                };
+        //            }
+        //            else
+        //            {
+        //                enemyInput = new EnemyInput
+        //                {
+        //                    Direction = direction,
+        //                    Move = Vector3.zero
+        //                };
+        //            }
+
+        //            character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
+        //            break;
+        //        }
+
+        //    case EnemyBehaviourState.Dead:
+        //        enemyInput = new EnemyInput
+        //        {
+        //            Direction = Vector3.zero,
+        //            Move = Vector3.zero
+        //        };
+        //        character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
+        //        break;
+        //}
+
+        //_animations.AnimUpdate(Time.fixedDeltaTime, character);
+
         character.UpdateState(_stateHandler.GetCurrentState());
+
         var enemyInput = new EnemyInput();
-        switch(_stateHandler.GetBehaviourState())
+        EnemyBehaviourState behaviour = _stateHandler.GetBehaviourState();
+
+        Vector3 destination = GetTarget(behaviour);
+        Vector3 direction = (destination - character.transform.position).normalized;
+        float distance = Vector3.Distance(destination, character.transform.position);
+
+        Vector3 moveVector = (distance > EnemySettings.AISettings.stopingDistance) ? direction : Vector3.zero;
+
+        enemyInput = new EnemyInput
         {
-            case EnemyBehaviourState.Default:
+            Direction = direction,
+            Move = moveVector
+        };
 
-                float distance = Vector3.Distance(GetTarget(),character.transform.position);
-                Vector3 direction = (testTarget.position - character.transform.position).normalized;
-                if(distance > EnemySettings.AISettings.stopingDistance)
-                {
-                    enemyInput = new EnemyInput
-                    {
-                        Direction = direction,
-                        Move = direction
-                    };
+        character.UpdateInputs(enemyInput, behaviour);
 
-                }
-                else
-                {
-                    enemyInput = new EnemyInput
-                    {
-                        Direction = direction,
-                        Move = Vector3.zero
-                    };
-                }
-                break;
-            case EnemyBehaviourState.Combat:
-                break;
-            case EnemyBehaviourState.Dead:
-                break;
+        _animations.AnimUpdate(Time.fixedDeltaTime, character);
+    }
+
+    public Vector3 GetTarget(EnemyBehaviourState behaviour)
+    {
+        if ((behaviour == EnemyBehaviourState.Default || character.CurrentMode == MovementMode.NavMesh)
+            && agent != null && agent.enabled && agent.isOnNavMesh && agent.hasPath && !agent.pathPending)
+        {
+            var corners = agent.path.corners;
+            if (corners != null && corners.Length > 1)
+                return corners[1]; // next corner
+            if (corners != null && corners.Length == 1)
+                return corners[0];
         }
-         character.UpdateInputs(enemyInput,_stateHandler.GetBehaviourState());
 
-
-
-    }
-
-    private void LateUpdate()
-    {
-        _characterState = character.GetState();
-        _lastCharacterState = character.GetLastState();
-    }
-
-    public Vector3 GetTarget()
-    {
-        return agent.steeringTarget;
+        return _stateHandler.Target != null
+            ? _stateHandler.Target.position
+            : character.transform.position; 
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(GetTarget(),0.1f);
+        if (character == null) return;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(GetTarget(_stateHandler != null ? _stateHandler.GetBehaviourState() : EnemyBehaviourState.Default), 0.1f);
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(character.transform.position, GetTarget(_stateHandler != null ? _stateHandler.GetBehaviourState() : EnemyBehaviourState.Default));
     }
 
     public IEnemyState GetEnemyState()
     {
         return _stateHandler.GetCurrentState();
     }
-    
+
 
 }

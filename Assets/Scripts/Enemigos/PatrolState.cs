@@ -22,7 +22,7 @@ public class PatrolState : IEnemyState
        return currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
     }
 
-    public void UpdateVelocity(ref Vector3 currentVelocity, EnemySettingsList Settings, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement)
+    public void UpdateVelocity(ref Vector3 currentVelocity, EnemySettingsList Settings, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, ref float _timeSinceUngrounded)
     {
 
         if (motor.GroundingStatus.IsStableOnGround)

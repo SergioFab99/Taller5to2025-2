@@ -3,17 +3,11 @@ using UnityEngine;
 [System.Serializable]
 public class IdleState : IEnemyState
 {
-    private EnemyStateHandler handler;
-    private EnemyMain main;
-
-    public IdleState(EnemyStateHandler handler)
-    {
-        this.handler = handler;
-    }
+    private EnemyMain ai;
 
     public IdleState(EnemyMain main)
     {
-        this.main = main;
+        ai = main;
     }
 
     public void OnEnter()
@@ -23,25 +17,9 @@ public class IdleState : IEnemyState
 
     public void Update()
     {
-        if (handler != null)
+        if (ai.Watching())
         {
-            if (handler.CheckTargetOnView(handler.Target))
-            {
-                handler.SetState(handler.GetAlertState());
-            }
-            return;
-        }
-
-        if (main == null) return;
-
-        if (main.target == null)
-        {
-            return;
-        }
-
-        if (main.Watching())
-        {
-            main.SetState(main.GetAlertState());
+            ai.SetState(ai.GetAlertState());
         }
     }
 

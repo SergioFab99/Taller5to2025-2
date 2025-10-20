@@ -3,19 +3,13 @@ using UnityEngine;
 
 public class BlockState : IEnemyState
 {
-    private EnemyStateHandler handler;
-    private EnemyMain main;
+    private EnemyMain ai;
     private float blockTimer;
     private float blockDuration = 1.0f;  
 
-    public BlockState(EnemyStateHandler handler)
-    {
-        this.handler = handler;
-    }
-
     public BlockState(EnemyMain main)
     {
-        this.main = main;
+        ai = main;
     }
 
     public void OnEnter()
@@ -28,31 +22,9 @@ public class BlockState : IEnemyState
 
     public void Update()
     {
-        if (handler != null)
+        if (ai.Watching())
         {
-            if (handler.Target == null)
-            {
-                handler.SetState(handler.GetAlertState());
-                return;
-            }
-
-            blockTimer -= Time.deltaTime;
-
-            if (blockTimer <= 0f)
-            {
-                handler.SetBehaviourState(EnemyBehaviourState.Default);
-            }
-            return;
-        }
-
-        if (main == null)
-        {
-            return;
-        }
-
-        if (main.target == null)
-        {
-            main.SetState(main.GetIdleState());
+            ai.SetState(ai.GetAlertState());
             return;
         }
 
@@ -60,7 +32,6 @@ public class BlockState : IEnemyState
 
         if (blockTimer <= 0f)
         {
-            main.SetState(main.GetRecoverState());
         }
     }
 
@@ -71,19 +42,11 @@ public class BlockState : IEnemyState
 
     public Quaternion UpdateRotation( Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
-        if (handler == null)
-        {
-            return currentRotation;
-        }
         return currentRotation;
     }
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings)
     {
-        if (handler == null)
-        {
-            return currentVelocity;
-        }
         return currentVelocity;
     }
 

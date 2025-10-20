@@ -1,76 +1,66 @@
 using UnityEngine;
+using KinematicCharacterController;
 
 public class AttackState : IEnemyState
-{
+{ 
     private EnemyMain ai;
     private IEnemyAttack attack;
-
     private float disengageBuffer = 5.5f;
-
     public AttackState(EnemyMain main)
-    {
-        ai = main;
-        attack = ai.GetComponent<IEnemyAttack>();
+    { 
+        ai = main; attack = ai.GetComponent<IEnemyAttack>();
     }
-
-    public void OnEnter()
-    {
-        Debug.Log("engaging");
+    public void OnEnter() 
+    { 
+        Debug.Log("engaging"); 
     }
-
-    public void Update()
-    {
-        if (ai.target == null)
-        {
-            ai.SetState(ai.GetIdleState());
-            return;
-        }
-
+    public void Update() 
+    { 
+        if (ai.target == null) 
+        { 
+            ai.SetState(ai.GetIdleState()); return; 
+        } 
         float dist = Vector3.Distance(ai.transform.position, ai.target.position);
-
-        if (attack.IsFinished)
-        {
+        if (attack.IsFinished) 
+        { 
             if (attack.WasInterrupted)
-            {
-                attack.ResetAttackCycle();
-                ai.SetState(ai.GetExposedState());
+            { 
+                attack.ResetAttackCycle(); ai.SetState(ai.GetExposedState()); 
             }
-            else
-            {
-                attack.ResetAttackCycle();
-                ai.SetState(ai.GetRecoverState());
-            }
-            return;
-        }
-
-        if (attack.IsAttacking)
-            return;
+            else 
+            { 
+                attack.ResetAttackCycle(); ai.SetState(ai.GetRecoverState());
+            } 
+            return; 
+        } 
+        if (attack.IsAttacking) return; 
 
         if (dist > attack.AttackRange + disengageBuffer)
-        {
-            ai.SetState(ai.GetAlertState());
+        { 
+            ai.SetState(ai.GetAlertState()); 
+
             if (attack is RangedAttack gun)
             {
-                gun.StartReload();
-            }
-            if(attack is TommyGunAttack gun2)
+                gun.StartReload(); 
+            } 
+            if (attack is TommyGunAttack gun2)
             {
-                gun2.StartReload();
-            }
-                return;
+                gun2.StartReload(); 
+            } 
+            return;
         }
 
-        if (dist <= attack.AttackRange)
-        {
+        if (dist <= attack.AttackRange) 
+        { 
             attack.Execute();
-        }
-        else
+        } 
+        
+        else 
         {
-            ai.Movement();
-        }
-    }
-
-    public void OnExit()
+            ai.Movement(); 
+        } 
+    } 
+    public void OnExit() 
     {
         Debug.Log("exiting attack state");
     }

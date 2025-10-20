@@ -9,7 +9,9 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
     public float comboGap = 0.3f;
     public int maxCombo = 2;
 
+    private EnemyStateHandler handler;
     private EnemyMain ai;
+    [SerializeField] private Transform characterTransform;
     private int currentPunch = 0;
 
     private bool isAttacking = false;
@@ -23,15 +25,20 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
 
     void Awake()
     {
+        handler = GetComponent<EnemyStateHandler>();
         ai = GetComponent<EnemyMain>();
+
+        if (handler != null)
+            characterTransform = handler.GetComponentInChildren<EnemyCharacter>().transform;
     }
 
     public void Execute()
     {
-        if (ai.target == null) return;
-        if (isAttacking || !finished && currentPunch > 0) return;
+        Transform target = handler != null ? handler.Target : null;
+        if (target == null) return;
+        if (isAttacking || (!finished && currentPunch > 0)) return;
 
-        float dist = Vector3.Distance(transform.position, ai.target.position);
+        float dist = Vector3.Distance(characterTransform.position, handler.Target.position);
         if (dist > attackRange) return;
 
         currentPunch = 0;
@@ -52,7 +59,8 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
         isAttacking = true;
         currentPunch++;
 
-        ai.StopMovement();
+        if (handler != null) handler.StopMovement();
+        if (ai != null) ai.StopMovement();
         Debug.Log($"windup for punch {currentPunch}");
 
         Invoke(nameof(PerformPunch), windupTime);
@@ -62,14 +70,14 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
     {
         Debug.Log($"punch {currentPunch}");
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
+        Collider[] hits = Physics.OverlapSphere(characterTransform.position, attackRange);
         bool hitLanded = false;
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Player"))
             {
                 Debug.Log($"punch {currentPunch} hit");
-                hit.gameObject.transform.parent.GetComponent<HealthController>().TakeDamague(10);
+                hit.gameObject.gameObject.GetComponent<HealthController>().TakeDamague(10);
                 hitLanded = true;
                 break;
             }

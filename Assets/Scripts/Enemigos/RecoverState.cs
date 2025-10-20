@@ -1,55 +1,59 @@
 using UnityEngine;
-
+using UnityEngine.AI;
 public class RecoverState : IEnemyState
 {
-    private EnemyMain ai;
+    private EnemyMain handler;
     private float recoverTimer;
-    private float recoverDuration = 1.0f; 
+    private readonly float recoverDuration = 1.0f;
 
-    public RecoverState(EnemyMain main)
+    public RecoverState(EnemyMain handler)
     {
-        ai = main;
+        this.handler = handler;
     }
 
     public void OnEnter()
     {
         recoverTimer = recoverDuration;
-        ai.StopMovement();
-        Debug.Log($"recovering");
+        if (handler.TryGetComponent(out NavMeshAgent agent))
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+        Debug.Log("Enemy recovering...");
     }
 
     public void Update()
     {
-        if (ai.target == null)
+        Transform target = handler.target;
+        if (target == null)
         {
-            ai.SetState(ai.GetIdleState());
+            handler.SetState(handler.GetIdleState());
             return;
         }
 
         recoverTimer -= Time.deltaTime;
+        if (recoverTimer > 0f)
+            return;
 
-        if (recoverTimer <= 0f)
+        float dist = Vector3.Distance(handler.transform.position, target.position);
+
+        if (dist <= handler.attackRange + 1f)
         {
-            float dist = Vector3.Distance(ai.transform.position, ai.target.position);
-
-            if (dist <= ai.attackRange + 1f) 
-            {
-                ai.SetState(ai.GetAttackState()); 
-            }
-            else if (ai.Watching())
-            {
-                ai.SetState(ai.GetAlertState()); 
-            }
-            else
-            {
-                ai.SetState(ai.GetIdleState()); 
-            }
+            handler.SetState(handler.GetAttackState());
+        }
+        else if (handler.Watching())
+        {
+            handler.SetState(handler.GetAlertState());
+        }
+        else
+        {
+            handler.SetState(handler.GetIdleState());
         }
     }
 
     public void OnExit()
     {
-        ai.GetComponent<IEnemyAttack>()?.ResetAttackCycle();
-        Debug.Log("finished recovering.");
+        handler.GetComponent<IEnemyAttack>()?.ResetAttackCycle();
+        Debug.Log("Finished recovering.");
     }
 }
