@@ -157,7 +157,7 @@ public class FistsWeapon : Weapon
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
-        var enemyCharacter = hitInfo.col.GetComponentInParent<EnemyCharacter>().gameObject;
+        var enemyCharacter = hitInfo.col.GetComponentInParent<EnemyCharacter>()?.gameObject;
         if (enemyCharacter != null)
         {
 
@@ -188,7 +188,7 @@ public class FistsWeapon : Weapon
         }
         else
         {
-            enemyCharacter = hitInfo.col.GetComponent<EnemyCharacter>().gameObject;
+            enemyCharacter = hitInfo.col.GetComponent<EnemyCharacter>()?.gameObject;
             if (enemyCharacter != null)
             {
                 if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
@@ -231,6 +231,13 @@ public class FistsWeapon : Weapon
                     hitDone = true;
                 }
             }
+        }
+        if(hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainerD) && tagContainerD.HasTag("Damagable") && !tagContainerD.HasTag("Player"))
+        {
+            
+                var healhtC = tagContainerD.gameObject.GetComponent<HealthController>();
+                healhtC.TakeDamague((settings as FistsWeaponSettings).damague);
+            
         }
     }
 
