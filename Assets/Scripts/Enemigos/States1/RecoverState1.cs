@@ -15,11 +15,15 @@ public class RecoverState1 : IEnemyState
     {
         recoverTimer = recoverDuration;
 
-        if (ai.TryGetComponent(out NavMeshAgent agent))
+        if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
         {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
+            ai.agent.velocity = Vector3.zero;
+            ai.agent.isStopped = true;
+            ai.agent.ResetPath();
         }
+
+        ai.character.Motor.BaseVelocity = Vector3.zero;
+        ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
 
         Debug.Log($"{ai.name} is recovering...");
     }
@@ -27,7 +31,6 @@ public class RecoverState1 : IEnemyState
     public void Update()
     {
         Transform target = ai.Target;
-
         if (target == null)
         {
             ai.SetState(ai.GetIdleState());
@@ -35,10 +38,9 @@ public class RecoverState1 : IEnemyState
         }
 
         recoverTimer -= Time.deltaTime;
-        if (recoverTimer > 0f)
-            return;
+        if (recoverTimer > 0f) return;
 
-        float dist = Vector3.Distance(ai.transform.position, target.position);
+        float dist = Vector3.Distance(ai.character.transform.position, target.position);
 
         if (dist <= ai.enemySettings.AISettings.attackRange + 1f)
         {

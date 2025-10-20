@@ -20,6 +20,8 @@ public class AlertState1 : IEnemyState
         alertTimer = 0f;
         ai.ExitCombatMode(); 
         Debug.Log($"{ai.name} entered ALERT state.");
+        if (ai.Target != null && ai.CheckTargetOnView())
+            ai.MoveTowardsTarget();
     }
 
     public void Update()
@@ -34,6 +36,9 @@ public class AlertState1 : IEnemyState
             }
             return;
         }
+
+        if (Vector3.Distance(ai.character.transform.position, ai.Target.position) < 0.5f)
+            return;
 
         ai.MoveTowardsTarget();
 

@@ -1,7 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyAISettings", menuName = "Scriptable Objects/EnemyAISettings")]
-public class EnemyAiSettings :ScriptableObject
+public enum AttackStyle
 {
-    public float stopingDistance, detectionDistance, attackRange, stunDuration;
+    Melee,
+    Ranged,
+    Mobile    
+}
+
+[CreateAssetMenu(fileName = "EnemyAISettings", menuName = "Scriptable Objects/EnemyAISettings")]
+public class EnemyAiSettings : ScriptableObject
+{
+    public float stopingDistance;
+    public float detectionDistance;
+    public float attackRange;
+    public float stunDuration;
+
+    [Header("Behaviour")]
+    public AttackStyle attackStyle = AttackStyle.Melee;
 }
