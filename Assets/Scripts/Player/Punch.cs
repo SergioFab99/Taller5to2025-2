@@ -4,28 +4,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct HitInfo
-{ 
-    public Collider col;
-    public Vector3 hitpoint;
-    public Vector3 normal;
-    public int damague;
-    public IEnemyState enemyState;
-
-    public HitInfo(Collider col, Vector3 point, Vector3 normal, int damage, IEnemyState state = null)
-    {
-        this.col = col;
-        this.hitpoint = point;
-        this.normal = normal;
-        this.damague = damage;
-        this.enemyState = state;
-    }
-}
 
 
 
 
 public class Punch : MonoBehaviour
+
 {
     bool hitDone = false;
     Vector3 lastPos;
@@ -170,23 +154,5 @@ public class Punch : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-
-         // Dibuja la esfera inicial
-        Gizmos.DrawWireSphere(transform.position, radius);
-
-        // Dibuja el tubo del SphereCast usando la última dirección y distancia calculada
-        Vector3 direction = dir.normalized;
-        float dist = dir.magnitude;
-         int steps = 10;
-         
-        for (int i = 1; i <= steps; i++)
-        {
-            float t = (dist / steps) * i;
-            Vector3 center = transform.position + direction * t;
-            Gizmos.DrawWireSphere(center, radius);
-        }
-    }
+   
 }

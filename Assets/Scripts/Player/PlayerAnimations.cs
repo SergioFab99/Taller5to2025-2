@@ -20,7 +20,11 @@ public class PlayerAnimation : MonoBehaviour
     public void Initialize(PlayerCombat playerCombat)
     {
         _playerCombat = playerCombat;
-        _playerCombat.OnAttack += Attack;
+        if(_playerCombat.currentWeapon != null)
+        {
+            (_playerCombat.currentWeapon as FistsWeapon).OnAttack += Attack;
+
+        }
         
     }
 

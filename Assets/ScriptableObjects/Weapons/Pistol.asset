@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1022e10a8fff344aaed0cb122c1d48e, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 37364283cc0593240913b26512045eee, type: 3}
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  tagName: Player
-  color: {r: 1, g: 1, b: 1, a: 1}
+  damague: 130
+  properties:
+  - {fileID: 11400000, guid: da4b763777ca6044d891a919c0aeafa1, type: 2}
+  ammunition: 7
