@@ -53,9 +53,13 @@ public class AudioManager : MonoBehaviour {
 
         AudioSource source = GetSource(data.type, pos);
 
-        if (data.clips.Length > 0) {
-            var clip = data.clips[Random.Range(0, data.clips.Length)]; 
+        if (data.clips != null && data.clips.Length > 0) {
+            // Pick one clip at random to avoid repeating the same sound every time.
+            var clip = data.clips[UnityEngine.Random.Range(0, data.clips.Length)];
             source.clip = clip;
+        } else {
+            Debug.LogWarning($"[AudioManager] No clips assigned for sound {id}.");
+            return;
         }
 
         source.volume = data.volume;
