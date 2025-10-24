@@ -73,11 +73,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeReference]
     [FoldoutGroup("DefaultGrab&ThrowSettings")]
     public DefaultGrabThrowSettings DefaultGrabThrowSettings;
-    public Transform cam;
-    public Transform HoldPoint;
-
-    public Transform holdpoint2;//solucion xd revisar luego
-    [SerializeField] public GameObject _heldObject;
+        
+    
 
     [Header("Hold Point Orientation Settings")] 
     [Tooltip("If true the HoldPoint will copy the camera rotation each frame.")]
@@ -109,41 +106,10 @@ public class PlayerCombat : MonoBehaviour
         if (requestBlocking) Debug.Log("Requested Blocking");
     }
 
-    //Eliminar cuando holdpoint este bien
+    
     public void Update()
     {
-        if (HoldPoint != null && holdpoint2 != null)
-        {
-            HoldPoint.position = holdpoint2.position;
-            HoldPoint.rotation = holdpoint2.rotation;
-
-            // Determine target rotation source
-            Quaternion targetRot = HoldPoint.rotation;
-            if (alignHoldPointWithCamera && cam != null)
-            {
-                targetRot = cam.rotation;
-            }
-            else if (alignWithPlayerRoot)
-            {
-                // Use player facing (ignore pitch) so vertical look doesn't tilt weapon
-                Vector3 fwd = transform.forward; fwd.y = 0f; if (fwd.sqrMagnitude < 0.0001f) fwd = Vector3.forward; fwd.Normalize();
-                targetRot = Quaternion.LookRotation(fwd, Vector3.up);
-            }
-
-            if (holdPointRotationOffset != Vector3.zero)
-            {
-                targetRot *= Quaternion.Euler(holdPointRotationOffset);
-            }
-
-            if (holdPointRotateSmoothing > 0f)
-            {
-                HoldPoint.rotation = Quaternion.Slerp(HoldPoint.rotation, targetRot, 1f - Mathf.Pow(1f - holdPointRotateSmoothing, Time.deltaTime * 60f));
-            }
-            else
-            {
-                HoldPoint.rotation = targetRot;
-            }
-        }
+        
     }
 
     public bool CheckIfCanAttack()
@@ -191,52 +157,38 @@ public class PlayerCombat : MonoBehaviour
 
     }
 
+    
+    public void ReceiveDamage(float damage)
+    {
+        float finalDamage = damage;
+        if (_state.isBlocking)
+        {
+            finalDamage = damage * 0.5f;             
+        }
+
+        var hc = GetComponent<HealthController>() ?? GetComponentInChildren<HealthController>() ?? GetComponentInParent<HealthController>();
+        if (hc != null)
+        {
+            hc.TakeDamague(finalDamage);
+        }
+        else
+        {
+            Debug.LogWarning("ReceiveDamage: No HealthController found on player to apply damage.");
+        }
+    }
+
 
     void Attack()
-    {
-        
-        // If holding an object, use bat logic or generic logic
-        if (_heldObject != null)
-        {
-            var bat = _heldObject.GetComponent<Bat>();
-            if (bat != null)
-            {
-                bat.Hit(cam, cam.forward, 2.5f); // Example range, adjust as needed
-                // Bat handles its own durability, do not call Use() here
-                /*if (_state.currentHand == CombatHand.None || _state.currentHand == CombatHand.Left)
-                {
-                    Transform reference = bat.HoldPoint != null && bat.HoldPoint.parent != null ? bat.HoldPoint.parent : transform;
-                    
-                } */
-            }
-            else
-            {
-                var grabbable = _heldObject.GetComponent<GrabbableObject>();
-                if (grabbable != null)
-                {
-                    if (grabbable.IsBroken)
-                    {
-                        Debug.Log("The item is broken! Cannot attack.");
-                        return;
-                    }
-                    else
-                    {
-                        grabbable.Use();
-                    }
-                }
-            }
-        }
+    {       
         
         Debug.Log("Attacking");
 
-        currentWeapon.Attack();
-
-       
+        currentWeapon.Attack();       
     }
 
     void GrabNThrow()
     {
-        Ray ray = new Ray(cam.position, cam.forward);
+        /*Ray ray = new Ray(cam.position, cam.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange)&& _heldObject == null)
         {
             var grabbable = hit.collider.GetComponent<GrabbableObject>();
@@ -285,7 +237,7 @@ public class PlayerCombat : MonoBehaviour
             if (grabbable != null) grabbable.OnReleased();
             _heldObject = null;
             _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
-        }
+        }*/
     }
 
     void Block()
