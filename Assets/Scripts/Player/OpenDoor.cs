@@ -12,7 +12,7 @@ public class OpenDoor : MonoBehaviour
     void Start()
     {
         starMoveDoor = true;
-        JustOpenDoor(timeBetweenMove, rotationY);
+        PushDoor(timeBetweenMove, rotationY);
     }
 
     private void Update()
@@ -20,14 +20,18 @@ public class OpenDoor : MonoBehaviour
         if (test)
         {
             test = false;
-            Invoke(nameof(Test), 1f);
+            Invoke(nameof(StartOpen), 0.5f);
         }
     }
-    void Test()
+    public void CallStartOpen()
     {
-        JustOpenDoor(timeBetweenMove, rotationY);
+        Invoke(nameof(StartOpen), 0.5f);
     }
-    public void JustOpenDoor(float timeBetweenMove, float rotationY)
+    void StartOpen()
+    {
+        PushDoor(timeBetweenMove, rotationY);
+    }
+    void JustOpenDoor(float timeBetweenMove, float rotationY)
     {
         Debug.Log("starCoroutine");
         if (thisIsLeftDoor)
