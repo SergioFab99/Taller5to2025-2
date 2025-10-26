@@ -14,7 +14,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     void Start()
     {
         canvas = GameObject.Find("Canvas");
-        canInteract = canvas.transform.Find("InteractBacground").gameObject;
+        canInteract = canvas.transform.Find("InteractBackground").gameObject;
         //canInteract.SetActive(false);
     }
 
@@ -95,6 +95,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         if(openDoor != null)
         {
             openDoor.CallStartOpen();
+            openDoor.starMoveDoor = true;
         }        
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && openDoor1)
         {

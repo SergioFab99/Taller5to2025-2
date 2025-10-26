@@ -5,7 +5,7 @@ public class InteractText : MonoBehaviour
     
     private TMP_Text interactTMP;
     PlayerInputActions _inputActions;
-    [SerializeField] string interactText, noFinal, mayus;
+    [SerializeField] string interactText, noFinal, mayus, quotes;
     [SerializeField] string[] interactTextSeparate;
     void Start()
     {
@@ -17,7 +17,7 @@ public class InteractText : MonoBehaviour
         interactTextSeparate = interactText.Split("/");
         noFinal = interactTextSeparate[3].Replace("]", string.Empty);
         mayus = noFinal.ToUpper();
-        interactTMP.text = $"Press *{mayus} to Interact";
+        interactTMP.text = $"Press {quotes}{mayus}{quotes} to Interact";
     }
 
     private void OnDestroy()

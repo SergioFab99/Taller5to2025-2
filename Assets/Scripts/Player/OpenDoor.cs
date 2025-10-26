@@ -7,7 +7,8 @@ public class OpenDoor : MonoBehaviour
 
     Coroutine coroutine;
     bool startCoroutine;
-    [SerializeField] bool starMoveDoor, doorIsOpen, thisIsLeftDoor, thisIsRightDoor, pushedDoor, test;
+    public bool starMoveDoor;
+    [SerializeField] bool doorIsOpen, thisIsLeftDoor, thisIsRightDoor, pushedDoor, test;
     
     void Start()
     {
