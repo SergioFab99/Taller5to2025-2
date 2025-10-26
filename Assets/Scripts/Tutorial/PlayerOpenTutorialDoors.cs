@@ -6,7 +6,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject canInteract;
 
-    CombatInput input;
+    PlayerInputActions _inputActions;
     [SerializeField] private bool onTrigger;
     [SerializeField] private bool interact;
     [SerializeField] private bool openDoor1, openDoor2;
@@ -15,7 +15,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     {
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBacground").gameObject;
-        canInteract.SetActive(false);
+        //canInteract.SetActive(false);
     }
 
     void Update()
@@ -38,7 +38,14 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
 
     public void UpdateInput()
     {
-        interact = input.Interact;
+        _inputActions = new PlayerInputActions();
+        _inputActions.Enable();
+        var input = _inputActions.Player;
+        interact = input.Interact.WasPressedThisFrame();
+    }
+    private void OnDestroy()
+    {
+        _inputActions.Dispose();
     }
     private void OnTriggerEnter(Collider other)
     {

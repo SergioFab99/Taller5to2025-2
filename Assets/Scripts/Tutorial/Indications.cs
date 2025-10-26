@@ -24,10 +24,10 @@ public class Indications : MonoBehaviour
     }
     private void Update()
     {
-        if (!indicationsLife && playerLife.health != playerLife.maxHealth)
+        /*if (!indicationsLife && playerLife.health != playerLife.maxHealth)
         {
             ChangeToIndicationsOfLife();
-        }
+        }*/
     }
     public void NextIndication()
     {

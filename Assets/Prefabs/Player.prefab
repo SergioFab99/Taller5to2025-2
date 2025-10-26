@@ -454,6 +454,7 @@ MonoBehaviour:
   attack: 0
   shakeForceAttack: 0
   velocityAttack: {x: 0, y: 0, z: 0}
+  grab: 0
 --- !u!1 &2581176843155265525
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +605,7 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   hitMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1023
   dmg: 1
 --- !u!1 &3495508983880263300
 GameObject:
@@ -1205,19 +1206,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9a79b3f363bbd489d25bb3e8fa4cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RigthArm: {fileID: 2922617095137946870}
-  LeftArm: {fileID: 390198713752385469}
+  weaponPos: {fileID: 0}
+  rightPunchPos: {fileID: 0}
+  leftPunchPos: {fileID: 0}
   _state:
     playerActionState: 0
     objectInteractionState: 0
-    currentHand: 0
     BlockState: 0
     CanAttack: 0
     CanGrabOrThrow: 0
     isBlocking: 0
-  timeBetweenAttacks: 0.4
-  timeToDoublePunch: 3
-  punchDuration: 1
+  currentWeapon: {fileID: 0}
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
   DefaultGrabThrowSettings: {fileID: 11400000, guid: c5c6ed4d58c8ba64c9c325265b15756d, type: 2}
   cam: {fileID: 5181122854075502260}
   HoldPoint: {fileID: 7007483033953792326}
