@@ -6,13 +6,10 @@ public class HealthController : MonoBehaviour
     [Header("Health Values")] public float maxHealth = 100f;
     public float health = 100f;
 
-    // Legacy events (kept for compatibility though semantics were odd)
-    public event LifeChangued OnLifeChangue; // Invoked with delta value (healed positive / damaged negative)
+    public event LifeChangued OnLifeChangue;
     public delegate void LifeChangued(float changeAmount);
     public event Live OnDead;
     public delegate void Live();
-
-    // New event providing current + max for UI
     public event Action<float, float> OnHealthUpdated;
 
     private void Awake()
@@ -39,7 +36,7 @@ public class HealthController : MonoBehaviour
         if (amount <= 0f) return;
         float before = health;
         health = Mathf.Max(health - amount, 0f);
-        float delta = health - before; // negative
+    float delta = health - before;
         OnLifeChangue?.Invoke(delta);
         RaiseFullUpdate();
         if (health <= 0f)
