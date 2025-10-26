@@ -12,6 +12,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private GameObject triggerIndication;
     void Awake()
     {
+        triggerIndication.SetActive(false);
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             enemiesActive.Add(firstEnemy);
