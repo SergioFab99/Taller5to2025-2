@@ -59,6 +59,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         if (other.gameObject.CompareTag("CheckPoint3"))
         {
             SetUpTutorial.checkPoint3 = true;
+            SetUpTutorial.enemyDefeatCount = 0;
         }
         
     }

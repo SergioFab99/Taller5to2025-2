@@ -56,6 +56,7 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        Indications.instance.ActivateIndications();
         Destroy(this);
     }
     void ChangePriorityCamera2Tutorial()
@@ -65,6 +66,8 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        Indications.instance.NextIndication();
+        Indications.instance.ActivateIndications();
         Destroy(this);
     }
     void ChangePriorityCamera3Tutorial()
@@ -74,6 +77,15 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        if (Indications.indicationsLife)
+        {
+            Indications.instance.NextIndication();
+            Indications.instance.ActivateIndications();
+        }
+        else
+        {
+            Indications.instance.ChangeToIndicationsOfLife();
+        }
         Destroy(this);
     }
 }

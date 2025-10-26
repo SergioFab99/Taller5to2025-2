@@ -9,6 +9,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private List<GameObject> enemiesCheckpoint2 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint3 = new List<GameObject>();
     [SerializeField] private GameObject firstEnemy;
+    [SerializeField] private GameObject triggerIndication;
     void Awake()
     {
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
@@ -54,6 +55,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         enemiesActive = firstsEnemies;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
+        triggerIndication.SetActive(true);
     }
     void EnemiesCheckPoint1()
     {
@@ -113,6 +115,11 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
                 enemiesActive[0].SetActive(true);
                 enemiesActive.RemoveAt(0);
                 enemiesCheckpoint3.RemoveAt(0);
+            }
+            if(SetUpTutorial.enemyDefeatCount >= 7)
+            {
+                Indications.instance.NextIndication();
+                Indications.instance.ActivateIndications();
             }
         }
     }
