@@ -8,4 +8,5 @@ public class SetUpTutorial : MonoBehaviour
     public static bool unlockMoreEnemies;
     public static bool checkPoint1, checkPoint2, checkPoint3;
     public static int enemyDefeatCount;
+    public static Vector3 spawnPoint;
 }

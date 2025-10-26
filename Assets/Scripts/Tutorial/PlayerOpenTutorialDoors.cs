@@ -92,11 +92,14 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         {
             SetUpTutorial.camera2 = true;
             SetUpTutorial.checkPoint1 = true;
+            SetUpTutorial.spawnPoint = gameObject.transform.position;
+
         }
         if (SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && openDoor2)
         {
             SetUpTutorial.camera3 = true;
             SetUpTutorial.checkPoint2 = true;
+            SetUpTutorial.spawnPoint = gameObject.transform.position;
         }
     }
 }
