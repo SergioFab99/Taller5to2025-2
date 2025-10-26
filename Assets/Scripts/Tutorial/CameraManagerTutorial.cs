@@ -26,22 +26,29 @@ public class CameraManagerTutorial : MonoBehaviour
     {
         if (SetUpTutorial.camera2 && cam2)
         {
-            playableDirector.Play();
-            cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
-            cameraPlayer.Priority = 0;
-            cameraScene.Priority = 1;
-            Time.timeScale = 0;
+            Invoke(nameof(StartCameraTour2), 0.3f);
         }
         if (SetUpTutorial.camera3 && cam3)
         {
-            playableDirector.Play();
-            cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
-            cameraPlayer.Priority = 0;
-            cameraScene.Priority = 1;
-            Time.timeScale = 0;
+            Invoke(nameof(StartCameraTour3), 0.3f);
         }
     }
-
+    void StartCameraTour2()
+    {
+        playableDirector.Play();
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+    }
+    void StartCameraTour3()
+    {
+        playableDirector.Play();
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+    }
     void ChangePriorityCamera1Tutorial()
     {
         SetUpTutorial.camera1 = false;

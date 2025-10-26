@@ -9,7 +9,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private List<GameObject> enemiesCheckpoint2 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint3 = new List<GameObject>();
     [SerializeField] private GameObject firstEnemy;
-    void Start()
+    void Awake()
     {
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
@@ -34,15 +34,15 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     {
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(FirstEnemies), 0.2f);
+            Invoke(nameof(FirstEnemies), 0.1f);
         }
         if (SetUpTutorial.checkPoint1 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(EnemiesCheckPoint1), 0.2f);
+            Invoke(nameof(EnemiesCheckPoint1), 0.1f);
         }
         if (SetUpTutorial.checkPoint2 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(EnemiesCheckPoint2), 0.2f);
+            Invoke(nameof(EnemiesCheckPoint2), 0.1f);
         }
         if (SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
         {

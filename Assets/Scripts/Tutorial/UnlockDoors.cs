@@ -4,7 +4,7 @@ public class UnlockDoors : MonoBehaviour
 {
     EnemyLife enemyLife;
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
-    private void Awake()
+    private void Start()
     {
         doorCollider1.enabled = false;
         doorCollider2.enabled = false;

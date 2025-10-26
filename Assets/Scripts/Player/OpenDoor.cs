@@ -20,12 +20,12 @@ public class OpenDoor : MonoBehaviour
         if (test)
         {
             test = false;
-            Invoke(nameof(StartOpen), 0.5f);
+            Invoke(nameof(StartOpen), 0.1f);
         }
     }
     public void CallStartOpen()
     {
-        Invoke(nameof(StartOpen), 0.5f);
+        Invoke(nameof(StartOpen), 0.1f);
     }
     void StartOpen()
     {
