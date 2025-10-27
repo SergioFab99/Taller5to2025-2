@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class HitInfo 
 {
-    public int damague;
+    public float damague;
     public Collider col;
     public Vector3 hitpoint;
     public Vector3 normal;
     public IEnemyState enemyState;
     public TagSO typeEnemy;
 
-    public HitInfo(Collider col, Vector3 point, Vector3 normal, int damage, IEnemyState state = null, TagSO tag = null) 
+    public HitInfo(Collider col, Vector3 point, Vector3 normal, float damage, IEnemyState state = null, TagSO tag = null) 
     {
         this.col = col;
         this.hitpoint = point;

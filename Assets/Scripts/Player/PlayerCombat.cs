@@ -68,7 +68,9 @@ public class PlayerCombat : MonoBehaviour
     #endregion
 
     public event PunchSide OnAttack;
-    public delegate void PunchSide(int hand); 
+    public delegate void PunchSide(int hand);
+    
+    
 
     [SerializeReference]
     [FoldoutGroup("DefaultGrab&ThrowSettings")]
@@ -78,26 +80,22 @@ public class PlayerCombat : MonoBehaviour
 
     public Transform holdpoint2;//solucion xd revisar luego
     [SerializeField] public GameObject _heldObject;
+    private PlayerPickUp PlayerPickUp;
 
-    [Header("Hold Point Orientation Settings")] 
-    [Tooltip("If true the HoldPoint will copy the camera rotation each frame.")]
-    [SerializeField] private bool alignHoldPointWithCamera = true;
-    [Tooltip("If true the HoldPoint will instead align with the player root (this transform) ignoring camera yaw/pitch.")]
-    [SerializeField] private bool alignWithPlayerRoot = false;
-    [Tooltip("Euler offset applied AFTER alignment (use to tweak weapon twist).")]
-    [SerializeField] private Vector3 holdPointRotationOffset = Vector3.zero;
-    [Tooltip("Slerp factor (0 = snap, <1 = smooth) for rotation alignment.")]
-    [Range(0f,1f)] [SerializeField] private float holdPointRotateSmoothing = 0f;
-    
 
-    public void Initialize()
+    public void Initialize(PlayerPickUp playerPickUp)
     {
         _state.CanAttack = true;
         _state.CanGrabOrThrow = true;   
         _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
         if (currentWeapon != null) currentWeapon.Initialize(this);
+        PlayerPickUp = playerPickUp;
+        PlayerPickUp.OnWeaponPickUp += LinkWeapon;
     }
-
+    public void OnDisable()
+    {
+        PlayerPickUp.OnWeaponPickUp -= LinkWeapon;
+    }
     public void UpdateInput(CombatInput input)
     {
         requestAttack = input.BaseAttack;
@@ -112,38 +110,8 @@ public class PlayerCombat : MonoBehaviour
     //Eliminar cuando holdpoint este bien
     public void Update()
     {
-        if (HoldPoint != null && holdpoint2 != null)
-        {
-            HoldPoint.position = holdpoint2.position;
-            HoldPoint.rotation = holdpoint2.rotation;
-
-            // Determine target rotation source
-            Quaternion targetRot = HoldPoint.rotation;
-            if (alignHoldPointWithCamera && cam != null)
-            {
-                targetRot = cam.rotation;
-            }
-            else if (alignWithPlayerRoot)
-            {
-                // Use player facing (ignore pitch) so vertical look doesn't tilt weapon
-                Vector3 fwd = transform.forward; fwd.y = 0f; if (fwd.sqrMagnitude < 0.0001f) fwd = Vector3.forward; fwd.Normalize();
-                targetRot = Quaternion.LookRotation(fwd, Vector3.up);
-            }
-
-            if (holdPointRotationOffset != Vector3.zero)
-            {
-                targetRot *= Quaternion.Euler(holdPointRotationOffset);
-            }
-
-            if (holdPointRotateSmoothing > 0f)
-            {
-                HoldPoint.rotation = Quaternion.Slerp(HoldPoint.rotation, targetRot, 1f - Mathf.Pow(1f - holdPointRotateSmoothing, Time.deltaTime * 60f));
-            }
-            else
-            {
-                HoldPoint.rotation = targetRot;
-            }
-        }
+       
+        
     }
 
     public bool CheckIfCanAttack()
@@ -194,44 +162,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        
-        // If holding an object, use bat logic or generic logic
-        if (_heldObject != null)
-        {
-            var bat = _heldObject.GetComponent<Bat>();
-            if (bat != null)
-            {
-                bat.Hit(cam, cam.forward, 2.5f); // Example range, adjust as needed
-                // Bat handles its own durability, do not call Use() here
-                /*if (_state.currentHand == CombatHand.None || _state.currentHand == CombatHand.Left)
-                {
-                    Transform reference = bat.HoldPoint != null && bat.HoldPoint.parent != null ? bat.HoldPoint.parent : transform;
-                    
-                } */
-            }
-            else
-            {
-                var grabbable = _heldObject.GetComponent<GrabbableObject>();
-                if (grabbable != null)
-                {
-                    if (grabbable.IsBroken)
-                    {
-                        Debug.Log("The item is broken! Cannot attack.");
-                        return;
-                    }
-                    else
-                    {
-                        grabbable.Use();
-                    }
-                }
-            }
-        }
-        
         Debug.Log("Attacking");
-
         currentWeapon?.Attack();
-
-       
     }
 
     void GrabNThrow()
@@ -295,15 +227,48 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("Blocking");
     }
 
-    public void LinkWeapon(Weapon weapon)
+    public void LinkWeapon(GameObject obj)
     {
-        currentWeapon = weapon;
+        Debug.Log("LinkWeapon");
+        var weapon = obj.GetComponent<Weapon>();
+        if(weapon.Wtype == WeaponType.Fist)
+        {
+            weapon.gameObject.SetActive(true);
+            var Oldweapon = currentWeapon.gameObject;
+            UnLinkWeapon();
+            currentWeapon = weapon;
+            if(Oldweapon!= null)
+            {
+                Destroy(Oldweapon);
+            }
+            currentWeapon = weapon;
+
+            currentWeapon.Initialize(this);
+        }
+        else
+        {
+            UnLinkWeapon();
+            var weaponObj = Instantiate(obj,weaponPos.transform);
+            Debug.Log("InstantieWeapon");
+            var weaponScript = weaponObj.GetComponent<Weapon>();
+            currentWeapon = weaponScript;
+
+            currentWeapon.Initialize(this);
+        }
+
     }
 
     public void UnLinkWeapon()
     {
-        currentWeapon = null;
-
+        if (currentWeapon.Wtype == WeaponType.Fist)
+        {
+            currentWeapon.gameObject.SetActive(false);
+            currentWeapon = null;
+        }
+        else
+        {
+            currentWeapon = null;      
+        }
     }
 
     public IEnumerator ResetCanAttack(float delay)

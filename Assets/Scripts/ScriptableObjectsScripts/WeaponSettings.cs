@@ -6,7 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public abstract class WeaponSettings : ScriptableObject
 {
-    public int damague;
+    public float damague;
+
     public TagSO[] properties;
     
 

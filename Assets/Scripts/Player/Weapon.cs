@@ -1,6 +1,15 @@
 using UnityEditor.Animations;
 using UnityEngine;
 
+public enum WeaponType
+{
+    Fist,
+    Knife,
+    Bat,
+
+}
+
+
 public abstract class Weapon : MonoBehaviour
 {
     
@@ -8,7 +17,7 @@ public abstract class Weapon : MonoBehaviour
     public event OnHitEvent OnHit;
 
     public WeaponSettings settings;
-
+    public WeaponType Wtype;
     public virtual void Initialize(PlayerCombat playerCombat)
     {
        

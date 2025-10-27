@@ -27,14 +27,18 @@ public class FistsWeapon : Weapon
 
     private punch currentPunch = new punch();
     public CombatHand currentHand;
-
+    
 
     
+     
     public LayerMask hitMask;
 
     public event PunchSide OnAttack;
     public delegate void PunchSide(int hand);
     private bool hitDone;
+
+
+
     [ShowInInspector]private punch rightPunch = new punch();
     [ShowInInspector]private punch leftPunch = new punch();
     private PlayerCombat playerCombat;
@@ -216,21 +220,7 @@ public class FistsWeapon : Weapon
                         }
                     }
 
-                    if (hitInfo.col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
-                    {
-                       
-                        if (hitInfo.enemyState is BlockState)
-                        {
-                            enemyLife.TakeDamage((settings as FistsWeaponSettings).damague / 2);
-
-                        }
-                        else
-                        {
-                            enemyLife.TakeDamage((settings as FistsWeaponSettings).damague);
-
-                        }
-
-                    }
+                   
                     hitDone = true;
                 }
             }
