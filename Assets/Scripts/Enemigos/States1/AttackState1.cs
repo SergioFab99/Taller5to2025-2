@@ -4,30 +4,23 @@ using KinematicCharacterController;
 public class AttackState1 : IEnemyState
 {
     private EnemyStateHandler ai;
-    private IEnemyAttack attack;
+    public IEnemyAttack attackMode;
     private float disengageBuffer = 5.5f;
 
     public AttackState1(EnemyStateHandler main)
     {
         ai = main;
-        attack = ai.GetComponentInParent<IEnemyAttack>();
+        attackMode = ai.GetComponentInParent<IEnemyAttack>();
     }
 
     public void OnEnter()
     {
-        ai.EnterCombatMode(); 
-        Debug.Log($"{ai.name} engaging target.");
+        ai.EnterCombatMode();
+        Debug.Log($"{ai.name}, {attackMode} engaging");
     }
 
     public void Update()
     {
-        if (attack == null)
-        {
-            Debug.LogWarning($"{ai.name} has no IEnemyAttack reference!");
-            ai.SetState(ai.GetIdleState());
-            return;
-        }
-
         if (ai.Target == null)
         {
             ai.SetState(ai.GetIdleState());
@@ -36,40 +29,48 @@ public class AttackState1 : IEnemyState
 
         float dist = Vector3.Distance(ai.character.transform.position, ai.Target.position);
 
-        if (attack.IsFinished)
+        if (attackMode.IsFinished)
         {
-            if (attack.WasInterrupted)
+            ai.QueuedBlock = false;
+            if(attackMode.ForceBlocked)
             {
-                attack.ResetAttackCycle();
+                ai.SetState(ai.GetBlockState());
+            }
+            else if (attackMode.WasInterrupted)
+            {
+                ai.SetState(ai.GetStunState());
+            }
+            else if (attackMode.Missed == true)
+            {
                 ai.SetState(ai.GetExposedState());
             }
             else
             {
-                attack.ResetAttackCycle();
                 ai.SetState(ai.GetRecoverState());
             }
+            attackMode.ResetAttackCycle();
             return;
         }
 
-        if (attack.IsAttacking)
+        if (attackMode.IsAttacking)
             return;
 
-        if (dist > attack.AttackRange + disengageBuffer)
+        if (dist > attackMode.AttackRange + disengageBuffer)
         {
             ai.ExitCombatMode();
             ai.SetState(ai.GetAlertState());
 
-            if (attack is RangedAttack gun)
+            if (attackMode is RangedAttack gun)
                 gun.StartReload();
-            else if (attack is TommyGunAttack gun2)
+            else if (attackMode is TommyGunAttack gun2)
                 gun2.StartReload();
 
             return;
         }
 
-        if (dist <= attack.AttackRange)
+        if (dist <= attackMode.AttackRange + 0.5f)
         {
-            attack.Execute();
+            attackMode.Execute();
         }
         else
         {
@@ -83,7 +84,11 @@ public class AttackState1 : IEnemyState
 
     public void OnExit()
     {
-        Debug.Log($"{ai.name} exiting ATTACK state.");
+        if(attackMode is MonoBehaviour mb)
+        {
+            mb.CancelInvoke();
+        }
+        Debug.Log($"{ai.name} exiting attack state.");
     }
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)

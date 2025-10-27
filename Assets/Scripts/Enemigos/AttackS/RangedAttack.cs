@@ -22,6 +22,8 @@ public class RangedAttack : MonoBehaviour, IEnemyAttack
     private bool finished = false;
     private bool interrupted = false;
     private bool reloading = false;
+    public bool Missed { get; private set; }
+    public bool ForceBlocked { get; private set; }
 
     private int burstShots;
     private int shotsFired;
@@ -157,12 +159,12 @@ public class RangedAttack : MonoBehaviour, IEnemyAttack
             finished = false; 
     }
 
-    public void ForceCancel()
+    public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
         isAttacking = false;
         finished = true;
-        interrupted = true;
+        interrupted = interrupt;
     }
 
     public void ResetAttackCycle()
@@ -171,5 +173,10 @@ public class RangedAttack : MonoBehaviour, IEnemyAttack
         isAttacking = false;
         finished = false;
         interrupted = false;
+    }
+
+    public bool TryInterrupt()
+    {
+        return true;
     }
 }

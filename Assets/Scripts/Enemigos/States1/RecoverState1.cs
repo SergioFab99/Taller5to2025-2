@@ -4,7 +4,7 @@ public class RecoverState1 : IEnemyState
 {
     private EnemyStateHandler ai;
     private float recoverTimer;
-    private readonly float recoverDuration = 1.0f;
+    private float recoverDuration = 1.0f;
 
     public RecoverState1(EnemyStateHandler handler)
     {
@@ -14,6 +14,7 @@ public class RecoverState1 : IEnemyState
     public void OnEnter()
     {
         recoverTimer = recoverDuration;
+
 
         if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
         {
@@ -25,7 +26,7 @@ public class RecoverState1 : IEnemyState
         ai.character.Motor.BaseVelocity = Vector3.zero;
         ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
 
-        Debug.Log($"{ai.name} is recovering...");
+        Debug.Log($"{ai.name} is recovering... for {recoverTimer}");
     }
 
     public void Update()

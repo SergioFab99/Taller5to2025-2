@@ -42,9 +42,9 @@ public class AlertState1 : IEnemyState
 
         ai.MoveTowardsTarget();
 
-        if (ai.CheckTargetOnAttackRange())
+        if (ai.CheckTargetOnAttackRange() && Time.time >= ai.nextAttackTime)
         {
-            ai.EnterCombatMode(); 
+            ai.EnterCombatMode();
             ai.SetState(ai.GetAttackState());
         }
     }
