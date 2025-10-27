@@ -21,7 +21,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyAnimations _animations;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] MeleeAttack attacc;
     [SerializeField] EnemySettingsList EnemySettings;
     //[SerializeField] CombatManager
 
@@ -35,7 +34,7 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _stateHandler.Initialize(EnemySettings, character.transform, character, agent, attacc);
+        _stateHandler.Initialize(EnemySettings, character.transform, character, agent);
 
         character.Initialize(EnemySettings, _stateHandler.GetBehaviourState(), _stateHandler.GetCurrentState());
 

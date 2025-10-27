@@ -14,11 +14,11 @@ public class EnemyStateHandler : MonoBehaviour
     [Header("Behaviour / Settings")]
     public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
     [NonSerialized] public EnemySettingsList enemySettings;
-    [NonSerialized] public MeleeAttack attackComponent;
+    [NonSerialized] public IEnemyAttack attackComponent;
 
     private IEnemyState currentState;
     private bool isTransitioning;
-
+    public bool QueuedBlock { get; set; }
 
     private IdleState1 idle;
     private AlertState1 alert;
@@ -31,6 +31,7 @@ public class EnemyStateHandler : MonoBehaviour
 
     public float detectionRange = 10f;
     public float attackRange = 5f;
+    [NonSerialized] public float nextAttackTime = 0f;
     public float moveSpeed = 3f;
     public float turnSpeed = 8f;
     public float knockbackForce = 5f;
@@ -45,19 +46,19 @@ public class EnemyStateHandler : MonoBehaviour
     public bool isBlind = false;
 
     [NonSerialized] public NavMeshAgent agent;
-    [NonSerialized] public EnemyCharacter character;
+    public EnemyCharacter character;
 
     private Vector3 _lastCornerPos;
     private float _cornerTimer;
     
 
-    public void Initialize(EnemySettingsList settings, Transform characterTransform, EnemyCharacter charac, NavMeshAgent agent1, MeleeAttack attacc)
+    public void Initialize(EnemySettingsList settings, Transform characterTransform, EnemyCharacter charac, NavMeshAgent agent1)
     {
         Character = characterTransform;
         enemySettings = settings;
-        attackComponent = attacc;
         agent = agent1;
         character = charac;
+        attackComponent = GetComponent<IEnemyAttack>();
 
         idle = new IdleState1(this);
         alert = new AlertState1(this);
@@ -69,6 +70,18 @@ public class EnemyStateHandler : MonoBehaviour
         dead = new DeadState1(this);
 
         SetState(idle);
+
+
+        var hp = GetComponentInChildren<HealthController>();
+        hp.OnLifeChangue += HandleHitEvent;
+    }
+
+    private void Awake()
+    {
+        if (character == null)
+        {
+            character = GetComponentInChildren<EnemyCharacter>();
+        }
     }
 
     public void CurrentStateUpdate()
@@ -112,6 +125,7 @@ public class EnemyStateHandler : MonoBehaviour
         StateMovement(newState);
         currentState?.OnEnter();
         isTransitioning = false;
+        QueuedBlock = false;
     }
 
     // ------------------- HELPERS -------------------
@@ -180,13 +194,19 @@ public class EnemyStateHandler : MonoBehaviour
 
     public void Knockback(Vector3 hitDirection)
     {
+        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce}");
+
+        if (currentState == block)
+        {
+            Debug.Log($"{name}: Knockback ignored (currently blocking).");
+            return;
+        }
+
         StopMovement();
         hitDirection.y = 0f;
 
-        if (TryGetComponent(out EnemyCharacter character))
-        {
-            character.AddExternalForce(hitDirection.normalized * knockbackForce);
-        }
+        Debug.Log($"{name}: Adding external force {hitDirection.normalized * knockbackForce}");
+        character.AddExternalForce(hitDirection.normalized * knockbackForce);
     }
 
     public void StateMovement(IEnemyState newState)
@@ -225,7 +245,6 @@ public class EnemyStateHandler : MonoBehaviour
 
     private IEnumerator Helper()
     {
-        //syncs character to next frame
         yield return null; 
         agent.nextPosition = character.transform.position;
     }
@@ -321,14 +340,67 @@ public class EnemyStateHandler : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.attackRange);
     }
-    private void SyncAgentToTransform()
-    {
-        if (agent == null || !agent.enabled) return;
-        if (!agent.isOnNavMesh) return;
 
-        agent.nextPosition = transform.position;
-        agent.updatePosition = false;
-        agent.updateRotation = false;
-        agent.Warp(transform.position);
+    //----------------------DAMAGE------------------------
+    private void HandleHitEvent(float delta)
+    {
+        Debug.Log($"{name}: HandleHitEvent called with delta={delta} in state {currentState?.GetType().Name}");
+        if (delta >= 0f) return;
+
+        Vector3 hitDir = Vector3.zero;
+        if (Target != null)
+            hitDir = (transform.position - Target.position).normalized;
+
+        OnHit(hitDir);
+    }
+    public void OnHit(Vector3 hitDir)
+    {
+        Debug.Log($"{name}: OnHit triggered in state {currentState?.GetType().Name}. Direction: {hitDir}");
+
+        if (currentState == attack)
+        {
+            if (attackComponent != null && attackComponent.TryInterrupt())
+            {
+                Debug.Log($"{name}: Attack interrupted = switching to stun state");
+                SetState(stunned);
+                Knockback(hitDir);
+                return;
+            }
+
+            Debug.Log($"{name}: Attack not interruptible = queuing block.");
+            QueuedBlock = true;
+            attackComponent.ForceCancel(false, true);
+            return;
+        }
+
+        else if (currentState == block)
+        {
+            Debug.Log($"{name}: Extending block duration.");
+            block.ExtendBlock();
+            return;
+        }
+
+        else if (currentState == exposed || currentState == recover)
+        {
+            Debug.Log($"{name}: Hit while exposed/recovering = stunned.");
+            SetState(stunned);
+            Knockback(hitDir);
+            return;
+        }
+        if (currentState == stunned)
+        {
+            Debug.Log($"{name}: already stunned.");
+            Knockback(hitDir);
+            return;
+        }
+
+        Debug.Log($"{name}: Regular hit knockback applied.");
+        Knockback(hitDir);
+    }
+
+    private void OnDisable()
+    {
+        if (TryGetComponent(out HealthController hp))
+            hp.OnLifeChangue -= HandleHitEvent;
     }
 }

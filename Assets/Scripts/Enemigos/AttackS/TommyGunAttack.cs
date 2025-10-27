@@ -23,6 +23,8 @@ public class TommyGunAttack : MonoBehaviour, IEnemyAttack
     private bool finished = false;
     private bool interrupted = false;
     private bool reloading = false;
+    public bool Missed { get; private set; }
+    public bool ForceBlocked { get; private set; }
 
     private int shotsFired;
 
@@ -147,12 +149,12 @@ public class TommyGunAttack : MonoBehaviour, IEnemyAttack
         Debug.Log($"{ai.name} finished reloading Tommy Gun");
     }
 
-    public void ForceCancel()
+    public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
         isAttacking = false;
         finished = true;
-        interrupted = true;
+        interrupted = interrupt;
     }
 
     public void ResetAttackCycle()
@@ -161,5 +163,10 @@ public class TommyGunAttack : MonoBehaviour, IEnemyAttack
         isAttacking = false;
         finished = false;
         interrupted = false;
+    }
+
+    public bool TryInterrupt()
+    {
+        return true;
     }
 }

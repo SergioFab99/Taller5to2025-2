@@ -4,10 +4,10 @@ public class Thrower : MonoBehaviour, IEnemyAttack
 {
     [Header("Throw Settings")]
     public float attackRange = 12f;
-    public float windup = 1f;              // delay before throwing
-    public float throwCooldown = 2f;       // time between throws
+    public float windup = 1f;      
+    public float throwCooldown = 2f;  
     public float throwForce = 15f;
-    public float upwardBoost = 0f;         // 0 = straight line, >0 = small arc
+    public float upwardBoost = 0f;     
 
     public GameObject bluntPrefab;
     public Transform throwPoint;
@@ -17,6 +17,8 @@ public class Thrower : MonoBehaviour, IEnemyAttack
     private bool finished;
     private bool interrupted;
     private bool coolingDown;
+    public bool Missed { get; private set; }
+    public bool ForceBlocked { get; private set; }
 
     public float AttackRange => attackRange;
     public bool IsAttacking => isAttacking;
@@ -61,26 +63,22 @@ public class Thrower : MonoBehaviour, IEnemyAttack
         float dist = dir.magnitude;
         dir.Normalize();
 
-        // --- NEW: line-of-sight test ---
         bool blocked = Physics.Raycast(
             throwPoint.position,
             dir,
             out RaycastHit hit,
             dist,
-            ~LayerMask.GetMask("Enemy") // ignore enemy layer
+            ~LayerMask.GetMask("Enemy") 
         );
 
-        // true if something is between throwPoint and target
         bool targetVisible = false;
         if (blocked)
         {
-            // If the hit object *is* the player, we actually have line of sight
             if (hit.collider.CompareTag("Player"))
                 targetVisible = true;
         }
         else
         {
-            // nothing in the way
             targetVisible = true;
         }
 
@@ -132,13 +130,12 @@ public class Thrower : MonoBehaviour, IEnemyAttack
         finished = true;
     }
 
-    public void ForceCancel()
+    public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
         isAttacking = false;
         finished = true;
-        interrupted = true;
-        Debug.Log($"{ai.name} interrupted.");
+        interrupted = interrupt;
     }
 
     public void ResetAttackCycle()
@@ -152,4 +149,9 @@ public class Thrower : MonoBehaviour, IEnemyAttack
 
     void OnDisable() => CancelInvoke();
     void OnDestroy() => CancelInvoke();
+
+    public bool TryInterrupt()
+    {
+        return true;
+    }
 }

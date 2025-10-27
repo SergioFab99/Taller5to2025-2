@@ -13,52 +13,83 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     public float swingArc = 120f;
     public LayerMask hittableLayers;
 
-    [Header("Throwable Reflection")]
-    public float reflectRadius = 4.5f;  
+    [Header("Reflect")]
+    public float reflectRadius = 4.5f;
     public float reflectForce = 15f;
-    public float reflectCooldown = 0.5f;  
+    public float reflectCooldown = 0.5f;
     private float reflectTimer;
 
-    private EnemyMain ai;
+    private EnemyStateHandler handler;
+    [SerializeField] private Transform characterTransform;
+
     private bool isAttacking;
     private bool finished;
     private bool interrupted;
+    public bool Missed { get; private set; }
+    public bool ForceBlocked { get; private set; }
+
     private int comboStep;
+
+    private enum AttackPhase { None, Windup, Active, Recovery }
+    [SerializeField] private AttackPhase currentPhase = AttackPhase.None;
 
     public float AttackRange => attackRange;
     public bool IsAttacking => isAttacking;
     public bool IsFinished => finished;
     public bool WasInterrupted => interrupted;
 
-    void Awake()
+    private void Awake()
     {
-        ai = GetComponent<EnemyMain>();
+        handler = GetComponent<EnemyStateHandler>();
+        if (handler == null)
+            handler = GetComponentInParent<EnemyStateHandler>();
+
+        if (handler != null)
+            characterTransform = handler.GetComponentInChildren<EnemyCharacter>().transform;
+        else
+            Debug.LogError($"{name}: No EnemyStateHandler found in parent!");
     }
 
-    void Update()
+    private void Update()
     {
         reflectTimer -= Time.deltaTime;
         if (reflectTimer <= 0f)
-        {
             DetectAndReflectIncoming();
-        }
     }
 
     public void Execute()
     {
-        if (ai.target == null || isAttacking) return;
+        if (handler.Target == null)
+        {
+            return;
+        }
 
-        float dist = Vector3.Distance(transform.position, ai.target.position);
-        if (dist > attackRange) return;
+        if (isAttacking)
+        {
+            return;
+        }
+
+        if (!finished && comboStep > 0)
+        {
+            return;
+        }
+
+        float dist = Vector3.Distance(characterTransform.position, handler.Target.position);
+        Debug.Log($"[{name}] target distance: {dist:F2} / range: {attackRange}");
+
+        if (dist > attackRange)
+        {
+            return;
+        }
 
         comboStep = 0;
         finished = false;
         interrupted = false;
 
-        StartCombo();
+        StartWindup();
     }
 
-    private void StartCombo()
+    private void StartWindup()
     {
         if (comboStep >= maxCombo)
         {
@@ -68,40 +99,49 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
 
         comboStep++;
         isAttacking = true;
-        ai.StopMovement();
-        Debug.Log($"[{ai.name}] Windup for bat attack #{comboStep}");
+        currentPhase = AttackPhase.Windup;
 
+        handler?.StopMovement();
+
+        Debug.Log($"[{handler.name}] Windup for bat swing #{comboStep}");
         Invoke(nameof(PerformSwing), windupTime);
     }
 
     private void PerformSwing()
     {
-        if (interrupted || ai.target == null)
+        if (interrupted)
         {
             EndAttack();
             return;
         }
 
-        Debug.Log($"[{ai.name}] performs bat swing #{comboStep}");
+        currentPhase = AttackPhase.Active;
+        Debug.Log($"[{handler.name}] performs bat swing #{comboStep}");
 
-        Vector3 forward = ai.transform.forward;
-        Collider[] hits = Physics.OverlapSphere(transform.position + forward, attackRange, hittableLayers);
+        bool hitLanded = false;
 
+        Vector3 forward = characterTransform.forward;
+        Vector3 center = characterTransform.position + forward * (attackRange * 0.5f);
+
+        Debug.DrawRay(characterTransform.position, forward * 2f, Color.green);
+        Collider[] hits = Physics.OverlapSphere(center, attackRange * 0.75f, hittableLayers);
         foreach (Collider hit in hits)
         {
-            Vector3 toTarget = (hit.transform.position - transform.position).normalized;
+            Vector3 toTarget = (hit.transform.position - characterTransform.position).normalized;
             float angle = Vector3.Angle(forward, toTarget);
             if (angle <= swingArc * 0.5f)
             {
                 if (hit.CompareTag("Player"))
                 {
-                    var health = hit.GetComponentInParent<HealthController>();
-                    if (health != null)
-                        health.TakeDamague(damage);
+                    if (hit.TryGetComponent(out HealthController hp))
+                        hp.TakeDamague(damage);
 
-                    Rigidbody rb = hit.attachedRigidbody;
-                    if (rb != null)
-                        rb.AddForce(toTarget * knockbackForce, ForceMode.Impulse);
+                    if (hit.attachedRigidbody != null)
+                        hit.attachedRigidbody.AddForce(toTarget * knockbackForce, ForceMode.Impulse);
+
+                    hitLanded = true;
+                    Missed = false;
+                    break;
                 }
                 else if (hit.CompareTag("Grabbable"))
                 {
@@ -110,36 +150,58 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             }
         }
 
-        Invoke(nameof(NextComboStep), swingActiveTime + recoveryTime);
+        if (!hitLanded)
+        {
+            Debug.Log($"[{handler.name}] swing missed");
+            Missed = true;
+            ForceCancel(false, false); 
+        }
+
+        Invoke(nameof(EndSwing), swingActiveTime);
+    }
+
+    private void EndSwing()
+    {
+        currentPhase = AttackPhase.Recovery;
+        isAttacking = false;
+
+        Invoke(nameof(NextComboStep), recoveryTime);
     }
 
     private void NextComboStep()
     {
-        isAttacking = false;
-
-        if (comboStep < maxCombo && !interrupted)
+        if (interrupted)
         {
-            StartCombo();
+            finished = true;
+            return;
         }
+
+        if (comboStep < maxCombo)
+            StartWindup();
         else
         {
             finished = true;
-            Debug.Log($"[{ai.name}] finished combo.");
+            currentPhase = AttackPhase.None;
+            Debug.Log($"[{handler.name}] finished combo.");
         }
     }
 
     private void EndAttack()
     {
+        CancelInvoke();
         isAttacking = false;
         finished = true;
+        currentPhase = AttackPhase.None;
     }
 
-    public void ForceCancel()
+    public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
         isAttacking = false;
         finished = true;
-        interrupted = true;
+        interrupted = interrupt;
+        ForceBlocked = block;
+        currentPhase = AttackPhase.None;
     }
 
     public void ResetAttackCycle()
@@ -148,22 +210,35 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         isAttacking = false;
         finished = false;
         interrupted = false;
+        ForceBlocked = false;
+        Missed = false;
         comboStep = 0;
+        currentPhase = AttackPhase.None;
     }
+
+    public bool TryInterrupt()
+    {
+        if (isAttacking && currentPhase == AttackPhase.Windup)
+        {
+            Debug.Log($"[{handler.name}] Bat attack interrupted during windup!");
+            ForceCancel(true, false);
+            return true;
+        }
+        return false;
+    }
+
     private void DetectAndReflectIncoming()
     {
-        Collider[] nearby = Physics.OverlapSphere(transform.position, reflectRadius);
+        Collider[] nearby = Physics.OverlapSphere(characterTransform.position, reflectRadius);
         foreach (Collider c in nearby)
         {
             if (!c.CompareTag("Grabbable")) continue;
-
             Rigidbody rb = c.attachedRigidbody;
             if (rb == null) continue;
 
-            Vector3 toEnemy = (transform.position - c.transform.position).normalized;
+            Vector3 toEnemy = (characterTransform.position - c.transform.position).normalized;
             float approachDot = Vector3.Dot(rb.linearVelocity.normalized, toEnemy);
-
-            if (approachDot > 0.5f) 
+            if (approachDot > 0.5f)
             {
                 ReflectObject(c);
                 reflectTimer = reflectCooldown;
@@ -177,20 +252,21 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         Rigidbody rb = obj.attachedRigidbody;
         if (rb != null)
         {
-            Vector3 dir = (ai.target != null)
-                ? (ai.target.position - obj.transform.position).normalized
-                : (transform.forward + Vector3.up * 0.3f).normalized;
+            Vector3 dir = (handler.Target != null)
+                ? (handler.Target.position - obj.transform.position).normalized
+                : (characterTransform.forward + Vector3.up * 0.3f).normalized;
 
             rb.linearVelocity = dir * reflectForce;
-            Debug.Log($"[{ai.name}] reflected {obj.name}!");
+            Debug.Log($"[{handler.name}] reflected {obj.name}");
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position + transform.forward, attackRange);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, reflectRadius);
+        Gizmos.DrawWireSphere(characterTransform.position, reflectRadius);
+        Gizmos.color = Color.red;
+        Vector3 center = characterTransform.position + characterTransform.forward * (attackRange * 0.5f);
+        Gizmos.DrawWireSphere(center, attackRange);
     }
 }
