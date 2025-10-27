@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     [Header("Damage Reception")]
     [Tooltip("Damage taken when colliding/triggering with an enemy tagged 'Enemy'.")]
     [SerializeField] private float contactDamage = 1f;
-    //[SerializeField] PlayerActionStateMachine actionStateMachine; 
+     
     PlayerInputActions _inputActions;
 
     [SerializeField] CharacterState _characterState;
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         healthController.OnDead -= OnDead;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         healthController.OnDead += OnDead;
@@ -50,7 +50,10 @@ public class Player : MonoBehaviour
         playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
         CharacterCameraTarget.Initialize(playerCamera.transform);
-        playerCombat.Initialize();
+    playerCombat.Initialize();
+    
+    playerCombat.playerCharacter = playerCharacter;
+    playerCombat.playerCamera = playerCamera;
         playerAnimation.Initialize(playerCombat);
     }
 
@@ -68,10 +71,10 @@ public class Player : MonoBehaviour
         {
             Rotation = playerCamera._camera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),
-            Crouch = input.Crouch.WasPressedThisFrame() ? CrouchInput.Toggle : CrouchInput.None,
-            Dash = input.Dash.WasPressedThisFrame(),
+            Jump = input.Jump.WasPressedThisFrame(),      
         };
+        
+        playerCombat.SetMoveInput(characterInput.Move);
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
 
@@ -88,11 +91,13 @@ public class Player : MonoBehaviour
         var combatInput = new CombatInput
         {
             BaseAttack = input.Attack.WasPressedThisFrame(),
-            Interact = input.Interact.WasPressedThisFrame(),      
-            Blocking = input.Block.IsPressed()   
+            Interact = input.Interact.WasPressedThisFrame(),
+            Blocking = input.Block.IsPressed(),
+            Dodge = input.Dash.WasPressedThisFrame()
         };
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
+        playerCharacter.setState(combatInput.Blocking);
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))

@@ -10,6 +10,7 @@ public struct  CameraInput
 public class PlayerCamera : MonoBehaviour
 {
     private Vector3 _eulerAngles;
+    private bool _lookLocked = false;
 
     [SerializeField] public GameObject _camera;
     private CinemachineCamera _CMCamera;
@@ -32,6 +33,8 @@ public class PlayerCamera : MonoBehaviour
     
     public void UpdateRotation(CameraInput input)
     {
+        if (_lookLocked) return; 
+
         _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility;
 
         _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -90f, 90f);
@@ -49,4 +52,10 @@ public class PlayerCamera : MonoBehaviour
     }
 
     public Vector3 GetCameraUp() => _CMCamera.transform.up;
+
+    
+    public void SetLookLocked(bool locked)
+    {
+        _lookLocked = locked;
+    }
 }

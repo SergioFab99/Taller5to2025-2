@@ -2995,7 +2995,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 389411482}
-  - component: {fileID: 389411483}
   m_Layer: 0
   m_Name: RightPunch
   m_TagString: Untagged
@@ -3018,24 +3017,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1504968253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &389411483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389411481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798cd920398b14d45ac252ad8679512a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.2
-  dir: {x: 0, y: 0, z: 0}
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 128
-  dmg: 1
 --- !u!43 &395531355
 Mesh:
   m_ObjectHideFlags: 0
@@ -3718,37 +3699,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &481170034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 481170035}
-  m_Layer: 0
-  m_Name: Hold point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &481170035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481170034}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1123035755}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &494903097
 Mesh:
   m_ObjectHideFlags: 0
@@ -4468,7 +4418,6 @@ Transform:
   m_Children:
   - {fileID: 1144268507}
   - {fileID: 1696335800}
-  - {fileID: 1123035755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554249257
@@ -10993,6 +10942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123035755}
   - component: {fileID: 1123035754}
+  - component: {fileID: 1123035756}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -11012,28 +10962,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9a79b3f363bbd489d25bb3e8fa4cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RigthArm: {fileID: 389411483}
-  LeftArm: {fileID: 1875060648}
+  weaponPos: {fileID: 1933736625}
+  rightPunchPos: {fileID: 389411481}
+  leftPunchPos: {fileID: 1875060646}
   _state:
     playerActionState: 0
     objectInteractionState: 0
-    currentHand: 0
     BlockState: 0
     CanAttack: 0
     CanGrabOrThrow: 0
     isBlocking: 0
-  timeBetweenAttacks: 0.4
-  timeToDoublePunch: 3
-  punchDuration: 1
+  currentWeapon: {fileID: 1123035756}
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
   DefaultGrabThrowSettings: {fileID: 11400000, guid: c5c6ed4d58c8ba64c9c325265b15756d, type: 2}
-  cam: {fileID: 604208994}
-  HoldPoint: {fileID: 481170035}
-  holdpoint2: {fileID: 1504968253}
-  _heldObject: {fileID: 0}
+  DefaultBlockDodgeCounterSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   alignHoldPointWithCamera: 1
   alignWithPlayerRoot: 0
   holdPointRotationOffset: {x: 0, y: 0, z: 0}
   holdPointRotateSmoothing: 0
+  playerCharacter: {fileID: 0}
+  playerCamera: {fileID: 0}
 --- !u!4 &1123035755
 Transform:
   m_ObjectHideFlags: 0
@@ -11046,10 +10996,26 @@ Transform:
   m_LocalPosition: {x: 0.84, y: 0, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 481170035}
-  m_Father: {fileID: 544003723}
+  m_Children: []
+  m_Father: {fileID: 1696335800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123035756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123035753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ed8847525f33d4db75d919da713948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: e847e7030afe8694bbb25ae2c4fe8bef, type: 2}
+  currentHand: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1141117519
 GameObject:
   m_ObjectHideFlags: 0
@@ -11261,7 +11227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1163644011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16535,12 +16501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultStandSettings: {fileID: 11400000, guid: 9662340f305252a48b54dbf18ef74bdd, type: 2}
-  DefaultCrouchSettings: {fileID: 11400000, guid: 6bb7cd64b57055e488ccade2382eaa31, type: 2}
+  DefaultBlockSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   DefaultAirSettings: {fileID: 11400000, guid: 896dc30e4ec40f141918f3caddf7f7b0, type: 2}
-  DefaultSlideSettings: {fileID: 11400000, guid: 84db2e1379aa75e49b887db7ef47a999, type: 2}
-  DefaultDashSettings: {fileID: 11400000, guid: d1c40231ab386bf4fbfb149763062904, type: 2}
   BodyStandSettings: {fileID: 11400000, guid: 608cbd82ec67ad945bda34d7fc9f3168, type: 2}
-  BodyCrouchSettings: {fileID: 11400000, guid: 846de5abb533abf4585705b17bc2d1b9, type: 2}
   motor: {fileID: 1696335801}
   cameraTarget: {fileID: 1739289803}
   _state:
@@ -16566,6 +16529,7 @@ Transform:
   - {fileID: 1739289803}
   - {fileID: 830140204}
   - {fileID: 238905844}
+  - {fileID: 1123035755}
   m_Father: {fileID: 544003723}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1696335801
@@ -17818,7 +17782,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875060647}
-  - component: {fileID: 1875060648}
   m_Layer: 0
   m_Name: LeftPunch
   m_TagString: Untagged
@@ -17841,24 +17804,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1881630454}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1875060648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875060646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798cd920398b14d45ac252ad8679512a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.2
-  dir: {x: 0, y: 0, z: 0}
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 128
-  dmg: 1
 --- !u!1 &1881162198
 GameObject:
   m_ObjectHideFlags: 0

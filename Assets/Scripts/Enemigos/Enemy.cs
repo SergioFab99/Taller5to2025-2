@@ -7,7 +7,7 @@ public struct EnemyInput
 {
     public Vector3 Direction;
     public Vector3 Move;
-    public CrouchInput Crouch;
+    //public CrouchInput Crouch;
     public bool Jump;
 }
 

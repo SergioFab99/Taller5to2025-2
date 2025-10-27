@@ -77,18 +77,13 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
             if (hit.CompareTag("Player"))
             {
                 Debug.Log($"punch {currentPunch} hit");
-                // Prefer calling PlayerCombat to allow player-side mitigation (blocking)
-                var playerCombat = hit.GetComponent<PlayerCombat>() ?? hit.GetComponentInParent<PlayerCombat>();
+                
+                var playerCombat = hit.GetComponent<PlayerCombat>() ?? hit.GetComponentInChildren<PlayerCombat>();
                 if (playerCombat != null)
                 {
                     playerCombat.ReceiveDamage(10f);
                 }
-                else
-                {
-                    // Fallback to direct health application
-                    var hc = hit.GetComponent<HealthController>() ?? hit.GetComponentInParent<HealthController>();
-                    if (hc != null) hc.TakeDamague(10f);
-                }
+                
                 hitLanded = true;
                 break;
             }
