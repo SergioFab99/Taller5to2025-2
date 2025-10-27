@@ -7,6 +7,9 @@ public class BatWeapon : Weapon
 {
     private PlayerCombat playerCombat;
     public Transform swingPoint;
+    public float force;
+    public GameObject throwWeapon;
+
     private bool isSwinging;
     private bool hitDone;
     private Vector3 lastPos;
@@ -90,5 +93,10 @@ public class BatWeapon : Weapon
         isSwinging = false;
     }
 
-
+    public override void Throw(Vector3 direc)
+    {
+        Debug.Log("This do something, Throw");
+        var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
+        ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
+    }
 }

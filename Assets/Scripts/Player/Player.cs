@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] HealthController healthController;
 
-    [SerializeField] PlayerPickUp playerPickUp;
+
 
     [Header("Damage Reception")]
     [Tooltip("Damage taken when colliding/triggering with an enemy tagged 'Enemy'.")]
@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
         playerCharacter.Initialize(playerCamera._camera.transform);
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
         CharacterCameraTarget.Initialize(playerCamera.transform);
-        playerPickUp.Initialize();
-        playerCombat.Initialize(playerPickUp);
+
+        playerCombat.Initialize();
    
     
     playerCombat.playerCharacter = playerCharacter;
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
-        playerPickUp.PickUpUpdate(input.Interact.WasPressedThisFrame());
+       // playerPickUp.PickUpUpdate(input.Interact.WasPressedThisFrame());
         var characterInput = new CharacterInput
         {
             Rotation = playerCamera._camera.transform.rotation,
