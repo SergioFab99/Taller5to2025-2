@@ -5,4 +5,8 @@ using UnityEngine;
 public class MeleeWeaponSettings : WeaponSettings
 {
     public int durability;
+
+    public Vector3 position;
+
+    public Vector3 rotation;
 }

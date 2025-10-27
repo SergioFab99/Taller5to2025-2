@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde8426a8062e134a9b49478a0980c6d, type: 3}
-  m_Name: Fists
+  m_Script: {fileID: 11500000, guid: 06a7c0f89c0f9654faebab37a6e89c22, type: 3}
+  m_Name: Bat
   m_EditorClassIdentifier: 
-  damague: 25
+  damague: 20
   properties:
-  - {fileID: 11400000, guid: a6f2c983f55c83447b9809c2f6517c4a, type: 2}
-  radius: 0.3
-  timeBetweenAttacks: 0.8
-  timeToDoublePunch: 3
-  punchDuration: 0.8
+  - {fileID: 11400000, guid: 788eb82f4ffe0a34b9601988ca6634b1, type: 2}
+  durability: 5
+  position: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}

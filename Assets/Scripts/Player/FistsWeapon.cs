@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public struct punch
@@ -22,6 +23,8 @@ public struct punch
 
 public class FistsWeapon : Weapon
 {
+    //public AnimatorController controller;
+
     private punch currentPunch = new punch();
     public CombatHand currentHand;
 
@@ -33,7 +36,7 @@ public class FistsWeapon : Weapon
     public delegate void PunchSide(int hand);
     private bool hitDone;
     [ShowInInspector]private punch rightPunch = new punch();
-    [ShowInInspector] private punch leftPunch = new punch();
+    [ShowInInspector]private punch leftPunch = new punch();
     private PlayerCombat playerCombat;
     private float timeSinceLastPunch;
 

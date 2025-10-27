@@ -160,7 +160,7 @@ public class PlayerCombat : MonoBehaviour
     public void CombatTickUpdate(float deltaTime)
     {
 
-        currentWeapon.CombatTickUpdate(deltaTime);
+        currentWeapon?.CombatTickUpdate(deltaTime);
         if (requestAttack && CheckIfCanAttack())
         {
             Attack();
@@ -229,7 +229,7 @@ public class PlayerCombat : MonoBehaviour
         
         Debug.Log("Attacking");
 
-        currentWeapon.Attack();
+        currentWeapon?.Attack();
 
        
     }
@@ -295,8 +295,16 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("Blocking");
     }
 
-    
+    public void LinkWeapon(Weapon weapon)
+    {
+        currentWeapon = weapon;
+    }
 
+    public void UnLinkWeapon()
+    {
+        currentWeapon = null;
+
+    }
 
     public IEnumerator ResetCanAttack(float delay)
     {

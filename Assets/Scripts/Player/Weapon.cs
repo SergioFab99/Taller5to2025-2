@@ -1,7 +1,9 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    
     public delegate void OnHitEvent(HitInfo info);
     public event OnHitEvent OnHit;
 
