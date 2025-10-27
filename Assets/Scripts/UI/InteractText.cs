@@ -1,0 +1,31 @@
+using UnityEngine;
+using TMPro;
+public class InteractText : MonoBehaviour
+{
+    
+    private TMP_Text interactTMP;
+    PlayerInputActions _inputActions;
+    [SerializeField] string interactText, noFinal, mayus, quotes;
+    [SerializeField] string[] interactTextSeparate;
+    void Start()
+    {
+        _inputActions = new PlayerInputActions();
+        _inputActions.Enable();
+        var input = _inputActions.Player;
+        interactTMP = gameObject.GetComponent<TMP_Text>();
+        interactText = input.Interact.ToString();
+        interactTextSeparate = interactText.Split("/");
+        noFinal = interactTextSeparate[3].Replace("]", string.Empty);
+        mayus = noFinal.ToUpper();
+        interactTMP.text = $"Press {quotes}{mayus}{quotes} to Interact";
+    }
+
+    private void OnDestroy()
+    {
+        _inputActions.Dispose();
+    }
+    void Update()
+    {
+        
+    }
+}

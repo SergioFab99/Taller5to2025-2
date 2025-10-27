@@ -7,7 +7,8 @@ public class OpenDoor : MonoBehaviour
 
     Coroutine coroutine;
     bool startCoroutine;
-    [SerializeField] bool starMoveDoor, doorIsOpen, thisIsLeftDoor, thisIsRightDoor, pushedDoor, test;
+    public bool starMoveDoor;
+    [SerializeField] bool doorIsOpen, thisIsLeftDoor, thisIsRightDoor, pushedDoor, test;
     
     void Start()
     {
@@ -20,12 +21,12 @@ public class OpenDoor : MonoBehaviour
         if (test)
         {
             test = false;
-            Invoke(nameof(StartOpen), 0.5f);
+            Invoke(nameof(StartOpen), 0.1f);
         }
     }
     public void CallStartOpen()
     {
-        Invoke(nameof(StartOpen), 0.5f);
+        Invoke(nameof(StartOpen), 0.1f);
     }
     void StartOpen()
     {

@@ -26,22 +26,29 @@ public class CameraManagerTutorial : MonoBehaviour
     {
         if (SetUpTutorial.camera2 && cam2)
         {
-            playableDirector.Play();
-            cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
-            cameraPlayer.Priority = 0;
-            cameraScene.Priority = 1;
-            Time.timeScale = 0;
+            Invoke(nameof(StartCameraTour2), 0.3f);
         }
         if (SetUpTutorial.camera3 && cam3)
         {
-            playableDirector.Play();
-            cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
-            cameraPlayer.Priority = 0;
-            cameraScene.Priority = 1;
-            Time.timeScale = 0;
+            Invoke(nameof(StartCameraTour3), 0.3f);
         }
     }
-
+    void StartCameraTour2()
+    {
+        playableDirector.Play();
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+    }
+    void StartCameraTour3()
+    {
+        playableDirector.Play();
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+    }
     void ChangePriorityCamera1Tutorial()
     {
         SetUpTutorial.camera1 = false;
@@ -49,6 +56,7 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        Indications.instance.ActivateIndications();
         Destroy(this);
     }
     void ChangePriorityCamera2Tutorial()
@@ -58,6 +66,8 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        Indications.instance.NextIndication();
+        Indications.instance.ActivateIndications();
         Destroy(this);
     }
     void ChangePriorityCamera3Tutorial()
@@ -67,6 +77,15 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
+        if (Indications.indicationsLife)
+        {
+            Indications.instance.NextIndication();
+            Indications.instance.ActivateIndications();
+        }
+        else
+        {
+            Indications.instance.ChangeToIndicationsOfLife();
+        }
         Destroy(this);
     }
 }

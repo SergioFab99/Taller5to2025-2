@@ -9,8 +9,10 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private List<GameObject> enemiesCheckpoint2 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint3 = new List<GameObject>();
     [SerializeField] private GameObject firstEnemy;
-    void Start()
+    [SerializeField] private GameObject triggerIndication;
+    void Awake()
     {
+        triggerIndication.SetActive(false);
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             enemiesActive.Add(firstEnemy);
@@ -34,15 +36,15 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     {
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(FirstEnemies), 0.2f);
+            Invoke(nameof(FirstEnemies), 0.1f);
         }
         if (SetUpTutorial.checkPoint1 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(EnemiesCheckPoint1), 0.2f);
+            Invoke(nameof(EnemiesCheckPoint1), 0.1f);
         }
         if (SetUpTutorial.checkPoint2 && SetUpTutorial.unlockMoreEnemies)
         {
-            Invoke(nameof(EnemiesCheckPoint2), 0.2f);
+            Invoke(nameof(EnemiesCheckPoint2), 0.1f);
         }
         if (SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
         {
@@ -54,6 +56,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         enemiesActive = firstsEnemies;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
+        triggerIndication.SetActive(true);
     }
     void EnemiesCheckPoint1()
     {
@@ -113,6 +116,11 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
                 enemiesActive[0].SetActive(true);
                 enemiesActive.RemoveAt(0);
                 enemiesCheckpoint3.RemoveAt(0);
+            }
+            if(SetUpTutorial.enemyDefeatCount >= 7)
+            {
+                Indications.instance.NextIndication();
+                Indications.instance.ActivateIndications();
             }
         }
     }
