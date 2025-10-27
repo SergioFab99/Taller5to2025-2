@@ -1572,13 +1572,13 @@ Transform:
   m_GameObject: {fileID: 4033318713313006122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.84, y: 0, z: -0.42}
+  m_LocalPosition: {x: 0.84, y: 0, z: -0.42000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4847087872006185642}
   - {fileID: 8778478082175224812}
-  m_Father: {fileID: 481600688267271213}
+  m_Father: {fileID: 2946452590443858840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6332060388536341452
 MonoBehaviour:
@@ -1611,7 +1611,7 @@ MonoBehaviour:
   HoldPoint: {fileID: 4847087872006185642}
   holdpoint2: {fileID: 4676367562346619981}
   _heldObject: {fileID: 0}
-  DefaultBlockDodgeCounterSettings: {fileID: 0}
+  DefaultBlockDodgeCounterSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   playerCharacter: {fileID: 0}
   playerCamera: {fileID: 0}
 --- !u!1 &4100171539347079509
@@ -1882,7 +1882,6 @@ Transform:
   m_Children:
   - {fileID: 9002908572558850845}
   - {fileID: 2946452590443858840}
-  - {fileID: 503574296837814596}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101921615916627339
@@ -1960,6 +1959,7 @@ Transform:
   - {fileID: 6292734665747695628}
   - {fileID: 1629768209325213302}
   - {fileID: 4934490415865912899}
+  - {fileID: 503574296837814596}
   m_Father: {fileID: 481600688267271213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6159303220848659265
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultStandSettings: {fileID: 11400000, guid: 9662340f305252a48b54dbf18ef74bdd, type: 2}
-  DefaultBlockSettings: {fileID: 0}
+  DefaultBlockSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   DefaultAirSettings: {fileID: 11400000, guid: 896dc30e4ec40f141918f3caddf7f7b0, type: 2}
   BodyStandSettings: {fileID: 11400000, guid: 608cbd82ec67ad945bda34d7fc9f3168, type: 2}
   motor: {fileID: 3533889361894481989}
