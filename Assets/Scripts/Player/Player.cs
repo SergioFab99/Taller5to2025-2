@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         CharacterCameraTarget.Initialize(playerCamera.transform);
         playerPickUp.Initialize();
         playerCombat.Initialize(playerPickUp);
-    playerCombat.Initialize();
+   
     
     playerCombat.playerCharacter = playerCharacter;
     playerCombat.playerCamera = playerCamera;
