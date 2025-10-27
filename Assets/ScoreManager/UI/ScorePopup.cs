@@ -40,10 +40,8 @@ public class ScorePopup : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / lifetime;
             
-            // Mover hacia arriba
             rectTransform.anchoredPosition = startPos + Vector3.up * (moveSpeed * elapsed);
             
-            // Fade out
             canvasGroup.alpha = fadeCurve.Evaluate(t);
             
             yield return null;

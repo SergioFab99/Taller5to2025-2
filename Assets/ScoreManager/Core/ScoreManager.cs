@@ -4,12 +4,10 @@ using System;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
-    
-    // Estado actual
+
     private int currentScore = 0;
     private ScoreRank currentRank = ScoreRank.D;
-    
-    // ===== VALORES DE PUNTUACIÓN (SEGÚN GDD) =====
+
     [Header("Combat Score Values")]
     [SerializeField] private int neutralConnectionScore = 15;
     [SerializeField] private int directConnectionScore = 30;
@@ -47,15 +45,13 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int bRankIntuition = 20;
     [SerializeField] private int cRankIntuition = 15;
     [SerializeField] private int dRankIntuition = 10;
-    
-    // Eventos para notificar cambios
+
     public event Action<int> OnScoreChanged;
     public event Action<ScoreRank> OnRankChanged;
-    public event Action<int, string> OnScoreAdded; // Para popups
+    public event Action<int, string> OnScoreAdded;
     
     private void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -66,28 +62,25 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    // ===== MÉTODO PRINCIPAL =====
+
     public void AddScore(int points, string reason = "")
     {
         currentScore += points;
         OnScoreChanged?.Invoke(currentScore);
         OnScoreAdded?.Invoke(points, reason);
-        
-        // Verificar cambio de rango
+
         ScoreRank newRank = CalculateRank();
         if (newRank != currentRank)
         {
             currentRank = newRank;
             OnRankChanged?.Invoke(currentRank);
         }
-        
+
         #if UNITY_EDITOR
         Debug.Log($"<color=yellow>Score:</color> {points:+0;-#} - {reason} | <color=cyan>Total: {currentScore}</color> | <color=green>Rank: {currentRank}</color>");
         #endif
     }
-    
-    // ===== GETTERS =====
+
     public int GetCurrentScore() => currentScore;
     public ScoreRank GetCurrentRank() => currentRank;
     
@@ -120,8 +113,7 @@ public class ScoreManager : MonoBehaviour
         OnScoreChanged?.Invoke(currentScore);
         OnRankChanged?.Invoke(currentRank);
     }
-    
-    // ===== MÉTODOS DE PUNTUACIÓN - COMBATE =====
+
     public void ScoreNeutralConnection() => AddScore(neutralConnectionScore, "Neutral Connection");
     public void ScoreDirectConnection() => AddScore(directConnectionScore, "Direct Connection");
     public void ScorePartialConnection() => AddScore(partialConnectionScore, "Partial Connection");
@@ -131,8 +123,7 @@ public class ScoreManager : MonoBehaviour
     public void ScoreReducedDamage() => AddScore(reducedDamageScore, "Damage Reduced");
     public void ScoreHealthLost() => AddScore(healthLostPenalty, "Health Lost");
     public void ScoreHealthHealed() => AddScore(healthHealedScore, "Health Healed");
-    
-    // ===== MÉTODOS DE PUNTUACIÓN - ENEMIGOS =====
+
     public void ScoreEnemyDefeated(bool isDrunk = false)
     {
         if (isDrunk)
@@ -140,20 +131,18 @@ public class ScoreManager : MonoBehaviour
         else
             AddScore(enemyDefeatedScore, "Enemy Defeated");
     }
-    
+
     public void ScoreEnemyBlinded() => AddScore(enemyBlindedScore, "Enemy Blinded");
     public void ScoreEnemyStunned() => AddScore(enemyStunnedScore, "Enemy Stunned");
     public void ScoreEnemyKnockedOut() => AddScore(enemyKnockedOutScore, "Knocked Out!");
     public void ScoreEnemyPushed() => AddScore(enemyPushedScore, "Enemy Pushed");
-    
-    // ===== MÉTODOS DE PUNTUACIÓN - OBJETOS =====
+
     public void ScoreWeaponPickedUp() => AddScore(weaponPickedUpScore, "Weapon Picked Up");
     public void ScoreBottleBroken() => AddScore(bottleBrokenScore, "Bottle Broken");
     public void ScoreTableFlipped() => AddScore(tableFlippedScore, "Table Flipped");
     public void ScoreChairBroken() => AddScore(chairBrokenScore, "Chair Broken");
 }
 
-// ===== ENUMS =====
 public enum ScoreRank
 {
     D,
@@ -165,8 +154,8 @@ public enum ScoreRank
 
 public enum ConnectionType
 {
-    Neutral,   // Disparo normal
-    Direct,    // Golpe directo sin defensa
-    Partial,   // Bloqueado
-    Total      // Golpe fatal (enemigo expuesto/noqueado)
+    Neutral,
+    Direct,
+    Partial,
+    Total
 }
