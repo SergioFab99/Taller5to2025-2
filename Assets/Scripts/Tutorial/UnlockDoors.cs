@@ -20,6 +20,9 @@ public class UnlockDoors : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log($"Checkpoint1 {SetUpTutorial.checkPoint1}");
+        Debug.Log($"Checkpoint2 {SetUpTutorial.checkPoint2}");
+        Debug.Log($"Checkpoint3 {SetUpTutorial.checkPoint3}");
         if(enemyLife == null)
         {
             /*var enemyLifes = enemyLife;
@@ -50,15 +53,26 @@ public class UnlockDoors : MonoBehaviour
     {
         SetUpTutorial.enemyDefeatCount++;
         Debug.Log(SetUpTutorial.enemyDefeatCount);
-        int healthcount = 0;
-        foreach(HealthController healthE in enemyLife)
+        for (int i = 0; i < enemyLife.Count; i++)
         {
-            healthcount++;
-            healthcount = Mathf.Clamp(healthcount, 0, enemyLife.Count);
-            if(healthE.gameObject == null)
+            if(enemyLife[i] == null)
             {
-                enemyLife.RemoveAt(healthcount);
-            }            
+                enemyLife.Remove(enemyLife[i]);
+            }
+        }
+        for (int i = 0; i < enemies.enemyLife.Count; i++)
+        {
+            if(enemies.enemyLife[i] == null)
+            {
+                enemies.enemyLife.Remove(enemies.enemyLife[i]);
+            }
+        }
+        for (int i = 0; i < enemies.enemiesActive.Count; i++)
+        {
+            if(enemies.enemyLife[i] == null)
+            {
+                enemies.enemiesActive.Remove(enemies.enemiesActive[i]);
+            }
         }
         if (SetUpTutorial.enemyDefeatCount >= 1 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
@@ -67,6 +81,7 @@ public class UnlockDoors : MonoBehaviour
         if (SetUpTutorial.enemyDefeatCount >= 4 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlockDoor1();
+            CanUnlocMoreEnemies();
         }
         if (SetUpTutorial.enemyDefeatCount >= 7 && SetUpTutorial.checkPoint1)
         {

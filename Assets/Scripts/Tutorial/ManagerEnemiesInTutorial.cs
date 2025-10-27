@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class ManagerEnemiesInTutorial : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> enemiesActive = new List<GameObject>();
+    [SerializeField] public List<GameObject> enemiesActive = new List<GameObject>();
     [SerializeField] private List<GameObject> firstsEnemies = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint1 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint2 = new List<GameObject>();
@@ -14,6 +14,22 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     void Awake()
     {
         triggerIndication.SetActive(false);
+        for(int i = 0; i < firstsEnemies.Count; i++)
+        {
+            firstsEnemies[i].SetActive(false);
+        }
+        for(int i = 0; i < enemiesCheckpoint1.Count; i++)
+        {
+            enemiesCheckpoint1[i].SetActive(false);
+        }
+        for(int i = 0; i < enemiesCheckpoint2.Count; i++)
+        {
+            enemiesCheckpoint2[i].SetActive(false);
+        }
+        for(int i = 0; i < enemiesCheckpoint3.Count; i++)
+        {
+            enemiesCheckpoint3[i].SetActive(false);
+        }
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             enemiesActive.Add(firstEnemy);
@@ -54,7 +70,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     }
     void FirstEnemies()
     {
-        enemiesActive.Clear();
+        //enemiesActive.Clear();
         enemiesActive = firstsEnemies;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
@@ -62,7 +78,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     }
     void EnemiesCheckPoint1()
     {
-        enemiesActive.Clear();
+        //enemiesActive.Clear();
         enemiesActive = enemiesCheckpoint1;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;

@@ -8,7 +8,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
 
     PlayerInputActions _inputActions;
     [SerializeField] private bool onTrigger;
-    [SerializeField] private bool interact;
+    //[SerializeField] private bool interact;
     [SerializeField] private bool openDoor1, openDoor2;
     private OpenDoor openDoor;
     void Start()
@@ -20,8 +20,8 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
 
     void Update()
     {
-        UpdateInput();
-        if(onTrigger && interact)
+        //UpdateInput();
+        if(onTrigger && Input.GetKeyDown(KeyCode.E))
         {
             Deactivate();
             ActiveCheckPoints();
@@ -38,15 +38,15 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
 
     public void UpdateInput()
     {
-        _inputActions = new PlayerInputActions();
+        /*_inputActions = new PlayerInputActions();
         _inputActions.Enable();
         var input = _inputActions.Player;
-        interact = input.Interact.WasPressedThisFrame();
+        interact = input.Interact.WasPressedThisFrame();*/
     }
     private void OnDestroy()
     {
-        _inputActions.Disable();
-        _inputActions.Dispose();
+        /*_inputActions.Disable();
+        _inputActions.Dispose();*/
     }
     private void OnTriggerEnter(Collider other)
     {

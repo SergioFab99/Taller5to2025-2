@@ -30,7 +30,7 @@ public class DisplayInteractHUD : MonoBehaviour
         while (!startCoroutine)
         {
             Ray ray = new Ray(cam.position, cam.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange)) 
+            if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange - 1)) 
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
