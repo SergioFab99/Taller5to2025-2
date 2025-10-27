@@ -64,15 +64,11 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             return;
         }
 
-        if (isAttacking)
-        {
+        if (isAttacking || (!finished && comboStep > 0))
             return;
-        }
 
-        if (!finished && comboStep > 0)
-        {
+        if (currentPhase != AttackPhase.None)
             return;
-        }
 
         float dist = Vector3.Distance(characterTransform.position, handler.Target.position);
         Debug.Log($"[{name}] target distance: {dist:F2} / range: {attackRange}");
@@ -109,7 +105,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
 
     private void PerformSwing()
     {
-        if (interrupted)
+        if (!isAttacking || interrupted)
         {
             EndAttack();
             return;
@@ -197,6 +193,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
+        StopAllCoroutines();
         isAttacking = false;
         finished = true;
         interrupted = interrupt;
@@ -207,6 +204,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     public void ResetAttackCycle()
     {
         CancelInvoke();
+        StopAllCoroutines();
         isAttacking = false;
         finished = false;
         interrupted = false;

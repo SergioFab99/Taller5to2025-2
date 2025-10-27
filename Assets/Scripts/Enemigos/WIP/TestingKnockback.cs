@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestingKnockback : MonoBehaviour
 {
     public float punchRange = 2f;
-    public float punchCooldown = 1f;
+    public float punchCooldown = 0.5f;
     public float damage = 10f;
     private float cooldownTimer;
 

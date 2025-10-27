@@ -142,6 +142,8 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
 
     public void ResetAttackCycle()
     {
+        CancelInvoke();
+        StopAllCoroutines();
         currentPunch = 0;
         finished = false;
         interrupted = false;

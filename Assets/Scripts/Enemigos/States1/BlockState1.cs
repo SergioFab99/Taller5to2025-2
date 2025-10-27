@@ -6,8 +6,8 @@ public class BlockState1 : IEnemyState
 {
     private readonly EnemyStateHandler ai;
     private float blockTimer;
-    private const float baseBlockDuration = 1.0f;
-    private const float extensionOnHit = 0.25f;
+    private const float baseBlockDuration = 2f;
+    private const float extensionOnHit = 1f;
 
     public BlockState1(EnemyStateHandler main) => ai = main;
 
