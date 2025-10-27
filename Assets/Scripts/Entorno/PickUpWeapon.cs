@@ -57,6 +57,14 @@ public class PickUpWeapon : MonoBehaviour
                 {
                     health.TakeDamague((settings as BatWeaponSettings).damague);
                 }
+                else
+                {
+                    health = tags.GetComponentInParent<HealthController>();
+                    if (health != null )
+                    {
+                        health.TakeDamague((settings as BatWeaponSettings).damague);
+                    }
+                }
 
             }
         }

@@ -214,9 +214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6885539197149038414, guid: 7947aa4bcb2e93b479969cad2a091a12, type: 3}
+  settings: {fileID: 11400000, guid: 548681afe0c5ac341aa9db5444399641, type: 2}
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   point1: {fileID: 151106602857139057}
   point2: {fileID: 3284101519627992639}
   hited: 1
