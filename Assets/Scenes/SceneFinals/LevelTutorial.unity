@@ -2545,6 +2545,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5101fdba234bf742bc32357e8216812, type: 3}
   m_PrefabInstance: {fileID: 105755187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &119425317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119425319}
+  - component: {fileID: 119425318}
+  m_Layer: 0
+  m_Name: Navmesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &119425318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119425317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 74d428fe00b4cbd42a7c02d1651268c3, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &119425319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119425317}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 1.62, z: 29.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &121320907
 GameObject:
   m_ObjectHideFlags: 0
@@ -30083,6 +30147,7 @@ MonoBehaviour:
   - {fileID: 785437841}
   - {fileID: 1837857262}
   - {fileID: 607667519}
+  enemyLife: []
   firstEnemy: {fileID: 994476641}
   triggerIndication: {fileID: 166749209}
 --- !u!114 &2080027503
@@ -30097,7 +30162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd796cb0b7f9f44cb9161bc0946ca30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLife: {fileID: 0}
+  enemyLife:
+  - {fileID: 0}
+  enemies: {fileID: 0}
   doorCollider1: {fileID: 1116663458}
   doorCollider2: {fileID: 1029874769}
   doorCollider3: {fileID: 680398330}
@@ -31387,4 +31454,5 @@ SceneRoots:
   - {fileID: 1016451669}
   - {fileID: 1366627352}
   - {fileID: 166749212}
+  - {fileID: 119425319}
   - {fileID: 1728093654}
