@@ -217,7 +217,10 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
                 break;
 
             case EnemyBehaviourState.Combat:
-
+                if (_timeSinceUngrounded < 0.1f && _externalForces == Vector3.zero)
+                {
+                    currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deltaTime * 8f);
+                }
                 currentVelocity = currentState.UpdateVelocity(currentVelocity, deltaTime, motor, _requestedMovement, default_Settings, ref _timeSinceUngrounded);
 
                 if (_externalExplosiveForces.magnitude > 0f)
@@ -292,8 +295,26 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public void SetMovementMode(MovementMode mode)
     {
         CurrentMode = mode;
+
         if (TryGetComponent(out NavMeshAgent agent))
-            agent.enabled = (mode == MovementMode.NavMesh);
+        {
+            bool useNav = (mode == MovementMode.NavMesh);
+            agent.enabled = useNav;
+
+            if (useNav)
+            {
+                agent.updatePosition = true;
+                agent.updateRotation = true;
+            }
+            else
+            {
+                agent.updatePosition = false;
+                agent.updateRotation = false;
+                if (agent.isOnNavMesh)
+                    agent.nextPosition = transform.position;
+            }
+        }
+
         motor.enabled = (mode == MovementMode.KCC);
     }
 }

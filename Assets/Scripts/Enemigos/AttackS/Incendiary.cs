@@ -17,6 +17,8 @@ public class Incendiary : MonoBehaviour, IEnemyAttack
     private bool finished = false;
     private bool interrupted = false;
     private bool coolingDown = false;
+    public bool Missed { get; private set; }
+    public bool ForceBlocked { get; private set; }
 
     public float AttackRange => attackRange;
     public bool IsAttacking => isAttacking;
@@ -67,7 +69,6 @@ public class Incendiary : MonoBehaviour, IEnemyAttack
             rb.linearVelocity = throwVelocity;
         }
 
-        // Start cooldown after throw
         StartCooldown();
     }
 
@@ -93,13 +94,13 @@ public class Incendiary : MonoBehaviour, IEnemyAttack
         finished = true;
     }
 
-    public void ForceCancel()
+    public void ForceCancel(bool interrupt, bool block)
     {
         CancelInvoke();
         isAttacking = false;
         finished = true;
-        interrupted = true;
-
+        interrupted = interrupt;
+    
         Debug.Log($"{ai.name} dropped molotov due to interruption!");
         if (molotovPf != null)
         {
@@ -114,8 +115,12 @@ public class Incendiary : MonoBehaviour, IEnemyAttack
         CancelInvoke();
         isAttacking = false;
         interrupted = false;
-        // Keep "finished" false if still cooling down
         finished = !coolingDown;
         Debug.Log($"{ai.name}: ResetAttackCycle() complete. Cooldown: {coolingDown}, Finished: {finished}");
+    }
+
+    public bool TryInterrupt()
+    {
+        return true;
     }
 }

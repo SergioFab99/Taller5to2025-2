@@ -13,6 +13,11 @@ public class DefaultBlockDodgeCounterSettings : ScriptableObject
     public float blockAngle = 120f;
     public float blockDamageMultiplier = 0.5f;
 
+    public float Speed = 0f;
+
+    public float Response = 0f;
+
+
     [Header("Counter Settings")]
     public float counterWindow = 0.5f;    
     private float counterTimer = 0f;

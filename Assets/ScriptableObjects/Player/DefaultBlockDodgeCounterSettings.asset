@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ea7cf48a418e04dacee391629336d0, type: 3}
   m_Name: DefaultBlockDodgeCounterSettings
   m_EditorClassIdentifier: 
-  dodgeDistance: 3
+  dodgeDistance: 5
   dodgeDuration: 0.2
   blockAngle: 120
   blockDamageMultiplier: 0.5
+  Speed: 5
+  Response: 25
   counterWindow: 0.5

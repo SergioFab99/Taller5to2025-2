@@ -36,13 +36,9 @@ public class PlayerAnimation : MonoBehaviour
 
     void Attack(int side)
     {       
-        if (_playerCombat._heldObject != null && _playerCombat._heldObject.GetComponent<Bat>() != null)
+                
         {
-            anim.SetTrigger("AttackBat");
-        }
-        else
-        {
-            float camPitch = _playerCombat.cam.eulerAngles.x;
+            float camPitch = UnityEngine.Camera.main.transform.eulerAngles.x;
             
             if (camPitch > 180f) camPitch -= 360f;
             
@@ -76,7 +72,7 @@ public class PlayerAnimation : MonoBehaviour
     }
     void Update()
     {
-        if (_playerCombat._heldObject != null)
+        /*if (_playerCombat._heldObject != null)
         {
             grab = true;
         }
@@ -84,17 +80,18 @@ public class PlayerAnimation : MonoBehaviour
         {
             grab = false;
         }
-        anim.SetBool("GrabBat", grab);
+        anim.SetBool("GrabBat", grab);*/
 
         
         if (_playerCombat._state.isBlocking)
         {
             anim.SetBool("isBlocking", true);
-            anim.Play("Block");
+            
         }
         else
         {
             anim.SetBool("isBlocking", false);
+            
         }
 
         // Animación de agarre (Grapple) con Q (TEMPORAL)

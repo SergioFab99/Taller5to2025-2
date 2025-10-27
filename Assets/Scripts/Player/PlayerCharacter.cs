@@ -6,22 +6,15 @@ public struct CharacterInput
     public Quaternion Rotation;
     public Vector3 Move;
     public bool Jump;
-    public CrouchInput Crouch;   
     public bool Dash;
 }
 
-public enum CrouchInput
-{
-    None,
-    Toggle,
-    Hold
-}
+
 
 public enum Stance
 {
     Stand,
-    Crouch,
-    Sliding
+    Block    
 }
 
 public enum MovementState
@@ -62,24 +55,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     [SerializeReference]
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
-    public DefaultMoveSettings DefaultCrouchSettings;
+    public DefaultBlockDodgeCounterSettings DefaultBlockSettings;
 
     [SerializeReference]
     [FoldoutGroup("DefaultMovementBehaviourSettings")]
-    public DefaultAirSettings DefaultAirSettings;
+    public DefaultAirSettings DefaultAirSettings;  
+    
 
-    [SerializeReference]
-    [FoldoutGroup("DefaultMovementBehaviourSettings")]
-    public DefaultSlideSettings DefaultSlideSettings;
-
-    [SerializeReference]
-    [FoldoutGroup("DefaultMovementBehaviourSettings")]
-    public DefaultDashSettings DefaultDashSettings;
-
-    [FoldoutGroup("BodySettings")]
+    
     [SerializeField] private CharacterBodySettings BodyStandSettings;
     [FoldoutGroup("BodySettings")]
-    [SerializeField] private CharacterBodySettings BodyCrouchSettings;
+    
 
     [Space]
     [SerializeField] private KinematicCharacterMotor motor;
@@ -130,31 +116,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (_requestedJump && wasResquestedJump)
         {
             _timeSinceJumpRequest = 0f;
-        }
-        var wasRequestedCrouch = _requestedCrouch;
-        _requestedCrouch = input.Crouch switch
-        {
-            CrouchInput.Toggle => !_requestedCrouch,
-            CrouchInput.None => _requestedCrouch,
-            _ => _requestedCrouch
-        };
-
-        if (_requestedCrouch && !wasRequestedCrouch)
-        {
-            _requestedCrouchOnAir = !_state.Grounded;
-        }
-        else if (!_requestedCrouch && wasRequestedCrouch)
-        {
-            _requestedCrouchOnAir = false;
-        }
-
-        if (input.Dash && !DefaultDashSettings._isDashing && _state.Grounded && _requestedMovement.magnitude > 0.1f)
-        {
-
-        }
-
-
-
+        }        
         // Use the real camera transform for raycast direction
         Transform cam = _cameraTransform != null ? _cameraTransform : cameraTarget;
 
@@ -166,10 +128,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             case BehaviourState.Default:
                 var currentHeight = motor.Capsule.height;
-                var cameraTargetHeight = currentHeight *
-                (
-                   _state.Stance is Stance.Stand ? BodyStandSettings.CameraHeight : BodyCrouchSettings.CameraHeight
-                );
+                var cameraTargetHeight = currentHeight * BodyStandSettings.CameraHeight;
+                
                 cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
                 break;
         }
@@ -183,7 +143,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             case BehaviourState.Default:
             
 
-                //Uncrouch
+                /*Uncrouch
                 if (!_requestedCrouch && _state.Stance is not Stance.Stand)
                 {
                     Debug.Log("Uncrouching");
@@ -220,6 +180,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 }
                 else { _state.MovementState = MovementState.Idle; }
                 _lastState = _tempState;
+                */
 
 
                 break;
@@ -236,18 +197,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             
 
                 _tempState = _state;
-                //Crouching
-                if (_requestedCrouch && _state.Stance is Stance.Stand)
-                {
-                    Debug.Log("Crouching");
-                    _state.Stance = Stance.Crouch;
-                    motor.SetCapsuleDimensions
-                    (
-                        radius: motor.Capsule.radius,
-                        height: BodyCrouchSettings.Height,
-                        yOffset: BodyCrouchSettings.Height * 0.5f
-                    );
-                }
+                
 
                 break;
         }
@@ -275,19 +225,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     }
 
     public void PostGroundingUpdate(float deltaTime)
-    {
-        switch (_state.BehaviourState)
-        {
-            case BehaviourState.Default:
-            
-
-                if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Sliding)
-                {
-                    _state.Stance = Stance.Crouch;
-                }
-
-                break;
-        }
+    {        
                 
     }
 
@@ -334,7 +272,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     ) * _requestedMovement.magnitude;
 
 
-                    //Dashing
+                    /*Dashing
                     if (DefaultDashSettings._isDashing)
                     {
                         var dashVel = Vector3.ProjectOnPlane(DefaultDashSettings._dashDirection, motor.CharacterUp).normalized * DefaultDashSettings.dashSpeed;
@@ -344,11 +282,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     else
                     {
                         DefaultDashSettings._isDashing = false;
-                    }
+                    }*/
                 
                 
 
-                    //Start Sliding
+                    /*Start Sliding
                     {
                         bool moving = groundedMovement.sqrMagnitude > 0f;
                         var crouching = _state.Stance is Stance.Crouch;
@@ -384,15 +322,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                             ) * slideSpeed;
 
                         }
-                    }
+                    }*/
 
                     //Move
-                    if (_state.Stance is Stance.Stand or Stance.Crouch)
+                    if (_state.Stance is Stance.Stand or Stance.Block)
                     {
 
-                        float speed = _state.Stance is Stance.Stand ? DefaultStandSettings.Speed : DefaultCrouchSettings.Speed;
+                        float speed = _state.Stance is Stance.Stand ? DefaultStandSettings.Speed : DefaultBlockSettings.Speed;
 
-                        float response = _state.Stance is Stance.Stand ? DefaultStandSettings.Response : DefaultCrouchSettings.Response;
+                        float response = _state.Stance is Stance.Stand ? DefaultStandSettings.Response : DefaultBlockSettings.Response;
 
                         Vector3 targetVelocity = groundedMovement * speed;
                         Vector3 moveVelocity = Vector3.Lerp
@@ -404,7 +342,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                         _state.Acceleration = moveVelocity - currentVelocity;
                         currentVelocity = moveVelocity;
                     }
-                    else // continue sliding
+                    /*else // continue sliding
                     {
                         Debug.Log("Continuing sliding");
                         //Friction
@@ -442,7 +380,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                             Debug.Log("Crouching");
                             Debug.Log("Stop sliding");
                         }
-                    }
+                    }*/
 
 
                 }
@@ -595,5 +533,18 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void AddExternalForce(Vector3 force)
     {
         _externalForces += force;
+    }
+
+    public void setState (bool request)
+    {
+        if (request)
+        {
+            _state.Stance = Stance.Block;
+        }
+        else
+        {
+            _state.Stance = Stance.Stand;
+        }        
+        
     }
 }

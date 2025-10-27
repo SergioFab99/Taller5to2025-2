@@ -39,6 +39,8 @@ public struct CombatInput
 {
     public bool BaseAttack;
     public bool Interact;
+    
+    public bool Dodge;
 
     public bool Blocking;
 }
@@ -65,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
     private bool requestThrow;
     private bool requestInteract;
     private bool requestBlocking;
+    private bool requestDodge;
     #endregion
 
     public event PunchSide OnAttack;
@@ -81,6 +84,8 @@ public class PlayerCombat : MonoBehaviour
     public Transform holdpoint2;//solucion xd revisar luego
     [SerializeField] public GameObject _heldObject;
     private PlayerPickUp PlayerPickUp;
+        
+    public DefaultBlockDodgeCounterSettings DefaultBlockDodgeCounterSettings;
 
 
     public void Initialize(PlayerPickUp playerPickUp)
@@ -96,18 +101,33 @@ public class PlayerCombat : MonoBehaviour
     {
         PlayerPickUp.OnWeaponPickUp -= LinkWeapon;
     }
+
+    
+    private Vector2 _moveInput = Vector2.zero;
+    public void SetMoveInput(Vector2 move) => _moveInput = move;
+
+    // References filled by Player.Start
+    [HideInInspector] public PlayerCharacter playerCharacter;
+    [HideInInspector] public PlayerCamera playerCamera;
+    // Dodge state
+    private bool _isDodging = false;
+    // Counter window
+    private bool _canCounter = false;
+
     public void UpdateInput(CombatInput input)
     {
         requestAttack = input.BaseAttack;
         requestInteract = input.Interact;
         requestBlocking = input.Blocking;
+        requestDodge = input.Dodge;
 
         if (requestAttack) Debug.Log("Requested Attack");
         if (requestInteract) Debug.Log("Requested Interact");
         if (requestBlocking) Debug.Log("Requested Blocking");
+        if (requestDodge) Debug.Log("Requested Dodge");
     }
 
-    //Eliminar cuando holdpoint este bien
+    
     public void Update()
     {
        
@@ -145,30 +165,73 @@ public class PlayerCombat : MonoBehaviour
             }
 
         }
-        while (requestBlocking&& !_state.isBlocking)
+        // Handle block input, but do not allow starting block while dodging
+        if (requestBlocking && !_state.isBlocking && !_isDodging)
         {
             Block();
         }
-        if (!requestBlocking && _state.isBlocking)
+        else if (!requestBlocking && _state.isBlocking)
         {
             _state.isBlocking = false;
             if (_state.playerActionState == PlayerActionState.Blocking)
                 _state.playerActionState = PlayerActionState.Normal;
         }
+        
+        if (requestDodge && _state.isBlocking)
+        {
+            Dodge();
+        }
 
+    }
 
+    
+    public void ReceiveDamage(float damage)
+    {
+        float finalDamage = damage;
+        if (_state.playerActionState == PlayerActionState.Blocking)
+        {
+            finalDamage = damage * 0.5f;             
+        }
+
+        var hc = GetComponent<HealthController>() ?? GetComponentInChildren<HealthController>() ?? GetComponentInParent<HealthController>();
+        if (hc != null)
+        {
+            hc.TakeDamague(finalDamage);
+        }
+        else
+        {
+            Debug.LogWarning("ReceiveDamage: No HealthController found on player to apply damage.");
+        }
     }
 
 
     void Attack()
     {
-        Debug.Log("Attacking");
-        currentWeapon?.Attack();
+       
+
+        
+        if (_canCounter)
+        {
+            Debug.Log("Performing counter attack (spawn sphere)");
+            
+            Vector3 spawnPos = weaponPos != null ? weaponPos.transform.position : transform.position + transform.forward * 1f;
+            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.transform.position = spawnPos;
+            sphere.transform.localScale = Vector3.one * 0.3f;          
+                  
+                        
+            Destroy(sphere, 1.5f);            
+            _canCounter = false;
+            return;
+        }
+
+        
+        currentWeapon.Attack();       
     }
 
     void GrabNThrow()
     {
-        Ray ray = new Ray(cam.position, cam.forward);
+        /*Ray ray = new Ray(cam.position, cam.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange)&& _heldObject == null)
         {
             var grabbable = hit.collider.GetComponent<GrabbableObject>();
@@ -217,11 +280,16 @@ public class PlayerCombat : MonoBehaviour
             if (grabbable != null) grabbable.OnReleased();
             _heldObject = null;
             _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
-        }
+        }*/
     }
 
     void Block()
     {
+        if (_isDodging)
+        {
+            Debug.Log("Block attempt ignored while dodging");
+            return;
+        }
         _state.isBlocking = true;
         _state.playerActionState = PlayerActionState.Blocking;
         Debug.Log("Blocking");
@@ -242,7 +310,7 @@ public class PlayerCombat : MonoBehaviour
                 Destroy(Oldweapon);
             }
             currentWeapon = weapon;
-
+            
             currentWeapon.Initialize(this);
         }
         else
@@ -257,6 +325,95 @@ public class PlayerCombat : MonoBehaviour
         }
 
     }
+    void Dodge()
+    {
+        Debug.Log("Dodging");
+       
+        if (playerCharacter == null)
+        {
+            Debug.LogWarning("Dodge: no PlayerCharacter assigned to PlayerCombat.");
+            return;
+        }
+
+        
+        _state.isBlocking = false;
+        if (_state.playerActionState == PlayerActionState.Blocking)
+            _state.playerActionState = PlayerActionState.Normal;
+
+        
+        if (_moveInput.sqrMagnitude <= 0.01f)
+        {
+            Debug.Log("Dodge cancelled: no input direction.");
+            return;
+        }
+
+        
+        Vector3 dirWorld = Vector3.zero;
+        if (_moveInput.sqrMagnitude > 0.001f)
+        {            
+            if (playerCamera != null && playerCamera._camera != null)
+            {
+                var camRot = playerCamera._camera.transform.rotation;
+                dirWorld = (camRot * new Vector3(_moveInput.x, 0f, _moveInput.y));
+            }
+            else
+            {
+                dirWorld = (transform.right * _moveInput.x + transform.forward * _moveInput.y);
+            }
+        }
+        else
+        {            
+            dirWorld = transform.right;
+        }
+        dirWorld.y = 0f;
+        if (dirWorld.sqrMagnitude < 0.001f) dirWorld = transform.right;
+    dirWorld.Normalize();
+
+    
+    _isDodging = true;
+
+        
+        float distance = DefaultBlockDodgeCounterSettings.dodgeDistance;
+        float duration = DefaultBlockDodgeCounterSettings.dodgeDuration;
+        float speed = distance / duration;
+
+        Vector3 impulse = dirWorld * speed;
+
+        
+        playerCharacter.AddExternalForce(impulse);
+
+        
+        if (playerCamera != null)
+        {
+            playerCamera.SetLookLocked(true);
+            StartCoroutine(EndDodgeAfter(duration));
+        }
+        else
+        {
+            StartCoroutine(EndDodgeAfter(duration));
+        }
+        
+        float counterWindow = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.counterWindow : 0.5f;
+        StartCoroutine(OpenCounterWindow(counterWindow));
+    }
+
+    private IEnumerator EndDodgeAfter(float duration)
+    {
+        _state.playerActionState = PlayerActionState.Normal;
+        yield return new WaitForSeconds(duration);
+        _isDodging = false;
+        if (playerCamera != null) playerCamera.SetLookLocked(false);
+    }
+
+    private IEnumerator OpenCounterWindow(float window)
+    {
+        _canCounter = true;
+        yield return new WaitForSeconds(window);
+        _canCounter = false;
+    }
+
+    
+
 
     public void UnLinkWeapon()
     {
@@ -278,9 +435,9 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public IEnumerator DeactivePunch(Punch punch,float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        punch.ActivateOrDeactivePunch(false);
-    }
+{
+    yield return new WaitForSeconds(duration);
+    punch.ActivateOrDeactivePunch(false);
+}
 
 }
