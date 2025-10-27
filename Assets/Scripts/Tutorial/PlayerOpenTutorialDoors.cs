@@ -15,7 +15,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     {
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
-        //canInteract.SetActive(false);
+        canInteract.SetActive(false);
     }
 
     void Update()
@@ -45,6 +45,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     }
     private void OnDestroy()
     {
+        _inputActions.Disable();
         _inputActions.Dispose();
     }
     private void OnTriggerEnter(Collider other)

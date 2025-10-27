@@ -24,10 +24,10 @@ public class Indications : MonoBehaviour
     }
     private void Update()
     {
-        /*if (!indicationsLife && playerLife.health != playerLife.maxHealth)
+        if (!indicationsLife && playerLife.health != playerLife.maxHealth)
         {
             ChangeToIndicationsOfLife();
-        }*/
+        }
     }
     public void NextIndication()
     {
@@ -81,12 +81,12 @@ public class Indications : MonoBehaviour
     {
         changeIndications = Mathf.Clamp(changeIndications, 0, 7);
         indicationsTitle.text = textsForTitle[changeIndications];
-        indicationsText.text = textsForIndicationsLife[changeIndications];
+        indicationsText.text = textsForIndications[changeIndications];
     }
     public void ChangeToIndicationsOfLife()
     {
         indicationsTitle.text = textsForTitleLife[0];
-        indicationsText.text = textsForIndications[0];
+        indicationsText.text = textsForIndicationsLife[0];
         close.SetActive(true);
         indicationsBackground.SetActive(true);
         next.SetActive(false);

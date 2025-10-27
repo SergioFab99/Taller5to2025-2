@@ -22,6 +22,7 @@ public class InteractText : MonoBehaviour
 
     private void OnDestroy()
     {
+        _inputActions.Disable();
         _inputActions.Dispose();
     }
     void Update()

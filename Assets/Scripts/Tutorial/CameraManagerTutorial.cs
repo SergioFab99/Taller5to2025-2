@@ -13,12 +13,12 @@ public class CameraManagerTutorial : MonoBehaviour
     {
         cameraScene = gameObject.GetComponent<CinemachineCamera>();
         playableDirector = gameObject.GetComponent<PlayableDirector>();
+        cameraPlayer.Priority = 1;
+        cameraScene.Priority = 0;
+        Debug.Log("CameraExiste");
         if (SetUpTutorial.camera1 && cam1)
         {
-            cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
-            cameraPlayer.Priority = 0;
-            cameraScene.Priority = 1;
-            Time.timeScale = 0;
+            StartCameraTour1();
         }
     }
 
@@ -32,6 +32,16 @@ public class CameraManagerTutorial : MonoBehaviour
         {
             Invoke(nameof(StartCameraTour3), 0.3f);
         }
+    }
+    void StartCameraTour1()
+    {
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+        playableDirector.Play();
+        Debug.Log("Camera1inicia");
+        
     }
     void StartCameraTour2()
     {

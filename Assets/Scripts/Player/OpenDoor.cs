@@ -12,17 +12,16 @@ public class OpenDoor : MonoBehaviour
     
     void Start()
     {
-        starMoveDoor = true;
         PushDoor(timeBetweenMove, rotationY);
     }
 
     private void Update()
     {
-        if (test)
+        /*if (test)
         {
             test = false;
             Invoke(nameof(StartOpen), 0.1f);
-        }
+        }*/
     }
     public void CallStartOpen()
     {

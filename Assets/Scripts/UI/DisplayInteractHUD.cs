@@ -6,30 +6,33 @@ public class DisplayInteractHUD : MonoBehaviour
     Coroutine coroutine;
     bool startCoroutine;
     [SerializeField] float timeBetween;
-    [SerializeField] bool starRay;
-    PlayerCombat playerCombat;
-    public DefaultGrabThrowSettings DefaultGrabThrowSettings;
-    public Transform cam;
+    [SerializeField] private PlayerCombat playerCombat;
+    DefaultGrabThrowSettings DefaultGrabThrowSettings;
+    [SerializeField] private Transform cam;
     void Start()
     {
-        playerCombat = GetComponent<PlayerCombat>();
-        cam = playerCombat.cam;
+        playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
+        cam = playerCombat.playerCamera._camera.transform;
         DefaultGrabThrowSettings = playerCombat.DefaultGrabThrowSettings;
         coroutine = StartCoroutine(Display(timeBetween));
     }
 
     void Update()
     {
-        
+        if(cam == null)
+        {
+            cam = playerCombat.playerCamera._camera.transform;
+
+        }
     }
     IEnumerator Display(float timeBetween)
     {
         while (!startCoroutine)
         {
             Ray ray = new Ray(cam.position, cam.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange)) 
             {
-                if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable"))
+                if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
                     var canvas = GameObject.Find("Canvas");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
@@ -51,12 +54,5 @@ public class DisplayInteractHUD : MonoBehaviour
             yield return new WaitForSeconds(0f);
         }
 
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Interactuable"))
-        {
-
-        }
     }
 }

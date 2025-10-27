@@ -8,6 +8,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private List<GameObject> enemiesCheckpoint1 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint2 = new List<GameObject>();
     [SerializeField] private List<GameObject> enemiesCheckpoint3 = new List<GameObject>();
+    public List<HealthController> enemyLife;
     [SerializeField] private GameObject firstEnemy;
     [SerializeField] private GameObject triggerIndication;
     void Awake()
@@ -53,6 +54,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     }
     void FirstEnemies()
     {
+        enemiesActive.Clear();
         enemiesActive = firstsEnemies;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
@@ -60,18 +62,21 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     }
     void EnemiesCheckPoint1()
     {
+        enemiesActive.Clear();
         enemiesActive = enemiesCheckpoint1;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
     }
     void EnemiesCheckPoint2()
     {
+        enemiesActive.Clear();
         enemiesActive = enemiesCheckpoint2;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
     }
     void EnemiesCheckPoint3()
     {
+        enemiesActive.Clear();
         enemiesActive = enemiesCheckpoint3;
         SpawnEnemiesInTutorial();
         SetUpTutorial.unlockMoreEnemies = false;
@@ -83,6 +88,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
             for (int i = 0; i < enemiesActive.Count; i++)
             {
                 enemiesActive[i].SetActive(true);
+                enemyLife.Add(enemiesActive[i].GetComponentInChildren<HealthController>());
             }
         }
         else
