@@ -1022,11 +1022,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4100171539347079509, guid: c8f31c6acc2078247995333c7520620f, type: 3}
   m_PrefabInstance: {fileID: 6715140100370385821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &940281150
+--- !u!114 &940281150 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3454665594819527305, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+  m_PrefabInstance: {fileID: 6715140100370385821}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940281147}
   m_Enabled: 1
@@ -1034,9 +1033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags:
-  - {fileID: 11400000, guid: cc7cb0e883179cd4eace0b10e38a7a46, type: 2}
-  - {fileID: 11400000, guid: a6f2c983f55c83447b9809c2f6517c4a, type: 2}
 --- !u!1 &950165082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,7 +1552,6 @@ MonoBehaviour:
   playerCombat: {fileID: 1325590033}
   playerAnimation: {fileID: 0}
   healthController: {fileID: 0}
-  playerPickUp: {fileID: 0}
   contactDamage: 1
   _characterState:
     Grounded: 0
@@ -2419,6 +2414,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1927599173}
+    - target: {fileID: 3804534893037069960, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_Center.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4847087872006185642, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.376
@@ -2431,6 +2430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5916072774861688886, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: fistWeapon
       value: 
@@ -2439,26 +2442,10 @@ PrefabInstance:
       propertyPath: hitMask.m_Bits
       value: 8192
       objectReference: {fileID: 0}
-    - target: {fileID: 6529874395530400547, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: throwWeapon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6974395615280198026, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8016712450807549269, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6974395615280198026, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4100171539347079509, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 940281150}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f31c6acc2078247995333c7520620f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
