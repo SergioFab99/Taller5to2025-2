@@ -53,11 +53,14 @@ public class PlayerCombat : MonoBehaviour
 
     public CombatState _state;
 
+    public GameObject fistWeapon;
+
     public Weapon currentWeapon;
 
 
     public LayerMask hitMask;
-    
+    public event WeaponPickUp OnWeaponPickUp;
+    public delegate void WeaponPickUp(GameObject Prefab);
 
 
     #region
@@ -83,24 +86,21 @@ public class PlayerCombat : MonoBehaviour
 
     public Transform holdpoint2;//solucion xd revisar luego
     [SerializeField] public GameObject _heldObject;
-    private PlayerPickUp PlayerPickUp;
+
         
     public DefaultBlockDodgeCounterSettings DefaultBlockDodgeCounterSettings;
 
 
-    public void Initialize(PlayerPickUp playerPickUp)
+    public void Initialize()
     {
         _state.CanAttack = true;
         _state.CanGrabOrThrow = true;   
         _state.objectInteractionState = ObjectInteractionState.NotHoldingObject;
         if (currentWeapon != null) currentWeapon.Initialize(this);
-        PlayerPickUp = playerPickUp;
-        PlayerPickUp.OnWeaponPickUp += LinkWeapon;
+
+       
     }
-    public void OnDisable()
-    {
-        PlayerPickUp.OnWeaponPickUp -= LinkWeapon;
-    }
+  
 
     
     private Vector2 _moveInput = Vector2.zero;
@@ -155,16 +155,24 @@ public class PlayerCombat : MonoBehaviour
         }
         if (requestInteract)
         {
-            if (CheckIfCanGraborThrow())
+            if (currentWeapon.Wtype == WeaponType.Fist)
             {
-                GrabNThrow();
+                Debug.Log("PickingUp Object");
+                PickUpWeapon();
+                return;
             }
-            else
+
+           if(currentWeapon != null && currentWeapon.Wtype != WeaponType.Fist && currentWeapon.tagContainer.HasTag("Throwable"))
             {
-                Debug.Log("Cantgraborthrow");
+                Debug.Log("RequestThrow");
+
+                currentWeapon.Throw(cam.forward);
+                LinkWeapon(fistWeapon);
             }
 
         }
+        
+        
         // Handle block input, but do not allow starting block while dodging
         if (requestBlocking && !_state.isBlocking && !_isDodging)
         {
@@ -440,4 +448,24 @@ public class PlayerCombat : MonoBehaviour
     punch.ActivateOrDeactivePunch(false);
 }
 
+
+    public void PickUpWeapon()
+    {
+        var col = Physics.OverlapSphere(weaponPos.transform.position, 2f, hitMask.value, QueryTriggerInteraction.Ignore);
+        if (col != null && col.Length > 0)
+        {
+            Debug.Log("EnterPickUp");
+            foreach (Collider coll in col)
+            {
+                if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("PickUpWeapon"))
+                {
+
+                    Debug.Log("HasPickUpTag");
+                    LinkWeapon(coll.gameObject.GetComponent<PickUpWeapon>().Prefab);
+                    Destroy(coll.gameObject);
+
+                }
+            }
+        }
+    }
 }

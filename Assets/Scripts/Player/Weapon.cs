@@ -18,6 +18,8 @@ public abstract class Weapon : MonoBehaviour
 
     public WeaponSettings settings;
     public WeaponType Wtype;
+
+    public TagContainer tagContainer;
     public virtual void Initialize(PlayerCombat playerCombat)
     {
        
@@ -45,6 +47,11 @@ public abstract class Weapon : MonoBehaviour
     public virtual void CombatTickUpdate(float deltaTime)
     {
 
+    }
+
+    public virtual void Throw(Vector3 direc)
+    {
+        Debug.Log("Maybe this to nothing");
     }
 
 }
