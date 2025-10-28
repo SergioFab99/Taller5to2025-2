@@ -214,9 +214,11 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
                 Debug.Log("index spawnpoints" + spawnPoints.Length);
                 Debug.Log("index prefabType" + prefabType.Length);
                 Debug.Log("spawmning");
-                Instantiate(prefabType[type], spawnPoints[place].transform.position, spawnPoints[place].transform.rotation);
-                Debug.Log("Posicion"+spawnPoints[place].transform.position);
-                Debug.Log("Rotacion"+spawnPoints[place].transform.rotation);
+                Debug.Log("Posicion1" + spawnPoints[place].transform.position);
+                Debug.Log("Rotacion1" + spawnPoints[place].transform.rotation);
+                Instantiate(prefabType[type], spawnPoints[place].gameObject.transform.position, spawnPoints[place].gameObject.transform.rotation);
+                Debug.Log("Posicion2"+spawnPoints[place].transform.position);
+                Debug.Log("Rotacion2"+spawnPoints[place].transform.rotation);
                 Debug.Log("Place" + place);
                 place++;
             }
