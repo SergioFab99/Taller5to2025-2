@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 public class UnlockDoors : MonoBehaviour
 {
-    [SerializeField] private List<HealthController> enemyLife;
+    [SerializeField] private Object[] enemyLife;
+    [SerializeField] private List<HealthController> enemiesLife;
     [SerializeField] private ManagerEnemiesInTutorial enemies;
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
+    public static UnlockDoors instance;
     private void Start()
     {
+        instance = this;
         enemies = GetComponent<ManagerEnemiesInTutorial>();
         doorCollider1.enabled = false;
         doorCollider2.enabled = false;
@@ -15,7 +18,7 @@ public class UnlockDoors : MonoBehaviour
         doorCollider4.enabled = true;
         SetUpTutorial.unlockMoreEnemies = false;
         SetUpTutorial.enemyDefeatCount = 0;
-        enemyLife = enemies.enemyLife;
+        //enemyLife = enemies.enemyLife;
         CountEnemiesDefeated();
     }
     private void Update()
@@ -32,7 +35,7 @@ public class UnlockDoors : MonoBehaviour
             }*/
             try
             {
-                enemyLife = enemies.enemyLife;
+                enemyLife = FindObjectsByType(typeof(HealthController), FindObjectsSortMode.None);
             }
             catch
             {
@@ -43,37 +46,44 @@ public class UnlockDoors : MonoBehaviour
     }
     void CountEnemiesDefeated()
     {
-        for(int i = 0; i < enemyLife.Count; i++)
+        /*for(int i = 0; i < enemyLife.Length; i++)
         {
-            enemyLife[i].OnDead += EnemiesDefated;
-        }
+            enemiesLife.Add(enemyLife[i]);
+            enemyLife[i].GetType(typeof(HealthController)).OnDead += EnemiesDefated;
+        }*/
     }
 
-    void EnemiesDefated()
+    public void EnemiesDefated()
     {
+        /*for (int i = 0; i < enemyLife.Length; i++)
+        {
+            enemyLife[i].OnDead -= EnemiesDefated;
+        }
         SetUpTutorial.enemyDefeatCount++;
         Debug.Log(SetUpTutorial.enemyDefeatCount);
-        for (int i = 0; i < enemyLife.Count; i++)
+
+        for (int i = 0; i < enemies.enemiesActive.Count; i++)
+        {
+            if (enemies.enemyLife[i] == null)
+            {
+                enemies.enemiesActive.Remove(enemies.enemiesActive[i]);
+            }
+        }
+
+        for (int i = 0; i < enemies.enemyLife.Count; i++)
+        {
+            if (enemies.enemyLife[i] == null)
+            {
+                enemies.enemyLife.Remove(enemies.enemyLife[i]);
+            }
+        }
+        for (int i = 0; i < enemyLife.Length; i++)
         {
             if(enemyLife[i] == null)
             {
                 enemyLife.Remove(enemyLife[i]);
             }
-        }
-        for (int i = 0; i < enemies.enemyLife.Count; i++)
-        {
-            if(enemies.enemyLife[i] == null)
-            {
-                enemies.enemyLife.Remove(enemies.enemyLife[i]);
-            }
-        }
-        for (int i = 0; i < enemies.enemiesActive.Count; i++)
-        {
-            if(enemies.enemyLife[i] == null)
-            {
-                enemies.enemiesActive.Remove(enemies.enemiesActive[i]);
-            }
-        }
+        }*/
         if (SetUpTutorial.enemyDefeatCount >= 1 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlocMoreEnemies();
@@ -105,7 +115,8 @@ public class UnlockDoors : MonoBehaviour
     void CanUnlocMoreEnemies()
     {
         SetUpTutorial.unlockMoreEnemies = true;
-        Invoke(nameof(CountEnemiesDefeated), 0.25f);
+        Debug.Log($"unlockEnemies {SetUpTutorial.unlockMoreEnemies}");
+        Invoke(nameof(CountEnemiesDefeated), 0.35f);
     }
     void CanUnlockDoor1()
     {
@@ -126,10 +137,10 @@ public class UnlockDoors : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < enemyLife.Count; i++)
+        /*for (int i = 0; i < enemyLife.Count; i++)
         {
             enemyLife[i].OnDead -= EnemiesDefated;
-        }
+        }*/
     }
 
     void DoorsEnabled()

@@ -7,10 +7,13 @@ public class InteractText : MonoBehaviour
     PlayerInputActions _inputActions;
     [SerializeField] string interactText, noFinal, mayus, quotes;
     [SerializeField] string[] interactTextSeparate;
-    void Start()
+    private void Awake()
     {
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
+    }
+    void Start()
+    {        
         var input = _inputActions.Player;
         interactTMP = gameObject.GetComponent<TMP_Text>();
         interactText = input.Interact.ToString();
@@ -22,7 +25,7 @@ public class InteractText : MonoBehaviour
 
     private void OnDestroy()
     {
-        _inputActions.Disable();
+        //_inputActions.Disable();
         _inputActions.Dispose();
     }
     void Update()

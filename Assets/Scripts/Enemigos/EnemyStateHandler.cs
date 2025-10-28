@@ -82,6 +82,10 @@ public class EnemyStateHandler : MonoBehaviour
         {
             character = GetComponentInChildren<EnemyCharacter>();
         }
+        if (Target == null)
+        {
+            Target = GameObject.FindWithTag("Player").transform;
+        }
     }
 
     public void CurrentStateUpdate()
@@ -213,7 +217,7 @@ public class EnemyStateHandler : MonoBehaviour
     {
         bool useKCC =
             newState == attack || newState == recover ||
-            newState == stunned || newState == block || newState == exposed;
+            newState == stunned || newState == block || newState == exposed || newState == idle;
 
         if (useKCC)
         {
