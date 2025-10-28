@@ -5,6 +5,7 @@ public class UnlockDoors : MonoBehaviour
 {
     [SerializeField] private Object[] enemyLife;
     [SerializeField] private List<HealthController> enemiesLife;
+    [SerializeField] private HealthController enemiesLifes;
     [SerializeField] private ManagerEnemiesInTutorial enemies;
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
     public static UnlockDoors instance;
@@ -50,19 +51,28 @@ public class UnlockDoors : MonoBehaviour
         {
             enemiesLife.Add(enemyLife[i]);
             enemyLife[i].GetType(typeof(HealthController)).OnDead += EnemiesDefated;
+        }
+       foreach(HealthController enemiesLifes in enemyLife)
+        {
+            enemiesLife.Add(enemiesLifes);
+        }
+        for (int i = 0; i < enemyLife.Length; i++)
+        {
+            enemiesLife[i].OnDead += EnemiesDefated;
         }*/
+        
     }
 
     public void EnemiesDefated()
     {
-        /*for (int i = 0; i < enemyLife.Length; i++)
+        /*for (int i = 0; i < enemiesLife.Count; i++)
         {
-            enemyLife[i].OnDead -= EnemiesDefated;
+            enemiesLife[i].OnDead -= EnemiesDefated;
         }
         SetUpTutorial.enemyDefeatCount++;
-        Debug.Log(SetUpTutorial.enemyDefeatCount);
+        Debug.Log(SetUpTutorial.enemyDefeatCount);*/
 
-        for (int i = 0; i < enemies.enemiesActive.Count; i++)
+       /* for (int i = 0; i < enemies.enemiesActive.Count; i++)
         {
             if (enemies.enemyLife[i] == null)
             {
@@ -137,10 +147,10 @@ public class UnlockDoors : MonoBehaviour
 
     private void OnDestroy()
     {
-        /*for (int i = 0; i < enemyLife.Count; i++)
+        for (int i = 0; i < enemiesLife.Count; i++)
         {
-            enemyLife[i].OnDead -= EnemiesDefated;
-        }*/
+            enemiesLife[i].OnDead -= EnemiesDefated;
+        }
     }
 
     void DoorsEnabled()
