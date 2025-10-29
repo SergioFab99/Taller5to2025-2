@@ -17,6 +17,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private int timeBetweenMove;
     public static ManagerEnemiesInTutorial instance;
     Coroutine coroutine;
+    int place;
     void Awake()
     {
         triggerIndication.SetActive(false);
@@ -37,6 +38,9 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         {
             enemiesCheckpoint3[i].SetActive(false);
         }*/
+    }
+    private void Start()
+    {
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             /*enemiesActive.Add(firstEnemy);
@@ -57,7 +61,6 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
             EnemiesCheckPoint3();
         }
     }
-
     void Update()
     {
         /*if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
@@ -76,6 +79,19 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         {
             Invoke(nameof(EnemiesCheckPoint3), 0.2f);
         }*/
+        if (!starSpawn)
+        {
+            StopAllCoroutines();
+        }
+        Debug.Log("startSpawn"+starSpawn);
+        if (SetUpTutorial.checkPoint3)
+        {
+            if (SetUpTutorial.enemyDefeatCount >= 7)
+            {
+                Indications.instance.NextIndication();
+                Indications.instance.ActivateIndications();
+            }
+        }
     }
     void FirstEnemies()
     {
@@ -84,7 +100,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         SpawnEnemiesInTutorial();*/
         starSpawn = true;
         coroutine = StartCoroutine(SpawnEnemy(timeBetweenMove, 3, 0));
-        Debug.Log("Funciona");
+        Debug.Log("Enemigos del principio");
         triggerIndication.SetActive(true);
         SetUpTutorial.unlockMoreEnemies = false;
     }
@@ -94,6 +110,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         enemiesActive = enemiesCheckpoint1;
         SpawnEnemiesInTutorial();*/
         starSpawn = true;
+        Debug.Log("Enemigos checkpoint 1");
         coroutine = StartCoroutine(SpawnEnemy(timeBetweenMove, 7, 0));
         SetUpTutorial.unlockMoreEnemies = false;
     }
@@ -164,20 +181,27 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
             }
         }        
     }
-    int place;
+    
+    public void ChangePlaceOnAwake(int place)
+    {
+        this.place = place;
+    }
     public void CallSpawn()
     {
         
-        Invoke(nameof(StartSpawn), 0f);
+        Invoke(nameof(StartSpawn), 0.05f);
     }
     void StartSpawn()
     {
+        Debug.Log("chekpointSpawn1" + SetUpTutorial.checkPoint1);
+        Debug.Log("unlockMoreEnemies" + SetUpTutorial.unlockMoreEnemies);
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && SetUpTutorial.unlockMoreEnemies)
         {
             Invoke(nameof(FirstEnemies), 0.1f);
         }
         if (SetUpTutorial.checkPoint1 && SetUpTutorial.unlockMoreEnemies)
         {
+            Debug.Log("Empieza coroutine enemigos chekcpoint 1");
             Invoke(nameof(EnemiesCheckPoint1), 0.1f);
         }
         if (SetUpTutorial.checkPoint2 && SetUpTutorial.unlockMoreEnemies)
@@ -197,9 +221,8 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
             if (starSpawn)
             {
                 SpawnPoints(lenght, type);
-                yield return new WaitForSeconds(timeBetweenMove);
                 starSpawn = false;
-                StopCoroutine(coroutine);
+                yield return new WaitForSeconds(timeBetweenMove);
             }
             yield return new WaitForSeconds(0f);
         }
@@ -211,18 +234,10 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         {
             for (int i = 0; i < lenght; i++)
             {
-                Debug.Log("index spawnpoints" + spawnPoints.Length);
-                Debug.Log("index prefabType" + prefabType.Length);
-                Debug.Log("spawmning");
-                Debug.Log("Posicion1" + spawnPoints[place].transform.position);
-                Debug.Log("Rotacion1" + spawnPoints[place].transform.rotation);
                 Instantiate(prefabType[type], spawnPoints[place].gameObject.transform.position, spawnPoints[place].gameObject.transform.rotation);
-                Debug.Log("Posicion2"+spawnPoints[place].transform.position);
-                Debug.Log("Rotacion2"+spawnPoints[place].transform.rotation);
                 Debug.Log("Place" + place);
                 place++;
             }
-            
         }
         else
         {
@@ -250,11 +265,6 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
                     place++;
                 }
                 Instantiate(prefabType[0], spawnPoints[place].transform.position, spawnPoints[place].transform.rotation);
-            }
-            if (SetUpTutorial.enemyDefeatCount >= 7)
-            {
-                Indications.instance.NextIndication();
-                Indications.instance.ActivateIndications();
             }
         }
     }

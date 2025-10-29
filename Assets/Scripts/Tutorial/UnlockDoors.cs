@@ -19,44 +19,60 @@ public class UnlockDoors : MonoBehaviour
         doorCollider4.enabled = true;
         SetUpTutorial.unlockMoreEnemies = false;
         SetUpTutorial.enemyDefeatCount = 0;
+        /*try
+        {
+            Debug.Log("Enemigos");
+            enemyLife = FindObjectsByType(typeof(HealthController), FindObjectsSortMode.None);
+        }
+        catch
+        {
+            Debug.Log("No hay enemigos");
+        }*/
+        
         //enemyLife = enemies.enemyLife;
         CountEnemiesDefeated();
     }
     private void Update()
     {
-        Debug.Log($"Checkpoint1 {SetUpTutorial.checkPoint1}");
+       /* Debug.Log($"Checkpoint1 {SetUpTutorial.checkPoint1}");
         Debug.Log($"Checkpoint2 {SetUpTutorial.checkPoint2}");
         Debug.Log($"Checkpoint3 {SetUpTutorial.checkPoint3}");
-        if(enemyLife == null)
-        {
             /*var enemyLifes = enemyLife;
             if (enemyLifes.TryGetComponent<HealthController>(out HealthController enemies))
             {
                 enemyLife = enemies;
             }*/
-            try
-            {
-                enemyLife = FindObjectsByType(typeof(HealthController), FindObjectsSortMode.None);
-            }
-            catch
-            {
-                Debug.Log("No hay enemigos");
-            }
-        }
+        
+        
         DoorsEnabled();
     }
-    void CountEnemiesDefeated()
+    public void CountEnemiesDefeated()
     {
         /*for(int i = 0; i < enemyLife.Length; i++)
         {
             enemiesLife.Add(enemyLife[i]);
             enemyLife[i].GetType(typeof(HealthController)).OnDead += EnemiesDefated;
-        }
-       foreach(HealthController enemiesLifes in enemyLife)
+        }*/
+
+        /*try
         {
-            enemiesLife.Add(enemiesLifes);
+            Debug.Log("Sí hay enemigos");
+            enemyLife = FindObjectsByType(typeof(HealthController), FindObjectsSortMode.None);
         }
-        for (int i = 0; i < enemyLife.Length; i++)
+        catch
+        {
+            Debug.Log("No hay enemigos");
+        }
+        foreach (HealthController enemiesLifes in enemyLife)
+        {
+            if (enemiesLifes.gameObject.CompareTag("Enemy"))
+            {
+                enemiesLife.Add(enemiesLifes);
+            }
+                    
+           
+        }
+        for (int i = 0; i < enemiesLife.Count; i++)
         {
             enemiesLife[i].OnDead += EnemiesDefated;
         }*/
@@ -67,10 +83,15 @@ public class UnlockDoors : MonoBehaviour
     {
         /*for (int i = 0; i < enemiesLife.Count; i++)
         {
-            enemiesLife[i].OnDead -= EnemiesDefated;
+            if (enemiesLife[i] == null)
+            {
+                enemiesLife[i].OnDead -= EnemiesDefated;
+                enemiesLife.Remove(enemiesLife[i]);
+            }
+                
         }
         SetUpTutorial.enemyDefeatCount++;
-        Debug.Log(SetUpTutorial.enemyDefeatCount);*/
+        Debug.Log(SetUpTutorial.enemyDefeatCount);
 
        /* for (int i = 0; i < enemies.enemiesActive.Count; i++)
         {
@@ -94,39 +115,45 @@ public class UnlockDoors : MonoBehaviour
                 enemyLife.Remove(enemyLife[i]);
             }
         }*/
-        if (SetUpTutorial.enemyDefeatCount >= 1 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
+        if (SetUpTutorial.enemyDefeatCount == 1 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlocMoreEnemies();
+            ManagerEnemiesInTutorial.instance.CallSpawn();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 4 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
+        if (SetUpTutorial.enemyDefeatCount == 4 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlockDoor1();
             CanUnlocMoreEnemies();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 7 && SetUpTutorial.checkPoint1)
+        if (SetUpTutorial.enemyDefeatCount == 7 && SetUpTutorial.checkPoint1)
         {
             CanUnlockDoor2();
             CanUnlocMoreEnemies();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 1 && SetUpTutorial.checkPoint2)
+        if (SetUpTutorial.enemyDefeatCount == 1 && SetUpTutorial.checkPoint2)
         {
             CanUnlockDoor3();
             CanUnlocMoreEnemies();
+            //ManagerEnemiesInTutorial.instance.CallSpawn();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 2 && SetUpTutorial.checkPoint3)
+        if (SetUpTutorial.enemyDefeatCount == 2 && SetUpTutorial.checkPoint3)
         {
             CanUnlocMoreEnemies();
+            ManagerEnemiesInTutorial.instance.CallSpawn();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 4 && SetUpTutorial.checkPoint3)
+        if (SetUpTutorial.enemyDefeatCount == 4 && SetUpTutorial.checkPoint3)
         {
             CanUnlocMoreEnemies();
+            ManagerEnemiesInTutorial.instance.CallSpawn();
         }
     }
     void CanUnlocMoreEnemies()
     {
         SetUpTutorial.unlockMoreEnemies = true;
         Debug.Log($"unlockEnemies {SetUpTutorial.unlockMoreEnemies}");
-        Invoke(nameof(CountEnemiesDefeated), 0.35f);
+
+        //Invoke(nameof(CountEnemiesDefeated), 0.15f);
+
     }
     void CanUnlockDoor1()
     {
@@ -147,10 +174,10 @@ public class UnlockDoors : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < enemiesLife.Count; i++)
+        /*for (int i = 0; i < enemiesLife.Count; i++)
         {
             enemiesLife[i].OnDead -= EnemiesDefated;
-        }
+        }*/
     }
 
     void DoorsEnabled()
@@ -166,7 +193,7 @@ public class UnlockDoors : MonoBehaviour
         }
         if (SetUpTutorial.canOpenDoor3)
         {
-            doorCollider3.enabled = false;
+            doorCollider4.enabled = false;
         }
     }
 }

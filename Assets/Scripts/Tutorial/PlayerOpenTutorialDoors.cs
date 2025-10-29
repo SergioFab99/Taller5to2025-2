@@ -1,18 +1,26 @@
 using UnityEngine;
-
+using System;
+using System.Collections.Generic;
+using KinematicCharacterController;
 public class PlayerOpenTutorialDoors : MonoBehaviour
 {
     [Header("HUD")]
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject canInteract;
-
+    KinematicCharacterMotor kinematic;
     PlayerInputActions _inputActions;
     [SerializeField] private bool onTrigger;
     //[SerializeField] private bool interact;
     [SerializeField] private bool openDoor1, openDoor2;
     private OpenDoor openDoor;
+    private void Awake()
+    {
+        kinematic = GetComponent<KinematicCharacterMotor>();
+        kinematic.enabled = false;
+    }
     void Start()
     {
+        kinematic.enabled = true;
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
         canInteract.SetActive(false);
@@ -21,10 +29,12 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     void Update()
     {
         //UpdateInput();
-        if(onTrigger && Input.GetKeyDown(KeyCode.E))
+        if(onTrigger && Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
         {
             Deactivate();
             ActiveCheckPoints();
+            ManagerEnemiesInTutorial.instance.CallSpawn();
+            
         }
         if (SetUpTutorial.checkPoint2)
         {
@@ -68,6 +78,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         {
             SetUpTutorial.checkPoint3 = true;
             SetUpTutorial.enemyDefeatCount = 0;
+            ManagerEnemiesInTutorial.instance.CallSpawn();
         }
         
     }
@@ -102,14 +113,18 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         {
             SetUpTutorial.camera2 = true;
             SetUpTutorial.checkPoint1 = true;
-            SetUpTutorial.spawnPoint = gameObject.transform.position;
+            Debug.Log("Checkpoint1" + SetUpTutorial.checkPoint1);
+            Debug.Log("Checkpoint2" + SetUpTutorial.checkPoint2);
+            Debug.Log("Checkpoint3" + SetUpTutorial.checkPoint3);
 
         }
         if (SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && openDoor2)
         {
             SetUpTutorial.camera3 = true;
             SetUpTutorial.checkPoint2 = true;
-            SetUpTutorial.spawnPoint = gameObject.transform.position;
+            Debug.Log("Checkpoint1" + SetUpTutorial.checkPoint1);
+            Debug.Log("Checkpoint2" + SetUpTutorial.checkPoint2);
+            Debug.Log("Checkpoint3" + SetUpTutorial.checkPoint3);
         }
     }
 }

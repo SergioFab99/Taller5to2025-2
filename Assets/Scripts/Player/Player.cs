@@ -31,10 +31,12 @@ public class Player : MonoBehaviour
     [SerializeField] float shakeForce;
     [SerializeField] Vector3 velocity;
 
+    [SerializeField] string thisScene;
+
     public void OnDead()
     {
-        
-        //SceneManager.LoadScene("BlockOutTest");
+        thisScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(thisScene);
     }
 
     private void OnDisable()

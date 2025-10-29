@@ -49,7 +49,7 @@ public class HealthController : MonoBehaviour
             {
                 SetUpTutorial.enemyDefeatCount++;
                 UnlockDoors.instance.EnemiesDefated();
-                ManagerEnemiesInTutorial.instance.CallSpawn();
+                //ManagerEnemiesInTutorial.instance.CallSpawn();
                 Debug.Log($"enemigos muertos {SetUpTutorial.enemyDefeatCount}");
             }
             
