@@ -8,7 +8,12 @@ public class UnlockDoors : MonoBehaviour
     [SerializeField] private HealthController enemiesLifes;
     [SerializeField] private ManagerEnemiesInTutorial enemies;
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
+    [SerializeField] private GameObject door4;
     public static UnlockDoors instance;
+    private void Awake()
+    {
+        SetUpTutorial.enemyDefeatCount = 0;
+    }
     private void Start()
     {
         instance = this;
@@ -16,9 +21,9 @@ public class UnlockDoors : MonoBehaviour
         doorCollider1.enabled = false;
         doorCollider2.enabled = false;
         doorCollider3.enabled = false;
+        door4.SetActive(true);
         doorCollider4.enabled = true;
         SetUpTutorial.unlockMoreEnemies = false;
-        SetUpTutorial.enemyDefeatCount = 0;
         /*try
         {
             Debug.Log("Enemigos");
@@ -193,6 +198,7 @@ public class UnlockDoors : MonoBehaviour
         }
         if (SetUpTutorial.canOpenDoor3)
         {
+            door4.SetActive(false);
             doorCollider4.enabled = false;
         }
     }

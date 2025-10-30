@@ -50,7 +50,7 @@ public class Indications : MonoBehaviour
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             changeIndications = 0;
-            ManagerEnemiesInTutorial.instance.ChangePlaceOnAwake(0);
+            
             if (!SetUpTutorial.camera1)
             {
                 ChangeIndications();
@@ -60,7 +60,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint1)
         {
             changeIndications = 5;
-            ManagerEnemiesInTutorial.instance.ChangePlaceOnAwake(4);
+            
             if (!SetUpTutorial.camera2)
             {
                 ChangeIndications();
@@ -70,7 +70,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint2)
         {
             changeIndications = 6;
-            ManagerEnemiesInTutorial.instance.ChangePlaceOnAwake(11);
+            
             if (!SetUpTutorial.camera3)
             {
                 ChangeIndications();
@@ -80,7 +80,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint3)
         {
             changeIndications = 6;
-            ManagerEnemiesInTutorial.instance.ChangePlaceOnAwake(18);
+            
         }
     }
     void ChangeIndications()

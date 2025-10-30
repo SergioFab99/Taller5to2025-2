@@ -46,19 +46,23 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
             /*enemiesActive.Add(firstEnemy);
             SpawnEnemiesInTutorial();*/
             starSpawn = true;
+            ChangePlaceOnAwake(0);
             coroutine = StartCoroutine(SpawnEnemy(timeBetweenMove, 1, 0));
         }
         if (SetUpTutorial.checkPoint1)
         {
-            EnemiesCheckPoint1();
+            ChangePlaceOnAwake(4);
+            Invoke(nameof(EnemiesCheckPoint1), 0.1f);
         }
         if (SetUpTutorial.checkPoint2)
         {
-            EnemiesCheckPoint2();
+            ChangePlaceOnAwake(11);
+            Invoke(nameof(EnemiesCheckPoint2), 0.1f);
         }
         if (SetUpTutorial.checkPoint3)
         {
-            EnemiesCheckPoint3();
+            ChangePlaceOnAwake(18);
+            Invoke(nameof(EnemiesCheckPoint3), 0.2f);
         }
     }
     void Update()
@@ -185,6 +189,8 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     public void ChangePlaceOnAwake(int place)
     {
         this.place = place;
+        Debug.Log("placeCall = " + place);
+        Debug.Log("Place = " + this.place);
     }
     public void CallSpawn()
     {

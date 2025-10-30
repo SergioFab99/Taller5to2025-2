@@ -82,6 +82,10 @@ public class EnemyStateHandler : MonoBehaviour
         {
             character = GetComponentInChildren<EnemyCharacter>();
         }
+        
+    }
+    private void Start()
+    {
         if (Target == null)
         {
             Target = GameObject.FindWithTag("Player").transform;

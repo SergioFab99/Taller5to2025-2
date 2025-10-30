@@ -14101,11 +14101,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1366627352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &838640590 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-  m_PrefabInstance: {fileID: 1186042198}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &844744338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18660,7 +18655,7 @@ PrefabInstance:
       objectReference: {fileID: 1422847162}
     - target: {fileID: 3533889361894481989, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3804534893037069960, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Radius
@@ -18673,6 +18668,10 @@ PrefabInstance:
     - target: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: playerCamera
@@ -25103,8 +25102,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.60742575
-          z: 0.32936934
+          y: -0.6074258
+          z: 0.32936937
           w: -0.4800159
     - Position:
         x: 5.59
@@ -28338,7 +28337,7 @@ MonoBehaviour:
   - Life
   textsForIndicationsLife:
   - You have a life bar of up to 100 hit points and you will die if it reaches 0.
-  playerCamera: {fileID: 197562388}
+  playerCamera: {fileID: 0}
 --- !u!1 &1786043912
 GameObject:
   m_ObjectHideFlags: 0
@@ -32337,7 +32336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab06e121b7b37646992ab246ed5f381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 838640590}
+  player: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
   spawnPoint: {fileID: 882918131}
   spawnPoint1: {fileID: 2126946127}
   spawnPoint2: {fileID: 539322659}

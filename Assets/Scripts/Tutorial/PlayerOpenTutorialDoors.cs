@@ -1,26 +1,20 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using KinematicCharacterController;
 public class PlayerOpenTutorialDoors : MonoBehaviour
 {
     [Header("HUD")]
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject canInteract;
-    KinematicCharacterMotor kinematic;
-    PlayerInputActions _inputActions;
     [SerializeField] private bool onTrigger;
     //[SerializeField] private bool interact;
     [SerializeField] private bool openDoor1, openDoor2;
     private OpenDoor openDoor;
     private void Awake()
     {
-        kinematic = GetComponent<KinematicCharacterMotor>();
-        kinematic.enabled = false;
     }
     void Start()
     {
-        kinematic.enabled = true;
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
         canInteract.SetActive(false);
