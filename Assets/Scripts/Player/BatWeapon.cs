@@ -46,6 +46,8 @@ public class BatWeapon : Weapon
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
+
+        Debug.Log("Perform");
         if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tags))
         {
             if (tags.HasTag("Damagable") && !tags.HasTag("Player"))
@@ -53,6 +55,21 @@ public class BatWeapon : Weapon
                 Debug.Log($"Bat hit {hitInfo.col.name}");
 
                 if (tags.TryGetComponent(out HealthController health))
+                {
+                    health.TakeDamague((settings as BatWeaponSettings).damague);
+                }
+
+            }
+        }
+        else if (hitInfo.col.GetComponentInParent<TagContainer>())
+        {
+            var tags1 = hitInfo.col.GetComponentInParent<TagContainer>();
+
+            if (tags1.HasTag("Damagable") && !tags1.HasTag("Player"))
+            {
+                Debug.Log($"Bat hit {hitInfo.col.name}");
+
+                if (tags1.TryGetComponent(out HealthController health))
                 {
                     health.TakeDamague((settings as BatWeaponSettings).damague);
                 }
@@ -100,5 +117,6 @@ public class BatWeapon : Weapon
         Debug.Log("This do something, Throw");
         var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
         ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
+        ThrowObject.GetComponent<PickUpWeapon>().hited = false;
     }
 }

@@ -39,7 +39,7 @@ public class PickUpWeapon : MonoBehaviour
                     PerformOnHit(hitInfo);
 
 
-                    hited = true;
+                    
                 }
             }
         }
@@ -56,6 +56,7 @@ public class PickUpWeapon : MonoBehaviour
                 if (tags.TryGetComponent(out HealthController health))
                 {
                     health.TakeDamague((settings as BatWeaponSettings).damague);
+
                 }
                 else
                 {
@@ -67,6 +68,23 @@ public class PickUpWeapon : MonoBehaviour
                 }
 
             }
+            hited = true;
+        }
+        else if (hitInfo.col.GetComponentInParent<TagContainer>())
+        {
+            var tags1 = hitInfo.col.GetComponentInParent<TagContainer>();
+
+            if (tags1.HasTag("Damagable") && !tags1.HasTag("Player"))
+            {
+                Debug.Log($"Bat hit {hitInfo.col.name}");
+
+                if (tags1.TryGetComponent(out HealthController health))
+                {
+                    health.TakeDamague((settings as BatWeaponSettings).damague);
+                }
+
+            }
+            hited = true;
         }
     }
 
