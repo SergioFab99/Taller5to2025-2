@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
-using UnityEditor.Animations;
+
 using UnityEngine;
 
 public struct punch

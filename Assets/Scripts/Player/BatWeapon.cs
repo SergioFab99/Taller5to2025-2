@@ -1,5 +1,5 @@
 using System.Collections;
-using UnityEditor.Animations;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +16,8 @@ public class BatWeapon : Weapon
     private Vector3 dir;
     private float swingStartTime;
     public LayerMask hitMask;
+    public event BatAttack OnAttack;
+    public delegate void BatAttack();
 
     public override void Initialize(PlayerCombat playerCombat)
     {
@@ -34,7 +36,7 @@ public class BatWeapon : Weapon
             return;
 
         Debug.Log("Attack");
-
+        OnAttack?.Invoke();
         playerCombat._state.CanAttack = false;
 
         StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
