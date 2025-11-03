@@ -8,4 +8,6 @@ public class FistsWeaponSettings : WeaponSettings
     public float timeToDoublePunch;
     public float AttackDelay;
 
+    
+
 }

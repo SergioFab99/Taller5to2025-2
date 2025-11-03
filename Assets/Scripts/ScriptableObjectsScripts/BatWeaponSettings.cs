@@ -7,5 +7,5 @@ public class BatWeaponSettings : MeleeWeaponSettings
     public float swingRange = 1.5f;
     public float swingDuration = 0.3f;
     public float timeBetweenSwings = 0.5f;
-
+    public float AttackDelay;
 }

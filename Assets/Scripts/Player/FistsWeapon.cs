@@ -64,7 +64,7 @@ public class FistsWeapon : Weapon
                 currentHand = CombatHand.Right;
                 OnAttack?.Invoke(1);
                 var direc = new Vector3(0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc));
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc));
                 
                 break;
 
@@ -72,14 +72,14 @@ public class FistsWeapon : Weapon
                 currentHand = CombatHand.Left;
                 OnAttack?.Invoke(2);
                 var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc2));
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc2));
                 break;
 
             case CombatHand.Left:
                 currentHand = CombatHand.Right;
                 OnAttack?.Invoke(1);
                 var direc3 = new Vector3(0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc3));
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc3));
                 break;
         }
 
@@ -142,17 +142,7 @@ public class FistsWeapon : Weapon
         }
     }
 
-    public IEnumerator MakeShake(float delay,Vector3 direc)
-    {
-        yield return new WaitForSeconds(delay);
-        CameraShake.cameraShakeInstance.Shake(2.4f, direc);
-    }
-
-    public IEnumerator PerfomDelay(float delay, HitInfo hitInfo)
-    {
-        yield return new WaitForSeconds(delay);
-        PerformOnHit(hitInfo);
-    }
+    
 
     void OnDrawGizmos()
     {
