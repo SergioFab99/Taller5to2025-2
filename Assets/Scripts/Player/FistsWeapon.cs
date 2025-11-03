@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public struct punch
 {
@@ -56,43 +57,39 @@ public class FistsWeapon : Weapon
     public override void Attack()
     {
         Debug.Log("Attacking");
+        playerCombat._state.CanAttack = false;      
         switch (currentHand)
         {
             case CombatHand.None:
                 currentHand = CombatHand.Right;
-                playerCombat._state.CanAttack = false;
-                StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
                 OnAttack?.Invoke(1);
+                var direc = new Vector3(0.15f, -0.1f, -0.05f);
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc));
                 
-
-                ActivateOrDeactivePunch(rightPunch,true);
-                StartCoroutine(DeactivePunch(rightPunch,(settings as FistsWeaponSettings).punchDuration));
                 break;
 
             case CombatHand.Right:
                 currentHand = CombatHand.Left;
-                playerCombat._state.CanAttack = false;
-                StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
                 OnAttack?.Invoke(2);
-
-                ActivateOrDeactivePunch(leftPunch, true);
-                StartCoroutine(DeactivePunch(leftPunch, (settings as FistsWeaponSettings).punchDuration));
+                var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc2));
                 break;
 
             case CombatHand.Left:
                 currentHand = CombatHand.Right;
-                playerCombat._state.CanAttack = false;
-                StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
-                timeSinceLastPunch = Time.time;
                 OnAttack?.Invoke(1);
-
-                ActivateOrDeactivePunch(rightPunch, true);
-                StartCoroutine(DeactivePunch(rightPunch, (settings as FistsWeaponSettings).punchDuration));
-
-
+                var direc3 = new Vector3(0.15f, -0.1f, -0.05f);
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).AttackDelay, direc3));
                 break;
+        }
+
+        timeSinceLastPunch = Time.time;
+        StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
+
+        if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+        {
+            var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
+            StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay,hitInfo));
         }
     }
 
@@ -105,168 +102,65 @@ public class FistsWeapon : Weapon
     {
 
     }
-    public void ActivateOrDeactivePunch(punch side,bool trigger)
-    {
-        side.isActive = trigger;
-        if (side.isActive)
-        {
-            hitDone = false;
-            var col = Physics.OverlapSphere(side.pos.position, (settings as FistsWeaponSettings).radius, hitMask.value, QueryTriggerInteraction.Ignore);
-            if (col != null && col.Length > 0)
-            {
-                var distance = (col[0].ClosestPoint(side.pos.position) - side.pos.position).normalized;
-                HitInfo hitInfo = new HitInfo(col[0], col[0].ClosestPoint(side.pos.position), distance, (settings as FistsWeaponSettings).damague);
 
-                PerformOnHit(hitInfo);
-            }
-
-        }
-
-    }
     public override void CombatTickUpdate(float deltaTime)
     {
         if (Time.time - timeSinceLastPunch > (settings as FistsWeaponSettings).timeToDoublePunch)
         {
             currentHand = CombatHand.None;
         }
-
-        if(rightPunch.isActive || leftPunch.isActive)
-        {
-
-            currentPunch = rightPunch.isActive ? rightPunch : leftPunch;
-            if (hitDone)
-            {
-                return;
-            }
-            Vector3 currentPos = currentPunch.pos.position;
-            currentPunch.dir = currentPos - currentPunch.lastPos;
-
-            float dist = currentPunch.dir.magnitude;
-            if (dist > 0.0001f)
-            {
-                RaycastHit hit;
-
-                if (Physics.SphereCast(transform.position, (settings as FistsWeaponSettings).radius,currentPunch.dir.normalized, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
-                {
-                    if (currentPunch.isActive)
-                    {
-                        HitInfo hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
-
-                        PerformOnHit(hitInfo);
-
-                    }
-                }
-            }
-            currentPunch.lastPos = currentPos;
-
-        }
     }
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
-        var enemyCharacter = hitInfo.col.GetComponentInParent<EnemyCharacter>()?.gameObject;
-        if (enemyCharacter != null)
+        
+        if(hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer) )
         {
-
-            if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+            HealthController health;
+            if (tagContainer.HasTag("BodyPart"))
             {
-                Debug.Log("Hitted");
-                var enemy = enemyCharacter.GetComponentInParent<Enemy>();
-                if (enemy != null)
+                Debug.Log("Find bodyPart");
+                var character = hitInfo.col.GetComponentInParent<EnemyCharacter>() ;
+
+                if(character.GetComponent<TagContainer>().HasTag("Damagable"))
                 {
-                    hitInfo.enemyState = enemy.GetEnemyState();
-                    enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
-                   
-                    if (hitInfo.enemyState is BlockState)
-                    {
-                        lifeController.TakeDamague((settings as FistsWeaponSettings).damague / 2);
-
-                    }
-                    else
-                    {
-
-                        lifeController.TakeDamague((settings as FistsWeaponSettings).damague);
-
-                    }
-                }
-                hitDone = true;
-            }
-
-        }
-        else
-        {
-            enemyCharacter = hitInfo.col.GetComponent<EnemyCharacter>()?.gameObject;
-            if (enemyCharacter != null)
-            {
-                if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
-                {
-                    Debug.Log("Hitted");
-                    var enemy = enemyCharacter.GetComponentInParent<Enemy>();
-                    if (enemy != null)
-                    {
-                        hitInfo.enemyState = enemy.GetEnemyState();
-                        enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
-                       
-                        if (hitInfo.enemyState is BlockState)
-                        {
-                            lifeController.TakeDamague((settings as FistsWeaponSettings).damague / 2);
-
-                        }
-                        else
-                        {
-
-                            lifeController.TakeDamague((settings as FistsWeaponSettings).damague);
-
-                        }
-                    }
-
-                   
-                    hitDone = true;
+                    Debug.Log("Find bodyPart and Damagable parent");
+                    health = character.gameObject.GetComponent<HealthController>();
+                    health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
             }
-        }
-        if(hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainerD) && tagContainerD.HasTag("Damagable") && !tagContainerD.HasTag("Player"))
-        {
-            
-                var healhtC = tagContainerD.gameObject.GetComponent<HealthController>();
-                healhtC.TakeDamague((settings as FistsWeaponSettings).damague);
+            else if(tagContainer.HasTag("Damagable"))
+            {
+                health = hitInfo.col.gameObject.GetComponent<HealthController>();
+                health.TakeDamague((settings as FistsWeaponSettings).damague);
+            }
+            else
+            {
+                Debug.Log("This doesnt have ");
+            }
             
         }
     }
 
-    public IEnumerator DeactivePunch(punch punch, float duration)
+    public IEnumerator MakeShake(float delay,Vector3 direc)
     {
-        yield return new WaitForSeconds(duration);
-        ActivateOrDeactivePunch(punch,false);
+        yield return new WaitForSeconds(delay);
+        CameraShake.cameraShakeInstance.Shake(2.4f, direc);
+    }
+
+    public IEnumerator PerfomDelay(float delay, HitInfo hitInfo)
+    {
+        yield return new WaitForSeconds(delay);
+        PerformOnHit(hitInfo);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        if (rightPunch.pos != null && leftPunch.pos != null)
+        if(playerCombat != null)
         {
-            // Dibuja la esfera inicial
-            Gizmos.DrawWireSphere(rightPunch.pos.position, (settings as FistsWeaponSettings).radius);
-            Gizmos.DrawWireSphere(leftPunch.pos.position, (settings as FistsWeaponSettings).radius);
-            // Dibuja el tubo del SphereCast usando la última dirección y distancia calculada
-            Vector3 directionR = rightPunch.dir.normalized;
-            float distR = rightPunch.dir.magnitude;
-            Vector3 directionL = leftPunch.dir.normalized;
-            float distL = leftPunch.dir.magnitude;
-            int steps = 10;
+            Gizmos.DrawLine(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.position  + playerCombat.playerCamera._camera.transform.forward * (settings as FistsWeaponSettings).attackDistance);
 
-            for (int i = 1; i <= steps; i++)
-            {
-                float t = (distR / steps) * i;
-                Vector3 center = rightPunch.pos.position + directionR * t;
-                Gizmos.DrawWireSphere(center, (settings as FistsWeaponSettings).radius);
-            }
-            for (int i = 1; i <= steps; i++)
-            {
-                float t = (distL / steps) * i;
-                Vector3 center = leftPunch.pos.position + directionL * t;
-                Gizmos.DrawWireSphere(center, (settings as FistsWeaponSettings).radius);
-            }
         }
     }
 }

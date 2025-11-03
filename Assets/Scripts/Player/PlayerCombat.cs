@@ -47,9 +47,16 @@ public struct CombatInput
 
 public class PlayerCombat : MonoBehaviour
 {
+    [FoldoutGroup("Positions")]
     public GameObject weaponPos;
+
+    [FoldoutGroup("Positions")]
     public GameObject rightPunchPos;
+
+    [FoldoutGroup("Positions")]
     public GameObject leftPunchPos;
+
+
 
     public CombatState _state;
 
