@@ -18,6 +18,7 @@ public class CameraManagerLevel1 : MonoBehaviour
         cameraScene3.SetActive(false);
         cameraScene4.SetActive(false);
         startCameras += CameraStart;
+        startCam = true;
     }
     void Update()
     {
@@ -30,6 +31,7 @@ public class CameraManagerLevel1 : MonoBehaviour
 
     void CameraStart()
     {
+        Time.timeScale = 0f;
         StartCoroutine(ChangeCamera());
     }
     IEnumerator ChangeCamera()
@@ -38,17 +40,18 @@ public class CameraManagerLevel1 : MonoBehaviour
         {
             cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.Cut;
             cameraScene1.SetActive(true);
-            yield return new WaitForSeconds(timeBetweenCameras);
+            yield return new WaitForSecondsRealtime(timeBetweenCameras);
             cameraScene2.SetActive(true);
             cameraScene1.SetActive(false);
-            yield return new WaitForSeconds(timeBetweenCameras);
+            yield return new WaitForSecondsRealtime(timeBetweenCameras);
             cameraScene3.SetActive(true);
             cameraScene2.SetActive(false);
-            yield return new WaitForSeconds(timeBetweenCameras);
+            yield return new WaitForSecondsRealtime(timeBetweenCameras);
             cameraScene4.SetActive(true);
             cameraScene3.SetActive(false);
-            yield return new WaitForSeconds(timeBetweenCameras);
+            yield return new WaitForSecondsRealtime(timeBetweenCameras);
             cameraScene4.SetActive(false);
+            Time.timeScale = 1f;
             StopAllCoroutines();
             startCam = false;
             yield return new WaitForSeconds(0f);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 public class SpawnEnemiesLvl1 : MonoBehaviour
 {
     [SerializeField] private float timer, maxTimer;
@@ -8,6 +9,7 @@ public class SpawnEnemiesLvl1 : MonoBehaviour
     [SerializeField] private SpawnPointsForEnemies[] spawnfounds;
     [SerializeField] private GameObject[][] enemiesPatron;
     [SerializeField] private GameObject[] patron1, patron2, patron3;
+    [SerializeField] private TMP_Text timeTMP;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,7 +28,8 @@ public class SpawnEnemiesLvl1 : MonoBehaviour
     void FixedUpdate()
     {
         timer -= Time.fixedDeltaTime;
-        if(timer <= 0)
+        timeTMP.text = $"Enemies Spawn in {timer}";
+        if (timer <= 0)
         {
             FindSpawnPoint();
             timer = maxTimer;

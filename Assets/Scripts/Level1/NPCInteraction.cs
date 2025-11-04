@@ -1,16 +1,36 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class NPCInteraction : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public event StartFinish startFinish;
+    public delegate void StartFinish();
+    [SerializeField] private string nextScene;
+    int npcCount;
     void Start()
     {
-        
+        startFinish += FinishLevel1;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Npc"))
+        {
+            npcCount++;
+            Destroy(other.gameObject);
+            startFinish?.Invoke();
+        }
+    }
+
+    void FinishLevel1()
+    {
+        if(npcCount >= 4)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+    }
+    private void OnDestroy()
+    {
+        startFinish += FinishLevel1;
     }
 }

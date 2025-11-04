@@ -605,7 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 5639893373377598887}
   healthController: {fileID: 7875354277584704186}
-  _animations: {fileID: 0}
+  _animations: {fileID: 6697375385693544320}
   _stateHandler: {fileID: 2425512085894206269}
   agent: {fileID: 3557529093066070415}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
@@ -1095,8 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  health: 1
+  maxHealth: 100
+  health: 100
 --- !u!1 &8905978150172342225
 GameObject:
   m_ObjectHideFlags: 0
