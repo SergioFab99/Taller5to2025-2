@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damague: 30
   properties: []
+  shakeForce: 3.5
   durability: 20
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
@@ -21,3 +22,4 @@ MonoBehaviour:
   swingRange: 1.5
   swingDuration: 0.3
   timeBetweenSwings: 0.5
+  AttackDelay: 0.5

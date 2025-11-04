@@ -39,66 +39,53 @@ public class BatWeapon : Weapon
         OnAttack?.Invoke();
         playerCombat._state.CanAttack = false;
 
-        StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
 
-        StartCoroutine(SwingRoutine());
+        StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
+        var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
+        StartCoroutine(MakeShake((settings as BatWeaponSettings).shakeForce, (settings as BatWeaponSettings).AttackDelay, direc2));
+        if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+        {
+            var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
+            StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
+        }
     }
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
 
         Debug.Log("Perform");
-        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tags))
+        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer))
         {
-            if (tags.HasTag("Damagable") && !tags.HasTag("Player"))
+            HealthController health;
+            if (tagContainer.HasTag("BodyPart"))
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
+                Debug.Log("Find bodyPart");
+                var character = hitInfo.col.GetComponentInParent<EnemyCharacter>();
 
-                if (tags.TryGetComponent(out HealthController health))
+                if (character.GetComponent<TagContainer>().HasTag("Damagable"))
                 {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
+                    Debug.Log("Find bodyPart and Damagable parent");
+                    health = character.gameObject.GetComponent<HealthController>();
+                    health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
-
             }
-        }
-        else if (hitInfo.col.GetComponentInParent<TagContainer>())
-        {
-            var tags1 = hitInfo.col.GetComponentInParent<TagContainer>();
-
-            if (tags1.HasTag("Damagable") && !tags1.HasTag("Player"))
+            else if (tagContainer.HasTag("Damagable"))
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
-
-                if (tags1.TryGetComponent(out HealthController health))
-                {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
-                }
-
+                health = hitInfo.col.gameObject.GetComponent<HealthController>();
+                health.TakeDamague((settings as FistsWeaponSettings).damague);
             }
+            else
+            {
+                Debug.Log("This doesnt have ");
+            }
+
         }
     }
 
     public override void CombatTickUpdate(float deltaTime)
     {
-        if (!isSwinging || swingPoint == null) return;
-
-        Vector3 currentPos = swingPoint.position;
-        dir = currentPos - lastPos;
-        float dist = dir.magnitude;
-
-        if (dist > 0.0001f && !hitDone)
-        {
-            RaycastHit hit;
-            if (Physics.SphereCast(lastPos,(settings as BatWeaponSettings).swingRadius, dir.normalized, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
-            {
-
-                HitInfo hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (int)((settings as BatWeaponSettings).damague));
-                PerformOnHit(hitInfo);
-                hitDone = true;
-            }
-        }
-
-        lastPos = currentPos;
+        
+       
     }
     private IEnumerator SwingRoutine()
     {

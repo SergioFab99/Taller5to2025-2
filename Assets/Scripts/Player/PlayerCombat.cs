@@ -47,9 +47,16 @@ public struct CombatInput
 
 public class PlayerCombat : MonoBehaviour
 {
+    [FoldoutGroup("Positions")]
     public GameObject weaponPos;
+
+    [FoldoutGroup("Positions")]
     public GameObject rightPunchPos;
+
+    [FoldoutGroup("Positions")]
     public GameObject leftPunchPos;
+
+
 
     public CombatState _state;
 
@@ -220,15 +227,9 @@ public class PlayerCombat : MonoBehaviour
         
         if (_canCounter)
         {
-            Debug.Log("Performing counter attack (spawn sphere)");
+            Debug.Log("Performing counter attack");
             
-            Vector3 spawnPos = weaponPos != null ? weaponPos.transform.position : transform.position + transform.forward * 1f;
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.transform.position = spawnPos;
-            sphere.transform.localScale = Vector3.one * 0.3f;          
-                  
-                        
-            Destroy(sphere, 1.5f);            
+            currentWeapon.Attack();       
             _canCounter = false;
             return;
         }
