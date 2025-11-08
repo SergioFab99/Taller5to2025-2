@@ -6,7 +6,7 @@ public class StunState1 : IEnemyState
 {
     private EnemyStateHandler ai;
     private float stunTimer;
-    private const float stunDuration = 1.5f;
+    private float stunDuration = 1.5f;
 
     public StunState1(EnemyStateHandler handler)
     {
@@ -47,6 +47,13 @@ public class StunState1 : IEnemyState
         yield return new WaitForSeconds(0.25f); 
         ai.SetState(ai.GetBlockState());
     }
+
+    public void ExtendStun(float extraTime)
+    {
+        stunTimer = Mathf.Min(stunTimer + extraTime, 4f);
+        Debug.Log($"{ai.name}: Stun extended by {extraTime:F1}s (remaining = {stunTimer:F1})");
+    }
+
 
     public void OnExit()
     {

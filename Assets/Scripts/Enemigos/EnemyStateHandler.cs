@@ -192,21 +192,19 @@ public class EnemyStateHandler : MonoBehaviour
             agent.SetDestination(Target.position);
     }
 
-    public void Knockback(Vector3 hitDirection)
+    public void Knockback(Vector3 hitDirection, float forceMultiplier = 1f)
     {
-        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce}");
+        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce * forceMultiplier}");
 
         if (currentState == block)
-        {
-            Debug.Log($"{name}: Knockback ignored (currently blocking).");
-            return;
-        }
+            forceMultiplier *= 0.8f;
 
         StopMovement();
         hitDirection.y = 0f;
 
-        Debug.Log($"{name}: Adding external force {hitDirection.normalized * knockbackForce}");
-        character.AddExternalForce(hitDirection.normalized * knockbackForce);
+        Vector3 force = hitDirection.normalized * (knockbackForce * forceMultiplier);
+        Debug.Log($"{name}: Adding external force {force}");
+        character.AddExternalForce(force);
     }
 
     public void StateMovement(IEnemyState newState)
@@ -344,7 +342,6 @@ public class EnemyStateHandler : MonoBehaviour
     //----------------------DAMAGE------------------------
     private void HandleHitEvent(float delta)
     {
-        Debug.Log($"{name}: HandleHitEvent called with delta={delta} in state {currentState?.GetType().Name}");
         if (delta >= 0f) return;
 
         Vector3 hitDir = Vector3.zero;
@@ -377,6 +374,7 @@ public class EnemyStateHandler : MonoBehaviour
         {
             Debug.Log($"{name}: Extending block duration.");
             block.ExtendBlock();
+            Knockback(hitDir);
             return;
         }
 
@@ -390,6 +388,7 @@ public class EnemyStateHandler : MonoBehaviour
         if (currentState == stunned)
         {
             Debug.Log($"{name}: already stunned.");
+            stunned.ExtendStun(0.8f);
             Knockback(hitDir);
             return;
         }
