@@ -6,7 +6,7 @@ public class MeleeWeaponSettings : WeaponSettings
 {
     public int durability;
 
-    public Vector3 position;
+    public Vector3 box;
 
     public Vector3 rotation;
 

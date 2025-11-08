@@ -43,9 +43,16 @@ public class BatWeapon : Weapon
         StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
         var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
         StartCoroutine(MakeShake((settings as BatWeaponSettings).shakeForce, (settings as BatWeaponSettings).AttackDelay, direc2));
-        if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+        /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+         {
+             var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
+             StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
+         } */
+        Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
+        foreach (Collider col in cols)
         {
-            var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
+           
+            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague);
             StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
         }
     }
@@ -57,7 +64,7 @@ public class BatWeapon : Weapon
         if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer))
         {
             HealthController health;
-            if (tagContainer.HasTag("BodyPart"))
+            /* if (tagContainer.HasTag("BodyPart"))
             {
                 Debug.Log("Find bodyPart");
                 var character = hitInfo.col.GetComponentInParent<EnemyCharacter>();
@@ -68,11 +75,11 @@ public class BatWeapon : Weapon
                     health = character.gameObject.GetComponent<HealthController>();
                     health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
-            }
-            else if (tagContainer.HasTag("Damagable"))
+            } */
+            if (tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
             {
                 health = hitInfo.col.gameObject.GetComponent<HealthController>();
-                health.TakeDamague((settings as FistsWeaponSettings).damague);
+                health.TakeDamague((settings as BatWeaponSettings).damague);
             }
             else
             {
@@ -105,5 +112,15 @@ public class BatWeapon : Weapon
         var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
         ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
         ThrowObject.GetComponent<PickUpWeapon>().hited = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        if (playerCombat != null)
+        {
+            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box);
+
+        }
     }
 }

@@ -56,6 +56,8 @@ public class PlayerCombat : MonoBehaviour
     [FoldoutGroup("Positions")]
     public GameObject leftPunchPos;
 
+    public GameObject hitPoint;
+
 
 
     public CombatState _state;
