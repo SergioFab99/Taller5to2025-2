@@ -193,6 +193,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &155830102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 155830103}
+  m_Layer: 0
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &155830103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155830102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.354, z: 1.195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 802158619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214790573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4847087872006185642, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.95
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Name
@@ -1530,6 +1561,10 @@ PrefabInstance:
       propertyPath: cameraTarget
       value: 
       objectReference: {fileID: 802158619}
+    - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: hitPoint
+      value: 
+      objectReference: {fileID: 155830102}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: weaponPos
       value: 
@@ -1699,6 +1734,9 @@ PrefabInstance:
     - {fileID: 964814893275075425, guid: c8f31c6acc2078247995333c7520620f, type: 3}
     - {fileID: 459955004247726431, guid: c8f31c6acc2078247995333c7520620f, type: 3}
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8834147580888674902, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 155830103}
     - targetCorrespondingSourceObject: {fileID: 5971734252669438905, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1017918243}
@@ -2260,6 +2298,7 @@ MonoBehaviour:
   weaponPos: {fileID: 0}
   rightPunchPos: {fileID: 0}
   leftPunchPos: {fileID: 0}
+  hitPoint: {fileID: 0}
   _state:
     playerActionState: 0
     objectInteractionState: 0

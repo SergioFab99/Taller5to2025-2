@@ -57,7 +57,7 @@ public class BatWeapon : Weapon
         if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer))
         {
             HealthController health;
-            if (tagContainer.HasTag("BodyPart"))
+            /* if (tagContainer.HasTag("BodyPart"))
             {
                 Debug.Log("Find bodyPart");
                 var character = hitInfo.col.GetComponentInParent<EnemyCharacter>();
@@ -68,8 +68,8 @@ public class BatWeapon : Weapon
                     health = character.gameObject.GetComponent<HealthController>();
                     health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
-            }
-            else if (tagContainer.HasTag("Damagable"))
+            } */
+            if (tagContainer.HasTag("Damagable"))
             {
                 health = hitInfo.col.gameObject.GetComponent<HealthController>();
                 health.TakeDamague((settings as FistsWeaponSettings).damague);
@@ -105,5 +105,15 @@ public class BatWeapon : Weapon
         var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
         ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
         ThrowObject.GetComponent<PickUpWeapon>().hited = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        if (playerCombat != null)
+        {
+            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box);
+
+        }
     }
 }

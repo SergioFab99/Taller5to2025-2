@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
-
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -86,11 +86,21 @@ public class FistsWeapon : Weapon
         timeSinceLastPunch = Time.time;
         StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
 
-        if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+        /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+         {
+             var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
+             StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay,hitInfo));
+         } */
+
+        Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
+        foreach (Collider col in cols)
         {
-            var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
-            StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay,hitInfo));
+            Vector3 fist = ((currentHand == CombatHand.None) || (currentHand == CombatHand.Right)) ? playerCombat.rightPunchPos.transform.position : playerCombat.leftPunchPos.transform.position;
+            var hitInfo = new HitInfo(col,col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague);
+            PerformOnHit(hitInfo);
         }
+
+
     }
 
     public override void LinkWeapon()
@@ -149,7 +159,7 @@ public class FistsWeapon : Weapon
         Gizmos.color = Color.green;
         if(playerCombat != null)
         {
-            Gizmos.DrawLine(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.position  + playerCombat.playerCamera._camera.transform.forward * (settings as FistsWeaponSettings).attackDistance);
+            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box);
 
         }
     }
