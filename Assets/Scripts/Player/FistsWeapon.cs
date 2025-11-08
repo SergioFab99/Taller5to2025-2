@@ -97,7 +97,7 @@ public class FistsWeapon : Weapon
         {
             Vector3 fist = ((currentHand == CombatHand.None) || (currentHand == CombatHand.Right)) ? playerCombat.rightPunchPos.transform.position : playerCombat.leftPunchPos.transform.position;
             var hitInfo = new HitInfo(col,col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague);
-            PerformOnHit(hitInfo);
+            StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay,hitInfo));
         }
 
 
@@ -127,7 +127,7 @@ public class FistsWeapon : Weapon
         if(hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer) )
         {
             HealthController health;
-            if (tagContainer.HasTag("BodyPart"))
+           /* if (tagContainer.HasTag("BodyPart"))
             {
                 Debug.Log("Find bodyPart");
                 var character = hitInfo.col.GetComponentInParent<EnemyCharacter>() ;
@@ -138,8 +138,8 @@ public class FistsWeapon : Weapon
                     health = character.gameObject.GetComponent<HealthController>();
                     health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
-            }
-            else if(tagContainer.HasTag("Damagable"))
+            } */
+            if(tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
             {
                 health = hitInfo.col.gameObject.GetComponent<HealthController>();
                 health.TakeDamague((settings as FistsWeaponSettings).damague);
