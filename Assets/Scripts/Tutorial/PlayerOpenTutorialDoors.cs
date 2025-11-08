@@ -6,9 +6,10 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject canInteract;
+    [SerializeField] private GameObject bat2;
     [SerializeField] private bool onTrigger;
     //[SerializeField] private bool interact;
-    [SerializeField] private bool openDoor1, openDoor2;
+    [SerializeField] private bool openDoor1, openDoor2, unlockFinalEnemies;
     private OpenDoor openDoor;
     private void Awake()
     {
@@ -18,6 +19,16 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
         canInteract.SetActive(false);
+        if (SetUpTutorial.checkPoint3)
+        {
+            unlockFinalEnemies = true;
+            bat2.SetActive(true);
+        }
+        else
+        {
+            unlockFinalEnemies = false;
+            bat2.SetActive(false);
+        }
     }
 
     void Update()
@@ -36,6 +47,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint3)
         {
+            SetUpTutorial.checkPoint1 = false;
             SetUpTutorial.checkPoint2 = false;
         }
     }
@@ -70,9 +82,15 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         }
         if (other.gameObject.CompareTag("CheckPoint3"))
         {
+            bat2.SetActive(true);
             SetUpTutorial.checkPoint3 = true;
             SetUpTutorial.enemyDefeatCount = 0;
-            ManagerEnemiesInTutorial.instance.CallSpawn();
+            if (!unlockFinalEnemies)
+            {
+                UnlockDoors.instance.CanUnlocMoreEnemies();
+                ManagerEnemiesInTutorial.instance.CallSpawn();
+                unlockFinalEnemies = true;
+            }
         }
         
     }

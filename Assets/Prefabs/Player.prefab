@@ -1987,7 +1987,6 @@ GameObject:
   - component: {fileID: 9106849588083348082}
   - component: {fileID: 8016712450807549269}
   - component: {fileID: 1280684948306544769}
-  - component: {fileID: 1024397908263437314}
   - component: {fileID: 3637376509325928319}
   m_Layer: 9
   m_Name: Character
@@ -2164,23 +2163,6 @@ MonoBehaviour:
   timeBetween: 0.2
   playerCombat: {fileID: 0}
   cam: {fileID: 0}
---- !u!114 &1024397908263437314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5726119059286108044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72aab0d4646411a49a4f3301c32bf130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  canInteract: {fileID: 0}
-  onTrigger: 0
-  openDoor1: 0
-  openDoor2: 0
 --- !u!54 &3637376509325928319
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -94,6 +94,7 @@ public class CameraManagerTutorial : MonoBehaviour
         }
         else
         {
+            Indications.instance.NextIndication();
             Indications.indicationsLifeWithCamera = true;
             Indications.instance.ChangeToIndicationsOfLife();
         }

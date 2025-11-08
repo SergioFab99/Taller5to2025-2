@@ -91,6 +91,7 @@ public class Indications : MonoBehaviour
     }
     public void ChangeToIndicationsOfLife()
     {
+        playerCamera.SetLookLocked(true);
         indicationsTitle.text = textsForTitleLife[0];
         indicationsText.text = textsForIndicationsLife[0];
         close.SetActive(true);
@@ -140,6 +141,7 @@ public class Indications : MonoBehaviour
             if (SetUpTutorial.checkPoint2 && indicationsLifeWithCamera)
             {
                 ActivateIndications();
+                indicationsLifeWithCamera = false;
             }
         }
         if(changeIndications == 7)

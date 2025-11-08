@@ -10,6 +10,7 @@ public class UnlockDoors : MonoBehaviour
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
     [SerializeField] private GameObject door4;
     public static UnlockDoors instance;
+    bool unlockedFinalEnemies;
     private void Awake()
     {
         SetUpTutorial.enemyDefeatCount = 0;
@@ -135,10 +136,11 @@ public class UnlockDoors : MonoBehaviour
             CanUnlockDoor2();
             CanUnlocMoreEnemies();
         }
-        if (SetUpTutorial.enemyDefeatCount == 1 && SetUpTutorial.checkPoint2)
+        if (SetUpTutorial.enemyDefeatCount == 1 && SetUpTutorial.checkPoint2 && !unlockedFinalEnemies)
         {
             CanUnlockDoor3();
-            CanUnlocMoreEnemies();
+            //CanUnlocMoreEnemies();
+            unlockedFinalEnemies = true;
             //ManagerEnemiesInTutorial.instance.CallSpawn();
         }
         if (SetUpTutorial.enemyDefeatCount == 2 && SetUpTutorial.checkPoint3)
@@ -152,7 +154,7 @@ public class UnlockDoors : MonoBehaviour
             ManagerEnemiesInTutorial.instance.CallSpawn();
         }
     }
-    void CanUnlocMoreEnemies()
+    public void CanUnlocMoreEnemies()
     {
         SetUpTutorial.unlockMoreEnemies = true;
         Debug.Log($"unlockEnemies {SetUpTutorial.unlockMoreEnemies}");
