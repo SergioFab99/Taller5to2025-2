@@ -1,5 +1,6 @@
 using UnityEngine;
 using KinematicCharacterController;
+using System.Collections;
 
 public struct CharacterInput
 {
@@ -143,44 +144,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             case BehaviourState.Default:
             
 
-                /*Uncrouch
-                if (!_requestedCrouch && _state.Stance is not Stance.Stand)
-                {
-                    Debug.Log("Uncrouching");
-                    motor.SetCapsuleDimensions
-                    (
-                        radius: motor.Capsule.radius,
-                        height: BodyStandSettings.Height,
-                        yOffset: BodyStandSettings.Height * 0.5f
-                    );
-
-                    Vector3 pos = motor.TransientPosition;
-                    Quaternion rot = motor.TransientRotation;
-                    LayerMask layers = motor.CollidableLayers;
-                    if (motor.CharacterOverlap(pos, rot, _uncrouchOverlapResults, layers, QueryTriggerInteraction.Ignore) > 0)
-                    {
-                        _requestedCrouch = true;
-                        motor.SetCapsuleDimensions
-                        (
-                            radius: motor.Capsule.radius,
-                            height: BodyCrouchSettings.Height,
-                            yOffset: BodyCrouchSettings.Height * 0.5f
-                        );
-                    }
-                    else
-                    {
-                        _state.Stance = Stance.Stand;
-                    }
-                }
-                _state.Grounded = motor.GroundingStatus.IsStableOnGround;
-                _state.Velocity = motor.Velocity;
-                if (_requestedMovement.magnitude >= 0.1f)
-                {
-                    _state.MovementState = MovementState.Moving;
-                }
-                else { _state.MovementState = MovementState.Idle; }
-                _lastState = _tempState;
-                */
+                
 
 
                 break;
@@ -258,7 +222,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         switch (_state.BehaviourState)
         {
             case BehaviourState.Default:
-            
+
 
                 _state.Acceleration = Vector3.zero;
                 if (motor.GroundingStatus.IsStableOnGround)
@@ -283,8 +247,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     {
                         DefaultDashSettings._isDashing = false;
                     }*/
-                
-                
+
+
 
                     /*Start Sliding
                     {
@@ -505,8 +469,106 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 break;
         }
 
-       
+
     }
+    
+    
+    public IEnumerator PerformArcMoveCoroutine(Transform target, float dodgeRange, float dodgeDuration, PlayerCamera cameraTransform, System.Action onComplete, int directionOverride = 0)
+    {
+        if (target == null)
+        {
+            onComplete?.Invoke();
+            yield break;
+        }
+
+        float playerY = transform.position.y;
+        Vector3 targetPos = target.position;
+
+        Vector3 rel = transform.position - targetPos;
+        Vector3 relHorizontal = new Vector3(rel.x, 0f, rel.z);
+        float startAngle = Mathf.Atan2(relHorizontal.z, relHorizontal.x);
+
+        float targetDistance = relHorizontal.magnitude;
+        float rawRadius = targetDistance * 0.6f;
+        float minRadius = 0.5f;
+        float maxRadius = Mathf.Max(1f, dodgeRange * 0.9f);
+        float radius = Mathf.Clamp(rawRadius, minRadius, maxRadius);
+
+    float signed = Vector3.SignedAngle(transform.forward, relHorizontal.normalized, Vector3.up);
+    int dirSign = directionOverride != 0 ? directionOverride : (signed >= 0f ? 1 : -1);
+
+        float normalized = Mathf.Clamp01(targetDistance / dodgeRange);
+        float closeness = 1f - normalized;
+        float minAngle = Mathf.PI * 0.5f;
+        float maxAngle = Mathf.PI;
+        float angleSpan = Mathf.Lerp(minAngle, maxAngle, closeness);
+        float endAngle = startAngle + dirSign * angleSpan;
+
+        float elapsed = 0f;
+        int largeDiffFrames = 0;
+        const float largeDiffThreshold = 0.6f; 
+        const int framesToWarn = 6;
+
+        while (elapsed < dodgeDuration)
+        {
+            float dt = Mathf.Max(Time.deltaTime, 0.0001f);
+            float t = elapsed / dodgeDuration;
+            float angle = Mathf.Lerp(startAngle, endAngle, t);
+
+            Vector3 desiredPos = targetPos + new Vector3(Mathf.Cos(angle) * radius, 0f, Mathf.Sin(angle) * radius);
+            desiredPos.y = playerY;
+
+            
+            Vector3 currentMotorPos = motor.TransientPosition;
+            Vector3 desiredVel = (desiredPos - currentMotorPos) / dt;
+
+            
+           
+
+           
+            float diff = Vector3.Distance(desiredPos, currentMotorPos);
+            if (diff > largeDiffThreshold)
+            {
+                largeDiffFrames++;
+            }
+            else
+            {
+                largeDiffFrames = 0;
+            }
+            if (largeDiffFrames >= framesToWarn)
+            {
+                
+                largeDiffFrames = 0;
+            }
+
+            
+            motor.BaseVelocity = desiredVel;
+
+            
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        float finalAngle = endAngle;
+        Vector3 finalPos = targetPos + new Vector3(Mathf.Cos(finalAngle) * radius, 0f, Mathf.Sin(finalAngle) * radius);
+        finalPos.y = playerY;
+
+        
+        motor.BaseVelocity = Vector3.zero;
+        SetPosition(finalPos, killvelocity: true);
+
+        Vector3 lookDir = targetPos - transform.position;
+        lookDir.y = 0f;
+        if (lookDir.sqrMagnitude > 0.0001f)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+        
+        onComplete?.Invoke();
+    }
+
+
 
     public void SetPosition(Vector3 position, bool killvelocity = true)
     {
