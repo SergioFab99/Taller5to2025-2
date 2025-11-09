@@ -83,14 +83,14 @@ public class PlayerAudio : MonoBehaviour
     {
         bool moving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
                       Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-        bool running = Input.GetKey(KeyCode.LeftShift);
+        //bool running = Input.GetKey(KeyCode.LeftShift);
 
         MoveState desired = MoveState.None;
 
         if (moving)
         {
             if (drunkWalk) desired = MoveState.DrunkWalk;
-            else desired = running ? MoveState.Run : MoveState.Walk;
+           // else desired = running ? MoveState.Run : MoveState.Walk;
         }
 
         if (desired != currentState)
