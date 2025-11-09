@@ -36,7 +36,7 @@ public class FistsWeapon : Weapon
     public event PunchSide OnAttack;
     public delegate void PunchSide(int hand);
     private bool hitDone;
-
+    [SerializeField] PlayerAudio playerAudio;
 
 
     [ShowInInspector]private punch rightPunch = new punch();
@@ -180,13 +180,13 @@ public class FistsWeapon : Weapon
                     if (hitInfo.enemyState is BlockState)
                     {
                         lifeController.TakeDamague((settings as FistsWeaponSettings).damague / 2);
-
+                        playerAudio.PlayAttack();
                     }
                     else
                     {
 
                         lifeController.TakeDamague((settings as FistsWeaponSettings).damague);
-
+                        playerAudio.PlayAttack();
                     }
                 }
                 hitDone = true;
@@ -210,13 +210,13 @@ public class FistsWeapon : Weapon
                         if (hitInfo.enemyState is BlockState)
                         {
                             lifeController.TakeDamague((settings as FistsWeaponSettings).damague / 2);
-
+                            playerAudio.PlayAttack();
                         }
                         else
                         {
 
                             lifeController.TakeDamague((settings as FistsWeaponSettings).damague);
-
+                            playerAudio.PlayAttack();
                         }
                     }
 

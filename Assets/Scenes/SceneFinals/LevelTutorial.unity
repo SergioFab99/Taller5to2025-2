@@ -5090,6 +5090,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &266212091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266212080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eaff5efb00f3340b7ff367a4ceb9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxVolume: 1
+  loopVolume: 1
+  walkNormal: {fileID: 8300000, guid: b31714376bd46404eac4fc33c30a1050, type: 3}
+  walkDirt: {fileID: 0}
+  runNormal: {fileID: 8300000, guid: 4a361fb75fa89814790d8059fed07ba0, type: 3}
+  runDirt: {fileID: 0}
+  drunkWalkNormal: {fileID: 0}
+  drunkWalkDirt: {fileID: 0}
+  lowHPBreathing: {fileID: 8300000, guid: fdfff0ea3e70de442a6079ce593acf0a, type: 3}
+  jumpClip: {fileID: 8300000, guid: edecc1913adc6e24fa4b1f8ce36b60a2, type: 3}
+  attackClip: {fileID: 8300000, guid: afe72169ccaeef04ca65186a1a5f0f3d, type: 3}
+  damage1: {fileID: 0}
+  damage2: {fileID: 0}
+  damage3: {fileID: 0}
+  damageBlockedClip: {fileID: 0}
 --- !u!4 &267585517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
@@ -18597,6 +18624,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 266212090}
+    - targetCorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 266212091}
   m_SourcePrefab: {fileID: 100100000, guid: c8f31c6acc2078247995333c7520620f, type: 3}
 --- !u!4 &1186042199 stripped
 Transform:
@@ -25012,8 +25042,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
