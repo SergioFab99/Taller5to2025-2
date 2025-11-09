@@ -72,6 +72,8 @@ public class BlockState1 : IEnemyState
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor,
         Vector3 _requestedMovement, EnemySettingsList settings, ref float _timeSinceUngrounded)
     {
-        return Vector3.zero;
+        Vector3 vel = motor.BaseVelocity;
+        vel = Vector3.Lerp(vel, Vector3.zero, deltaTime * 2f);
+        return vel;
     }
 }
