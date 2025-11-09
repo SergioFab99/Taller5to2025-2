@@ -19020,10 +19020,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1024397908263437314, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: bat2
-      value: 
-      objectReference: {fileID: 761808554}
     - target: {fileID: 2934200553639028973, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: _camera
       value: 
@@ -19044,6 +19040,10 @@ PrefabInstance:
       propertyPath: DefaultVelocity.z
       value: -0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bat2
+      value: 
+      objectReference: {fileID: 761808554}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23318,7 +23318,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.44508657
+          x: -0.4450866
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
