@@ -99,7 +99,14 @@ public class AttackState1 : IEnemyState
         toTarget.y = 0f;
         if (toTarget.sqrMagnitude < 0.001f) return currentRotation;
 
-        Quaternion desired = Quaternion.LookRotation(toTarget.normalized, motor.CharacterUp);
+        Vector3 facing = toTarget.normalized;
+
+        if (ai.HasStatus(StatusEffect.Drunk))
+        {
+            facing = Quaternion.Euler(ai.drunkRotationOffset) * facing;
+        }
+
+        Quaternion desired = Quaternion.LookRotation(facing, motor.CharacterUp);
         return Quaternion.Slerp(currentRotation, desired, deltaTime * 10f);
     }
 
