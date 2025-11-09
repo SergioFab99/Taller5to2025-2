@@ -68,6 +68,10 @@ public class PlayerCombat : MonoBehaviour
 
 
     public LayerMask hitMask;
+
+    public LayerMask EnemyMask;
+
+    
     public event WeaponPickUp OnWeaponPickUp;
     public delegate void WeaponPickUp(GameObject Prefab);
 
@@ -122,6 +126,8 @@ public class PlayerCombat : MonoBehaviour
     private bool _isDodging = false;
     // Counter window
     private bool _canCounter = false;
+    
+    private float _lastDodgeTime = 0f;
 
     public void UpdateInput(CombatInput input)
     {
@@ -182,7 +188,7 @@ public class PlayerCombat : MonoBehaviour
         }
         
         
-        // Handle block input, but do not allow starting block while dodging
+        
         if (requestBlocking && !_state.isBlocking && !_isDodging)
         {
             Block();
@@ -194,7 +200,7 @@ public class PlayerCombat : MonoBehaviour
                 _state.playerActionState = PlayerActionState.Normal;
         }
         
-        if (requestDodge && _state.isBlocking)
+        if (requestDodge && !_isDodging)
         {
             Dodge();
         }
@@ -204,6 +210,9 @@ public class PlayerCombat : MonoBehaviour
     
     public void ReceiveDamage(float damage)
     {
+        
+        if (_isDodging)
+            return;
         float finalDamage = damage;
         if (_state.playerActionState == PlayerActionState.Blocking)
         {
@@ -310,24 +319,24 @@ public class PlayerCombat : MonoBehaviour
     {
         Debug.Log("LinkWeapon");
         var weapon = obj.GetComponent<Weapon>();
-        if(weapon.Wtype == WeaponType.Fist)
+        if (weapon.Wtype == WeaponType.Fist)
         {
             weapon.gameObject.SetActive(true);
             var Oldweapon = currentWeapon.gameObject;
             UnLinkWeapon();
             currentWeapon = weapon;
-            if(Oldweapon!= null)
+            if (Oldweapon != null)
             {
                 Destroy(Oldweapon);
             }
             currentWeapon = weapon;
-            
+
             currentWeapon.Initialize(this);
         }
         else
         {
             UnLinkWeapon();
-            var weaponObj = Instantiate(obj,weaponPos.transform);
+            var weaponObj = Instantiate(obj, weaponPos.transform);
             Debug.Log("InstantieWeapon");
             var weaponScript = weaponObj.GetComponent<Weapon>();
             currentWeapon = weaponScript;
@@ -336,10 +345,51 @@ public class PlayerCombat : MonoBehaviour
         }
 
     }
+    private Transform FindNearestTargetInFOV(float maxDist, float fovDegrees, LayerMask mask)
+    {
+        
+        int layerMask = (mask.value == 0) ? ~0 : mask.value;
+
+        Collider[] cols = Physics.OverlapSphere(transform.position, maxDist, layerMask, QueryTriggerInteraction.Ignore);
+
+        if (cols == null || cols.Length == 0)
+        {
+            return null;
+        }
+
+        
+        Vector3 forwardRef = cam != null ? cam.forward : transform.forward;
+
+        Transform best = null;
+        float bestDist = float.MaxValue;
+
+        for (int i = 0; i < cols.Length; i++)
+        {
+            var c = cols[i];
+            Vector3 dir = c.transform.position - transform.position;
+            dir.y = 0f;
+            float ang = dir.sqrMagnitude > 0.0001f ? Vector3.Angle(forwardRef, dir.normalized) : 0f;
+
+            if (dir.sqrMagnitude < 0.01f) continue;
+            if (ang <= fovDegrees * 0.5f)
+            {
+                float d = dir.sqrMagnitude;
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    best = c.transform;
+                }
+            }
+        }
+        return best;
+    }
+    
+
+
     void Dodge()
     {
-        Debug.Log("Dodging");
-       
+        
+
         if (playerCharacter == null)
         {
             Debug.LogWarning("Dodge: no PlayerCharacter assigned to PlayerCombat.");
@@ -347,65 +397,71 @@ public class PlayerCombat : MonoBehaviour
         }
 
         
-        _state.isBlocking = false;
-        if (_state.playerActionState == PlayerActionState.Blocking)
-            _state.playerActionState = PlayerActionState.Normal;
 
-        
-        if (_moveInput.sqrMagnitude <= 0.01f)
+        float dodgeRange = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDistance : 3f;
+        float fov = (DefaultBlockDodgeCounterSettings as DefaultBlockDodgeCounterSettings) != null && false ? 90f : 120f;
+        Transform target = FindNearestTargetInFOV(dodgeRange, fov, EnemyMask);
+
+        if (target == null)
         {
-            Debug.Log("Dodge cancelled: no input direction.");
             return;
         }
 
         
-        Vector3 dirWorld = Vector3.zero;
-        if (_moveInput.sqrMagnitude > 0.001f)
-        {            
-            if (playerCamera != null && playerCamera._camera != null)
-            {
-                var camRot = playerCamera._camera.transform.rotation;
-                dirWorld = (camRot * new Vector3(_moveInput.x, 0f, _moveInput.y));
-            }
-            else
-            {
-                dirWorld = (transform.right * _moveInput.x + transform.forward * _moveInput.y);
-            }
-        }
-        else
-        {            
-            dirWorld = transform.right;
-        }
-        dirWorld.y = 0f;
-        if (dirWorld.sqrMagnitude < 0.001f) dirWorld = transform.right;
-    dirWorld.Normalize();
-
+    float durationDbg = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDuration : 0.2f;
+    float dodgeDistanceDbg = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDistance : 3f;
+        Vector3 tgtPos = target.position;
+        float tgtDist = Vector3.Distance(playerCharacter.transform.position, tgtPos);
+        Vector3 dirToTgt = (tgtPos - playerCharacter.transform.position);
+        dirToTgt.y = 0f;
+        Vector3 forwardRef = cam != null ? cam.forward : transform.forward;
+        float tgtAngle = dirToTgt.sqrMagnitude > 0.0001f ? Vector3.Angle(forwardRef, dirToTgt.normalized) : 0f;
+        float tgtSigned = dirToTgt.sqrMagnitude > 0.0001f ? Vector3.SignedAngle(forwardRef, dirToTgt.normalized, Vector3.up) : 0f;
     
-    _isDodging = true;
 
-        
-        float distance = DefaultBlockDodgeCounterSettings.dodgeDistance;
-        float duration = DefaultBlockDodgeCounterSettings.dodgeDuration;
-        float speed = distance / duration;
+        _state.isBlocking = false;
+        if (_state.playerActionState == PlayerActionState.Blocking)
+            _state.playerActionState = PlayerActionState.Normal;
 
-        Vector3 impulse = dirWorld * speed;
 
-        
-        playerCharacter.AddExternalForce(impulse);
+        float duration = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDuration : 0.2f;
+        float range = dodgeRange;
+        _isDodging = true;
 
-        
         if (playerCamera != null)
         {
             playerCamera.SetLookLocked(true);
-            StartCoroutine(EndDodgeAfter(duration));
+            playerCamera.SetLookLockTarget(target);
         }
-        else
+
+        Vector3 lookDir = target.position - playerCharacter.transform.position;
+        lookDir.y = 0f;
+        if (lookDir.sqrMagnitude > 0.0001f)
         {
-            StartCoroutine(EndDodgeAfter(duration));
+            playerCharacter.transform.rotation = Quaternion.LookRotation(lookDir.normalized, Vector3.up);
         }
+
+        
+        int directionOverride = 0;
+        if (Mathf.Abs(_moveInput.x) > 0.15f)
+        {
+            directionOverride = _moveInput.x > 0f ? 1 : -1;
+        }
+
+        playerCharacter.StartCoroutine(playerCharacter.PerformArcMoveCoroutine(target, range, duration, playerCamera, () =>
+        {
+            if (playerCamera != null)
+            {
+                playerCamera.SetLookLocked(false);
+                playerCamera.SetLookLockTarget(null);
+            }
+            _isDodging = false;
+            _lastDodgeTime = Time.time;
+        }, directionOverride));
         
         float counterWindow = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.counterWindow : 0.5f;
-        StartCoroutine(OpenCounterWindow(counterWindow));
+        StartCoroutine(OpenCounterWindow(counterWindow));        
+
     }
 
     private IEnumerator EndDodgeAfter(float duration)
