@@ -1189,6 +1189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1904027b90482344eadbeee64ba1e1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockHeightOffset: 0.5
+  _lockTurnSpeed: 999
+  _yawDeadZoneDeg: 0.5
+  _preservePitchOnLock: 1
   _camera: {fileID: 0}
   Gain:
   - 1
@@ -1639,6 +1643,9 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 8192
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 0
   DefaultGrabThrowSettings: {fileID: 11400000, guid: c5c6ed4d58c8ba64c9c325265b15756d, type: 2}
   cam: {fileID: 7471997633191356730}
   HoldPoint: {fileID: 4847087872006185642}
@@ -1647,6 +1654,7 @@ MonoBehaviour:
   DefaultBlockDodgeCounterSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   playerCharacter: {fileID: 0}
   playerCamera: {fileID: 2934200553639028973}
+  dodgeCooldown: 1.7
 --- !u!1 &4100171539347079509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,6 +1919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481600688267271213}
   - component: {fileID: 101921615916627339}
+  - component: {fileID: 1541510181475124186}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1973,6 +1982,19 @@ MonoBehaviour:
   shakeForce: 0.002225
   velocity: {x: 0, y: -1, z: 0}
   thisScene: 
+--- !u!114 &1541510181475124186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570666785982006465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98415d481656f15418c258cc46d00f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 7370482882594465284}
 --- !u!1 &5726119059286108044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,14 +2229,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxVolume: 1
   loopVolume: 1
-  walkNormal: {fileID: 0}
+  walkNormal: {fileID: 8300000, guid: 40abc99bbf56e464eaa582cd7b5c0913, type: 3}
   walkDirt: {fileID: 0}
-  runNormal: {fileID: 0}
+  runNormal: {fileID: 8300000, guid: 9b59d34e7a734174fa5de15acfb1b98b, type: 3}
   runDirt: {fileID: 0}
   drunkWalkNormal: {fileID: 0}
   drunkWalkDirt: {fileID: 0}
-  lowHPBreathing: {fileID: 0}
-  jumpClip: {fileID: 0}
+  lowHPBreathing: {fileID: 8300000, guid: fdfff0ea3e70de442a6079ce593acf0a, type: 3}
+  jumpClip: {fileID: 8300000, guid: edecc1913adc6e24fa4b1f8ce36b60a2, type: 3}
   attackClip: {fileID: 0}
   damage1: {fileID: 0}
   damage2: {fileID: 0}

@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     playerCombat.playerCamera = playerCamera;
         playerAnimation.Initialize(playerCombat);
 
-        playerAudio = GetComponentInParent<PlayerAudio>();
+        //playerAudio = GetComponentInParent<PlayerAudio>();
     }
 
     private void OnDestroy()

@@ -212,12 +212,13 @@ MonoBehaviour:
   turnSpeed: 8
   knockbackForce: 6
   stunDuration: 2
+  drunkRotationOffset: {x: 0, y: 0, z: 0}
+  character: {fileID: 0}
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
   drunkWeakness: 1.3
   isBlind: 0
-  character: {fileID: 0}
 --- !u!114 &7856147728866338547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3
-  windupTime: 1
+  windupTime: 1.5
   punchActiveTime: 0.5
   comboGap: 0.3
   maxCombo: 2

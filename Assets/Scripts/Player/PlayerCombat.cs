@@ -128,7 +128,7 @@ public class PlayerCombat : MonoBehaviour
     private bool _canCounter = false;
     
     private float _lastDodgeTime = 0f;
-
+    [SerializeField] private float dodgeCooldown = 1.0f;
     public void UpdateInput(CombatInput input)
     {
         requestAttack = input.BaseAttack;
@@ -395,8 +395,11 @@ public class PlayerCombat : MonoBehaviour
             Debug.LogWarning("Dodge: no PlayerCharacter assigned to PlayerCombat.");
             return;
         }
+        if (Time.time - _lastDodgeTime < dodgeCooldown)
+        {
+            return;
+        }
 
-        
 
         float dodgeRange = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDistance : 3f;
         float fov = (DefaultBlockDodgeCounterSettings as DefaultBlockDodgeCounterSettings) != null && false ? 90f : 120f;
@@ -427,7 +430,7 @@ public class PlayerCombat : MonoBehaviour
         float duration = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDuration : 0.2f;
         float range = dodgeRange;
         _isDodging = true;
-
+        _lastDodgeTime = Time.time;
         if (playerCamera != null)
         {
             playerCamera.SetLookLocked(true);
@@ -456,7 +459,6 @@ public class PlayerCombat : MonoBehaviour
                 playerCamera.SetLookLockTarget(null);
             }
             _isDodging = false;
-            _lastDodgeTime = Time.time;
         }, directionOverride));
         
         float counterWindow = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.counterWindow : 0.5f;

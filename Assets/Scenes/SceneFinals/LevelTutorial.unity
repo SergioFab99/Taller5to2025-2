@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -285,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -730,6 +738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (34)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -833,6 +845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (26)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -931,6 +947,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1176,6 +1196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1249,6 +1273,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1353,6 +1381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (5)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1455,6 +1487,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1987,6 +2023,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (13)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2082,9 +2122,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2155,6 +2203,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2232,6 +2284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (38)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2336,6 +2392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TechoFabrica
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b3fc359fdd70f44499005b8f68c2160a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2406,6 +2466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2467,6 +2531,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2532,6 +2600,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2606,6 +2678,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (32)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2784,6 +2860,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
       propertyPath: m_Name
       value: VentanaFabrica (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2976,6 +3056,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (9)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3292,6 +3376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3478,6 +3566,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
       propertyPath: m_Name
       value: Barril (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3675,6 +3767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3736,6 +3832,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3876,6 +3976,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4292,6 +4396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (23)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4416,6 +4524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4515,9 +4627,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4841,6 +4961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (17)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4944,6 +5068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5021,6 +5149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (21)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5078,7 +5210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5196,6 +5328,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5396,6 +5532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5464,6 +5604,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5556,6 +5700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5624,6 +5772,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5782,6 +5934,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (45)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5889,6 +6045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Botella (Moment\xE1neo) (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5963,6 +6123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botella
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6036,6 +6200,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
       propertyPath: m_Name
       value: Barril (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6140,6 +6308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (44)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6243,6 +6415,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaFabrica (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6308,6 +6484,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6494,6 +6674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6638,6 +6822,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Tuber\xEDa (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6711,6 +6899,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6815,6 +7007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6918,6 +7114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContenedordeAgua1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88f037074658d5348b48913300dfccc6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6991,6 +7191,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (42)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7094,6 +7298,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (9)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7419,6 +7627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7531,6 +7743,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (25)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7665,6 +7881,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (39)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7972,6 +8192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (13)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8074,6 +8298,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (12)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8286,6 +8514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8376,6 +8608,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8565,6 +8801,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8695,6 +8935,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8859,6 +9103,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
       propertyPath: m_Name
       value: FarolaCalle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9050,6 +9298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9152,6 +9404,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (22)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9322,6 +9578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9424,6 +9684,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (40)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9670,6 +9934,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (20)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9853,6 +10121,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10063,6 +10335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10166,6 +10442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Tuber\xEDa (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10239,6 +10519,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10342,6 +10626,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (16)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10600,6 +10888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -10676,6 +10968,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10772,6 +11068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -10858,6 +11158,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10958,6 +11262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11031,6 +11339,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (20)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11134,6 +11446,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11273,6 +11589,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (27)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11375,6 +11695,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11525,6 +11849,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11765,6 +12093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11976,6 +12308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12169,6 +12505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Botella (Moment\xE1neo)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12235,9 +12575,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -12347,6 +12695,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (51)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12887,6 +13239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (25)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13099,6 +13455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13202,6 +13562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarolaCalle (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -13283,6 +13647,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13418,6 +13786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13521,6 +13893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (30)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13620,6 +13996,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13685,6 +14065,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13762,6 +14146,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
       propertyPath: m_Name
       value: "Tuber\xEDa"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13945,6 +14333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (6)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14105,6 +14497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14218,6 +14614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (35)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14320,6 +14720,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14445,12 +14849,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4122370409488793342, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122370409488793342, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
       propertyPath: m_TagString
       value: Interactuable
       objectReference: {fileID: 0}
     - target: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
       propertyPath: m_Name
       value: LeftDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
       propertyPath: m_TagString
@@ -14519,6 +14931,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14659,6 +15075,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (47)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14761,6 +15181,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14903,9 +15327,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -14976,6 +15408,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15084,6 +15520,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (43)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15303,6 +15743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15440,6 +15884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaEnrrollable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a567a895a4b93c41b05244e03e2b13d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15543,6 +15991,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16018,6 +16470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16131,6 +16587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (6)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16234,6 +16694,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (19)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16329,9 +16793,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -16517,6 +16989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (14)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16619,6 +17095,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (15)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16764,6 +17244,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd1ef018b382739468979369a65aea46, type: 3}
       propertyPath: m_Name
       value: "Ambientaci\xF3n - Barra de Metal"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd1ef018b382739468979369a65aea46, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16939,6 +17423,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17303,9 +17791,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -17711,6 +18207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17784,6 +18284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18025,6 +18529,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (18)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18350,6 +18858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -18426,6 +18938,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18560,6 +19076,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (36)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18847,6 +19367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19028,6 +19552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: EnemyMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: DefaultVelocity.x
       value: 0.15
@@ -19040,10 +19568,6 @@ PrefabInstance:
       propertyPath: DefaultVelocity.z
       value: -0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: bat2
-      value: 
-      objectReference: {fileID: 761808554}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19181,6 +19705,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
       propertyPath: m_Name
       value: VentanaFabrica (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19451,6 +19979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (14)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19553,6 +20085,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19657,6 +20193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -19733,6 +20273,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20076,6 +20620,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -20220,6 +20768,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20419,6 +20971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20521,6 +21077,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (16)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20701,6 +21261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (29)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20865,6 +21429,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (28)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21004,6 +21572,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (4)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21107,6 +21679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (33)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21209,6 +21785,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21503,6 +22083,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaFabrica (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21618,6 +22202,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
       propertyPath: m_Name
       value: Barril (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21746,6 +22334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (19)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21848,6 +22440,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (24)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21989,6 +22585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22091,6 +22691,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (22)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22303,6 +22907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaFabrica (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22438,6 +23046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (46)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22569,6 +23181,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (10)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22777,6 +23393,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23124,6 +23744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaMaderaFinal (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23318,7 +23942,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.4450866
+          x: -0.44508657
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -23589,6 +24213,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (41)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23810,6 +24438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (10)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23918,6 +24550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (31)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24009,6 +24645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Ventilaci\xF3n"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 66392a6fff8eee342938204b8c089a59, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24078,6 +24718,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24152,6 +24796,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (5)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24255,6 +24903,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (26)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24527,6 +25179,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (48)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24826,6 +25482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaMaderaFinal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24928,6 +25588,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
       propertyPath: m_Name
       value: FarolaCalle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25384,6 +26048,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -25526,8 +26194,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
@@ -25722,6 +26390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25825,6 +26497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25916,6 +26592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25984,6 +26664,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
       propertyPath: m_Name
       value: Botella (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26054,6 +26738,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26128,6 +26816,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (18)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26231,6 +26923,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
       propertyPath: m_Name
       value: Barril
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26374,6 +27070,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26442,6 +27142,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (12)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26570,6 +27274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26622,6 +27330,10 @@ PrefabInstance:
       value: 'RightDoor '
       objectReference: {fileID: 0}
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_TagString
       value: Door2
       objectReference: {fileID: 0}
@@ -26663,6 +27375,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037149968998732472, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
@@ -26737,6 +27453,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (15)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26841,6 +27561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (24)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26943,6 +27667,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27099,6 +27827,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27284,6 +28016,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (2)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27635,6 +28371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27737,6 +28477,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_Name
       value: PuertaMetalFinal (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_IsActive
@@ -28080,6 +28824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28214,6 +28962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaMaderaFinal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28316,6 +29068,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28516,6 +29272,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (4)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28985,6 +29745,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29087,6 +29851,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29251,6 +30019,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (37)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29561,6 +30333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29663,6 +30439,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29777,6 +30557,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29879,6 +30663,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30263,6 +31051,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (23)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30366,6 +31158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30468,6 +31264,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30697,6 +31497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30850,6 +31654,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoteDeBasura
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f614548ed0d40345af4fe83fc168a68, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30990,6 +31798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarolaCalle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -31071,6 +31883,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31163,6 +31979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31231,6 +32051,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (11)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31365,6 +32189,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (52)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31659,6 +32487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31882,6 +32714,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (21)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31984,6 +32820,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_Name
       value: PuertaMetalFinal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_IsActive
@@ -32092,6 +32932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botella (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32165,6 +33009,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
       propertyPath: m_Name
       value: PuertaMaderaFinal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32257,6 +33105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32325,6 +33177,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32428,6 +33284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32592,6 +33452,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33084,6 +33948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (49)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33325,6 +34193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (17)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33478,6 +34350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (11)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33580,6 +34456,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (50)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33834,6 +34714,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
       propertyPath: m_Name
       value: Botella (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34147,6 +35031,10 @@ PrefabInstance:
       value: 'RightDoor '
       objectReference: {fileID: 0}
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_TagString
       value: Door1
       objectReference: {fileID: 0}
@@ -34188,6 +35076,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037149968998732472, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
