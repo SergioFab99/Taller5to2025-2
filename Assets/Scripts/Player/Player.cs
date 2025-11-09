@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] PlayerCombat playerCombat;
     [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerAudio playerAudio;
 
     [SerializeField] HealthController healthController;
 
@@ -48,6 +49,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         healthController.OnDead += OnDead;
+        healthController.OnLifeChangue += OnHealthChanged;
+
         Cursor.lockState = CursorLockMode.Locked;
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
@@ -62,6 +65,8 @@ public class Player : MonoBehaviour
     playerCombat.playerCharacter = playerCharacter;
     playerCombat.playerCamera = playerCamera;
         playerAnimation.Initialize(playerCombat);
+
+        playerAudio = GetComponentInParent<PlayerAudio>();
     }
 
     private void OnDestroy()
@@ -106,6 +111,10 @@ public class Player : MonoBehaviour
         playerCombat.UpdateInput(combatInput);
         playerCombat.CombatTickUpdate(Time.deltaTime);
         playerCharacter.setState(combatInput.Blocking);
+
+        if (healthController.health <= healthController.maxHealth / 4)
+            playerAudio.SetLowHP(true);
+        else playerAudio.SetLowHP(false);
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
@@ -162,6 +171,15 @@ public class Player : MonoBehaviour
         if (healthController != null && contactDamage > 0f)
         {
             healthController.TakeDamague(contactDamage);
+        }
+    }
+    private void OnHealthChanged(float delta)
+    {
+        if (playerAudio == null) return;
+
+        if (delta < 0f)
+        {
+            playerAudio.PlayDamage();
         }
     }
 
