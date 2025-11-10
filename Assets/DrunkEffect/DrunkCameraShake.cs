@@ -1,43 +1,59 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+
 public class DrunkCameraShake : MonoBehaviour
 {
+    [Header("Magnitude & Frequencies")]
     public bool isDrunk = false;
-    public float drunkIntensity = 1f;
-    public float drunkFrequency = 1f;
+    public float rotationIntensity = 15f;
+    public float positionIntensity = 0.25f;
+    public float frequency = 2f;
 
     private Quaternion originalRot;
+    private Vector3 originalPos;
+    private float timeVar;
 
     void Start()
     {
+        isDrunk = false;
         originalRot = transform.localRotation;
+        originalPos = transform.localPosition;
+        timeVar = UnityEngine.Random.Range(0f, 100f);
     }
 
     void Update()
     {
         if (isDrunk)
         {
-            float x = Mathf.Sin(Time.time * drunkFrequency) * drunkIntensity;
-            float y = Mathf.PerlinNoise(Time.time, 0) * drunkIntensity * 0.5f; 
-            float z = Mathf.Sin(Time.time * drunkFrequency * 0.8f) * drunkIntensity * 0.7f;
+            float rotX = Mathf.Sin(Time.time * frequency) * rotationIntensity;
+            float rotY = Mathf.PerlinNoise(Time.time * 0.3f + timeVar, 0) * rotationIntensity - rotationIntensity * 0.5f;
+            float rotZ = Mathf.Cos(Time.time * frequency * 0.7f) * (rotationIntensity * 0.7f);
 
-            transform.localRotation = originalRot * Quaternion.Euler(x, y, z);
+            transform.localRotation = originalRot * Quaternion.Euler(rotX, rotY, rotZ);
+
+            float posX = Mathf.Sin(Time.time * (frequency * 0.5f) + timeVar) * positionIntensity;
+            float posY = Mathf.Sin(Time.time * (frequency * 0.85f) + timeVar) * positionIntensity;
+            float posZ = Mathf.Cos(Time.time * (frequency * 0.6f) + timeVar) * (positionIntensity * 0.6f);
+
+            transform.localPosition = originalPos + new Vector3(posX, posY, posZ);
         }
         else
         {
             transform.localRotation = originalRot;
+            transform.localPosition = originalPos;
         }
     }
 
-    public void ActivateDrunk()
+    public void ActivateDrunk(float duration = 0f)
     {
         isDrunk = true;
+        Debug.Log("Efecto borracho activo");
     }
 
     public void DeactivateDrunk()
     {
         isDrunk = false;
         transform.localRotation = originalRot;
+        transform.localPosition = originalPos;
+        Debug.Log("Efecto borracho desactivado");
     }
 }

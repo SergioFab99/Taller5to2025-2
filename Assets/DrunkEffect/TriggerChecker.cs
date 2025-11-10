@@ -1,19 +1,24 @@
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+
 public class TriggerChecker : MonoBehaviour
 {
-    public DrunkZone drunkZone;
+    public DrunkCameraShake drunkCameraShake; 
 
     void OnTriggerEnter(Collider other)
     {
-        drunkZone.ActivarDrunk();
-        Debug.Log("Trigger checker: Entré en zona " + other.gameObject.name);
+        if (drunkCameraShake != null)
+        {
+            drunkCameraShake.ActivateDrunk(5f);
+            Debug.Log("Efecto borracho activo");
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        drunkZone.DesactivarDrunk();
-        Debug.Log("Trigger checker: Salí de zona " + other.gameObject.name);
+        if (drunkCameraShake != null)
+        {
+            drunkCameraShake.DeactivateDrunk();
+            Debug.Log("Efecto borracho desactivado");
+        }
     }
 }

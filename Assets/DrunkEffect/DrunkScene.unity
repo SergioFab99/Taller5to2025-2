@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 593568153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.68, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 907538273}
   - component: {fileID: 907538272}
   - component: {fileID: 907538276}
-  - component: {fileID: 907538277}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -478,21 +477,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &907538277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907538271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b4a31b6f1badc149b998feb7d17bc8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDrunk: 0
-  drunkIntensity: 1
-  drunkFrequency: 1
 --- !u!1 &1297440193
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7969e2278da708c48862888d332a4f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drunkZone: {fileID: 593568156}
+  drunkCameraShake: {fileID: 5954944787588728202}
 --- !u!136 &1451170847
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6244,6 +6228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2367288398283134272}
+  - component: {fileID: 5954944787588728202}
   m_Layer: 0
   m_Name: CameraCMTarget
   m_TagString: Untagged
@@ -6251,6 +6236,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5954944787588728202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954944787588728201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4a31b6f1badc149b998feb7d17bc8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDrunk: 0
+  rotationIntensity: 15
+  positionIntensity: 0.25
+  frequency: 2
 --- !u!4 &5995420758176000999
 Transform:
   m_ObjectHideFlags: 0
