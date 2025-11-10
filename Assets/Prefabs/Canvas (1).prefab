@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3197512281097462649}
   - component: {fileID: 88789290484512656}
   m_Layer: 0
-  m_Name: UpgradesRowZone (1)
+  m_Name: ConstantRythm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 5220926288216884408}
   - component: {fileID: 8216111634752535461}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1114954320358045754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: ThrowingGlassBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &752430596239122031
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +952,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4884420601243075028}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: LifeGrowth3Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &909209548897138992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,7 +1113,7 @@ GameObject:
   - component: {fileID: 5371969124174500570}
   - component: {fileID: 9219976538959343579}
   m_Layer: 0
-  m_Name: UpgradesRowZone (12)
+  m_Name: Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,7 +1325,7 @@ GameObject:
   - component: {fileID: 5733365826197771034}
   - component: {fileID: 5235968632049399693}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,7 +1603,7 @@ GameObject:
   - component: {fileID: 2225123920816616296}
   - component: {fileID: 4713405607576606380}
   m_Layer: 0
-  m_Name: UpgradesRowZone (6)
+  m_Name: Push
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1757,7 @@ GameObject:
   - component: {fileID: 7136506582937747596}
   - component: {fileID: 1886232081417879694}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1872,7 +1896,7 @@ GameObject:
   - component: {fileID: 8278890280524062669}
   - component: {fileID: 7780664098677934183}
   m_Layer: 0
-  m_Name: UpgradesRowZone (11)
+  m_Name: Knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1948,7 +1972,7 @@ GameObject:
   - component: {fileID: 3677863672858315822}
   - component: {fileID: 1072183923920761573}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2092,7 +2116,7 @@ GameObject:
   - component: {fileID: 304744608828207704}
   - component: {fileID: 3200392309108249434}
   m_Layer: 0
-  m_Name: UpgradesRowZone (14)
+  m_Name: ThrowingKnife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2491,7 +2515,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5710987987499249513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: PowerBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2164367298662722188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,7 +2889,7 @@ GameObject:
   - component: {fileID: 4647941968036384490}
   - component: {fileID: 7885456638595792088}
   m_Layer: 0
-  m_Name: UpgradesRowZone (3)
+  m_Name: LifeGrowth1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2929,7 +2965,7 @@ GameObject:
   - component: {fileID: 4849870378199686230}
   - component: {fileID: 2823501443743193169}
   m_Layer: 0
-  m_Name: UpgradesRowZone (4)
+  m_Name: LifeGrowth2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3448,7 +3484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3602533014277242442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: LifeRecoveryBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2936304476504642002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,7 +3509,7 @@ GameObject:
   - component: {fileID: 6703810447576407591}
   - component: {fileID: 5964175493536306762}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3858,7 +3906,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1869454621386387498}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: FullAmmunitionBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3269192858247163060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,7 +3931,7 @@ GameObject:
   - component: {fileID: 8920575895821121026}
   - component: {fileID: 650158723513346346}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4009,7 +4069,7 @@ GameObject:
   - component: {fileID: 2436731661948412213}
   - component: {fileID: 4124325341677756616}
   m_Layer: 0
-  m_Name: UpgradesRowZone (10)
+  m_Name: LifeRecovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4085,7 +4145,7 @@ GameObject:
   - component: {fileID: 4366405179789425131}
   - component: {fileID: 7008353953013114578}
   m_Layer: 0
-  m_Name: UpgradesRowZone (5)
+  m_Name: LifeGrowth3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4163,6 +4223,7 @@ GameObject:
   - component: {fileID: 5718228445376085143}
   - component: {fileID: 6035023184360926631}
   - component: {fileID: 1336475959478639534}
+  - component: {fileID: 53206150104495319}
   m_Layer: 0
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -4302,6 +4363,20 @@ MonoBehaviour:
   pauseMenu: {fileID: 1328666179093020872}
   shopMenu: {fileID: 2148230341169274975}
   playerCamera: {fileID: 0}
+--- !u!114 &53206150104495319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441679682004620102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b50414a8baa19d4cba9c96defb18e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+  intuitionTMP: {fileID: 989333788459346185}
 --- !u!1 &3709319439944722165
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,7 +4389,7 @@ GameObject:
   - component: {fileID: 7498150411552110440}
   - component: {fileID: 6189460561681930380}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4560,7 +4635,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3471492394258339696}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: HookBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3802595953528032725
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,7 +5040,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6436139809719998753}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: FastRhytmBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4381472378430291647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,7 +5203,7 @@ GameObject:
   - component: {fileID: 5163664549227387280}
   - component: {fileID: 598618615769105817}
   m_Layer: 0
-  m_Name: UpgradesRowZone (9)
+  m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5288,7 +5387,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2511932491371690587}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: DrunkenCombatBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4772947216452680283
 GameObject:
   m_ObjectHideFlags: 0
@@ -5609,7 +5720,7 @@ GameObject:
   - component: {fileID: 16124287090516314}
   - component: {fileID: 6882966363391340323}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5748,7 +5859,7 @@ GameObject:
   - component: {fileID: 1136021097227988669}
   - component: {fileID: 2604359775380027789}
   m_Layer: 0
-  m_Name: UpgradesRowZone (16)
+  m_Name: ReuseBeer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6525,7 +6636,7 @@ GameObject:
   - component: {fileID: 2578657811415129723}
   - component: {fileID: 4092573421962235048}
   m_Layer: 0
-  m_Name: UpgradesRowZone (7)
+  m_Name: Tackle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6676,7 +6787,7 @@ GameObject:
   - component: {fileID: 5083305264312298478}
   - component: {fileID: 307575448266862133}
   m_Layer: 0
-  m_Name: UpgradesRowZone (15)
+  m_Name: ThrowingGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7265,7 +7376,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 172912515091412311}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: ConstantRythmBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6431117526671058825
 GameObject:
   m_ObjectHideFlags: 0
@@ -7278,7 +7401,7 @@ GameObject:
   - component: {fileID: 8014490372187372230}
   - component: {fileID: 4352957028075217202}
   m_Layer: 0
-  m_Name: UpgradesRowZone (13)
+  m_Name: FullAmmunition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7354,7 +7477,7 @@ GameObject:
   - component: {fileID: 413949098654545189}
   - component: {fileID: 6106043504561723619}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7501,7 +7624,7 @@ GameObject:
   - component: {fileID: 814346921152525009}
   - component: {fileID: 7788250031047747399}
   m_Layer: 0
-  m_Name: UpgradesRowZone (8)
+  m_Name: ChargedPunch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7577,7 +7700,7 @@ GameObject:
   - component: {fileID: 2363897902716060880}
   - component: {fileID: 6741668344942260830}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7823,7 +7946,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3739455149001258603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: ReuseBeerBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7016007879801990935
 GameObject:
   m_ObjectHideFlags: 0
@@ -8047,7 +8182,7 @@ GameObject:
   - component: {fileID: 1618032768035936669}
   - component: {fileID: 8174489167344031054}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8295,7 +8430,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3304564441163716308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: ChargedPunchBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7660995936641583696
 GameObject:
   m_ObjectHideFlags: 0
@@ -8416,7 +8563,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 119706296626918439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: TackleBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7667003842993367858
 GameObject:
   m_ObjectHideFlags: 0
@@ -8537,7 +8696,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5217739568840722010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: LifeGrowth1Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7689094573230216836
 GameObject:
   m_ObjectHideFlags: 0
@@ -8550,7 +8721,7 @@ GameObject:
   - component: {fileID: 7635719291294555377}
   - component: {fileID: 3940421169412303501}
   m_Layer: 0
-  m_Name: UpgradesRowZone (17)
+  m_Name: DrunkenCombat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8734,7 +8905,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6618104180162178551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: LifeGrowth2Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7857119227312507196
 GameObject:
   m_ObjectHideFlags: 0
@@ -8999,7 +9182,7 @@ GameObject:
   - component: {fileID: 3520965147829775525}
   - component: {fileID: 4977302847918205471}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9307,7 +9490,7 @@ GameObject:
   - component: {fileID: 1145819029613850927}
   - component: {fileID: 8373085855134126627}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9444,7 +9627,7 @@ GameObject:
   - component: {fileID: 7754242840739172978}
   - component: {fileID: 8108304471176765286}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9692,7 +9875,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1433668564219252431}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: PushBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8190999172619996809
 GameObject:
   m_ObjectHideFlags: 0
@@ -9705,7 +9900,7 @@ GameObject:
   - component: {fileID: 23655594370736358}
   - component: {fileID: 4919480031270887665}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9976,7 +10171,7 @@ GameObject:
   - component: {fileID: 6563694866979363231}
   - component: {fileID: 6076536798637913652}
   m_Layer: 0
-  m_Name: UpgradesRowZone (2)
+  m_Name: FastRhytm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10052,7 +10247,7 @@ GameObject:
   - component: {fileID: 7909727405362835817}
   - component: {fileID: 7024215953493584508}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10509,7 +10704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6491101489830201168}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: KneeBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8970172721007574393
 GameObject:
   m_ObjectHideFlags: 0
@@ -10827,7 +11034,7 @@ GameObject:
   - component: {fileID: 370423639308202722}
   - component: {fileID: 5506966968401239656}
   m_Layer: 0
-  m_Name: Upgrade (0)
+  m_Name: UpgradeTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11214,4 +11421,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 242346860215371613}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53206150104495319}
+        m_TargetAssemblyTypeName: UpgradesShop, Assembly-CSharp
+        m_MethodName: ThrowingKnifeBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
