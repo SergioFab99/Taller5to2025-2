@@ -7,6 +7,8 @@ public class PickUpWeapon : MonoBehaviour
 {
     [SerializeField]
     [AssetsOnly]
+    public CombatBase attacker;
+    WeaponType Wtype;
     public GameObject Prefab;
     public WeaponSettings settings;
     public LayerMask hitMask;
@@ -34,7 +36,7 @@ public class PickUpWeapon : MonoBehaviour
 
                     Debug.Log("hitted");
                     var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
-                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, (settings as FistsWeaponSettings).damague);
+                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, (settings as FistsWeaponSettings).damague, Wtype, attacker);
 
                     PerformOnHit(hitInfo);
 

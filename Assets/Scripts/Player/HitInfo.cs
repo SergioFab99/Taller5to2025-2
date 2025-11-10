@@ -6,40 +6,23 @@ public class HitInfo
     public Collider col;
     public Vector3 hitpoint;
     public Vector3 normal;
-    public IEnemyState enemyState;
-    public TagSO typeEnemy;
+    public WeaponType type;
+    CombatBase attacker;
+    
 
-    public HitInfo(Collider col, Vector3 point, Vector3 normal, float damage, IEnemyState state = null, TagSO tag = null) 
+    public HitInfo(Collider col, Vector3 point, Vector3 normal, float damage, WeaponType type, CombatBase attacker) 
     {
         this.col = col;
         this.hitpoint = point;
         this.normal = normal;
         this.damague = damage;
-        this.enemyState = state;
-        this.typeEnemy = tag;
+        this.type = type;
+        this.attacker = attacker;
     }
 
 
 
-    /*public virtual int CalculateDmg()
-    {
-        if(enemyState is BlockState )
-        {
-            switch (tag)
-            {
-                case meleeEnemy:
-                    break;
 
-            }
-        }
-        else if (tag != null)
-        {
 
-        }
-        else
-        {
-            return damague;
-        }
-        return damague;
-    } */
+   
 }

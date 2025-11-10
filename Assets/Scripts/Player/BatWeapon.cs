@@ -52,7 +52,7 @@ public class BatWeapon : Weapon
         foreach (Collider col in cols)
         {
            
-            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague);
+            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague, Wtype,playerCombat);
             StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
         }
     }
