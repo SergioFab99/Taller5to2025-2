@@ -78,15 +78,7 @@ public class PlayerAnimation : MonoBehaviour
     }
     void Update()
     {
-        /*if (_playerCombat._heldObject != null)
-        {
-            grab = true;
-        }
-        else
-        {
-            grab = false;
-        }
-        anim.SetBool("GrabBat", grab);*/
+
         if (_playerCombat.currentWeapon.Wtype == WeaponType.Bat)
         {
             (_playerCombat.currentWeapon as BatWeapon).OnAttack += BatAttack;
