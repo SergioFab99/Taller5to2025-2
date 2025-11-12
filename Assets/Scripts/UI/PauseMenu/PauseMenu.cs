@@ -12,14 +12,17 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1f)
         {
-            Time.timeScale = 0f;
-            playerCamera.SetLookLocked(true);
-            pausePanel.SetActive(true);
-            pauseMenu.SetActive(true);
-            shopMenu.SetActive(false);
+            ActivePauseMenu();
         }
     }
-
+    public void ActivePauseMenu()
+    {
+        Time.timeScale = 0f;
+        playerCamera.SetLookLocked(true);
+        pausePanel.SetActive(true);
+        pauseMenu.SetActive(true);
+        shopMenu.SetActive(false);
+    }
     public void ResumeButton()
     {
         Time.timeScale = 1f;
