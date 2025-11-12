@@ -2,31 +2,19 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class ScoreManager: MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-    [SerializeField]
-    private int pointsPerEnemy = 500;
+    public static ScoreManager Instance;
 
-    [SerializeField]
-    private string enemyTag = "enemy";
-
-    [SerializeField]
-    private Canvas scoreCanvas;
-
-    [SerializeField]
-    private TMP_Text scoreText;
-
-    [SerializeField]
-    private int enemiesToDefeat = 11;
-
-    [SerializeField]
-    private GameObject rankPanel;
-
-    [SerializeField]
-    private TMP_Text rankPanelTitle;
-
-    [SerializeField]
-    private TMP_Text rankPanelDetails;
+    [SerializeField] public TMP_Text scoreText;
+    [SerializeField] public TMP_Text scoreTextSecondCanvas;
+    [SerializeField] public Canvas scoreCanvas;
+    [SerializeField] private int pointsPerEnemy = 500;
+    [SerializeField] private string enemyTag = "enemy";
+    [SerializeField] private int enemiesToDefeat = 11;
+    [SerializeField] public GameObject rankPanel;
+    [SerializeField] public TMP_Text rankPanelTitle;
+    [SerializeField] public TMP_Text rankPanelDetails;
 
     private const float EnemyScanIntervalSeconds = 1f;
 
@@ -35,6 +23,11 @@ public class ScoreManager: MonoBehaviour
     private bool hasWarnedForMissingScoreText;
     private bool hasWarnedForMissingEnemyTag;
     private bool hasShownRankPanel;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -45,19 +38,14 @@ public class ScoreManager: MonoBehaviour
     private void OnEnable()
     {
         ScanForEnemiesAndAttachReporter();
-
         if (EnemyScanIntervalSeconds > 0f)
-        {
             InvokeRepeating(nameof(ScanForEnemiesAndAttachReporter), EnemyScanIntervalSeconds, EnemyScanIntervalSeconds);
-        }
     }
 
     private void OnDisable()
     {
         if (EnemyScanIntervalSeconds > 0f)
-        {
             CancelInvoke(nameof(ScanForEnemiesAndAttachReporter));
-        }
     }
 
     public void AddScore()
@@ -67,11 +55,29 @@ public class ScoreManager: MonoBehaviour
         UpdateScoreDisplay();
     }
 
+    public int GetTotalScore()
+    {
+        return totalScore;
+    }
+
     public string GetRank()
     {
         var rank = CalculateRank(totalScore);
         Debug.Log($"ScoreManager: Final rank = {rank} with total score = {totalScore}");
         return rank;
+    }
+
+    public int GetIntuitionByRank()
+    {
+        string rank = GetRank();
+        switch(rank)
+        {
+            case "S": return 50;
+            case "A": return 25;
+            case "B": return 20;
+            case "C": return 15;
+            default:  return 10;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,28 +92,17 @@ public class ScoreManager: MonoBehaviour
 
     private void TryPrepareEnemy(GameObject candidate)
     {
-        if (!IsEnemy(candidate))
-        {
-            return;
-        }
-
+        if (!IsEnemy(candidate)) return;
         EnsureReporter(candidate);
     }
 
-    private void UpdateScoreDisplay()
+    public void UpdateScoreDisplay()
     {
-        if (scoreText == null && scoreCanvas != null)
-        {
-            scoreText = scoreCanvas.GetComponentInChildren<TMP_Text>();
-        }
-
         if (scoreText != null)
-        {
             scoreText.text = $"Score: {totalScore}";
-            return;
-        }
-
-        if (!hasWarnedForMissingScoreText)
+        if (scoreTextSecondCanvas != null)
+            scoreTextSecondCanvas.text = $"Score: {totalScore}";
+        if (!hasWarnedForMissingScoreText && scoreText == null && scoreTextSecondCanvas == null)
         {
             Debug.LogWarning("ScoreManager: No TMP_Text assigned to display the score.");
             hasWarnedForMissingScoreText = true;
@@ -119,11 +114,8 @@ public class ScoreManager: MonoBehaviour
         try
         {
             var enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-
             foreach (var enemy in enemies)
-            {
                 EnsureReporter(enemy);
-            }
         }
         catch (UnityException)
         {
@@ -137,119 +129,64 @@ public class ScoreManager: MonoBehaviour
 
     private void EnsureReporter(GameObject enemy)
     {
-        if (enemy == null)
-        {
-            return;
-        }
-
+        if (enemy == null) return;
         if (enemy.TryGetComponent(out EnemyScoreReporter reporter))
         {
             reporter.Bind(this);
             return;
         }
-
         reporter = enemy.AddComponent<EnemyScoreReporter>();
         reporter.Bind(this);
     }
 
     private bool IsEnemy(GameObject candidate)
     {
-        if (candidate == null)
-        {
-            return false;
-        }
-
-        if (candidate.CompareTag(enemyTag))
-        {
-            return true;
-        }
-
+        if (candidate == null) return false;
+        if (candidate.CompareTag(enemyTag)) return true;
         return string.Equals(candidate.tag, enemyTag, StringComparison.OrdinalIgnoreCase);
     }
 
     internal void HandleEnemyDestroyed(GameObject enemy)
     {
-        if (!IsEnemy(enemy))
-        {
-            return;
-        }
-
+        if (!IsEnemy(enemy)) return;
         AddScore();
         defeatedEnemies++;
-
         if (defeatedEnemies >= enemiesToDefeat)
-        {
             ShowRankPanel();
-        }
     }
 
     private static string CalculateRank(int score)
     {
-        if (score >= 5000)
-        {
-            return "S";
-        }
-
-        if (score >= 3500)
-        {
-            return "A";
-        }
-
-        if (score >= 2500)
-        {
-            return "B";
-        }
-
-        if (score >= 1000)
-        {
-            return "C";
-        }
-
+        if (score >= 5000) return "S";
+        if (score >= 3500) return "A";
+        if (score >= 2500) return "B";
+        if (score >= 1000) return "C";
         return "D";
     }
 
-    private void ShowRankPanel()
+    public void ShowRankPanel()
     {
-        if (hasShownRankPanel)
-        {
-            return;
-        }
-
+        if (hasShownRankPanel) return;
         hasShownRankPanel = true;
-
         if (EnemyScanIntervalSeconds > 0f)
-        {
             CancelInvoke(nameof(ScanForEnemiesAndAttachReporter));
-        }
-
         if (rankPanel != null)
-        {
             rankPanel.SetActive(true);
-        }
-
         var rank = GetRank();
-
         if (rankPanelTitle != null)
-        {
             rankPanelTitle.text = $"Rank: {rank}";
-        }
-
         if (rankPanelDetails != null)
-        {
             rankPanelDetails.text = "S = 5000+\nA = 3500+\nB = 2500+\nC = 1000+\nD = 0+\nTotal Score = " + totalScore;
-        }
     }
 
-    private void HideRankPanel()
+    public void HideRankPanel()
     {
         if (rankPanel != null)
-        {
             rankPanel.SetActive(false);
-        }
     }
 }
 
-public sealed class EnemyScoreReporter: MonoBehaviour
+public sealed class EnemyScoreReporter : MonoBehaviour
 {
     private ScoreManager scoreManager;
     private bool hasReported;
@@ -262,16 +199,8 @@ public sealed class EnemyScoreReporter: MonoBehaviour
 
     private void OnDestroy()
     {
-        if (hasReported)
-        {
-            return;
-        }
-
-        if (scoreManager == null || !scoreManager.isActiveAndEnabled)
-        {
-            return;
-        }
-
+        if (hasReported) return;
+        if (scoreManager == null || !scoreManager.isActiveAndEnabled) return;
         scoreManager.HandleEnemyDestroyed(gameObject);
         hasReported = true;
     }
