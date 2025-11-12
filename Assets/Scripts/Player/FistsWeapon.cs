@@ -4,33 +4,13 @@ using System.Collections;
 //using UnityEditor.Animations;
 using UnityEngine;
 
-public struct punch
-{
-    public Transform pos;
-    
-    public Vector3 lastPos;
-    public Vector3 dir;
-    public bool isActive;
-
-    public punch(Transform pos, Vector3 lastPos, Vector3 dir, bool isActive)
-    {
-        this.pos = pos;
-        this.lastPos = lastPos; 
-        this.dir = dir;
-        this.isActive = isActive;
-    }
-}
 
 public class FistsWeapon : Weapon
 {
     //public AnimatorController controller;
 
-    private punch currentPunch = new punch();
     public CombatHand currentHand;
     
-
-    
-     
     public LayerMask hitMask;
 
     public event PunchSide OnAttack;
@@ -39,8 +19,7 @@ public class FistsWeapon : Weapon
     [SerializeField] PlayerAudio playerAudio;
 
 
-    [ShowInInspector]private punch rightPunch = new punch();
-    [ShowInInspector]private punch leftPunch = new punch();
+  
     private PlayerCombat playerCombat;
     private float timeSinceLastPunch;
 
@@ -49,8 +28,7 @@ public class FistsWeapon : Weapon
         this.playerCombat = playerCombat;
 
         currentHand = CombatHand.None;
-        rightPunch.pos = this.playerCombat.rightPunchPos.transform;
-        leftPunch.pos = this.playerCombat.leftPunchPos.transform;
+
     }
 
     public override void Attack()
@@ -95,22 +73,14 @@ public class FistsWeapon : Weapon
         foreach (Collider col in cols)
         {
             Vector3 fist = ((currentHand == CombatHand.None) || (currentHand == CombatHand.Right)) ? playerCombat.rightPunchPos.transform.position : playerCombat.leftPunchPos.transform.position;
-            var hitInfo = new HitInfo(col, col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague);
+            var hitInfo = new HitInfo(col, col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague, Wtype,playerCombat);
             StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay, hitInfo));
         }
 
 
     }
 
-    public override void LinkWeapon()
-    {
-
-    }
-
-    public override void UnlinkWeapon()
-    {
-
-    }
+  
     public override void CombatTickUpdate(float deltaTime)
     {
         if (Time.time - timeSinceLastPunch > (settings as FistsWeaponSettings).timeToDoublePunch)

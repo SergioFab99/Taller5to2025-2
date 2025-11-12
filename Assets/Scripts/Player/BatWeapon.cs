@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class BatWeapon : Weapon
 {
     private PlayerCombat playerCombat;
-    public Transform swingPoint;
+   
     public float force;
     public GameObject throwWeapon;
 
-    private bool isSwinging;
+
     private bool hitDone;
-    private Vector3 lastPos;
-    private Vector3 dir;
     private float swingStartTime;
     public LayerMask hitMask;
     public event BatAttack OnAttack;
@@ -22,17 +20,14 @@ public class BatWeapon : Weapon
     public override void Initialize(PlayerCombat playerCombat)
     {
         this.playerCombat = playerCombat;
-        isSwinging = false;
+        
         hitDone = false;
-        if (swingPoint == null)
-        {
-            Debug.LogWarning("Swing point not assigned for BatWeapon!");
-        }
+      
     }
 
     public override void Attack()
     {
-        if (isSwinging || !playerCombat._state.CanAttack)
+        if (!playerCombat._state.CanAttack)
             return;
 
         Debug.Log("Attack");
@@ -52,7 +47,7 @@ public class BatWeapon : Weapon
         foreach (Collider col in cols)
         {
            
-            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague);
+            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague, Wtype,playerCombat);
             StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
         }
     }
@@ -94,17 +89,7 @@ public class BatWeapon : Weapon
         
        
     }
-    private IEnumerator SwingRoutine()
-    {
-        isSwinging = true;
-        hitDone = false;
-        swingStartTime = Time.time;
-
-
-        yield return new WaitForSeconds((settings as BatWeaponSettings).swingDuration);
-
-        isSwinging = false;
-    }
+   
 
     public override void Throw(Vector3 direc)
     {
