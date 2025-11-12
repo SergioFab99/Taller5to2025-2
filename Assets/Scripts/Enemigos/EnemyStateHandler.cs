@@ -20,6 +20,7 @@ public class EnemyStateHandler : MonoBehaviour
     private bool isTransitioning;
     public bool QueuedBlock { get; set; }
 
+    [Header("States")]
     private IdleState1 idle;
     private AlertState1 alert;
     private AttackState1 attack;
@@ -29,6 +30,7 @@ public class EnemyStateHandler : MonoBehaviour
     private ExposedState1 exposed;
     private DeadState1 dead;
 
+    [Header("Movement")]
     public float detectionRange = 10f;
     public float attackRange = 5f;
     [NonSerialized] public float nextAttackTime = 0f;
@@ -36,20 +38,24 @@ public class EnemyStateHandler : MonoBehaviour
     public float turnSpeed = 8f;
     public float knockbackForce = 5f;
     public float stunDuration = 2f;
+    private float drunkSwayTimer = 0f;
+    public Vector3 drunkRotationOffset = Vector3.zero;
+    [NonSerialized] public NavMeshAgent agent;
+    public EnemyCharacter character;
 
+    private Vector3 _lastCornerPos;
+    private float _cornerTimer;
 
+    [Header("Status Effects")]
     private Dictionary<StatusEffect, float> activeEffects = new Dictionary<StatusEffect, float>();
     public float bleedSpeedMultiplier = 0.7f;
     public float bleedDamageMultiplier = 0.8f;
     public float drunkDamageMultiplier = 1.5f;
     public float drunkWeakness = 1.3f;
     public bool isBlind = false;
+    [NonSerialized] public bool suppressOnHit = false;
 
-    [NonSerialized] public NavMeshAgent agent;
-    public EnemyCharacter character;
 
-    private Vector3 _lastCornerPos;
-    private float _cornerTimer;
     
 
     public void Initialize(EnemySettingsList settings, Transform characterTransform, EnemyCharacter charac, NavMeshAgent agent1)
@@ -196,21 +202,19 @@ public class EnemyStateHandler : MonoBehaviour
             agent.SetDestination(Target.position);
     }
 
-    public void Knockback(Vector3 hitDirection)
+    public void Knockback(Vector3 hitDirection, float forceMultiplier = 1f)
     {
-        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce}");
+        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce * forceMultiplier}");
 
         if (currentState == block)
-        {
-            Debug.Log($"{name}: Knockback ignored (currently blocking).");
-            return;
-        }
+            forceMultiplier *= 0.8f;
 
         StopMovement();
         hitDirection.y = 0f;
 
-        Debug.Log($"{name}: Adding external force {hitDirection.normalized * knockbackForce}");
-        character.AddExternalForce(hitDirection.normalized * knockbackForce);
+        Vector3 force = hitDirection.normalized * (knockbackForce * forceMultiplier);
+        Debug.Log($"{name}: Adding external force {force}");
+        character.AddExternalForce(force);
     }
 
     public void StateMovement(IEnemyState newState)
@@ -278,11 +282,26 @@ public class EnemyStateHandler : MonoBehaviour
     // ------------------- STATUS -------------------
     public void ApplyStatus(StatusEffect type, float duration)
     {
+        Debug.Log($"{name} ApplyStatus called: {type} for {duration}s");
         activeEffects[type] = duration;
-        if (type == StatusEffect.Blind)
+        switch (type)
         {
-            isBlind = true;
-            StopMovement();
+            case StatusEffect.Bleeding:
+                StopCoroutine(nameof(BleedTick)); 
+                StartCoroutine(BleedTick());
+                break;
+
+            case StatusEffect.Drunk:
+                StartCoroutine(DrunkWobble());
+                break;
+
+            case StatusEffect.Blind:
+                isBlind = true;
+                attackComponent.ForceCancel(false, false);
+                StopMovement();
+                if (currentState == attack || currentState == alert)
+                    SetState(idle);
+                break;
         }
     }
 
@@ -311,29 +330,64 @@ public class EnemyStateHandler : MonoBehaviour
 
         foreach (var e in expired)
             RemoveStatus(e);
+
+        if (isBlind)
+        {
+            StopMovement();
+        }
+
+        if (HasStatus(StatusEffect.Drunk))
+        {
+            drunkSwayTimer -= Time.deltaTime;
+            if (drunkSwayTimer <= 0f)
+            {
+                drunkSwayTimer = UnityEngine.Random.Range(0.3f, 0.6f);
+                drunkRotationOffset = new Vector3(0f, UnityEngine.Random.Range(-20f, 20f), 0f);
+            }
+        }
+        else
+        {
+            drunkRotationOffset = Vector3.zero;
+        }
     }
 
     public float MoveSpeed()
     {
-        float speed = enemySettings.AlertEnemySettings.moveSettings.Speed;
+        float baseSpeed = enemySettings.AlertEnemySettings.moveSettings.Speed;
+        float speed = baseSpeed;
+
         if (HasStatus(StatusEffect.Bleeding))
+        {
             speed *= bleedSpeedMultiplier;
+            Debug.Log($"{name}: MoveSpeed reduced by bleed ({baseSpeed:F2} > {speed:F2})");
+        }
+
         return speed;
     }
 
     public float EffectiveDamage(float baseDamage)
     {
         float damage = baseDamage;
+
         if (HasStatus(StatusEffect.Bleeding))
-            damage *= bleedDamageMultiplier;
+        {
+            float reduced = damage * bleedDamageMultiplier;
+            damage = reduced;
+        }
+
         if (HasStatus(StatusEffect.Drunk))
-            damage *= drunkDamageMultiplier;
+        {
+            float boosted = damage * drunkDamageMultiplier;
+            damage = boosted;
+        }
+
         return damage;
     }
 
     public float DamageTakeMult()
     {
-        return HasStatus(StatusEffect.Drunk) ? drunkWeakness : 1f;
+        float mult = HasStatus(StatusEffect.Drunk) ? drunkWeakness : 1f;
+        return mult;
     }
 
     private void OnDrawGizmosSelected()
@@ -345,11 +399,35 @@ public class EnemyStateHandler : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.attackRange);
     }
 
+    private IEnumerator BleedTick()
+    {
+        var hp = GetComponentInChildren<HealthController>();
+        if (hp == null) yield break;
+
+        while (HasStatus(StatusEffect.Bleeding))
+        {
+            Debug.Log("Taking bleed damage");
+            suppressOnHit = true;    
+            hp.TakeDamague(5);
+            suppressOnHit = false;       
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+    private IEnumerator DrunkWobble() //wip
+    {
+        while (HasStatus(StatusEffect.Drunk))
+        {
+            Vector3 sway = new Vector3(0, UnityEngine.Random.Range(-15f, 15f), 0);
+            character.transform.Rotate(sway * Time.deltaTime);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
     //----------------------DAMAGE------------------------
     private void HandleHitEvent(float delta)
     {
-        Debug.Log($"{name}: HandleHitEvent called with delta={delta} in state {currentState?.GetType().Name}");
         if (delta >= 0f) return;
+        if (suppressOnHit) return;
 
         Vector3 hitDir = Vector3.zero;
         if (Target != null)
@@ -381,6 +459,7 @@ public class EnemyStateHandler : MonoBehaviour
         {
             Debug.Log($"{name}: Extending block duration.");
             block.ExtendBlock();
+            Knockback(hitDir);
             return;
         }
 
@@ -394,6 +473,7 @@ public class EnemyStateHandler : MonoBehaviour
         if (currentState == stunned)
         {
             Debug.Log($"{name}: already stunned.");
+            stunned.ExtendStun(0.8f);
             Knockback(hitDir);
             return;
         }

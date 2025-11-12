@@ -4,9 +4,9 @@ public class TestingStatuses : MonoBehaviour
 {
     public float effectDuration = 5f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        EnemyMain enemy = collision.collider.GetComponent<EnemyMain>();
+        EnemyStateHandler enemy = collision.GetComponentInParent<EnemyStateHandler>();
         if (enemy != null)
         {
             StatusEffect effect = (StatusEffect)Random.Range(0, 3);

@@ -8,6 +8,9 @@ public class StunState : IEnemyState
     private float stunTimer;
     private Vector3 knockbackDir;
 
+    private const float knockbackDamping = 0.4f;  
+    private const float stunExtension = 0.8f;
+
     public StunState(EnemyMain main)
     {
         ai = main;
@@ -23,9 +26,7 @@ public class StunState : IEnemyState
         stunDuration = ai.stunDuration;   
         stunTimer = 0f;
 
-        Debug.Log("stunned");
-
-        
+        Debug.Log("stunned");       
     }
 
     public void Update()
@@ -45,6 +46,8 @@ public class StunState : IEnemyState
                 
         }
     }
+
+
 
     public void OnExit()
     {
