@@ -1,36 +1,99 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 public class UnlockDoors : MonoBehaviour
 {
-    EnemyLife enemyLife;
+    [SerializeField] private Object[] enemyLife;
+    [SerializeField] private List<HealthController> enemiesLife;
+    [SerializeField] private HealthController enemiesLifes;
+    [SerializeField] private ManagerEnemiesInTutorial enemies;
     [SerializeField] private BoxCollider doorCollider1, doorCollider2, doorCollider3, doorCollider4;
-    private void Awake()
+    public static UnlockDoors instance;
+    private void Start()
     {
+        instance = this;
+        enemies = GetComponent<ManagerEnemiesInTutorial>();
         doorCollider1.enabled = false;
         doorCollider2.enabled = false;
         doorCollider3.enabled = false;
         doorCollider4.enabled = true;
         SetUpTutorial.unlockMoreEnemies = false;
         SetUpTutorial.enemyDefeatCount = 0;
-        enemyLife = GameObject.FindWithTag("Enemy").GetComponent<EnemyLife>();
+        //enemyLife = enemies.enemyLife;
         CountEnemiesDefeated();
     }
     private void Update()
     {
+        Debug.Log($"Checkpoint1 {SetUpTutorial.checkPoint1}");
+        Debug.Log($"Checkpoint2 {SetUpTutorial.checkPoint2}");
+        Debug.Log($"Checkpoint3 {SetUpTutorial.checkPoint3}");
         if(enemyLife == null)
         {
-            enemyLife = GameObject.FindWithTag("Enemy").GetComponent<EnemyLife>();
+            /*var enemyLifes = enemyLife;
+            if (enemyLifes.TryGetComponent<HealthController>(out HealthController enemies))
+            {
+                enemyLife = enemies;
+            }*/
+            try
+            {
+                enemyLife = FindObjectsByType(typeof(HealthController), FindObjectsSortMode.None);
+            }
+            catch
+            {
+                Debug.Log("No hay enemigos");
+            }
         }
         DoorsEnabled();
     }
     void CountEnemiesDefeated()
     {
-        enemyLife.healthController.OnDead += EnemiesDefated;
+        /*for(int i = 0; i < enemyLife.Length; i++)
+        {
+            enemiesLife.Add(enemyLife[i]);
+            enemyLife[i].GetType(typeof(HealthController)).OnDead += EnemiesDefated;
+        }
+       foreach(HealthController enemiesLifes in enemyLife)
+        {
+            enemiesLife.Add(enemiesLifes);
+        }
+        for (int i = 0; i < enemyLife.Length; i++)
+        {
+            enemiesLife[i].OnDead += EnemiesDefated;
+        }*/
+        
     }
 
-    void EnemiesDefated()
+    public void EnemiesDefated()
     {
+        /*for (int i = 0; i < enemiesLife.Count; i++)
+        {
+            enemiesLife[i].OnDead -= EnemiesDefated;
+        }
         SetUpTutorial.enemyDefeatCount++;
+        Debug.Log(SetUpTutorial.enemyDefeatCount);*/
+
+       /* for (int i = 0; i < enemies.enemiesActive.Count; i++)
+        {
+            if (enemies.enemyLife[i] == null)
+            {
+                enemies.enemiesActive.Remove(enemies.enemiesActive[i]);
+            }
+        }
+
+        for (int i = 0; i < enemies.enemyLife.Count; i++)
+        {
+            if (enemies.enemyLife[i] == null)
+            {
+                enemies.enemyLife.Remove(enemies.enemyLife[i]);
+            }
+        }
+        for (int i = 0; i < enemyLife.Length; i++)
+        {
+            if(enemyLife[i] == null)
+            {
+                enemyLife.Remove(enemyLife[i]);
+            }
+        }*/
         if (SetUpTutorial.enemyDefeatCount >= 1 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlocMoreEnemies();
@@ -38,8 +101,9 @@ public class UnlockDoors : MonoBehaviour
         if (SetUpTutorial.enemyDefeatCount >= 4 && !SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             CanUnlockDoor1();
+            CanUnlocMoreEnemies();
         }
-        if (SetUpTutorial.enemyDefeatCount >= 10 && SetUpTutorial.checkPoint1)
+        if (SetUpTutorial.enemyDefeatCount >= 7 && SetUpTutorial.checkPoint1)
         {
             CanUnlockDoor2();
             CanUnlocMoreEnemies();
@@ -61,10 +125,13 @@ public class UnlockDoors : MonoBehaviour
     void CanUnlocMoreEnemies()
     {
         SetUpTutorial.unlockMoreEnemies = true;
+        Debug.Log($"unlockEnemies {SetUpTutorial.unlockMoreEnemies}");
+        Invoke(nameof(CountEnemiesDefeated), 0.35f);
     }
     void CanUnlockDoor1()
     {
         SetUpTutorial.canOpenDoor1 = true;
+        Debug.Log("Puerta1 Abrir");
         SetUpTutorial.enemyDefeatCount = 0;
     }
     void CanUnlockDoor2()
@@ -80,7 +147,10 @@ public class UnlockDoors : MonoBehaviour
 
     private void OnDestroy()
     {
-        enemyLife.healthController.OnDead -= EnemiesDefated;
+        for (int i = 0; i < enemiesLife.Count; i++)
+        {
+            enemiesLife[i].OnDead -= EnemiesDefated;
+        }
     }
 
     void DoorsEnabled()

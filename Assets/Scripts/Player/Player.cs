@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public void OnDead()
     {
         
-        SceneManager.LoadScene("BlockOutTest");
+        //SceneManager.LoadScene("BlockOutTest");
     }
 
     private void OnDisable()

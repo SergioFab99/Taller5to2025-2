@@ -108,7 +108,7 @@ public class PlayerCombat : MonoBehaviour
 
     // References filled by Player.Start
     [HideInInspector] public PlayerCharacter playerCharacter;
-    [HideInInspector] public PlayerCamera playerCamera;
+     public PlayerCamera playerCamera;
     // Dodge state
     private bool _isDodging = false;
     // Counter window

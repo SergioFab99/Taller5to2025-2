@@ -42,6 +42,14 @@ public class HealthController : MonoBehaviour
         if (health <= 0f)
         {
             OnDead?.Invoke();
+            if(gameObject.tag == "Enemy")
+            {
+                SetUpTutorial.enemyDefeatCount++;
+                UnlockDoors.instance.EnemiesDefated();
+                ManagerEnemiesInTutorial.instance.CallSpawn();
+                Debug.Log($"enemigos muertos {SetUpTutorial.enemyDefeatCount}");
+            }
+            
         }
     }
 
