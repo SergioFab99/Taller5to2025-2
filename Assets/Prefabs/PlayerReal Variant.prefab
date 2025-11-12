@@ -52,8 +52,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerReal Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 6159303220848659265, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: cameraTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: leftPunchPos
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: rightPunchPos
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5540451750797161310, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 8399834708097410902, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    - {fileID: 8352472941355899615, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    - {fileID: 1892239398410428972, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    - {fileID: 5193977198459761544, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+    - {fileID: 459955004247726431, guid: c8f31c6acc2078247995333c7520620f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f31c6acc2078247995333c7520620f, type: 3}

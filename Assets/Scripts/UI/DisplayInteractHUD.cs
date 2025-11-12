@@ -7,13 +7,13 @@ public class DisplayInteractHUD : MonoBehaviour
     bool startCoroutine;
     [SerializeField] float timeBetween;
     [SerializeField] private PlayerCombat playerCombat;
-    DefaultGrabThrowSettings DefaultGrabThrowSettings;
+    [SerializeField]DefaultGrabThrowSettings DefaultGrabThrowSettings;
     [SerializeField] private Transform cam;
     void Start()
     {
         playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
         cam = playerCombat.playerCamera._camera.transform;
-        DefaultGrabThrowSettings = playerCombat.DefaultGrabThrowSettings;
+       // DefaultGrabThrowSettings = playerCombat.DefaultGrabThrowSettings;
         coroutine = StartCoroutine(Display(timeBetween));
     }
 
@@ -36,7 +36,7 @@ public class DisplayInteractHUD : MonoBehaviour
                 {
                     var canvas = GameObject.Find("Canvas");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
-                    Debug.Log("Sí hay");
+                    Debug.Log("Sï¿½ hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
                     yield return new WaitForSeconds(timeBetween);
