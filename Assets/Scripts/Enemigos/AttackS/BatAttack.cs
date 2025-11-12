@@ -129,8 +129,11 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             {
                 if (hit.CompareTag("Player"))
                 {
-                    if (hit.TryGetComponent(out HealthController hp))
-                        hp.TakeDamague(damage);
+                    var playerCombat = hit.GetComponent<PlayerCombat>() ?? hit.GetComponentInChildren<PlayerCombat>();
+                    if (playerCombat != null)
+                    {
+                        playerCombat.ReceiveDamage(damage);
+                    }                    
 
                     if (hit.attachedRigidbody != null)
                         hit.attachedRigidbody.AddForce(toTarget * knockbackForce, ForceMode.Impulse);

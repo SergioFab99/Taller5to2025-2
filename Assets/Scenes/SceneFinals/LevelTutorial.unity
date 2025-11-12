@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -285,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -730,6 +738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (34)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -833,6 +845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (26)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -932,6 +948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -978,83 +998,6 @@ Transform:
   - {fileID: 1211122827}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &24948043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 24948044}
-  - component: {fileID: 24948046}
-  - component: {fileID: 24948045}
-  m_Layer: 0
-  m_Name: PanelState
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &24948044
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24948043}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 662841679}
-  - {fileID: 1965198322}
-  m_Father: {fileID: 184358162}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &24948045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24948043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &24948046
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24948043}
-  m_CullTransparentMesh: 1
 --- !u!1001 &28202663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1176,6 +1119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1249,6 +1196,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1353,6 +1304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (5)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1456,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1488,8 +1447,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
-  m_Center: {x: -0.00000014901161, y: 0, z: 0}
+  m_Size: {x: 2.3836424, y: 0.9061367, z: 0.8944931}
+  m_Center: {x: -0.79444814, y: -0.12328566, z: 0.16067211}
 --- !u!4 &40178591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
@@ -1987,6 +1946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (13)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2082,9 +2045,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2155,6 +2126,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2232,6 +2207,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (38)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2336,6 +2315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TechoFabrica
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b3fc359fdd70f44499005b8f68c2160a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2406,6 +2389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2467,6 +2454,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2532,6 +2523,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2607,6 +2602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (32)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2646,81 +2645,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
   m_Center: {x: -0.00000014901161, y: 0, z: 0}
---- !u!1 &94739713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 94739714}
-  - component: {fileID: 94739716}
-  - component: {fileID: 94739715}
-  m_Layer: 0
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &94739714
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94739713}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1296262511}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &94739715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94739713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &94739716
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94739713}
-  m_CullTransparentMesh: 1
 --- !u!1001 &105755187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2784,6 +2708,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
       propertyPath: m_Name
       value: VentanaFabrica (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2976,6 +2904,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (9)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3292,6 +3224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3479,16 +3415,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 148768580}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &148768578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
   m_PrefabInstance: {fileID: 148768577}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &148768579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+  m_PrefabInstance: {fileID: 148768577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &148768580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148768579}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000071525574, y: 0.00000011920929, z: 0.0000009536743}
 --- !u!1001 &150477258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3646,6 +3615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3708,86 +3681,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
---- !u!1 &158242086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 158242087}
-  - component: {fileID: 158242089}
-  - component: {fileID: 158242088}
-  m_Layer: 0
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &158242087
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158242086}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 210638791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &158242088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158242086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &158242089
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158242086}
-  m_CullTransparentMesh: 1
 --- !u!1001 &165955122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3847,6 +3749,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4064,140 +3970,6 @@ Transform:
   - {fileID: 1959433412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &184358157
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 184358162}
-  - component: {fileID: 184358161}
-  - component: {fileID: 184358160}
-  - component: {fileID: 184358159}
-  - component: {fileID: 184358158}
-  m_Layer: 0
-  m_Name: Canvas (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &184358158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184358157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c50ae584bbdc524d95ea8fa8f6a5bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 210638792}
-  canvasGroup: {fileID: 210638790}
-  nameLabel: {fileID: 0}
-  targetCamera: {fileID: 0}
-  maxDetectDistance: 60
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 1023
-  useTagFilter: 0
-  enemyTag: Enemy
-  aimAssistRadius: 0.05
-  hideWhenFull: 0
-  lingerTime: 0.35
-  fadeSpeed: 8
-  detectionInterval: 0.05
-  debugDrawRay: 0
---- !u!114 &184358159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184358157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 1023
---- !u!114 &184358160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184358157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &184358161
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184358157}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &184358162
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184358157}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1296262511}
-  - {fileID: 210638791}
-  - {fileID: 500870814}
-  - {fileID: 24948044}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &185258770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4261,6 +4033,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (23)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4386,6 +4162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4435,27 +4215,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.759806
+      value: 7.780079
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5260279
+      value: 1.5319437
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1462345
+      value: 1.3413883
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.8729
+      value: -10.073
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1156
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.75
+      value: 9.8949
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4485,9 +4265,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4503,108 +4291,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
   m_PrefabInstance: {fileID: 207247639}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &210638789
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 210638791}
-  - component: {fileID: 210638792}
-  - component: {fileID: 210638790}
-  m_Layer: 0
-  m_Name: EnemyBar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!225 &210638790
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210638789}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!224 &210638791
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210638789}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4939, y: 2.4939, z: 2.4939}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 158242087}
-  - {fileID: 1809428526}
-  m_Father: {fileID: 184358162}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 667, y: 463}
-  m_SizeDelta: {x: 160, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &210638792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210638789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 1900308182}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &216452071
 GameObject:
   m_ObjectHideFlags: 0
@@ -4811,6 +4497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (17)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4914,6 +4604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4991,6 +4685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (21)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5030,66 +4728,74 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55871093, y: 0.5587897, z: 0.5731471}
   m_Center: {x: -0.00000014901161, y: -0.05077691, z: -0.00000001490116}
---- !u!1 &266212080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-  m_PrefabInstance: {fileID: 1186042198}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &254057594
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6222481651229147237, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_Name
+      value: PickUpBat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99948925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.031959493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3.663
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
 --- !u!114 &266212081 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7370482882594465284, guid: c8f31c6acc2078247995333c7520620f, type: 3}
   m_PrefabInstance: {fileID: 1186042198}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266212080}
+  m_GameObject: {fileID: 1674016217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &266212082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266212080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72aab0d4646411a49a4f3301c32bf130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  canInteract: {fileID: 0}
-  onTrigger: 0
-  openDoor1: 0
-  openDoor2: 0
---- !u!54 &266212090
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266212080}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &267585517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
@@ -5158,6 +4864,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5358,6 +5068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5426,6 +5140,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5518,6 +5236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5586,6 +5308,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5744,6 +5470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (45)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5851,6 +5581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Botella (Moment\xE1neo) (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5924,6 +5658,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
       propertyPath: m_Name
       value: Botella
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5999,16 +5737,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 310975536}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &310975534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
   m_PrefabInstance: {fileID: 310975533}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &310975535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+  m_PrefabInstance: {fileID: 310975533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &310975536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310975535}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000023841858, y: 0.00000011920929, z: 0.0000009536743}
 --- !u!1001 &322644612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6072,6 +5843,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (44)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6176,6 +5951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaFabrica (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6242,6 +6021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6255,6 +6038,114 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
   m_PrefabInstance: {fileID: 325056611}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &326470188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326470189}
+  - component: {fileID: 326470192}
+  - component: {fileID: 326470191}
+  - component: {fileID: 326470190}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326470189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326470188}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.21, y: 0.020987034, z: 0.30999947}
+  m_LocalScale: {x: 2, y: 6, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 992813673}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &326470190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326470188}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &326470191
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326470188}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &326470192
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326470188}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &331884981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6318,6 +6209,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6463,6 +6358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Tuber\xEDa (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6536,6 +6435,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6640,16 +6543,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 372872767}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &372872765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
   m_PrefabInstance: {fileID: 372872764}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &372872766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+  m_PrefabInstance: {fileID: 372872764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &372872767
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372872766}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000023841858, y: 0.00000011920929, z: 0.0000009536743}
 --- !u!1001 &376508687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6713,6 +6649,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88f037074658d5348b48913300dfccc6, type: 3}
       propertyPath: m_Name
       value: ContenedordeAgua1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88f037074658d5348b48913300dfccc6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6787,6 +6727,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (42)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6890,6 +6834,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (9)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7215,6 +7163,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7253,7 +7205,7 @@ Transform:
   m_GameObject: {fileID: 404197701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.4, y: 6.33, z: -11.14}
+  m_LocalPosition: {x: 12.4, y: 6.33, z: -11.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7328,6 +7280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (25)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7392,7 +7348,7 @@ Transform:
   m_GameObject: {fileID: 416805412}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22, y: 6.33, z: -21.41}
+  m_LocalPosition: {x: 12.26, y: 6.33, z: -28.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7461,6 +7417,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (39)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7768,6 +7728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (13)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7870,6 +7834,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (12)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8082,6 +8050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8172,6 +8144,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8361,6 +8337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8371,6 +8351,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
   m_PrefabInstance: {fileID: 1551118497}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &460595734
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6222481651229147237, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_Name
+      value: PickUpBat (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 25.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99948925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.031959493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3.663
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
 --- !u!1001 &460711893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8434,6 +8471,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8598,6 +8639,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
       propertyPath: m_Name
       value: FarolaCalle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8789,6 +8834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8891,6 +8940,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (22)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9061,6 +9114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9164,6 +9221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (40)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9203,82 +9264,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
   m_Center: {x: -0.00000014901161, y: 0, z: 0}
---- !u!1 &500870813
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 500870814}
-  - component: {fileID: 500870816}
-  - component: {fileID: 500870815}
-  m_Layer: 0
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &500870814
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500870813}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2085019624}
-  m_Father: {fileID: 184358162}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &500870815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500870813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &500870816
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500870813}
-  m_CullTransparentMesh: 1
 --- !u!1001 &503398427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9409,6 +9394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (20)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9473,7 +9462,7 @@ Transform:
   m_GameObject: {fileID: 521738294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.34, y: 6.33, z: -16.69}
+  m_LocalPosition: {x: 10.91, y: 6.33, z: -16.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9593,6 +9582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9669,6 +9662,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6608428171975471103, guid: 2ad861d1eb48d8342b8b05e27794d7fd, type: 3}
   m_PrefabInstance: {fileID: 538575481}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &539322659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539322660}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &539322660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539322659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.75, y: 1.74, z: -7.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547284176
 GameObject:
   m_ObjectHideFlags: 0
@@ -9771,16 +9795,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 559487433}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &559487431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
   m_PrefabInstance: {fileID: 559487430}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &559487432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+  m_PrefabInstance: {fileID: 559487430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &559487433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559487432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000071525574, y: 0.00000011920929, z: 0.0000009536743}
 --- !u!1001 &574207046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9844,6 +9901,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
       propertyPath: m_Name
       value: "Tuber\xEDa (1)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9918,6 +9979,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10021,6 +10086,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (16)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10279,6 +10348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -10355,6 +10428,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10451,6 +10528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -10537,6 +10618,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10637,6 +10722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10710,6 +10799,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (20)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10813,6 +10906,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10952,6 +11049,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (27)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11054,6 +11155,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11205,147 +11310,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
---- !u!1 &662841678
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 662841679}
-  - component: {fileID: 662841681}
-  - component: {fileID: 662841680}
-  m_Layer: 0
-  m_Name: rank1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &662841679
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662841678}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 24948044}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 337}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &662841680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662841678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &662841681
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662841678}
-  m_CullTransparentMesh: 1
 --- !u!1 &663264404
 GameObject:
   m_ObjectHideFlags: 0
@@ -11443,6 +11416,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11655,6 +11632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11848,6 +11829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Botella (Moment\xE1neo)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11914,9 +11899,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -12026,6 +12019,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (51)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12237,81 +12234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.000005878344, y: 0.5128093, z: 359.6422}
---- !u!1 &723790897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 723790898}
-  - component: {fileID: 723790900}
-  - component: {fileID: 723790899}
-  m_Layer: 0
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &723790898
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723790897}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1331092204}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &723790899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723790897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 3
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 1
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &723790900
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723790897}
-  m_CullTransparentMesh: 1
 --- !u!1 &727055114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12566,6 +12488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (25)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12778,6 +12704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12881,6 +12811,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarolaCalle (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -12893,6 +12827,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
   m_PrefabInstance: {fileID: 759949805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &761808554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6222481651229147237, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
+  m_PrefabInstance: {fileID: 460595734}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763312372
 PrefabInstance:
@@ -12957,6 +12896,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13092,6 +13035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13195,6 +13142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (30)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13294,6 +13245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13359,6 +13314,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13436,6 +13395,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
       propertyPath: m_Name
       value: "Tuber\xEDa"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 153dcc95b0b92fa4e913f911bf6e1007, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13619,6 +13582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (6)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13779,6 +13746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13892,6 +13863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (35)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13995,6 +13970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14034,6 +14013,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44760376, y: 0.45772076, z: 0.44759345}
   m_Center: {x: 0, y: -0.0111749545, z: -0.00000047683716}
+--- !u!1 &824495340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+  m_PrefabInstance: {fileID: 844744338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &826139220
 GameObject:
   m_ObjectHideFlags: 0
@@ -14044,7 +14028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 826139221}
   m_Layer: 0
-  m_Name: SpawnPoint3
+  m_Name: PlayerSpawnPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14114,6 +14098,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4122370409488793342, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122370409488793342, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
       propertyPath: m_TagString
       value: Interactuable
       objectReference: {fileID: 0}
@@ -14122,13 +14110,20 @@ PrefabInstance:
       value: LeftDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
       propertyPath: m_TagString
       value: Door1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6440735231067578634, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1116663460}
   m_SourcePrefab: {fileID: 100100000, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
 --- !u!1001 &847404870
 PrefabInstance:
@@ -14185,6 +14180,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14325,6 +14324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (47)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14427,6 +14430,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14569,9 +14576,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -14643,6 +14658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -14656,6 +14675,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
   m_PrefabInstance: {fileID: 875596855}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882918131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882918132}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882918132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882918131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.64, y: 2.0019913, z: 29.80488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &883755284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14719,6 +14769,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (43)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14938,6 +14992,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15075,6 +15133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaEnrrollable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a567a895a4b93c41b05244e03e2b13d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15178,6 +15240,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15653,6 +15719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15766,6 +15836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (6)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15869,6 +15943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (19)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15964,9 +16042,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -16077,6 +16163,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (14)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16180,6 +16270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (15)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16266,10 +16360,11 @@ Transform:
   m_GameObject: {fileID: 992813671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.06, y: 0, z: -22.46}
+  m_LocalPosition: {x: 45.72, y: 0, z: -22.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 326470189}
   m_Father: {fileID: 1116350029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &994120798
@@ -16323,6 +16418,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd1ef018b382739468979369a65aea46, type: 3}
       propertyPath: m_Name
       value: "Ambientaci\xF3n - Barra de Metal"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd1ef018b382739468979369a65aea46, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16498,6 +16597,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
       propertyPath: m_Name
       value: VentanaCasa (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16862,9 +16965,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8661987788134558766, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_Name
       value: EscaleraTijera (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -16994,7 +17105,7 @@ Transform:
   m_GameObject: {fileID: 1022284101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.41, y: 6.33, z: -16.23}
+  m_LocalPosition: {x: 8.02, y: 6.33, z: -16.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17270,6 +17381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17343,6 +17458,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17584,6 +17703,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (18)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17841,6 +17964,18 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 380866329362138596, guid: 645423cb439a5684c81504a6207b50b9, type: 3}
   m_PrefabInstance: {fileID: 844744338}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1116663460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824495340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f437791024a90f49a79935c65e272ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1119896153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17896,6 +18031,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17974,6 +18113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18038,7 +18181,7 @@ Transform:
   m_GameObject: {fileID: 1131470311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.16, y: 6.33, z: -11.2}
+  m_LocalPosition: {x: 9.16, y: 6.33, z: -11.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18107,6 +18250,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (36)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18394,6 +18541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18571,32 +18722,33 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1422847162}
-    - target: {fileID: 3804534893037069960, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804534893037069960, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: m_Center.z
-      value: 0.22
-      objectReference: {fileID: 0}
     - target: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 197562388}
+      propertyPath: EnemyMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: DefaultVelocity.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: DefaultVelocity.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: DefaultVelocity.z
+      value: -0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 266212082}
-    - targetCorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 266212090}
+      addedObject: {fileID: 1674016227}
   m_SourcePrefab: {fileID: 100100000, guid: c8f31c6acc2078247995333c7520620f, type: 3}
 --- !u!4 &1186042199 stripped
 Transform:
@@ -18727,6 +18879,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
       propertyPath: m_Name
       value: VentanaFabrica (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18874,6 +19030,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222120886}
   m_CullTransparentMesh: 1
+--- !u!1 &1225506032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+  m_PrefabInstance: {fileID: 1186042198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1234081991
 GameObject:
   m_ObjectHideFlags: 0
@@ -18992,6 +19153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (14)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19094,6 +19259,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19198,6 +19367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Cami\xF3n"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b001b5d0b0555a041b9cfbc912e2b3f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -19274,6 +19447,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19617,6 +19794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EstanteFabrica (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -19762,6 +19943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pallet (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19777,125 +19962,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
   m_PrefabInstance: {fileID: 422975230}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1296262510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1296262511}
-  - component: {fileID: 1296262514}
-  - component: {fileID: 1296262513}
-  - component: {fileID: 1296262512}
-  m_Layer: 0
-  m_Name: PlayerHudBar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1296262511
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296262510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4939, y: 2.4939, z: 2.4939}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 94739714}
-  - {fileID: 1331092204}
-  m_Father: {fileID: 184358162}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -742, y: 463}
-  m_SizeDelta: {x: 160, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1296262512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296262510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74991b7d52fd6b8468f48c2ccb0970a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 266212081}
-  slider: {fileID: 1296262514}
-  canvasGroup: {fileID: 1296262513}
-  hideWhenFull: 0
---- !u!225 &1296262513
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296262510}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &1296262514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296262510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 723790898}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1297172572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19959,6 +20025,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20062,6 +20132,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (16)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20242,6 +20316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (29)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20406,6 +20484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (28)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20445,42 +20527,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
   m_Center: {x: -0.00000014901161, y: 0, z: 0}
---- !u!1 &1331092203
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1331092204}
-  m_Layer: 0
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1331092204
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331092203}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 723790898}
-  m_Father: {fileID: 1296262511}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1337905451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20544,6 +20590,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (4)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20648,6 +20698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (33)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20750,6 +20804,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20935,8 +20993,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 28.720478, y: 3.9680128, z: 2.1860096}
-  m_Center: {x: -1.4681811, y: 0.37623692, z: 0.3035673}
+  m_Size: {x: 28.720478, y: 3.9680128, z: 3.5236943}
+  m_Center: {x: -1.4681816, y: 0.37623692, z: 0.9724096}
 --- !u!4 &1366627352
 Transform:
   m_ObjectHideFlags: 0
@@ -21043,6 +21101,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
       propertyPath: m_Name
       value: VentanaFabrica (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21160,6 +21222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21167,6 +21233,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1372717793}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1372717794}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &1372717791 stripped
 Transform:
@@ -21179,6 +21248,27 @@ GameObject:
   m_PrefabInstance: {fileID: 1372717790}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1372717793
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372717792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000023841858, y: 0, z: 0}
+--- !u!65 &1372717794
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21262,6 +21352,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (19)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21365,6 +21459,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (24)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21506,6 +21604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21608,6 +21710,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (22)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21820,6 +21926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaFabrica (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5101fdba234bf742bc32357e8216812, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21955,6 +22065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (46)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21999,6 +22113,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1136891021894543542, guid: 242a9ba7be2d4a34a8b5729a0ad24cee, type: 3}
   m_PrefabInstance: {fileID: 1455679015}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1422847166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422847162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &1425088608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22062,6 +22200,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (10)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22270,6 +22412,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22541,10 +22687,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3997754804215422828, guid: 242a9ba7be2d4a34a8b5729a0ad24cee, type: 3}
+      propertyPath: Damping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1136891021894543542, guid: 242a9ba7be2d4a34a8b5729a0ad24cee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1422847166}
   m_SourcePrefab: {fileID: 100100000, guid: 242a9ba7be2d4a34a8b5729a0ad24cee, type: 3}
 --- !u!1001 &1457130457
 PrefabInstance:
@@ -22609,6 +22762,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
       propertyPath: m_Name
       value: PuertaMaderaFinal (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22804,7 +22961,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.44508657
+          x: -0.4450866
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -23075,6 +23232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (41)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23296,6 +23457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (10)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23404,6 +23569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (31)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23495,6 +23664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Ventilaci\xF3n"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 66392a6fff8eee342938204b8c089a59, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23564,6 +23737,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23638,6 +23815,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (5)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23741,6 +23922,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (26)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24013,6 +24198,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (48)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24312,6 +24501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaMaderaFinal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24414,6 +24607,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
       propertyPath: m_Name
       value: FarolaCalle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24777,7 +24974,7 @@ Transform:
   m_GameObject: {fileID: 1612326278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.24, y: 6.33, z: 15.13}
+  m_LocalPosition: {x: -25, y: 6.33, z: 14.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24869,6 +25066,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25011,10 +25212,10 @@ MonoBehaviour:
         z: 1.8906918
       Rotation:
         value:
-          x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
-          w: -0.4800159
+          x: 0.5404947
+          y: -0.6074259
+          z: 0.32936928
+          w: -0.48001593
     - Position:
         x: 5.59
         y: 1.33
@@ -25208,6 +25409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25311,6 +25516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25402,6 +25611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25470,6 +25683,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
       propertyPath: m_Name
       value: Botella (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25540,6 +25757,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25614,6 +25835,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (18)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25718,16 +25943,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barril
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1661156241}
   m_SourcePrefab: {fileID: 100100000, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
 --- !u!4 &1661156239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
   m_PrefabInstance: {fileID: 1661156238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1661156240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab71863828d3c0745a23bc06e52deae2, type: 3}
+  m_PrefabInstance: {fileID: 1661156238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1661156241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661156240}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0886707, y: 1.5404391, z: 1.0886712}
+  m_Center: {x: -0.00000023841858, y: 0.00000011920929, z: 0}
 --- !u!1 &1662913959
 GameObject:
   m_ObjectHideFlags: 0
@@ -25831,6 +26089,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25900,6 +26162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (12)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25939,6 +26205,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55871093, y: 0.5587897, z: 0.5731471}
   m_Center: {x: -0.00000014901161, y: -0.05077691, z: -0.00000001490116}
+--- !u!1 &1674016217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+  m_PrefabInstance: {fileID: 1186042198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1674016227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674016217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72aab0d4646411a49a4f3301c32bf130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  canInteract: {fileID: 0}
+  bat2: {fileID: 761808554}
+  onTrigger: 0
+  openDoor1: 0
+  openDoor2: 0
+  unlockFinalEnemies: 0
 --- !u!1001 &1675017572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26003,6 +26293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26055,6 +26349,10 @@ PrefabInstance:
       value: 'RightDoor '
       objectReference: {fileID: 0}
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_TagString
       value: Door2
       objectReference: {fileID: 0}
@@ -26096,6 +26394,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037149968998732472, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
@@ -26170,6 +26472,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (15)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26274,6 +26580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (24)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26376,6 +26686,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26532,6 +26846,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
       propertyPath: m_Name
       value: EstanteFabrica (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26717,6 +27035,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (2)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26998,7 +27320,7 @@ Transform:
   m_GameObject: {fileID: 1723289687}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.53, y: 6.33, z: -11.31}
+  m_LocalPosition: {x: -1.627, y: 6.33, z: -11.024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27067,6 +27389,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27170,6 +27496,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_Name
       value: PuertaMetalFinal (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_IsActive
@@ -27280,7 +27610,7 @@ Transform:
   m_GameObject: {fileID: 1728093651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.62, z: 29.73}
+  m_LocalPosition: {x: -2.3, y: 1.62, z: 29.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27513,6 +27843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caja Cart\xF3n - Abierta (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a2ab45868aa8134f8b156ad2a88db97, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27647,6 +27981,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuertaMaderaFinal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27749,6 +28087,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27949,6 +28291,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (4)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28229,6 +28575,7 @@ MonoBehaviour:
   - Interactuable Objects
   - Bate
   - Score and Upgrades
+  nextScene: Level1B
   textsForIndications:
   - '"W,A,S,D" to move and "Space" to jump.'
   - '"Left click" to attack.'
@@ -28237,15 +28584,14 @@ MonoBehaviour:
   - Upon successful evasion, quickly attack to trigger a successful counterattack
   - '"E" to interact.'
   - '"E" to interact, "Left click" to attack.'
-  - By eliminating enemies you earn points and when you complete a level these are
+  - 'By eliminating enemies you earn points and when you complete a level these are
     converted into a rating that will give you *Intuition* necessary to improve your
-    skills.  (S = 4000 points = 50 intuition/ A = 3500 points = 25 intuition/ B =
-    2500 points = 20 intuition/ C = 1000 points = 15 intuition/ D = 0 points = 10
-    intuition)
+    skills. '
   textsForTitleLife:
   - Life
   textsForIndicationsLife:
   - You have a life bar of up to 100 hit points and you will die if it reaches 0.
+  playerCamera: {fileID: 197562388}
 --- !u!1 &1786043912
 GameObject:
   m_ObjectHideFlags: 0
@@ -28418,6 +28764,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28520,6 +28870,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28685,6 +29039,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (37)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28724,42 +29082,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
   m_Center: {x: -0.00000014901161, y: 0, z: 0}
---- !u!1 &1809428525
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1809428526}
-  m_Layer: 0
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1809428526
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809428525}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1900308182}
-  m_Father: {fileID: 210638791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1813273751
 GameObject:
   m_ObjectHideFlags: 0
@@ -28994,6 +29316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29096,6 +29422,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29210,6 +29540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29312,6 +29646,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29696,6 +30034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (23)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29798,6 +30140,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29902,6 +30248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaInteractuable (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29941,81 +30291,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44760376, y: 0.45772076, z: 0.44759345}
   m_Center: {x: 0, y: -0.0111749545, z: -0.00000047683716}
---- !u!1 &1900308181
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1900308182}
-  - component: {fileID: 1900308184}
-  - component: {fileID: 1900308183}
-  m_Layer: 0
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1900308182
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900308181}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1809428526}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1900308183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900308181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 3
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 1
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1900308184
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900308181}
-  m_CullTransparentMesh: 1
 --- !u!1 &1909672781
 GameObject:
   m_ObjectHideFlags: 0
@@ -30129,6 +30404,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
       propertyPath: m_Name
       value: Pallet (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dbcc7c5187a8c5e4da30f027cf620821, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30283,6 +30562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoteDeBasura
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f614548ed0d40345af4fe83fc168a68, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30423,6 +30706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarolaCalle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -30504,6 +30791,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30596,6 +30887,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30665,6 +30960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (11)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30729,7 +31028,7 @@ Transform:
   m_GameObject: {fileID: 1958436836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.05, y: 6.33, z: 14.19}
+  m_LocalPosition: {x: -22.75, y: 6.33, z: 12.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30799,6 +31098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (52)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30838,142 +31141,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55870605, y: 0.55870605, z: 0.5731472}
   m_Center: {x: -0.00000014901161, y: 0, z: 0}
---- !u!1 &1965198321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1965198322}
-  - component: {fileID: 1965198324}
-  - component: {fileID: 1965198323}
-  m_Layer: 0
-  m_Name: detail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1965198322
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965198321}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 24948044}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -35}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1965198323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965198321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1965198324
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965198321}
-  m_CullTransparentMesh: 1
 --- !u!1 &1970081236
 GameObject:
   m_ObjectHideFlags: 0
@@ -31091,6 +31258,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaMadera (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31315,6 +31486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (21)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31417,6 +31592,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_Name
       value: PuertaMetalFinal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
       propertyPath: m_IsActive
@@ -31525,6 +31704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botella (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31598,6 +31781,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
       propertyPath: m_Name
       value: PuertaMaderaFinal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29aa1257c9022fc41a5f1900ae20fe7d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31690,6 +31877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentanaCasa (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46511a5f79d6206448f3ce4380789e25, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31758,6 +31949,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31861,6 +32056,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
       propertyPath: m_Name
       value: CajaInteractuable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32026,6 +32225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CajaMadera (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b6c2e9da649bea46b048d170e9b2334, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32137,6 +32340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0c09455b1678f4c808ab737d4fd3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &2080027502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32231,6 +32435,7 @@ MonoBehaviour:
   doorCollider2: {fileID: 1029874769}
   doorCollider3: {fileID: 680398330}
   doorCollider4: {fileID: 992813672}
+  door4: {fileID: 992813671}
 --- !u!114 &2080027504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32243,8 +32448,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab06e121b7b37646992ab246ed5f381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 266212080}
+  player: {fileID: 1225506032}
+  spawnPoint: {fileID: 882918131}
+  spawnPoint1: {fileID: 2126946127}
+  spawnPoint2: {fileID: 539322659}
   spawnPointFinal: {fileID: 826139220}
+  setUpTutorial: {fileID: 0}
 --- !u!1 &2080993824
 GameObject:
   m_ObjectHideFlags: 0
@@ -32306,142 +32515,6 @@ Transform:
   - {fileID: 1630253222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2085019623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2085019624}
-  - component: {fileID: 2085019626}
-  - component: {fileID: 2085019625}
-  m_Layer: 0
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2085019624
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085019623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 500870814}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2085019625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085019623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &2085019626
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085019623}
-  m_CullTransparentMesh: 1
 --- !u!4 &2086751011 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
@@ -32510,6 +32583,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (49)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32752,6 +32829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (17)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32905,6 +32986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CajaCart\xF3n2 - Cerrada (11)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46defae81854efe429f1cb2d8967be14, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33007,6 +33092,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
       propertyPath: m_Name
       value: "Contenedor - Moment\xE1neo (50)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1795877ea20829b4c8c883f5049b94c2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33162,6 +33251,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7601788176990736633, guid: 0ac2b67ef39b9c2448c944f8b48f8fff, type: 3}
+--- !u!1 &2126946127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126946128}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2126946128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126946127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.86, y: 1.74, z: 23.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2132941306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
@@ -33230,6 +33350,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
       propertyPath: m_Name
       value: Botella (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc036c0ccc402143bd827145d1687f7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33530,6 +33654,143 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.000005434756, y: 359.6935, z: 0.1454039}
+--- !u!1001 &718661335522599396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1328666179093020872, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336475959478639534, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 197562388}
+    - target: {fileID: 2148230341169274975, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191946771870454737, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.472473
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441679682004620102, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_Name
+      value: Canvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885595085325869591, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 266212081}
+    - target: {fileID: 6542684677294534232, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542684677294534232, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682416210737152657, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578605996649695453, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.19812012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565913941832870712, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565913941832870712, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
 --- !u!1001 &1076887580871396486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33541,6 +33802,10 @@ PrefabInstance:
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_Name
       value: 'RightDoor '
+      objectReference: {fileID: 0}
+    - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_TagString
@@ -33584,6 +33849,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6037149968998732472, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7783301402448367506, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
@@ -33649,9 +33918,14 @@ SceneRoots:
   - {fileID: 889034852}
   - {fileID: 851554857}
   - {fileID: 1783029772}
-  - {fileID: 184358162}
+  - {fileID: 718661335522599396}
   - {fileID: 1016451669}
   - {fileID: 1366627352}
   - {fileID: 166749212}
   - {fileID: 1728093654}
   - {fileID: 119425319}
+  - {fileID: 882918132}
+  - {fileID: 2126946128}
+  - {fileID: 539322660}
+  - {fileID: 254057594}
+  - {fileID: 460595734}

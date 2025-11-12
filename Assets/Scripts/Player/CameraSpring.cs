@@ -20,12 +20,12 @@ public class CameraSpring : MonoBehaviour
 
         SpringUtils.CalcDampedSpringMotionParams(ref springParams, deltaTime, frecuency, damping);
 
-         SpringUtils.UpdateDampedSpringMotion(ref currentPos.x, ref velocity.x, targetPosition.x, springParams);
+         //SpringUtils.UpdateDampedSpringMotion(ref currentPos.x, ref velocity.x, targetPosition.x, springParams);
 
          SpringUtils.UpdateDampedSpringMotion(ref currentPos.y, ref velocity.y, targetPosition.y, springParams);
-         SpringUtils.UpdateDampedSpringMotion(ref currentPos.z, ref velocity.z, targetPosition.z,springParams);
+         //SpringUtils.UpdateDampedSpringMotion(ref currentPos.z, ref velocity.z, targetPosition.z,springParams);
 
-        transform.position = new Vector3(currentPos.x,currentPos.y,currentPos.z);
+        transform.position = new Vector3(targetPosition.x,currentPos.y,targetPosition.z);
     }
 }
 

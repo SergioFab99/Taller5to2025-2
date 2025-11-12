@@ -1,30 +1,45 @@
 using UnityEngine;
-
+using System;
+using System.Collections.Generic;
 public class PlayerOpenTutorialDoors : MonoBehaviour
 {
     [Header("HUD")]
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject canInteract;
-
-    PlayerInputActions _inputActions;
+    [SerializeField] private GameObject bat2;
     [SerializeField] private bool onTrigger;
     //[SerializeField] private bool interact;
-    [SerializeField] private bool openDoor1, openDoor2;
+    [SerializeField] private bool openDoor1, openDoor2, unlockFinalEnemies;
     private OpenDoor openDoor;
+    private void Awake()
+    {
+    }
     void Start()
     {
         canvas = GameObject.Find("Canvas");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
         canInteract.SetActive(false);
+        if (SetUpTutorial.checkPoint3)
+        {
+            unlockFinalEnemies = true;
+            bat2.SetActive(true);
+        }
+        else
+        {
+            unlockFinalEnemies = false;
+            bat2.SetActive(false);
+        }
     }
 
     void Update()
     {
         //UpdateInput();
-        if(onTrigger && Input.GetKeyDown(KeyCode.E))
+        if(onTrigger && Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
         {
             Deactivate();
             ActiveCheckPoints();
+            ManagerEnemiesInTutorial.instance.CallSpawn();
+            
         }
         if (SetUpTutorial.checkPoint2)
         {
@@ -32,6 +47,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint3)
         {
+            SetUpTutorial.checkPoint1 = false;
             SetUpTutorial.checkPoint2 = false;
         }
     }
@@ -66,8 +82,15 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         }
         if (other.gameObject.CompareTag("CheckPoint3"))
         {
+            bat2.SetActive(true);
             SetUpTutorial.checkPoint3 = true;
             SetUpTutorial.enemyDefeatCount = 0;
+            if (!unlockFinalEnemies)
+            {
+                UnlockDoors.instance.CanUnlocMoreEnemies();
+                ManagerEnemiesInTutorial.instance.CallSpawn();
+                unlockFinalEnemies = true;
+            }
         }
         
     }
@@ -102,14 +125,18 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         {
             SetUpTutorial.camera2 = true;
             SetUpTutorial.checkPoint1 = true;
-            SetUpTutorial.spawnPoint = gameObject.transform.position;
+            Debug.Log("Checkpoint1" + SetUpTutorial.checkPoint1);
+            Debug.Log("Checkpoint2" + SetUpTutorial.checkPoint2);
+            Debug.Log("Checkpoint3" + SetUpTutorial.checkPoint3);
 
         }
         if (SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && openDoor2)
         {
             SetUpTutorial.camera3 = true;
             SetUpTutorial.checkPoint2 = true;
-            SetUpTutorial.spawnPoint = gameObject.transform.position;
+            Debug.Log("Checkpoint1" + SetUpTutorial.checkPoint1);
+            Debug.Log("Checkpoint2" + SetUpTutorial.checkPoint2);
+            Debug.Log("Checkpoint3" + SetUpTutorial.checkPoint3);
         }
     }
 }

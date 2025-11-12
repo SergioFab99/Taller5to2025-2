@@ -4,17 +4,18 @@ public class StartMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject startMenuPanel;
     [SerializeField] GameObject optionsPanel;
+    [SerializeField] string sceneToLoad;
     private void Start()
     {
         startMenuPanel = transform.Find("StartMenuPanel").gameObject;
         optionsPanel = transform.Find("OptionsPanel").gameObject;
         startMenuPanel.SetActive(true);
-        optionsPanel.SetActive(false);        
-        
+        optionsPanel.SetActive(false);
+        sceneToLoad = SceneToLoad.sceneSaved;
     }
     public void PlayButton()
     {
-        SceneManager.LoadScene("LevelTutorial");
+        SceneManager.LoadScene(sceneToLoad);
       
     }
 

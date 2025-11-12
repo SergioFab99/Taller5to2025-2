@@ -76,8 +76,8 @@ public class CameraManagerTutorial : MonoBehaviour
         cameraScene.Priority = 0;
         cameraPlayer.Priority = 1;
         Time.timeScale = 1;
-        Indications.instance.NextIndication();
-        Indications.instance.ActivateIndications();
+        /*Indications.instance.NextIndication();
+        Indications.instance.ActivateIndications();*/
         Destroy(this);
     }
     void ChangePriorityCamera3Tutorial()
@@ -94,6 +94,8 @@ public class CameraManagerTutorial : MonoBehaviour
         }
         else
         {
+            Indications.instance.NextIndication();
+            Indications.indicationsLifeWithCamera = true;
             Indications.instance.ChangeToIndicationsOfLife();
         }
         Destroy(this);

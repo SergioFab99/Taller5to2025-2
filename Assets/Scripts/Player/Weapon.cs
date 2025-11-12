@@ -1,4 +1,5 @@
-using UnityEditor.Animations;
+
+using System.Collections;
 using UnityEngine;
 
 public enum WeaponType
@@ -18,6 +19,8 @@ public abstract class Weapon : MonoBehaviour
 
     public WeaponSettings settings;
     public WeaponType Wtype;
+
+    public TagContainer tagContainer;
     public virtual void Initialize(PlayerCombat playerCombat)
     {
        
@@ -45,6 +48,23 @@ public abstract class Weapon : MonoBehaviour
     public virtual void CombatTickUpdate(float deltaTime)
     {
 
+    }
+
+    public virtual void Throw(Vector3 direc)
+    {
+        Debug.Log("Maybe this to nothing");
+    }
+
+    public IEnumerator MakeShake(float force, float delay, Vector3 direc)
+    {
+        yield return new WaitForSeconds(delay);
+        CameraShake.cameraShakeInstance.Shake(force, direc);
+    }
+
+    public IEnumerator PerfomDelay(float delay, HitInfo hitInfo)
+    {
+        yield return new WaitForSeconds(delay);
+        PerformOnHit(hitInfo);
     }
 
 }

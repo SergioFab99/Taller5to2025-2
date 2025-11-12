@@ -32,6 +32,7 @@ public class PlayerAnimation : MonoBehaviour
     private void OnDisable()
     {
         _playerCombat.OnAttack -= Attack;
+        (_playerCombat.currentWeapon as BatWeapon).OnAttack -= BatAttack;
     }
 
     void Attack(int side)
@@ -70,6 +71,11 @@ public class PlayerAnimation : MonoBehaviour
         }
            
     }
+
+    public void BatAttack()
+    {
+        anim.SetTrigger("AttackBat");
+    }
     void Update()
     {
         /*if (_playerCombat._heldObject != null)
@@ -81,8 +87,13 @@ public class PlayerAnimation : MonoBehaviour
             grab = false;
         }
         anim.SetBool("GrabBat", grab);*/
+        if (_playerCombat.currentWeapon.Wtype == WeaponType.Bat)
+        {
+            (_playerCombat.currentWeapon as BatWeapon).OnAttack += BatAttack;
 
-        
+        }
+       
+
         if (_playerCombat._state.isBlocking)
         {
             anim.SetBool("isBlocking", true);
@@ -92,6 +103,14 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetBool("isBlocking", false);
             
+        }
+        if(_playerCombat.currentWeapon.Wtype == WeaponType.Bat)
+        {
+            anim.SetBool("GrabBat", true);
+        }
+        else
+        {
+            anim.SetBool("GrabBat", false);
         }
 
         // Animación de agarre (Grapple) con Q (TEMPORAL)

@@ -1,5 +1,5 @@
 using System.Collections;
-using UnityEditor.Animations;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +7,17 @@ public class BatWeapon : Weapon
 {
     private PlayerCombat playerCombat;
     public Transform swingPoint;
+    public float force;
+    public GameObject throwWeapon;
+
     private bool isSwinging;
     private bool hitDone;
     private Vector3 lastPos;
     private Vector3 dir;
     private float swingStartTime;
     public LayerMask hitMask;
+    public event BatAttack OnAttack;
+    public delegate void BatAttack();
 
     public override void Initialize(PlayerCombat playerCombat)
     {
@@ -31,52 +36,63 @@ public class BatWeapon : Weapon
             return;
 
         Debug.Log("Attack");
-
+        OnAttack?.Invoke();
         playerCombat._state.CanAttack = false;
 
-        StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
 
-        StartCoroutine(SwingRoutine());
+        StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
+        var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
+        StartCoroutine(MakeShake((settings as BatWeaponSettings).shakeForce, (settings as BatWeaponSettings).AttackDelay, direc2));
+        /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
+         {
+             var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
+             StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
+         } */
+        Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
+        foreach (Collider col in cols)
+        {
+           
+            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague);
+            StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
+        }
     }
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
-        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tags))
+
+        Debug.Log("Perform");
+        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer))
         {
-            if (tags.HasTag("Damagable") && !tags.HasTag("Player"))
+            HealthController health;
+            /* if (tagContainer.HasTag("BodyPart"))
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
+                Debug.Log("Find bodyPart");
+                var character = hitInfo.col.GetComponentInParent<EnemyCharacter>();
 
-                if (tags.TryGetComponent(out HealthController health))
+                if (character.GetComponent<TagContainer>().HasTag("Damagable"))
                 {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
+                    Debug.Log("Find bodyPart and Damagable parent");
+                    health = character.gameObject.GetComponent<HealthController>();
+                    health.TakeDamague((settings as FistsWeaponSettings).damague);
                 }
-
+            } */
+            if (tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+            {
+                health = hitInfo.col.gameObject.GetComponent<HealthController>();
+                health.TakeDamague((settings as BatWeaponSettings).damague);
             }
+            else
+            {
+                Debug.Log("This doesnt have ");
+            }
+
         }
     }
 
     public override void CombatTickUpdate(float deltaTime)
     {
-        if (!isSwinging || swingPoint == null) return;
-
-        Vector3 currentPos = swingPoint.position;
-        dir = currentPos - lastPos;
-        float dist = dir.magnitude;
-
-        if (dist > 0.0001f && !hitDone)
-        {
-            RaycastHit hit;
-            if (Physics.SphereCast(lastPos,(settings as BatWeaponSettings).swingRadius, dir.normalized, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
-            {
-
-                HitInfo hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (int)((settings as BatWeaponSettings).damague));
-                PerformOnHit(hitInfo);
-                hitDone = true;
-            }
-        }
-
-        lastPos = currentPos;
+        
+       
     }
     private IEnumerator SwingRoutine()
     {
@@ -90,5 +106,21 @@ public class BatWeapon : Weapon
         isSwinging = false;
     }
 
+    public override void Throw(Vector3 direc)
+    {
+        Debug.Log("This do something, Throw");
+        var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
+        ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
+        ThrowObject.GetComponent<PickUpWeapon>().hited = false;
+    }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        if (playerCombat != null)
+        {
+            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box);
+
+        }
+    }
 }

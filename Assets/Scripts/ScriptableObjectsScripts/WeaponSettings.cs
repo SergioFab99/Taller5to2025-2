@@ -9,6 +9,6 @@ public abstract class WeaponSettings : ScriptableObject
     public float damague;
 
     public TagSO[] properties;
-    
+    public float shakeForce;
 
 }

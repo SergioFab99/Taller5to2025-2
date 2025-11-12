@@ -1,24 +1,28 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Indications : MonoBehaviour
 {
     [SerializeField] private GameObject indicationsBackground, next, back, close;
     [SerializeField] private HealthController playerLife;
     [SerializeField] private TMP_Text indicationsText, indicationsTitle;
     [SerializeField] private string[] textsForTitle;
+    [SerializeField] private string nextScene;
     [SerializeField] [TextArea(4, 6)] private string[] textsForIndications;
     [SerializeField] private string[] textsForTitleLife;
     [SerializeField] [TextArea(2, 4)] private string[] textsForIndicationsLife;
     public static int changeIndications;
-    public static bool indicationsLife;
+    public static bool indicationsLife, indicationsLifeWithCamera;
     public static Indications instance;
-    private void Awake()
+    [SerializeField] private PlayerCamera playerCamera;
+     private void Awake()
     {
         indicationsBackground.SetActive(false);
+        
     }
     void Start()
     {
-        instance = this;       
+        instance = this;
         ChangeIndicationsOnAwake();
         ChangeIndications();
     }
@@ -46,6 +50,7 @@ public class Indications : MonoBehaviour
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3)
         {
             changeIndications = 0;
+            
             if (!SetUpTutorial.camera1)
             {
                 ChangeIndications();
@@ -55,7 +60,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint1)
         {
             changeIndications = 5;
-
+            
             if (!SetUpTutorial.camera2)
             {
                 ChangeIndications();
@@ -65,7 +70,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint2)
         {
             changeIndications = 6;
-
+            
             if (!SetUpTutorial.camera3)
             {
                 ChangeIndications();
@@ -75,6 +80,7 @@ public class Indications : MonoBehaviour
         if (SetUpTutorial.checkPoint3)
         {
             changeIndications = 6;
+            
         }
     }
     void ChangeIndications()
@@ -85,6 +91,7 @@ public class Indications : MonoBehaviour
     }
     public void ChangeToIndicationsOfLife()
     {
+        playerCamera.SetLookLocked(true);
         indicationsTitle.text = textsForTitleLife[0];
         indicationsText.text = textsForIndicationsLife[0];
         close.SetActive(true);
@@ -118,21 +125,35 @@ public class Indications : MonoBehaviour
     }
     public void ActivateIndications()
     {
+        playerCamera.SetLookLocked(true);
         indicationsBackground.SetActive(true);
         ActiveExtras();
         Time.timeScale = 0;
     }
     public void CloseIndications()
     {
+        playerCamera.SetLookLocked(false);
         indicationsBackground.SetActive(false);
         Time.timeScale = 1;
         if (indicationsLife)
         {
             ChangeIndications();
-            if (SetUpTutorial.checkPoint2)
+            if (SetUpTutorial.checkPoint2 && indicationsLifeWithCamera)
             {
                 ActivateIndications();
+                indicationsLifeWithCamera = false;
             }
+        }
+        if(changeIndications == 7)
+        {
+            SetUpTutorial.checkPoint1 = false;
+            SetUpTutorial.checkPoint2 = false;
+            SetUpTutorial.checkPoint3 = false;
+            SetUpTutorial.camera1 = true;
+            SetUpTutorial.canOpenDoor1 = false;
+            SetUpTutorial.canOpenDoor2 = false;
+            SetUpTutorial.canOpenDoor3 = false;
+            SceneManager.LoadScene(nextScene);
         }
     }
 }
