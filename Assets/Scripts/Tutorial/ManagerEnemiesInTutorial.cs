@@ -13,7 +13,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
     [SerializeField] private GameObject triggerIndication;
     [SerializeField] private GameObject[] prefabType;
     [SerializeField] private GameObject[] spawnPoints;
-    bool starSpawn, startCoroutine;
+    bool starSpawn, startCoroutine, finish;
     [SerializeField] private int timeBetweenMove;
     public static ManagerEnemiesInTutorial instance;
     Coroutine coroutine;
@@ -87,13 +87,16 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         {
             StopAllCoroutines();
         }
-        Debug.Log("startSpawn"+starSpawn);
+        //Debug.Log("startSpawn"+starSpawn);
         if (SetUpTutorial.checkPoint3)
         {
-            if (SetUpTutorial.enemyDefeatCount >= 7)
+            if (SetUpTutorial.enemyDefeatCount >= 7 && !finish)
             {
+                Debug.Log($"Indication = {Indications.changeIndications}");
                 Indications.instance.NextIndication();
+                Debug.Log($"Indication = {Indications.changeIndications}");
                 Indications.instance.ActivateIndications();
+                finish = true;
             }
         }
     }
