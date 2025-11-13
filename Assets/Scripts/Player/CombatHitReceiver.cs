@@ -12,16 +12,21 @@ public class CombatHitReceiver : MonoBehaviour
     public HealthController healthController;
 
     private Conexions conexions;
+    
+
+    public int batExposeThreshold = 3;
+
+    public bool resetCounterOnExpose = true;
 
     public void OnHit(HitInfo info)
     {
-        switch(info.type)
+        switch (info.type)
         {
             case WeaponType.Fist:
                 conexions.type = WeaponType.Fist;
-                if(isBlocking)
+                if (isBlocking)
                 {
-                    healthController.TakeDamague(info.damague/2);
+                    healthController.TakeDamague(info.damague / 2);
                     if (conexions.type == WeaponType.None || info.type == conexions.type)
                     {
                         conexions.counter += 0.5f;
@@ -30,7 +35,7 @@ public class CombatHitReceiver : MonoBehaviour
                 else
                 {
                     healthController.TakeDamague(info.damague);
-                    if (conexions.type == WeaponType.None|| info.type == conexions.type)
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
                     {
                         conexions.counter++;
                     }
@@ -60,5 +65,27 @@ public class CombatHitReceiver : MonoBehaviour
 
                 break;
         }
+        
+        var enemyHandler = GetComponentInParent<EnemyStateHandler>();
+        if (enemyHandler != null)
+        {
+            if (conexions.type == WeaponType.Bat && conexions.counter >= batExposeThreshold)
+            {                
+                var exposedState = enemyHandler.GetExposedState();
+                if (exposedState != null)
+                {
+                    enemyHandler.SetState(exposedState);
+                }
+                
+                if (resetCounterOnExpose) conexions.counter = 0f;
+                else conexions.counter = Mathf.Max(0f, conexions.counter - batExposeThreshold);
+            }
+        }
+
+
+        
+
+
+
     }
 }
