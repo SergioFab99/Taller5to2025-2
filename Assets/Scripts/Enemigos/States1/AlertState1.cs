@@ -37,16 +37,38 @@ public class AlertState1 : IEnemyState
             return;
         }
 
-        if (Vector3.Distance(ai.character.transform.position, ai.Target.position) < 0.5f)
+        var eeo = EnemyAttackOrder.Instance;
+        if (eeo == null)
+        {
+            ai.MoveTowardsTarget();
             return;
+        }
+
+        float dist = Vector3.Distance(ai.character.transform.position, ai.Target.position);
+
+        if (eeo.IsAttacking(ai))
+        {
+            if (dist <= ai.attackRange + 0.3f && Time.time >= ai.nextAttackTime)
+            {
+                ai.EnterCombatMode();
+                Debug.Log($"{ai.name} entering ATTACK from alert (zone granted)");
+                ai.SetState(ai.GetAttackState());
+                return;
+            }
+            else
+            {
+                ai.MoveTowardsTarget(); 
+                return;
+            }
+        }
+
+        if (eeo.IsStandby(ai))
+        {
+            MaintainFormation(eeo.player);
+            return;
+        }
 
         ai.MoveTowardsTarget();
-
-        if (ai.CheckTargetOnAttackRange() && Time.time >= ai.nextAttackTime)
-        {
-            ai.EnterCombatMode();
-            ai.SetState(ai.GetAttackState());
-        }
     }
 
     public void OnExit()
@@ -54,7 +76,16 @@ public class AlertState1 : IEnemyState
         ai.StopMovement();
         Debug.Log($"{ai.name} exited ALERT state.");
     }
+    private void MaintainFormation(Transform player)
+    {
+        if (ai.agent == null || player == null) return;
+        float orbitRadius = EnemyAttackOrder.Instance.standbyZoneRadius * 0.9f;
 
+        Vector3 dir = (ai.transform.position - player.position).normalized;
+        Vector3 offset = Quaternion.Euler(0f, Time.time * 30f, 0f) * dir * orbitRadius;
+
+        ai.agent.SetDestination(player.position + offset);
+    }
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {
         if (ai == null)

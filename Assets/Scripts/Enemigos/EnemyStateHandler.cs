@@ -88,7 +88,7 @@ public class EnemyStateHandler : MonoBehaviour
         {
             character = GetComponentInChildren<EnemyCharacter>();
         }
-        
+        EnemyAttackOrder.Instance.RegisterEnemy(this);
     }
     private void Start()
     {
