@@ -21198,6 +21198,46 @@ PrefabInstance:
       propertyPath: cameraTarget
       value: 
       objectReference: {fileID: 100754306}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: damage1
+      value: 
+      objectReference: {fileID: 8300000, guid: a4edf66224d2b76409ce1790d635cfa5, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: damage2
+      value: 
+      objectReference: {fileID: 8300000, guid: c7019464da3f3f2459fa724ae9ac61c2, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: damage3
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c53cb303c5ffa5409fda96d58477bdd, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: runDirt
+      value: 
+      objectReference: {fileID: 8300000, guid: 362ca2ec46d2bb64d8a74717d3b58501, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: walkDirt
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b38f03ef9683ac48b2cc3e2207f5322, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: attackClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c2e431095c9e614780faf8d5efdd436, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: walkNormal
+      value: 
+      objectReference: {fileID: 8300000, guid: 336fda52c85535a408b1f2818a7ba1cb, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: drunkWalkDirt
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b10b5b15f5164745b4a55b1431576c1, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: drunkWalkNormal
+      value: 
+      objectReference: {fileID: 8300000, guid: 336fda52c85535a408b1f2818a7ba1cb, type: 3}
+    - target: {fileID: 2387388933979746481, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      propertyPath: damageBlockedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: abd0b009f6918534a9883fd75bc9b2ff, type: 3}
     - target: {fileID: 4934579220517239865, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.93
@@ -22923,7 +22963,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.4450866
+          x: -0.44508657
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -25180,8 +25220,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
