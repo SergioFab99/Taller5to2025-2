@@ -138,6 +138,12 @@ public class EnemyStateHandler : MonoBehaviour
         currentState = newState;
         StateMovement(newState);
         currentState?.OnEnter();
+        var recv = GetComponentInChildren<CombatHitReceiver>();
+        if (recv != null)
+        {
+           recv.isBlocking = (newState == block);
+        }
+
         isTransitioning = false;
         QueuedBlock = false;
     }

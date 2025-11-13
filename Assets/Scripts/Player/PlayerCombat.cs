@@ -181,9 +181,9 @@ public class PlayerCombat : CombatBase
             }
 
         }
-        
-        
-        
+
+
+
         if (requestBlocking && !_state.isBlocking && !_isDodging)
         {
             Block();
@@ -194,6 +194,9 @@ public class PlayerCombat : CombatBase
             if (_state.playerActionState == PlayerActionState.Blocking)
                 _state.playerActionState = PlayerActionState.Normal;
         }
+        //cambiar el metodo de recivir el componente dependiendo de su lugar UWwU
+        var recv = GetComponentInChildren<CombatHitReceiver>();
+            if (recv != null) recv.isBlocking = false;
         
         if (requestDodge && !_isDodging)
         {
@@ -254,6 +257,10 @@ public class PlayerCombat : CombatBase
         _state.isBlocking = true;
         _state.playerActionState = PlayerActionState.Blocking;
         Debug.Log("Blocking");
+
+        // LO MISMO que en el otro. cambiuar dependiendo de su lugar UwU
+        var recv = GetComponentInChildren<CombatHitReceiver>();
+        if (recv != null) recv.isBlocking = true;
     }
 
     public void LinkWeapon(GameObject obj)
