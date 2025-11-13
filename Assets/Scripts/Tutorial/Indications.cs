@@ -15,6 +15,7 @@ public class Indications : MonoBehaviour
     public static bool indicationsLife, indicationsLifeWithCamera;
     public static Indications instance;
     [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private PauseMenu pauseMenu;
      private void Awake()
     {
         indicationsBackground.SetActive(false);
@@ -23,6 +24,7 @@ public class Indications : MonoBehaviour
     void Start()
     {
         instance = this;
+        pauseMenu.enabled = false;
         ChangeIndicationsOnAwake();
         ChangeIndications();
     }
@@ -85,7 +87,7 @@ public class Indications : MonoBehaviour
     }
     void ChangeIndications()
     {
-        changeIndications = Mathf.Clamp(changeIndications, 0, 7);
+        changeIndications = Mathf.Clamp(changeIndications, 0, 8);
         indicationsTitle.text = textsForTitle[changeIndications];
         indicationsText.text = textsForIndications[changeIndications];
     }
@@ -103,12 +105,12 @@ public class Indications : MonoBehaviour
     }
     void ActiveExtras()
     {
-        if(changeIndications == 0 || changeIndications == 1 || changeIndications == 4 || changeIndications == 5 || changeIndications == 6 || changeIndications == 7)
+        if(changeIndications == 0 || changeIndications == 1 || changeIndications == 4 || changeIndications == 5 || changeIndications == 6 || changeIndications == 8)
         {
             close.SetActive(true);
             next.SetActive(false);
         }
-        if(changeIndications == 3 || changeIndications == 4)
+        if(changeIndications == 3 || changeIndications == 4 || changeIndications == 8)
         {
             back.SetActive(true);
             next.SetActive(false);
@@ -117,7 +119,7 @@ public class Indications : MonoBehaviour
         {
             back.SetActive(false);
         }
-        if(changeIndications == 2 || changeIndications == 3)
+        if(changeIndications == 2 || changeIndications == 3 || changeIndications == 7)
         {
             next.SetActive(true);
             close.SetActive(false);
@@ -144,7 +146,7 @@ public class Indications : MonoBehaviour
                 indicationsLifeWithCamera = false;
             }
         }
-        if(changeIndications == 7)
+        if(changeIndications == 8)
         {
             SetUpTutorial.checkPoint1 = false;
             SetUpTutorial.checkPoint2 = false;
@@ -153,7 +155,24 @@ public class Indications : MonoBehaviour
             SetUpTutorial.canOpenDoor1 = false;
             SetUpTutorial.canOpenDoor2 = false;
             SetUpTutorial.canOpenDoor3 = false;
-            SceneManager.LoadScene(nextScene);
+            UpgradesTutorial();
         }
+    }
+
+    void UpgradesTutorial()
+    {
+        pauseMenu.enabled = true;
+        pauseMenu.ActivePauseMenu();        
+    }
+
+    public void AlreadyFinishTutorial()
+    {
+        Time.timeScale = 1;
+        Invoke(nameof(ChangeScene), 1f);        
+    }
+
+    void ChangeScene()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 }
