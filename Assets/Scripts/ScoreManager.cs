@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -183,6 +184,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (rankPanel != null)
             rankPanel.SetActive(false);
+    }
+
+    public void SaveScoreAndGoToShop(string LevelTutorial)
+    {
+        GameData.intuition = GetTotalScore();
+        SceneManager.LoadScene(LevelTutorial);
     }
 }
 

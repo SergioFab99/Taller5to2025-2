@@ -16,7 +16,7 @@ public class UpgradesShop : MonoBehaviour
     }
     void Start()
     {
-        intuition = 10000;
+        intuition = GameData.intuition > 0 ? GameData.intuition : 10000;
         ChangeIntuitionTMP();
         TMPS();
     }
