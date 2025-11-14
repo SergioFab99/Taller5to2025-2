@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
 
     private const float EnemyScanIntervalSeconds = 1f;
 
-    private int totalScore;
+    private int totalScore{ get{ return GameData.intuition; } set{ GameData.intuition = value; } }
     private int defeatedEnemies;
     private bool hasWarnedForMissingScoreText;
     private bool hasWarnedForMissingEnemyTag;
