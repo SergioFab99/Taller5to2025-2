@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class PickUpWeapon : MonoBehaviour
 
     public GameObject point1, point2;
 
+    public GameObject model, BrokenModel;
+
     public bool hited = true;
 
     public void Update()
@@ -31,15 +34,14 @@ public class PickUpWeapon : MonoBehaviour
         {
             foreach (Collider coll in col)
             {
-                if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("damagable"))
+                if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("Damagable") && !TagC.HasTag("Player"))
                 {
 
                     Debug.Log("hitted");
                     var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
-                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, (settings as FistsWeaponSettings).damague, Wtype, attacker);
-
+                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, 25f, Wtype, attacker);
                     PerformOnHit(hitInfo);
-
+                    BreakObj();               
 
                     
                 }
@@ -49,45 +51,35 @@ public class PickUpWeapon : MonoBehaviour
 
     public void PerformOnHit(HitInfo hitInfo)
     {
-        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tags))
         {
-            if (tags.HasTag("Damagable") && !tags.HasTag("Player"))
+            var recv = hitInfo.col.GetComponent<CombatHitReceiver>()
+                    ?? hitInfo.col.GetComponentInChildren<CombatHitReceiver>()
+                    ?? hitInfo.col.GetComponentInParent<CombatHitReceiver>();
+
+            if (recv != null)
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
-
-                if (tags.TryGetComponent(out HealthController health))
-                {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
-
-                }
-                else
-                {
-                    health = tags.GetComponentInParent<HealthController>();
-                    if (health != null )
-                    {
-                        health.TakeDamague((settings as BatWeaponSettings).damague);
-                    }
-                }
-
-            }
-            hited = true;
-        }
-        else if (hitInfo.col.GetComponentInParent<TagContainer>())
-        {
-            var tags1 = hitInfo.col.GetComponentInParent<TagContainer>();
-
-            if (tags1.HasTag("Damagable") && !tags1.HasTag("Player"))
+                recv.OnHit(hitInfo);
+                hited = true;
+                Debug.Log("Se ha hecho daño al objeto");
+                Debug.Log(hitInfo.damague);
+                return;
+            } 
+            else
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
-
-                if (tags1.TryGetComponent(out HealthController health))
-                {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
-                }
-
-            }
-            hited = true;
+                Debug.Log("No se ha podido hacer daño al objeto");
+                hited = false;
+            }           
         }
+    }
+
+    public void BreakObj()
+    {
+        if (!hited) return;
+        if (model == null || BrokenModel == null) return;
+        model.SetActive(false);
+        BrokenModel.SetActive(true); 
+        
+        //Destroy(this.gameObject, 2f);
     }
 
     private void OnDrawGizmos()

@@ -48,7 +48,7 @@ public class CombatHitReceiver : MonoBehaviour
                 conexions.type = WeaponType.Bat;
                 if (isBlocking)
                 {
-                    healthController.TakeDamague(info.damague);
+                    healthController.TakeDamague(info.damague/2);
                     if (conexions.type == WeaponType.None || info.type == conexions.type)
                     {
                         conexions.counter += 0.5f;
@@ -56,6 +56,7 @@ public class CombatHitReceiver : MonoBehaviour
                 }
                 else
                 {
+                    healthController.TakeDamague(info.damague);
                     if (conexions.type == WeaponType.None || info.type == conexions.type)
                     {
                         conexions.counter++;
@@ -64,6 +65,31 @@ public class CombatHitReceiver : MonoBehaviour
                 }
 
                 break;
+                
+                case WeaponType.Crate:
+                    conexions.type = WeaponType.Crate;
+                    if (isBlocking)
+                    {
+                        healthController.TakeDamague(info.damague/2);
+                        if (conexions.type == WeaponType.None || info.type == conexions.type)
+                        {
+                            conexions.counter += 0.5f;
+                        }
+                    }
+                    else
+                    {      
+                        healthController.TakeDamague(info.damague);         
+                        if (conexions.type == WeaponType.None || info.type == conexions.type)
+                        {
+                            conexions.counter++;
+                        }     
+                    }              
+                    
+
+                break;
+
+
+
         }
         
         var enemyHandler = GetComponentInParent<EnemyStateHandler>();

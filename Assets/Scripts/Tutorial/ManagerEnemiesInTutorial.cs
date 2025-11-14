@@ -87,7 +87,7 @@ public class ManagerEnemiesInTutorial : MonoBehaviour
         {
             StopAllCoroutines();
         }
-        Debug.Log("startSpawn"+starSpawn);
+        //Debug.Log("startSpawn"+starSpawn);
         if (SetUpTutorial.checkPoint3)
         {
             if (SetUpTutorial.enemyDefeatCount >= 7)
