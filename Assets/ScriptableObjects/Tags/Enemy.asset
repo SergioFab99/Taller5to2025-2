@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ca2270ee5d8ba4d81b57aecd649d98, type: 3}
-  m_Name: DefaultStandSettings
+  m_Script: {fileID: 11500000, guid: d1022e10a8fff344aaed0cb122c1d48e, type: 3}
+  m_Name: Enemy
   m_EditorClassIdentifier: 
-  Speed: 3
-  Response: 25
+  tagName: Enemy
+  color: {r: 1, g: 1, b: 1, a: 1}

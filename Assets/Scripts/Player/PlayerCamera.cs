@@ -9,6 +9,7 @@ public struct  CameraInput
 
 public class PlayerCamera : MonoBehaviour
 {
+    public LayerMask mask;
     private Vector3 _eulerAngles;
     private bool _lookLocked = false;
     private Transform _lockTarget = null;
@@ -22,9 +23,10 @@ public class PlayerCamera : MonoBehaviour
     private CinemachineCamera _CMCamera;
 
     public float[] Gain = new float[2];
-    public float sensibility = 0.1f; 
+    public float sensibility = 0.1f;
 
-
+    private bool _requestedSideStep;
+    private Transform _currentTarget;
     public void Initialize(Transform Target)
     {
         transform.position = Target.position;
@@ -64,7 +66,9 @@ public class PlayerCamera : MonoBehaviour
             return;
         }
 
-        if (_lookLocked) return; 
+     
+        
+        if (_lookLocked) return;
 
         _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility;
 
@@ -108,8 +112,28 @@ public class PlayerCamera : MonoBehaviour
         _lockTarget = target;
     }
 
-    public bool CheckIsViewTarget()
+    public bool CheckIsViewTarget(Transform character)
     {
-        return false;
+        SetTargetOnView(character);
+        return _currentTarget != null;
+    }
+
+    public void SetTargetOnView(Transform character)
+    {
+        Ray ray = new Ray(character.position, character.forward);
+
+        if(Physics.SphereCast(ray,1f, out RaycastHit hit, 5f, mask) && hit.collider.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Enemy"))
+        {
+            _currentTarget = hit.transform;
+        }
+        else
+        {
+            _currentTarget = null;
+        }
+    }
+
+    public Transform GetTargetInView()
+    {
+        return _currentTarget;
     }
 }

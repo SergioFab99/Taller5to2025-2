@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 public enum CombatHand
 {
     None,
@@ -200,7 +200,7 @@ public class PlayerCombat : CombatBase
         
         if (requestDodge && !_isDodging)
         {
-            Dodge();
+         //   Dodge();
         }
 
     }
@@ -326,6 +326,8 @@ public class PlayerCombat : CombatBase
                 {
                     bestDist = d;
                     best = c.transform;
+
+                    
                 }
             }
         }

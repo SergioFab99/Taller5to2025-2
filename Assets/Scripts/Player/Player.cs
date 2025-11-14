@@ -80,14 +80,18 @@ public class Player : MonoBehaviour
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
        // playerPickUp.PickUpUpdate(input.Interact.WasPressedThisFrame());
+        if(playerCamera.CheckIsViewTarget(playerCharacter.transform))
+        {
+            Debug.Log("TargetOnView");
+            playerCharacter.ReceiveTarget(playerCamera.GetTargetInView().position);
+        }
         var characterInput = new CharacterInput
         {
             Rotation = playerCamera._camera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
             Jump = input.Jump.WasPressedThisFrame(),
-            SideStep = input.Dash.WasPressedThisFrame() && playerCamera.CheckIsViewTarget()
+            SideStep = input.Dash.WasPressedThisFrame() && playerCamera.CheckIsViewTarget(playerCharacter.transform)
         };
-        
         playerCombat.SetMoveInput(characterInput.Move);
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
