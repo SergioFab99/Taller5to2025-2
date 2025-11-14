@@ -96,7 +96,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""9c4baf7e-dd4a-45cb-b8b5-518f23ef2f3f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -325,7 +325,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""id"": ""8a2bfa46-4ead-4a8f-aac0-c0bc4f585928"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=4,y=4)"",
+                    ""processors"": ""ScaleVector2(x=2000,y=2000)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,

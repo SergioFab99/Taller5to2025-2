@@ -18732,7 +18732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: DefaultVelocity.x
-      value: 0.15
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7451615003526968281, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: DefaultVelocity.y
@@ -25213,8 +25213,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
