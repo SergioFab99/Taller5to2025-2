@@ -1,0 +1,192 @@
+using System;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
+
+public struct HitInfo
+{ 
+    public Collider col;
+    public Vector3 hitpoint;
+    public Vector3 normal;
+    public int damague;
+    public IEnemyState enemyState;
+
+    public HitInfo(Collider col, Vector3 point, Vector3 normal, int damage, IEnemyState state = null)
+    {
+        this.col = col;
+        this.hitpoint = point;
+        this.normal = normal;
+        this.damague = damage;
+        this.enemyState = state;
+    }
+}
+
+
+
+
+public class Punch : MonoBehaviour
+{
+    bool hitDone = false;
+    Vector3 lastPos;
+    public float radius = 0.2f;
+    public Vector3 dir;
+    public LayerMask hitMask;
+    private bool isActive;
+
+    public int dmg;
+
+    public delegate void OnHitEvent(HitInfo hitInfo);
+    public event OnHitEvent OnHit;
+
+    private void Start()
+    {
+        lastPos = transform.position;
+    }
+    public void FixedUpdate()
+    {
+        if (hitDone)
+        {
+            return;
+        }
+        Vector3 currentPos = transform.position;
+        dir = currentPos - lastPos;
+        float dist = dir.magnitude;
+        if (dist > 0.0001f)
+        {
+            RaycastHit hit;
+
+            if (Physics.SphereCast(transform.position, radius, dir.normalized, out hit, dist, hitMask, QueryTriggerInteraction.Ignore))
+            {
+                if (isActive)
+                {
+                    HitInfo hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, dmg);
+                    
+                    PerformOnHit(hitInfo);
+
+                }
+            }
+        }
+        lastPos = currentPos;
+        
+    }
+
+    public void PerformOnHit(HitInfo hitInfo)
+    {
+        var enemyCharacter = hitInfo.col.GetComponentInParent<EnemyCharacter>().gameObject;
+        if (enemyCharacter != null) 
+        {
+            
+            if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+            {
+                Debug.Log("Hitted");
+                var enemy = enemyCharacter.GetComponentInParent<Enemy>();
+                if (enemy != null)
+                {
+                    hitInfo.enemyState = enemy.GetEnemyState();
+                    enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
+                    OnHit?.Invoke(hitInfo);
+                    if (hitInfo.enemyState is BlockState)
+                    {
+                        lifeController.TakeDamage(dmg / 2);
+
+                    }
+                    else
+                    {
+                     
+                        lifeController.TakeDamage(dmg);
+
+                    }
+                }
+                hitDone = true;
+            }
+        
+        }
+        else
+        {
+           enemyCharacter = hitInfo.col.GetComponent<EnemyCharacter>().gameObject;
+            if(enemyCharacter != null)
+            {
+                if (enemyCharacter.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+                {
+                    Debug.Log("Hitted");
+                    var enemy = enemyCharacter.GetComponentInParent<Enemy>();
+                    if (enemy != null)
+                    {
+                        hitInfo.enemyState = enemy.GetEnemyState();
+                        enemyCharacter.TryGetComponent<HealthController>(out HealthController lifeController);
+                        OnHit?.Invoke(hitInfo);
+                        if (hitInfo.enemyState is BlockState)
+                        {
+                            lifeController.TakeDamage(dmg / 2);
+
+                        }
+                        else
+                        {
+
+                            lifeController.TakeDamage(dmg);
+
+                        }
+                    }
+
+                    if (hitInfo.col.gameObject.TryGetComponent<EnemyLife>(out EnemyLife enemyLife))
+                    {
+                        OnHit?.Invoke(hitInfo);
+                        if (hitInfo.enemyState is BlockState)
+                        {
+                            enemyLife.TakeDamage(dmg / 2);
+
+                        }
+                        else
+                        {
+                            enemyLife.TakeDamage(dmg);
+
+                        }
+
+                    }
+                    hitDone = true;
+                }
+            }
+        }
+    }
+
+    public void ActivateOrDeactivePunch(bool trigger)
+    {
+        isActive = trigger;
+        if (isActive)
+        {
+            hitDone = false;
+            var col = Physics.OverlapSphere(transform.position, radius, hitMask.value, QueryTriggerInteraction.Ignore);
+            if (col != null && col.Length > 0)
+            {
+                var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
+                HitInfo hitInfo = new HitInfo(col[0], col[0].ClosestPoint(transform.position), distance, dmg);
+
+                PerformOnHit(hitInfo);
+            }
+
+
+        }
+
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+         // Dibuja la esfera inicial
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        // Dibuja el tubo del SphereCast usando la última dirección y distancia calculada
+        Vector3 direction = dir.normalized;
+        float dist = dir.magnitude;
+         int steps = 10;
+         
+        for (int i = 1; i <= steps; i++)
+        {
+            float t = (dist / steps) * i;
+            Vector3 center = transform.position + direction * t;
+            Gizmos.DrawWireSphere(center, radius);
+        }
+    }
+}
