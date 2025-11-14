@@ -88,13 +88,13 @@ public class Punch : MonoBehaviour
                     OnHit?.Invoke(hitInfo);
                     if (hitInfo.enemyState is BlockState)
                     {
-                        lifeController.TakeDamague(dmg / 2);
+                        lifeController.TakeDamage(dmg / 2);
 
                     }
                     else
                     {
                      
-                        lifeController.TakeDamague(dmg);
+                        lifeController.TakeDamage(dmg);
 
                     }
                 }
@@ -118,13 +118,13 @@ public class Punch : MonoBehaviour
                         OnHit?.Invoke(hitInfo);
                         if (hitInfo.enemyState is BlockState)
                         {
-                            lifeController.TakeDamague(dmg / 2);
+                            lifeController.TakeDamage(dmg / 2);
 
                         }
                         else
                         {
 
-                            lifeController.TakeDamague(dmg);
+                            lifeController.TakeDamage(dmg);
 
                         }
                     }

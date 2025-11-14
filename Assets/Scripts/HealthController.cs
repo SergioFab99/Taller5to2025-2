@@ -3,22 +3,27 @@ using System;
 
 public class HealthController : MonoBehaviour
 {
-    [Header("Health Values")] public float maxHealth = 100f;
+    [Header("Health Values")] 
+    public float maxHealth = 100f;
     public float health = 100f;
 
-    // Legacy events (kept for compatibility though semantics were odd)
-    public event LifeChangued OnLifeChangue; // Invoked with delta value (healed positive / damaged negative)
-    public delegate void LifeChangued(float changeAmount);
-    public event Live OnDead;
-    public delegate void Live();
+    [Header("Blood Canvas")]
+    public GameObject bloodCanvas; 
+    public float bloodVisibleTime = 0.5f;   
 
-    // New event providing current + max for UI
+    private float bloodTimer = 0f;
+
     public event Action<float, float> OnHealthUpdated;
+    public event Action<float> OnPlayerDamaged;
+    public event Action OnDead;
 
     private void Awake()
     {
         health = Mathf.Clamp(health, 0f, maxHealth);
         RaiseFullUpdate();
+
+        if (bloodCanvas != null)
+            bloodCanvas.SetActive(false);
     }
 
     public void AddHealth(float amount)
@@ -26,25 +31,42 @@ public class HealthController : MonoBehaviour
         if (amount <= 0f) return;
         float before = health;
         health = Mathf.Min(health + amount, maxHealth);
-        float delta = health - before;
-        if (Mathf.Abs(delta) > 0.0001f)
+        if (Mathf.Abs(health - before) > 0.0001f)
         {
-            OnLifeChangue?.Invoke(delta);
             RaiseFullUpdate();
         }
     }
 
-    public void TakeDamague(float amount)
+    public void TakeDamage(float amount)
     {
         if (amount <= 0f) return;
         float before = health;
         health = Mathf.Max(health - amount, 0f);
-        float delta = health - before; // negative
-        OnLifeChangue?.Invoke(delta);
-        RaiseFullUpdate();
-        if (health <= 0f)
+        if (health < before)
         {
-            OnDead?.Invoke();
+            RaiseFullUpdate();
+            OnPlayerDamaged?.Invoke(health / maxHealth);
+
+            if (bloodCanvas != null)
+            {
+                bloodCanvas.SetActive(true);
+                bloodTimer = bloodVisibleTime;
+            }
+
+            if (health <= 0f)
+            {
+                OnDead?.Invoke();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (bloodCanvas != null && bloodCanvas.activeSelf)
+        {
+            bloodTimer -= Time.deltaTime;
+            if (bloodTimer <= 0f)
+                bloodCanvas.SetActive(false);
         }
     }
 

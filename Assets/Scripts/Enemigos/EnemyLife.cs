@@ -52,7 +52,7 @@ public class EnemyLife : MonoBehaviour
         if (estaMuerto) return;
         if (cantidad <= 0) cantidad = damagePerHit;
     if (enemyAnimator != null) enemyAnimator.SetTrigger("Hit");
-        healthController.TakeDamague(cantidad);
+        healthController.TakeDamage(cantidad);
     }
 
     private void OnDeadHandler()

@@ -43,7 +43,7 @@ public class AlertState : IEnemyState
                     if (handler.Target.TryGetComponent<HealthController>(out HealthController ht))
                     {
                         Debug.Log("Attacking target");
-                        ht.TakeDamague(10);
+                        ht.TakeDamage(10);
                         canAttack = false;
                         handler.StartCoroutine(ResetCanAttack(1.0f));
                     }

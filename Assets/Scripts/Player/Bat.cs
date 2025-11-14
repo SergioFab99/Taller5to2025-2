@@ -142,7 +142,7 @@ public class Bat : MonoBehaviour
         }
         else if (health != null)
         {
-            health.TakeDamague(damage);
+            health.TakeDamage(damage);
         }
 
         if (grabbable != null) grabbable.Use();

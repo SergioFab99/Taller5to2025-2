@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     {
         if (healthController != null && contactDamage > 0f)
         {
-            healthController.TakeDamague(contactDamage);
+            healthController.TakeDamage(contactDamage);
         }
     }
 
