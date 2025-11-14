@@ -107,4 +107,9 @@ public class PlayerCamera : MonoBehaviour
     {
         _lockTarget = target;
     }
+
+    public bool CheckIsViewTarget()
+    {
+        return false;
+    }
 }

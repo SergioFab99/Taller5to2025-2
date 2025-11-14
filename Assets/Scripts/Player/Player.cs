@@ -84,7 +84,8 @@ public class Player : MonoBehaviour
         {
             Rotation = playerCamera._camera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),      
+            Jump = input.Jump.WasPressedThisFrame(),
+            SideStep = input.Dash.WasPressedThisFrame() && playerCamera.CheckIsViewTarget()
         };
         
         playerCombat.SetMoveInput(characterInput.Move);

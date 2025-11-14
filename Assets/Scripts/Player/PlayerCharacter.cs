@@ -8,6 +8,7 @@ public struct CharacterInput
     public Vector3 Move;
     public bool Jump;
     public bool Dash;
+    public bool SideStep;
 }
 
 
@@ -82,6 +83,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private Vector3 _externalForces;
     private Vector3 _externalExplosiveForces;
 
+    private bool RequestedSideStep;
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
     private bool _requestedJump;
@@ -117,7 +119,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (_requestedJump && wasResquestedJump)
         {
             _timeSinceJumpRequest = 0f;
-        }        
+        }
+        
+        RequestedSideStep = input.SideStep;   
+
         // Use the real camera transform for raycast direction
         Transform cam = _cameraTransform != null ? _cameraTransform : cameraTarget;
 
