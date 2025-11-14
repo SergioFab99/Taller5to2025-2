@@ -89,12 +89,17 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
             {
                 Debug.Log($"punch {currentPunch} hit");
                 
-                var playerCombat = hit.GetComponent<PlayerCombat>() ?? hit.GetComponentInChildren<PlayerCombat>();
-                if (playerCombat != null)
+                var recv = hit.GetComponent<CombatHitReceiver>() 
+                   ?? hit.GetComponentInChildren<CombatHitReceiver>() 
+                   ?? hit.GetComponentInParent<CombatHitReceiver>();
+
+                if (recv != null)
                 {
-                    playerCombat.ReceiveDamage(10f);
+                    Vector3 hitPoint = hit.ClosestPoint(characterTransform.position);
+                    var hitInfo = new HitInfo(hit, hitPoint, (hitPoint - characterTransform.position), 10f, WeaponType.Fist, null);
+                    recv.OnHit(hitInfo);
                 }
-                
+
                 hitLanded = true;
                 Missed = false;
                 break;

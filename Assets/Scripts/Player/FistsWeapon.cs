@@ -91,33 +91,17 @@ public class FistsWeapon : Weapon
 
     public override void PerformOnHit(HitInfo hitInfo)
     {
+        //mirar donde esta el componente
+        var recv = hitInfo.col.GetComponent<CombatHitReceiver>() 
+                ?? hitInfo.col.GetComponentInParent<CombatHitReceiver>() 
+                ?? hitInfo.col.GetComponentInChildren<CombatHitReceiver>();
 
-        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tagContainer))
+        if (recv != null)
         {
-            HealthController health;
-            /* if (tagContainer.HasTag("BodyPart"))
-             {
-                 Debug.Log("Find bodyPart");
-                 var character = hitInfo.col.GetComponentInParent<EnemyCharacter>() ;
-
-                 if(character.GetComponent<TagContainer>().HasTag("Damagable"))
-                 {
-                     Debug.Log("Find bodyPart and Damagable parent");
-                     health = character.gameObject.GetComponent<HealthController>();
-                     health.TakeDamague((settings as FistsWeaponSettings).damague);
-                 }
-             } */
-            if (tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
-            {
-                health = hitInfo.col.gameObject.GetComponent<HealthController>();
-                health.TakeDamague((settings as FistsWeaponSettings).damague);
-            }
-            else
-            {
-                Debug.Log("This doesnt have ");
-            }
-
-        }
+             recv.OnHit(hitInfo);
+             return;
+        }              
+                
     }
 
 

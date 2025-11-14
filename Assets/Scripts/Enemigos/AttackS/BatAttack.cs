@@ -129,10 +129,15 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             {
                 if (hit.CompareTag("Player"))
                 {
-                    var playerCombat = hit.GetComponent<PlayerCombat>() ?? hit.GetComponentInChildren<PlayerCombat>();
-                    if (playerCombat != null)
+                    var recv = hit.GetComponent<CombatHitReceiver>() 
+                   ?? hit.GetComponentInChildren<CombatHitReceiver>() 
+                   ?? hit.GetComponentInParent<CombatHitReceiver>();
+
+                    if (recv != null)
                     {
-                        playerCombat.ReceiveDamage(damage);
+                        Vector3 hitPoint = hit.ClosestPoint(characterTransform.position);
+                        var hitInfo = new HitInfo(hit, hitPoint, (hitPoint - characterTransform.position), damage, WeaponType.Bat, null);
+                        recv.OnHit(hitInfo);
                     }                    
 
                     if (hit.attachedRigidbody != null)
