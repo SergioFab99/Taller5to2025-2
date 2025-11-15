@@ -41,9 +41,7 @@ public class PickUpWeapon : MonoBehaviour
                     var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
                     HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, 25f, Wtype, attacker);
                     PerformOnHit(hitInfo);
-                    BreakObj();               
-
-                    
+                    BreakObj();           
                 }
             }
         }
@@ -62,6 +60,8 @@ public class PickUpWeapon : MonoBehaviour
                 hited = true;
                 Debug.Log("Se ha hecho daño al objeto");
                 Debug.Log(hitInfo.damague);
+                Debug.Log(hitInfo.attacker);
+                Debug.Log(hitInfo.type);
                 return;
             } 
             else
