@@ -6,4 +6,6 @@ public class DefaultMoveSettings : ScriptableObject
 {
    public float Speed,
                 Response;
+
+    public float ExternalForcesResponse;
 }

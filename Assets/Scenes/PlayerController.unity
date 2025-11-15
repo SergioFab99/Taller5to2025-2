@@ -617,6 +617,8 @@ MonoBehaviour:
   - 1
   - 1
   sensibility: 0.1
+  rotSpeed: 0
+  sideStepDuration: 0
 --- !u!1001 &382048282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1648,8 +1650,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1927599173}
     - target: {fileID: 2934200553639028973, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: rotSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934200553639028973, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: mask.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934200553639028973, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: sideStepDuration
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3804534893037069960, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Center.z
@@ -2013,6 +2023,8 @@ MonoBehaviour:
     BehaviourState: 0
     Velocity: {x: 0, y: 0, z: 0}
     Acceleration: {x: 0, y: 0, z: 0}
+  _canSideStep: 1
+  _requestedSideStep: 0
 --- !u!114 &950165085
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using Unity.Cinemachine;
+using System.Collections;
 
 public struct  CameraInput
 {
     public Vector2 Look;
+    public bool SideStep;
 }
 
 public class PlayerCamera : MonoBehaviour
@@ -24,9 +26,13 @@ public class PlayerCamera : MonoBehaviour
 
     public float[] Gain = new float[2];
     public float sensibility = 0.1f;
+    [Header("SideStep")]
+    public float rotSpeed;
+    public float sideStepDuration;
 
     private bool _requestedSideStep;
     private Transform _currentTarget;
+    private bool AllowCameraInput = true;
     public void Initialize(Transform Target)
     {
         transform.position = Target.position;
@@ -41,40 +47,36 @@ public class PlayerCamera : MonoBehaviour
     
     public void UpdateRotation(CameraInput input)
     {
-        
-        if (_lookLocked && _lockTarget != null)
+        _requestedSideStep = input.SideStep;
+        if(_requestedSideStep)
         {
-            
-            Vector3 camPos = transform.position;
-            Vector3 tgt = _lockTarget.position + Vector3.up * _lockHeightOffset;
-            Vector3 flatDir = new Vector3(tgt.x - camPos.x, 0f, tgt.z - camPos.z);
-            if (flatDir.sqrMagnitude > 0.0001f)
-            {
-                float currentYaw = transform.eulerAngles.y;
-                float targetYaw = Quaternion.LookRotation(flatDir.normalized, Vector3.up).eulerAngles.y;
-                float delta = Mathf.DeltaAngle(currentYaw, targetYaw);
-                if (Mathf.Abs(delta) > _yawDeadZoneDeg)
-                {
-                    float t = (_lockTurnSpeed >= 999f) ? 1f : Mathf.Clamp01(Time.deltaTime * _lockTurnSpeed);
-                    float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, t);
-                    float basePitch = _preservePitchOnLock ? _savedPitchOnLock : transform.eulerAngles.x;
-                    float newPitch = Mathf.Clamp(basePitch, -90f, 90f);
-                    transform.rotation = Quaternion.Euler(newPitch, newYaw, 0f);
-                    _eulerAngles = transform.eulerAngles;
-                }
-            }
-            return;
+            AllowCameraInput = false;
+            StartCoroutine(ResetCameraInput(sideStepDuration));
         }
+        if(AllowCameraInput)
+        {
+            _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility;
 
-     
-        
-        if (_lookLocked) return;
+            _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -90f, 90f);
+            transform.eulerAngles = _eulerAngles;
+        }
+        else if(_currentTarget != null)
+        {
+            var direc = _currentTarget.position - transform.position;
+            direc.y = 0f;
 
-        _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility;
+            Quaternion targetRot = Quaternion.LookRotation(direc);
 
-        _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -90f, 90f);
-        transform.eulerAngles = _eulerAngles;
+            transform.rotation = Quaternion.Lerp
+            (
+                a: transform.rotation,
+                b: targetRot,
+                t: 1f - Mathf.Exp(-rotSpeed * Time.deltaTime)
+            );
+            _eulerAngles =  transform.eulerAngles;
+        }
     }
+
 
     public void UpdatePosition(Transform Target)
     {
@@ -114,26 +116,34 @@ public class PlayerCamera : MonoBehaviour
 
     public bool CheckIsViewTarget(Transform character)
     {
-        SetTargetOnView(character);
-        return _currentTarget != null;
+       
+        return SetTargetOnView(character);
     }
 
-    public void SetTargetOnView(Transform character)
+    public  bool SetTargetOnView(Transform character)
     {
         Ray ray = new Ray(character.position, character.forward);
 
         if(Physics.SphereCast(ray,1f, out RaycastHit hit, 5f, mask) && hit.collider.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Enemy"))
         {
             _currentTarget = hit.transform;
+            return true;
         }
         else
         {
-            _currentTarget = null;
+            return false;
         }
     }
 
     public Transform GetTargetInView()
     {
         return _currentTarget;
+    }
+
+    public IEnumerator ResetCameraInput(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        AllowCameraInput = true;
     }
 }

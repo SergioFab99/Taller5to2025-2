@@ -87,6 +87,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private Vector3 _externalExplosiveForces;
 
     public bool _canSideStep = true;
+    private bool _isSideStep;
     public bool _requestedSideStep;
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
@@ -203,11 +204,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             case BehaviourState.Default:
             
-
-                var forward = Vector3.ProjectOnPlane(
-                _requestedRotation * Vector3.forward,
-                 motor.CharacterUp
-                );
+                
+                    var forward = Vector3.ProjectOnPlane(
+                    _requestedRotation * Vector3.forward,
+                     motor.CharacterUp
+                    );
 
                 currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
 
@@ -228,6 +229,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 {
                     _timeSinceUngrounded = 0f;
                     _ungroundedDueToJump = false;
+                    
                     var groundedMovement = motor.GetDirectionTangentToSurface
                     (
                       direction: _requestedMovement,
@@ -237,10 +239,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                     float speed;
                     float response;
+                    Vector3 direc;
 
                     if (_requestedSideStep)
                     {
                         _canSideStep = false;
+                        _isSideStep = true;
                         StartCoroutine(ResetCanSideStep(0.3f));
                         /*var enemyFoward = faceTarget - transform.position;
                         enemyFoward.y = 0f;
@@ -249,7 +253,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                         Vector3 direc = enemyFoward * _requestedMovement.x + enemyRight * -_requestedMovement.z ;  */
 
-                        Vector3 direc = transform.forward * _rawInput.z + transform.right * _rawInput.x;
+                        direc = transform.forward * _rawInput.z + transform.right * _rawInput.x;
                         if (Mathf.Abs(_rawInput.x) > 0.1f && Mathf.Abs(_requestedMovement.z) < 0.1f)
                         {
                             direc += transform.forward * 1f;
@@ -259,27 +263,30 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                             direc = transform.forward;
                         }
 
+                        speed = DefaultSideStepSettings.Speed;
+
+                        response = DefaultSideStepSettings.Response;
+
                         groundedMovement = motor.GetDirectionTangentToSurface
                         (
                             direction: direc,
                             surfaceNormal: motor.GroundingStatus.GroundNormal
                         );
-
                         speed = DefaultSideStepSettings.Speed;
 
                         response = DefaultSideStepSettings.Response;
-
-
-
+                        Vector3 targetSideStepVelocity = groundedMovement * speed;
+                        AddExternalForce(targetSideStepVelocity);
+                   
                     }
+                    
                     else
                     {
-
                         speed = _state.Stance is Stance.Stand ? DefaultStandSettings.Speed : DefaultBlockSettings.Speed;
 
                         response = _state.Stance is Stance.Stand ? DefaultStandSettings.Response : DefaultBlockSettings.Response;
-
                     }
+
 
                         Vector3 targetVelocity = groundedMovement * speed;
                         Vector3 moveVelocity = Vector3.Lerp
@@ -408,6 +415,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 if (_externalForces.magnitude > 0)
                 {
                     motor.ForceUnground();
+        
                     currentVelocity += _externalForces;
                     _externalForces = Vector3.zero;
                 }

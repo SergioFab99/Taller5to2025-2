@@ -9,6 +9,8 @@ public class DefaultBlockDodgeCounterSettings : ScriptableObject
     public float dodgeDuration = 0.2f;    
     private float dodgeTimer = 0f;
 
+   
+
     [Header("Block Settings")]
     public float blockAngle = 120f;
     public float blockDamageMultiplier = 0.5f;

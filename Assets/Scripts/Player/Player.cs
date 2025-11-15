@@ -96,13 +96,17 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
 
-      /*  if (characterInput.Move != new Vector3(0,0,0))
+        /*  if (characterInput.Move != new Vector3(0,0,0))
+          {
+              CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
+          } */
+
+
+        var cameraInput = new CameraInput
         {
-            CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
-        } */
-       
-        
-        var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
+            Look = input.Look.ReadValue<Vector2>(),
+            SideStep = input.Dash.WasPressedThisFrame() &&playerCharacter._canSideStep
+        };
         playerCamera.UpdateRotation(cameraInput);
 
         
