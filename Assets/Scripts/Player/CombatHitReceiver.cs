@@ -14,9 +14,7 @@ public class CombatHitReceiver : MonoBehaviour
     private Conexions conexions;
     
 
-    public int batExposeThreshold = 2;
-
-    public int FistExposeThreshold = 3;
+    public int batExposeThreshold = 3;
 
     public bool resetCounterOnExpose = true;
 
@@ -98,22 +96,6 @@ public class CombatHitReceiver : MonoBehaviour
         if (enemyHandler != null)
         {
             if (conexions.type == WeaponType.Bat && conexions.counter >= batExposeThreshold)
-            {                
-                var exposedState = enemyHandler.GetExposedState();
-                if (exposedState != null)
-                {
-                    enemyHandler.SetState(exposedState);
-                }
-                
-                if (resetCounterOnExpose) conexions.counter = 0f;
-                else conexions.counter = Mathf.Max(0f, conexions.counter - batExposeThreshold);
-            }
-        }
-
-        
-        if (enemyHandler != null)
-        {
-            if (conexions.type == WeaponType.Fist && conexions.counter >= FistExposeThreshold)
             {                
                 var exposedState = enemyHandler.GetExposedState();
                 if (exposedState != null)
