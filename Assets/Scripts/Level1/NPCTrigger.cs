@@ -44,8 +44,9 @@ public class NPCTrigger : MonoBehaviour
         }
     }
 
-    void CombatOption()
+    public void CombatOption()
     {
+        Debug.Log("CombatWithNPC");
         if (dialogueController.npc2)
         {
             Invoke(nameof(SpawnEnemyNpc2), 1f);

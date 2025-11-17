@@ -39,7 +39,8 @@ public class DialogueController : MonoBehaviour
         {
             ReadCSV();
         }
-        //NPC1Dialogues();
+        npc1 = true;
+        NPC1Dialogues();
     }
 
     void ReadCSV()
@@ -105,7 +106,7 @@ public class DialogueController : MonoBehaviour
             }
         }
         
-        //peaceSelectionTMP.text = selection1[0];
+        peaceSelectionTMP.text = selection1[0];
     }
     public void NPC2Dialogues()
     {
