@@ -95,6 +95,7 @@ public class CameraManagerTutorial : MonoBehaviour
         else
         {
             Indications.instance.NextIndication();
+            Debug.Log($"Indication = {Indications.changeIndications}");
             Indications.indicationsLifeWithCamera = true;
             Indications.instance.ChangeToIndicationsOfLife();
         }
