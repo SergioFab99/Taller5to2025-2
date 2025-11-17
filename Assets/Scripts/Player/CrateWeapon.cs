@@ -1,9 +1,6 @@
-using System.Collections;
-
 using UnityEngine;
-using UnityEngine.UI;
 
-public class BatWeapon : Weapon
+public class CrateWeapon : Weapon
 {
     private PlayerCombat playerCombat;
    
@@ -13,15 +10,15 @@ public class BatWeapon : Weapon
 
     private bool hitDone;
     private float swingStartTime;
-    public LayerMask hitMask;
-  
+    public LayerMask hitMask;    
+    public event CrateAttack OnCrateAttack;
+    public delegate void CrateAttack();    
 
     public override void Initialize(PlayerCombat playerCombat)
     {
         this.playerCombat = playerCombat;
         
-        hitDone = false;
-      
+        hitDone = false;      
     }
 
     public override void Attack()
@@ -30,24 +27,24 @@ public class BatWeapon : Weapon
             return;
 
         Debug.Log("Attack");
-
+        OnCrateAttack?.Invoke();
         playerCombat._state.CanAttack = false;
 
 
-        StartCoroutine(playerCombat.ResetCanAttack((settings as BatWeaponSettings).timeBetweenSwings));
+        StartCoroutine(playerCombat.ResetCanAttack((settings as CrateWeaponSettings).timeBetweenSwings));
         var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
-        StartCoroutine(MakeShake((settings as BatWeaponSettings).shakeForce, (settings as BatWeaponSettings).AttackDelay, direc2));
+        StartCoroutine(MakeShake((settings as CrateWeaponSettings).shakeForce, (settings as CrateWeaponSettings).AttackDelay, direc2));
         /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
          {
              var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
              StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
          } */
-        Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
+        Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as CrateWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
         foreach (Collider col in cols)
         {
            
-            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as BatWeaponSettings).damague, Wtype,playerCombat);
-            StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
+            var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as CrateWeaponSettings).damague, Wtype,playerCombat);
+            StartCoroutine(PerfomDelay((settings as CrateWeaponSettings).AttackDelay, hitInfo));
         }
     }
 
@@ -93,8 +90,9 @@ public class BatWeapon : Weapon
         Gizmos.color = Color.green;
         if (playerCombat != null)
         {
-            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box);
+            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as CrateWeaponSettings).box);
 
         }
     }
 }
+

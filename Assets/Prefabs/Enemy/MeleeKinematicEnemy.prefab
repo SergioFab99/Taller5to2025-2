@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 5161424549491569845}
   - component: {fileID: 2196153423083873068}
   - component: {fileID: 4629790375579077680}
+  - component: {fileID: 8092243494369351890}
   m_Layer: 8
   m_Name: Character
   m_TagString: Enemy
@@ -686,6 +687,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 1100
+--- !u!114 &8092243494369351890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279654035997620268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd91845c3259f249817f5e7eb6ddbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBlocking: 0
+  healthController: {fileID: 4629790375579077680}
+  batExposeThreshold: 3
+  FistExposeThreshold: 3
+  resetCounterOnExpose: 1
 --- !u!1 &3902273270240207874
 GameObject:
   m_ObjectHideFlags: 0

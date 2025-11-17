@@ -8,6 +8,7 @@ public enum WeaponType
     Fist,
     Knife,
     Bat,
+    Crate,
 
 }
 
