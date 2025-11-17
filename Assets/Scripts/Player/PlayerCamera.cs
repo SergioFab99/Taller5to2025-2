@@ -47,6 +47,31 @@ public class PlayerCamera : MonoBehaviour
     
     public void UpdateRotation(CameraInput input)
     {
+        if (_lookLocked && _lockTarget != null)
+        {
+
+            Vector3 camPos = transform.position;
+            Vector3 tgt = _lockTarget.position + Vector3.up * _lockHeightOffset;
+            Vector3 flatDir = new Vector3(tgt.x - camPos.x, 0f, tgt.z - camPos.z);
+            if (flatDir.sqrMagnitude > 0.0001f)
+            {
+                float currentYaw = transform.eulerAngles.y;
+                float targetYaw = Quaternion.LookRotation(flatDir.normalized, Vector3.up).eulerAngles.y;
+                float delta = Mathf.DeltaAngle(currentYaw, targetYaw);
+                if (Mathf.Abs(delta) > _yawDeadZoneDeg)
+                {
+                    float t = (_lockTurnSpeed >= 999f) ? 1f : Mathf.Clamp01(Time.deltaTime * _lockTurnSpeed);
+                    float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, t);
+                    float basePitch = _preservePitchOnLock ? _savedPitchOnLock : transform.eulerAngles.x;
+                    float newPitch = Mathf.Clamp(basePitch, -90f, 90f);
+                    transform.rotation = Quaternion.Euler(newPitch, newYaw, 0f);
+                    _eulerAngles = transform.eulerAngles;
+                }
+            }
+            return;
+        }
+
+        if (_lookLocked) return;
         _requestedSideStep = input.SideStep;
         if(_requestedSideStep)
         {

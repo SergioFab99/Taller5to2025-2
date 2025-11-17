@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5fa66fa6259734c42bae1af12a2d0c03
+guid: f83570b4aeee8664fac74dfe119c6a07
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -80,52 +80,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: Enemigo Modelo(Clone)
-      parentName: 
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: EnemigoCuerpoPrinc
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0, y: 0, z: -0.0105639715}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 3.0003495, y: 3.0003495, z: 3.0003495}
-    - name: CabelloCejasLowPoly
-      parentName: Enemigo Modelo(Clone)
-      position: {x: 0.00000016354066, y: -0.0061377427, z: -0.0110030575}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 3.1096337, y: 3.1096337, z: 3.1096337}
-    - name: Ojos
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0.000099669625, y: 0.22703831, z: 0.028442906}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Camisa
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0, y: 0, z: -0.01149262}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 3.063361, y: 3.063361, z: 3.063361}
-    - name: Pantalon
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0.00030554575, y: -0.1177121, z: -0.006448781}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 0.49828854, y: 0.49828854, z: 0.49828854}
-    - name: Tirantes
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0.030615415, y: 0.028752977, z: 0.0016254272}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Zapatos
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0.00069189473, y: -0.25965974, z: 0.017191932}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Corbata
-      parentName: Enemigo Modelo(Clone)
-      position: {x: -0.00014070878, y: 0.10168657, z: 0.032907046}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -136,11 +91,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
