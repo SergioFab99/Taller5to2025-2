@@ -6,13 +6,14 @@ public class DisplayInteractHUD : MonoBehaviour
     Coroutine coroutine;
     bool startCoroutine;
     [SerializeField] float timeBetween;
-    [SerializeField] private PlayerCombat playerCombat;    
+    [SerializeField] private PlayerCombat playerCombat;
+    [SerializeField]DefaultGrabThrowSettings DefaultGrabThrowSettings;
     [SerializeField] private Transform cam;
     void Start()
     {
         playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
         cam = playerCombat.playerCamera._camera.transform;
-       
+       // DefaultGrabThrowSettings = playerCombat.DefaultGrabThrowSettings;
         coroutine = StartCoroutine(Display(timeBetween));
     }
 
@@ -29,7 +30,7 @@ public class DisplayInteractHUD : MonoBehaviour
         while (!startCoroutine)
         {
             Ray ray = new Ray(cam.position, cam.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, 2.5f)) 
+            if (Physics.Raycast(ray, out RaycastHit hit, DefaultGrabThrowSettings.grabRange - 1.5f)) 
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {

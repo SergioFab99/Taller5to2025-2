@@ -165,7 +165,6 @@ public class PlayerCombat : CombatBase
         }
         if (requestInteract)
         {
-            Debug.Log(currentWeapon.Wtype);
             if (currentWeapon.Wtype == WeaponType.Fist)
             {
                 Debug.Log("PickingUp Object");
