@@ -140,8 +140,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             case BehaviourState.Default:
                 var currentHeight = motor.Capsule.height;
                 var cameraTargetHeight = currentHeight * BodyStandSettings.CameraHeight;
+
                 
-                cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
+                cameraTarget.localPosition = new Vector3(cameraTarget.localPosition.x, cameraTargetHeight, cameraTarget.localPosition.z);
                 break;
         }
        
