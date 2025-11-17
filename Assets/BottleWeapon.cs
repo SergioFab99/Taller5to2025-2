@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CrateWeapon : Weapon
+public class BottleWeapon : Weapon
 {
     private PlayerCombat playerCombat;
    
@@ -23,7 +23,7 @@ public class CrateWeapon : Weapon
 
     public override void Attack()
     {
-        if (!playerCombat._state.CanAttack)
+        /*if (!playerCombat._state.CanAttack)
             return;
 
         Debug.Log("Attack");
@@ -38,7 +38,7 @@ public class CrateWeapon : Weapon
          {
              var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as BatWeaponSettings).damague);
              StartCoroutine(PerfomDelay((settings as BatWeaponSettings).AttackDelay, hitInfo));
-         } */
+         } 
         Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as CrateWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
         foreach (Collider col in cols)
         {
@@ -46,6 +46,7 @@ public class CrateWeapon : Weapon
             var hitInfo = new HitInfo(col, col.ClosestPoint(playerCombat.currentWeapon.transform.position), (col.ClosestPoint(playerCombat.currentWeapon.transform.position) - playerCombat.currentWeapon.transform.position), (settings as CrateWeaponSettings).damague, Wtype,playerCombat);
             StartCoroutine(PerfomDelay((settings as CrateWeaponSettings).AttackDelay, hitInfo));
         }
+        */
     }
 
     public override void PerformOnHit(HitInfo hitInfo)
@@ -95,4 +96,6 @@ public class CrateWeapon : Weapon
         }
     }
 }
+
+
 

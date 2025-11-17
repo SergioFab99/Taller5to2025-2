@@ -80,7 +80,13 @@ public class BatWeapon : Weapon
         Debug.Log("This do something, Throw");
         var ThrowObject = Instantiate(throwWeapon, transform.position, transform.rotation);
         ThrowObject.GetComponent<Rigidbody>().AddForce(direc * force , ForceMode.Impulse);
-        ThrowObject.GetComponent<PickUpWeapon>().hited = false;
+        var pick = ThrowObject.GetComponent<PickUpWeapon>();
+        if (pick != null)
+        {
+            pick.hited = false;
+            pick.Wtype = this.Wtype;
+            pick.attacker = playerCombat;
+        }
     }
 
     void OnDrawGizmos()

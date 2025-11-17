@@ -9,14 +9,16 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField]
     [AssetsOnly]
     public CombatBase attacker;
-    WeaponType Wtype;
+    public WeaponType Wtype;
     public GameObject Prefab;
     public WeaponSettings settings;
     public LayerMask hitMask;
 
     public GameObject point1, point2;
 
-    public GameObject model, BrokenModel;
+    public GameObject model, BrokenModel,internalobject;
+
+    
 
     public bool hited = true;
 
@@ -38,11 +40,14 @@ public class PickUpWeapon : MonoBehaviour
                 {
 
                     Debug.Log("hitted");
-                    var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
-                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, 25f, Wtype, attacker);
+                    var distance = (coll.ClosestPoint(transform.position) - transform.position).normalized;
+                    float damage = settings != null ? settings.damague : 25f;
+                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, damage, Wtype, attacker);
                     PerformOnHit(hitInfo);
-                    BreakObj();           
+                    BreakObj();     
+                     
                 }
+
             }
         }
     }
@@ -78,8 +83,18 @@ public class PickUpWeapon : MonoBehaviour
         if (model == null || BrokenModel == null) return;
         model.SetActive(false);
         BrokenModel.SetActive(true); 
-        
-        //Destroy(this.gameObject, 2f);
+        if(Wtype==WeaponType.Crate)
+                    {
+                        Wood();
+                    }     
+        Destroy(this.gameObject, 6f);
+    }
+
+    public void Wood()
+    {
+        if (!hited) return;
+        if (model == null || BrokenModel == null) return;
+        var o = Instantiate(internalobject, transform.position, transform.rotation);
     }
 
     private void OnDrawGizmos()
