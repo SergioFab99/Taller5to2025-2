@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,12 +9,16 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField]
     [AssetsOnly]
     public CombatBase attacker;
-    WeaponType Wtype = WeaponType.Bat;
+    public WeaponType Wtype;
     public GameObject Prefab;
     public WeaponSettings settings;
     public LayerMask hitMask;
 
     public GameObject point1, point2;
+
+    public GameObject model, BrokenModel,internalobject;
+
+    
 
     public bool hited = true;
 
@@ -31,63 +36,65 @@ public class PickUpWeapon : MonoBehaviour
         {
             foreach (Collider coll in col)
             {
-                if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("damagable"))
+                if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("Damagable") && !TagC.HasTag("Player"))
                 {
 
                     Debug.Log("hitted");
-                    var distance = (col[0].ClosestPoint(transform.position) - transform.position).normalized;
-                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, (settings as FistsWeaponSettings).damague, Wtype, attacker);
-
+                    var distance = (coll.ClosestPoint(transform.position) - transform.position).normalized;
+                    float damage = settings != null ? settings.damague : 25f;
+                    HitInfo hitInfo = new HitInfo(coll, coll.ClosestPoint(transform.position), distance, damage, Wtype, attacker);
                     PerformOnHit(hitInfo);
-
-
-                    
+                    BreakObj();     
+                     
                 }
+
             }
         }
     }
 
     public void PerformOnHit(HitInfo hitInfo)
     {
-        if (hitInfo.col.TryGetComponent<TagContainer>(out TagContainer tags))
         {
-            if (tags.HasTag("Damagable") && !tags.HasTag("Player"))
+            var recv = hitInfo.col.GetComponent<CombatHitReceiver>()
+                    ?? hitInfo.col.GetComponentInChildren<CombatHitReceiver>()
+                    ?? hitInfo.col.GetComponentInParent<CombatHitReceiver>();
+
+            if (recv != null)
             {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
+                recv.OnHit(hitInfo);
+                hited = true;
+                Debug.Log("Se ha hecho daño al objeto");
+                Debug.Log(hitInfo.damague);
+                Debug.Log(hitInfo.attacker);
+                Debug.Log(hitInfo.type);
+                return;
+            } 
+            else
+            {
+                Debug.Log("No se ha podido hacer daño al objeto");
+                hited = false;
+            }           
+        }
+    }
 
-                if (tags.TryGetComponent(out HealthController health))
-                {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
-
-                }
-                else
-                {
-                    health = tags.GetComponentInParent<HealthController>();
-                    if (health != null )
+    public void BreakObj()
+    {
+        if (!hited) return;
+        if (model == null || BrokenModel == null) return;
+        model.SetActive(false);
+        BrokenModel.SetActive(true); 
+        if(Wtype==WeaponType.Crate)
                     {
-                        health.TakeDamague((settings as BatWeaponSettings).damague);
-                    }
-                }
+                        Wood();
+                    }     
+        Destroy(this.gameObject, 6f);
+    }
 
-            }
-            hited = true;
-        }
-        else if (hitInfo.col.GetComponentInParent<TagContainer>())
-        {
-            var tags1 = hitInfo.col.GetComponentInParent<TagContainer>();
-
-            if (tags1.HasTag("Damagable") && !tags1.HasTag("Player"))
-            {
-                Debug.Log($"Bat hit {hitInfo.col.name}");
-
-                if (tags1.TryGetComponent(out HealthController health))
-                {
-                    health.TakeDamague((settings as BatWeaponSettings).damague);
-                }
-
-            }
-            hited = true;
-        }
+    public void Wood()
+    {
+        if (!hited) return;
+        if (model == null || BrokenModel == null) return;
+        var o = Instantiate(internalobject, transform.position, transform.rotation);
     }
 
     private void OnDrawGizmos()
