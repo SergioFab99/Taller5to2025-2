@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2638247157040596496, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
   m_PrefabInstance: {fileID: 66350518}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 66350520}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
@@ -2030,13 +2030,40 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7653374895477926796, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 650960580}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 982517114296502168, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 66350521}
   m_SourcePrefab: {fileID: 100100000, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
 --- !u!4 &66350519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7653374895477926796, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
   m_PrefabInstance: {fileID: 66350518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &66350520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 982517114296502168, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
+  m_PrefabInstance: {fileID: 66350518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &66350521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66350520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72aab0d4646411a49a4f3301c32bf130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  canInteract: {fileID: 0}
+  bat2: {fileID: 1852586516}
+  onTrigger: 0
+  openDoor1: 0
+  openDoor2: 0
+  unlockFinalEnemies: 0
 --- !u!1001 &69639464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33370,7 +33397,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.44508657
+          x: -0.4450866
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -36263,10 +36290,10 @@ MonoBehaviour:
         z: 1.8906918
       Rotation:
         value:
-          x: 0.5404947
-          y: -0.6074259
-          z: 0.32936928
-          w: -0.48001593
+          x: 0.5404946
+          y: -0.60742575
+          z: 0.32936934
+          w: -0.4800159
     - Position:
         x: 5.59
         y: 1.33
@@ -47794,17 +47821,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7940577754635503606, guid: 11047d93478507b49a38ac89322936e8, type: 3}
-      propertyPath: internalobject
-      value: 
-      objectReference: {fileID: 1852586516}
     - target: {fileID: 6222481651229147237, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_Name
       value: PickUpBat (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.771
+      value: -14.92
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -47812,7 +47835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.79037
+      value: -9.34
       objectReference: {fileID: 0}
     - target: {fileID: 6506586916832013050, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47842,6 +47865,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7940577754635503606, guid: 11047d93478507b49a38ac89322936e8, type: 3}
+      propertyPath: internalobject
+      value: 
+      objectReference: {fileID: 1852586516}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47855,10 +47882,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3699090652523216931, guid: c924e85129a50ec4087e2e30f7c7ad5d, type: 3}
-      propertyPath: Prefab
-      value: 
-      objectReference: {fileID: 8438829059646461089, guid: f2b173c72e2a6584a98102072ed77452, type: 3}
     - target: {fileID: 6222481651229147237, guid: d7f4e33d8d437c44f8ecfb27ff9aa9e4, type: 3}
       propertyPath: m_Name
       value: PickUpBat (1)
@@ -47903,6 +47926,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3699090652523216931, guid: c924e85129a50ec4087e2e30f7c7ad5d, type: 3}
+      propertyPath: Prefab
+      value: 
+      objectReference: {fileID: 8438829059646461089, guid: f2b173c72e2a6584a98102072ed77452, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
