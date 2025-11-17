@@ -18902,6 +18902,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: EnemyMask.m_Bits
       value: 256
@@ -18921,16 +18925,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5726119059286108044, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1674016227}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f31c6acc2078247995333c7520620f, type: 3}
---- !u!4 &1186042199 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7066029821056978412, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-  m_PrefabInstance: {fileID: 1186042198}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1198958825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23206,7 +23202,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.44508657
+          x: -0.4450866
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -25468,8 +25464,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
@@ -28848,6 +28844,7 @@ MonoBehaviour:
   textsForIndicationsLife:
   - You have a life bar of up to 100 hit points and you will die if it reaches 0.
   playerCamera: {fileID: 1724578677}
+  pauseMenu: {fileID: 231286820}
 --- !u!1 &1786043912
 GameObject:
   m_ObjectHideFlags: 0
@@ -33998,6 +33995,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5506229434939493958, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5885595085325869591, guid: d8d9af7633efd7544b796fdb8d8a1050, type: 3}
       propertyPath: playerHealth
       value: 
@@ -34267,3 +34268,4 @@ SceneRoots:
   - {fileID: 539322660}
   - {fileID: 254057594}
   - {fileID: 460595734}
+  - {fileID: 1186042198}
