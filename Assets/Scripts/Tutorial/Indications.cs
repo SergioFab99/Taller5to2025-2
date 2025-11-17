@@ -143,6 +143,7 @@ public class Indications : MonoBehaviour
             if (SetUpTutorial.checkPoint2 && indicationsLifeWithCamera)
             {
                 ActivateIndications();
+                Debug.Log($"Indication = {Indications.changeIndications}");
                 indicationsLifeWithCamera = false;
             }
         }
