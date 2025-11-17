@@ -231,18 +231,38 @@ public class PlayerCombat : CombatBase
 
     void Attack()
     {
- 
+        int number =3;
         if (_canCounter)
         {
             Debug.Log("Performing counter attack");
             
             currentWeapon.Attack();       
             _canCounter = false;
-            return;
-        }
-
         
+            
+        }
+        if(currentWeapon.Wtype == WeaponType.Fist)
+        {
+            if ((currentWeapon as FistsWeapon).currentHand == CombatHand.None || (currentWeapon as FistsWeapon).currentHand ==  CombatHand.Left)
+            {
+                number = 0;
+            OnAttack?.Invoke(number);
+            }
+            else if((currentWeapon as FistsWeapon).currentHand == CombatHand.Right)
+            {
+                number = 1;
+                OnAttack?.Invoke(number);
+            }
+           
+                
+        }
+        else if (currentWeapon.Wtype == WeaponType.Bat)
+        {
+            number = 2;
+            OnAttack?.Invoke(number);
+        }
         currentWeapon.Attack();       
+
     }
 
    

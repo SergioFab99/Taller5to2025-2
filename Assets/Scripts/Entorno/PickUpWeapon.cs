@@ -8,7 +8,7 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField]
     [AssetsOnly]
     public CombatBase attacker;
-    WeaponType Wtype;
+    WeaponType Wtype = WeaponType.Bat;
     public GameObject Prefab;
     public WeaponSettings settings;
     public LayerMask hitMask;

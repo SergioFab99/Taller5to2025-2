@@ -13,8 +13,7 @@ public class FistsWeapon : Weapon
     
     public LayerMask hitMask;
 
-    public event PunchSide OnAttack;
-    public delegate void PunchSide(int hand);
+  
     private bool hitDone;
     [SerializeField] PlayerAudio playerAudio;
 
@@ -39,7 +38,7 @@ public class FistsWeapon : Weapon
         {
             case CombatHand.None:
                 currentHand = CombatHand.Right;
-                OnAttack?.Invoke(1);
+                
                 var direc = new Vector3(0.15f, -0.1f, -0.05f);
                 StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc));
 
@@ -47,14 +46,14 @@ public class FistsWeapon : Weapon
 
             case CombatHand.Right:
                 currentHand = CombatHand.Left;
-                OnAttack?.Invoke(2);
+                
                 var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
                 StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc2));
                 break;
 
             case CombatHand.Left:
                 currentHand = CombatHand.Right;
-                OnAttack?.Invoke(1);
+               
                 var direc3 = new Vector3(0.15f, -0.1f, -0.05f);
                 StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc3));
                 break;

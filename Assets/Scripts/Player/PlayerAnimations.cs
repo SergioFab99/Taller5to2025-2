@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
+using JetBrains.Annotations;
 public class PlayerAnimation : MonoBehaviour
 {
      PlayerCombat _playerCombat;
@@ -20,11 +21,9 @@ public class PlayerAnimation : MonoBehaviour
     public void Initialize(PlayerCombat playerCombat)
     {
         _playerCombat = playerCombat;
-        if(_playerCombat.currentWeapon != null)
-        {
-            (_playerCombat.currentWeapon as FistsWeapon).OnAttack += Attack;
-
-        }
+        _playerCombat.OnAttack += Attack;
+        
+        
         
     }
 
@@ -32,50 +31,29 @@ public class PlayerAnimation : MonoBehaviour
     private void OnDisable()
     {
         _playerCombat.OnAttack -= Attack;
-        (_playerCombat.currentWeapon as BatWeapon).OnAttack -= BatAttack;
+       
     }
 
     void Attack(int side)
-    {       
-                
+    {
+        switch(side)
         {
-            float camPitch = UnityEngine.Camera.main.transform.eulerAngles.x;
-            
-            if (camPitch > 180f) camPitch -= 360f;
-            
-            float threshold = 45f;
-            if (camPitch < threshold)
-            {
-               
-                if (side == 1)
-                {
-                    anim.Play("armRightUp");
-                }
-                else if (side == 2)
-                {
-                    anim.Play("armLeftUp");
-                }
-            }
-            else
-            {
-                
-                if (side == 1)
-                {
-                    anim.Play("armRightDown");
-                }
-                else if (side == 2)
-                {
-                    anim.Play("armLeftDown");
-                }
-            }
-        }
-           
+            case 0:
+                anim.Play("RightArm", 0);
+                break;
+            case 1:
+                anim.Play("LeftArm", 0);
+                break;
+            case 2:
+                anim.Play("BatAttack", 0);
+                break;
+            case 3:
+                break;
+        }    
     }
 
-    public void BatAttack()
-    {
-        anim.SetTrigger("AttackBat");
-    }
+
+  
     void Update()
     {
         /*if (_playerCombat._heldObject != null)
@@ -87,11 +65,9 @@ public class PlayerAnimation : MonoBehaviour
             grab = false;
         }
         anim.SetBool("GrabBat", grab);*/
-        if (_playerCombat.currentWeapon.Wtype == WeaponType.Bat)
-        {
-            (_playerCombat.currentWeapon as BatWeapon).OnAttack += BatAttack;
+        
 
-        }
+        
        
 
         if (_playerCombat._state.isBlocking)
@@ -113,14 +89,7 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetBool("GrabBat", false);
         }
 
-        // Animación de agarre (Grapple) con Q (TEMPORAL)
-        bool isGrappling = Input.GetKey(KeyCode.Q);
-        anim.SetBool("Grapple", isGrappling);
-        if (isGrappling && !wasGrappling)
-        {
-            anim.Play("Grapple");
-        }
-        wasGrappling = isGrappling;
+        
     }
 
     void Shake()
