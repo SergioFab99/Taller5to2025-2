@@ -23481,6 +23481,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+--- !u!1 &1198184611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198184613}
+  - component: {fileID: 1198184612}
+  m_Layer: 0
+  m_Name: EventsSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1198184612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198184611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea2183f6005470499277f9e2e5d17db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftClickSound: {fileID: 8300000, guid: 3c2e431095c9e614780faf8d5efdd436, type: 3}
+  rightClickSound: {fileID: 8300000, guid: abd0b009f6918534a9883fd75bc9b2ff, type: 3}
+  eSound: {fileID: 0}
+  spaceSound: {fileID: 8300000, guid: edecc1913adc6e24fa4b1f8ce36b60a2, type: 3}
+  shiftSound: {fileID: 8300000, guid: 9b59d34e7a734174fa5de15acfb1b98b, type: 3}
+--- !u!4 &1198184613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198184611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.9180875, y: 0.9150001, z: 29.685658}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1198958825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30053,8 +30102,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.60742575
-          z: 0.32936934
+          y: -0.6074258
+          z: 0.32936937
           w: -0.4800159
     - Position:
         x: 5.59
@@ -38955,3 +39004,4 @@ SceneRoots:
   - {fileID: 539322660}
   - {fileID: 254057594}
   - {fileID: 460595734}
+  - {fileID: 1198184613}

@@ -66,20 +66,18 @@ public class Player : MonoBehaviour
     playerCombat.playerCamera = playerCamera;
         playerAnimation.Initialize(playerCombat);
 
-        //playerAudio = GetComponentInParent<PlayerAudio>();
+     
     }
 
     private void OnDestroy()
     {
         _inputActions.Dispose();
     }
-    // Update is called once per frame
     void Update()
         
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
-       // playerPickUp.PickUpUpdate(input.Interact.WasPressedThisFrame());
         var characterInput = new CharacterInput
         {
             Rotation = playerCamera._camera.transform.rotation,
@@ -90,12 +88,7 @@ public class Player : MonoBehaviour
         playerCombat.SetMoveInput(characterInput.Move);
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody();
-
-      /*  if (characterInput.Move != new Vector3(0,0,0))
-        {
-            CameraShake.cameraShakeInstance.Shake(shakeForce, velocity);
-        } */
-       
+ 
         
         var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
