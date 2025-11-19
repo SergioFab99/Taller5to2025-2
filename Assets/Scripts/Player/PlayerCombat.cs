@@ -477,6 +477,7 @@ public class PlayerCombat : CombatBase
 
     public void PickUpWeapon()
     {
+        bool done = false;
         var col = Physics.OverlapSphere(weaponPos.transform.position, 2f, hitMask.value, QueryTriggerInteraction.Ignore);
         if (col != null && col.Length > 0)
         {
@@ -485,10 +486,15 @@ public class PlayerCombat : CombatBase
             {
                 if (coll.gameObject.TryGetComponent<TagContainer>(out TagContainer TagC) && TagC.HasTag("PickUpWeapon"))
                 {
-
-                    Debug.Log("HasPickUpTag");
+                    if(done)
+                    {
+                        return;
+                    }
+                    
+                        Debug.Log("HasPickUpTag");
                     LinkWeapon(coll.gameObject.GetComponent<PickUpWeapon>().Prefab);
                     Destroy(coll.gameObject);
+                    done = true;
 
                 }
             }

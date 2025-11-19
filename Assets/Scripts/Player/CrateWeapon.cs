@@ -11,8 +11,7 @@ public class CrateWeapon : Weapon
     private bool hitDone;
     private float swingStartTime;
     public LayerMask hitMask;    
-    public event CrateAttack OnCrateAttack;
-    public delegate void CrateAttack();    
+ 
 
     public override void Initialize(PlayerCombat playerCombat)
     {
@@ -27,7 +26,7 @@ public class CrateWeapon : Weapon
             return;
 
         Debug.Log("Attack");
-        OnCrateAttack?.Invoke();
+        
         playerCombat._state.CanAttack = false;
 
 

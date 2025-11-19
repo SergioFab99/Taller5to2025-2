@@ -16,6 +16,7 @@ public class Indications : MonoBehaviour
     public static Indications instance;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private GameObject pausePanel;
      private void Awake()
     {
         indicationsBackground.SetActive(false);
@@ -24,6 +25,7 @@ public class Indications : MonoBehaviour
     void Start()
     {
         instance = this;
+        pausePanel.SetActive(false);
         pauseMenu.enabled = false;
         ChangeIndicationsOnAwake();
         ChangeIndications();
@@ -162,6 +164,7 @@ public class Indications : MonoBehaviour
 
     void UpgradesTutorial()
     {
+        pausePanel.SetActive(true); 
         pauseMenu.enabled = true;
         pauseMenu.ActivePauseMenu();        
     }
