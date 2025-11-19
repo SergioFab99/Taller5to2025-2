@@ -19093,7 +19093,7 @@ MonoBehaviour:
   damagableTagName: Damagable
   hitLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1023
   hitAssistRadius: 0
 --- !u!136 &790534803
 CapsuleCollider:
@@ -36034,7 +36034,7 @@ MonoBehaviour:
   damagableTagName: Damagable
   hitLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1023
   hitAssistRadius: 0
 --- !u!136 &1881162200
 CapsuleCollider:
@@ -42789,7 +42789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8d231f4a4896cd84cb1481add6c6a612, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 499a9c9cee03c0741acdaee89b45ffad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

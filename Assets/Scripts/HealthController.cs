@@ -1,17 +1,19 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class HealthController : MonoBehaviour
 {
-    [Header("Health Values")] 
+    [Header("Health Values")]
     public float maxHealth = 100f;
     public float health = 100f;
 
     [Header("Blood Canvas")]
-    public GameObject bloodCanvas; 
-    public float bloodVisibleTime = 0.5f;   
+    public GameObject bloodCanvas;
+    public float bloodVisibleTime = 0.5f;
 
     private float bloodTimer = 0f;
+    private CanvasGroup canvasGroup;
 
     public event Action<float, float> OnHealthUpdated;
     public event Action<float> OnPlayerDamaged;
@@ -22,8 +24,32 @@ public class HealthController : MonoBehaviour
         health = Mathf.Clamp(health, 0f, maxHealth);
         RaiseFullUpdate();
 
+        DesactivarPanel();
+    }
+
+    private void Start()
+    {
+        DesactivarPanel();
+        StartCoroutine(ForceDeactivateOnFirstFrame());
+    }
+
+    private IEnumerator ForceDeactivateOnFirstFrame()
+    {
+        yield return null;
+        DesactivarPanel();
+    }
+
+    private void DesactivarPanel()
+    {
         if (bloodCanvas != null)
+        {
             bloodCanvas.SetActive(false);
+
+            canvasGroup = bloodCanvas.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            canvasGroup = bloodCanvas.AddComponent<CanvasGroup>();
+            canvasGroup.alpha = 0f;
+        }
     }
 
     public void AddHealth(float amount)
@@ -47,10 +73,12 @@ public class HealthController : MonoBehaviour
             RaiseFullUpdate();
             OnPlayerDamaged?.Invoke(health / maxHealth);
 
-            if (bloodCanvas != null)
+            if (bloodCanvas != null && canvasGroup != null)
             {
                 bloodCanvas.SetActive(true);
                 bloodTimer = bloodVisibleTime;
+                float opacity = Mathf.Lerp(0.2f, 1f, 1f - (health / maxHealth));
+                canvasGroup.alpha = opacity;
             }
 
             if (health <= 0f)
@@ -66,7 +94,10 @@ public class HealthController : MonoBehaviour
         {
             bloodTimer -= Time.deltaTime;
             if (bloodTimer <= 0f)
+            {
                 bloodCanvas.SetActive(false);
+                if (canvasGroup != null) canvasGroup.alpha = 0f;
+            }
         }
     }
 
