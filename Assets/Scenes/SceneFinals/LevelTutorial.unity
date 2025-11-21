@@ -2023,7 +2023,7 @@ PrefabInstance:
       objectReference: {fileID: 1714002712}
     - target: {fileID: 1516067868984407000, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       propertyPath: EnemyMask.m_Bits
-      value: 256
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1706834896090016597, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       propertyPath: DefaultSideStepSettings
@@ -2103,7 +2103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7668934405043095801, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       propertyPath: mask.m_Bits
-      value: 384
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7668934405043095801, guid: 6ba4e56df1b6c494e8c694acfd254a47, type: 3}
       propertyPath: sideStepDuration
@@ -36685,8 +36685,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
