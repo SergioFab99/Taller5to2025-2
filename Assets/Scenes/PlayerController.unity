@@ -504,19 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3900fdb751b04ba47b7c2f378f7fa01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxUses: 5
-  usesLeft: 0
-  requiredTag: Grabbable
-  interactionDistance: 2
-  highlightColor: {r: 0, g: 0, b: 0, a: 0.12941177}
-  showGlowWhenNear: 1
-  showCanvasWhenNear: 1
-  uiCanvas: {fileID: 0}
-  useOverlayPrompt: 1
-  promptVerb: Agarrar
-  promptFormat: '[{0}] {1}'
-  fallbackKey: E
-  debugPrompt: 0
 --- !u!54 &276535472
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1764,6 +1751,14 @@ PrefabInstance:
       propertyPath: ImpulseDefinition.TimeEnvelope.AttackShape.m_Curve.Array.data[1].tangentMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7882452930375524675, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.019
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882452930375524675, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.908
+      objectReference: {fileID: 0}
     - target: {fileID: 8834147580888674902, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.258
@@ -2153,10 +2148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2d29e5867ed714885f012435672d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2082171199}
-  spawnRadius: 5
-  spawnInterval: 2
-  maxEnemies: 10
 --- !u!114 &1803452472 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}

@@ -73,6 +73,7 @@ public class PlayerCamera : MonoBehaviour
 
         if (_lookLocked) return;
         _requestedSideStep = input.SideStep;
+
         if(_requestedSideStep)
         {
             AllowCameraInput = false;
