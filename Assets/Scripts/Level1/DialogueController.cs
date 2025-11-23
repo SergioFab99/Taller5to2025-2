@@ -13,7 +13,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] TMP_Text combatSelectionTMP, peaceSelectionTMP, continueSelectionTMP;
     [SerializeField] GameObject dialoguePanel, combatButton, peaceButton, continueButton;
     [SerializeField] private PlayerCamera playerCamera;
-    public bool npc1, npc2, npc3, npc4;
+    public bool npc1, npc2, npc3, npc4, canStartDialogue;
 
     /*[Serializable]
     public class Dialogues
@@ -104,9 +104,9 @@ public class DialogueController : MonoBehaviour
             {
                 actualDialogue.actualLines[i] = Npc1[i];
             }
-        }
-        
+        }        
         peaceSelectionTMP.text = selection1[0];
+        canStartDialogue = true;
     }
     public void NPC2Dialogues()
     {
@@ -117,7 +117,7 @@ public class DialogueController : MonoBehaviour
                 actualDialogue.actualLines[i] = Npc2[i];
             }
         }
-        
+        canStartDialogue = true;
     }
     public void NPC3Dialogues()
     {
@@ -128,6 +128,7 @@ public class DialogueController : MonoBehaviour
                 actualDialogue.actualLines[i] = Npc3[i];
             } 
         }
+        canStartDialogue = true;
     }
     public void NPC4Dialogues()
     {
@@ -138,6 +139,7 @@ public class DialogueController : MonoBehaviour
                 actualDialogue.actualLines[i] = Npc4[i];
             }
         }
+        canStartDialogue = true;
     }
     //Selections
     public void Selection1()

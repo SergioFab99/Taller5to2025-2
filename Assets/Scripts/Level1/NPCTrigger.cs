@@ -15,7 +15,7 @@ public class NPCTrigger : MonoBehaviour
                 dialogueController.npc2 = false;
                 dialogueController.npc3 = false;
                 dialogueController.npc4 = false;
-                dialogueController.NPC1Dialogues();
+                dialogueController.NPC1Dialogues();                
             }
             if (npc2)
             {
@@ -40,6 +40,17 @@ public class NPCTrigger : MonoBehaviour
                 dialogueController.npc3 = false;
                 dialogueController.npc4 = true;
                 dialogueController.NPC4Dialogues();
+            }
+            var canvas = GameObject.Find("Canvas (1)");
+            var canInteract = canvas.transform.Find("InteractBackground").gameObject;
+            if (Input.GetKey(KeyCode.E) && Time.timeScale == 1 && dialogueController.canStartDialogue)
+            {
+                Debug.Log("InteractionNPC");
+                dialogueController.ActivateDialoguePanel();
+                dialogueController.LockPlayerCamera();
+                canInteract.SetActive(false);
+                Time.timeScale = 0;
+                other.enabled = false;
             }
         }
     }

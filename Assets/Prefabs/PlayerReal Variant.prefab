@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1280684948306544769, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1124531029725635797}
     - target: {fileID: 2383150606487118343, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: Wtype
       value: 1
@@ -110,7 +114,13 @@ MonoBehaviour:
   isBlocking: 0
   healthController: {fileID: 2638247157040596496}
   batExposeThreshold: 3
+  FistExposeThreshold: 3
   resetCounterOnExpose: 1
+--- !u!1 &1124531029725635797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+  m_PrefabInstance: {fileID: 4815993893947777044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2638247157040596496 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7370482882594465284, guid: c8f31c6acc2078247995333c7520620f, type: 3}

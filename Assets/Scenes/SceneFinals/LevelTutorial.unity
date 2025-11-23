@@ -5266,7 +5266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5319437
+      value: 2.018871
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalScale.z
@@ -5278,11 +5278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.38
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.8949
+      value: 9.92
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf531a1989b4e0a47a3bacd5e024a1c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12453,6 +12453,37 @@ Transform:
   - {fileID: 1837857263}
   - {fileID: 607667520}
   m_Father: {fileID: 152879014}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &553061296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553061297}
+  m_Layer: 0
+  m_Name: StairUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &553061297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553061296}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.015699863, y: 2.4569998, z: -0.0093129305}
+  m_LocalScale: {x: 1, y: 1, z: 1.0347354}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181054171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &559487430
 PrefabInstance:
@@ -27593,8 +27624,8 @@ GameObject:
   - component: {fileID: 1181054171}
   - component: {fileID: 1181054172}
   m_Layer: 0
-  m_Name: Collider
-  m_TagString: Untagged
+  m_Name: StairCollider
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27611,7 +27642,8 @@ Transform:
   m_LocalPosition: {x: 5.276, y: 1.676, z: -0.741}
   m_LocalScale: {x: 1, y: 1, z: 0.96643066}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 553061297}
   m_Father: {fileID: 207247640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1181054172
@@ -33791,7 +33823,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.4450866
+          x: -0.44508657
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -36685,8 +36717,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.60742575
-          z: 0.32936934
+          y: -0.6074258
+          z: 0.32936937
           w: -0.4800159
     - Position:
         x: 5.59

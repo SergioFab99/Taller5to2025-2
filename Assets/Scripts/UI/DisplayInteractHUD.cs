@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class DisplayInteractHUD : MonoBehaviour
 {
     Coroutine coroutine;
@@ -8,12 +9,23 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] float timeBetween;
     [SerializeField] private PlayerCombat playerCombat;    
     [SerializeField] private Transform cam;
+    [SerializeField] private GameObject player;
+    [SerializeField] string thisScene;
+    private GameObject stairUp;
+    private OpenDoor openDoor;
+    Player playerTp;
+    private bool thisIsTutorial;
     void Start()
     {
+        thisScene = SceneManager.GetActiveScene().name;
         playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
         cam = playerCombat.playerCamera._camera.transform;
-       
+        playerTp = player.GetComponent<Player>();
         coroutine = StartCoroutine(Display(timeBetween));
+        if(thisScene == "LevelTutorial")
+        {
+            thisIsTutorial = true;
+        }
     }
 
     void Update()
@@ -38,6 +50,14 @@ public class DisplayInteractHUD : MonoBehaviour
                     Debug.Log("S� hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
+                    openDoor = hit.collider.gameObject.GetComponent<OpenDoor>();
+                    if(hit.collider.gameObject.name == "StairCollider")
+                    {
+                        var stairHit = hit.collider.gameObject;
+                        stairUp = stairHit.transform.Find("StairUp").gameObject;
+                    }                    
+                    ActiveInteracts();
+                    
                     yield return new WaitForSeconds(timeBetween);
                 }
                 else
@@ -53,5 +73,39 @@ public class DisplayInteractHUD : MonoBehaviour
             yield return new WaitForSeconds(0f);
         }
 
+    }
+    void ActiveInteracts()
+    {
+        if (Input.GetKey(KeyCode.E) && Time.timeScale == 1)
+        {
+            if (openDoor != null)
+            {
+                Doors();
+            }
+            if(stairUp != null)
+            {
+                Stairs();
+            }
+        }
+    }
+    void Stairs()
+    {
+        playerTp.Teleport(stairUp.transform.position);
+    }
+
+    void Doors()
+    {
+        if (thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
     }
 }
