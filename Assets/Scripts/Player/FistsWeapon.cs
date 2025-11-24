@@ -21,6 +21,8 @@ public class FistsWeapon : Weapon
   
     private PlayerCombat playerCombat;
     private float timeSinceLastPunch;
+    private int arm;
+    private bool isAttacking;
 
     public override void Initialize(PlayerCombat playerCombat)
     {
@@ -38,32 +40,32 @@ public class FistsWeapon : Weapon
         {
             case CombatHand.None:
                 currentHand = CombatHand.Right;
-                
-                var direc = new Vector3(0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc));
+                arm = 0;
+                /*var direc = new Vector3(0.15f, -0.1f, -0.05f);
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc)); */
 
                 break;
 
             case CombatHand.Right:
                 currentHand = CombatHand.Left;
-                
-                var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc2));
+                arm = 1;
+                /* var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
+                 StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc2)); */
                 break;
 
             case CombatHand.Left:
                 currentHand = CombatHand.Right;
-               
-                var direc3 = new Vector3(0.15f, -0.1f, -0.05f);
-                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc3));
+                arm = 0;
+               /* var direc3 = new Vector3(0.15f, -0.1f, -0.05f);
+                StartCoroutine(MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc3)); */
                 break;
         }
 
         timeSinceLastPunch = Time.time;
         StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
-
-
-        StartCoroutine(MakeAttack((settings as FistsWeaponSettings).AttackDelay));
+        isAttacking = true;
+        StartCoroutine(ResetIsAttacking((settings as FistsWeaponSettings).punchDuration));
+        //StartCoroutine(MakeAttack((settings as FistsWeaponSettings).AttackDelay));
         /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
          {
              var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
@@ -101,10 +103,27 @@ public class FistsWeapon : Weapon
         {
             currentHand = CombatHand.None;
         }
+
+        if(isAttacking)
+        {
+            
+            var pos = arm == 0 ? playerCombat.rightPunchPos.transform.position : playerCombat.leftPunchPos.transform.position;
+            var cols = Physics.OverlapSphere(pos, (settings as FistsWeaponSettings).radius);
+            foreach (Collider col in cols)
+            {
+                var hitInfo = new HitInfo(col, col.ClosestPoint(pos), (col.ClosestPoint(pos) - pos), (settings as FistsWeaponSettings).damague, Wtype, playerCombat);
+                PerformOnHit(hitInfo);
+            }
+        }
+        
     }
+
+
+
     [SerializeField] OpenDoor openDoor;
     public override void PerformOnHit(HitInfo hitInfo)
     {
+
         //mirar donde esta el componente
         var recv = hitInfo.col.GetComponent<CombatHitReceiver>() 
                 ?? hitInfo.col.GetComponentInParent<CombatHitReceiver>() 
@@ -113,6 +132,18 @@ public class FistsWeapon : Weapon
         if (recv != null)
         {
              recv.OnHit(hitInfo);
+            switch (currentHand)
+            {
+                case CombatHand.Right:
+                    var direc = new Vector3(0.15f, -0.1f, -0.05f);
+                    MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc);
+                    break;
+
+                case CombatHand.Left:
+                    var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
+                    MakeShake((settings as FistsWeaponSettings).shakeForce, (settings as FistsWeaponSettings).AttackDelay, direc2);
+                    break;
+            }
              return;
         }
         else if (recv == null)
@@ -152,5 +183,11 @@ public class FistsWeapon : Weapon
             Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box);
 
         }
+    }
+
+    IEnumerator ResetIsAttacking(float delay)
+    {
+        yield return new  WaitForSeconds (delay);
+        isAttacking = false;
     }
 }
