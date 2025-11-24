@@ -7,7 +7,7 @@ public class CameraManagerTutorial : MonoBehaviour
     [SerializeField] private CinemachineCamera cameraPlayer;
     [SerializeField] private CinemachineBrain cinemachineBrain;
      private PlayableDirector playableDirector;
-    [SerializeField] private bool cam1, cam2, cam3;
+    [SerializeField] private bool cam1, cam2, cam3, cam4;
 
     void Start()
     {
@@ -32,6 +32,10 @@ public class CameraManagerTutorial : MonoBehaviour
         {
             Invoke(nameof(StartCameraTour3), 0.3f);
         }
+        if (SetUpTutorial.camera4 && cam4)
+        {
+            Invoke(nameof(StartCameraTour4), 0.5f);
+        }
     }
     void StartCameraTour1()
     {
@@ -52,6 +56,14 @@ public class CameraManagerTutorial : MonoBehaviour
         Time.timeScale = 0;
     }
     void StartCameraTour3()
+    {
+        playableDirector.Play();
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+        cameraPlayer.Priority = 0;
+        cameraScene.Priority = 1;
+        Time.timeScale = 0;
+    }
+    void StartCameraTour4()
     {
         playableDirector.Play();
         cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
@@ -99,6 +111,17 @@ public class CameraManagerTutorial : MonoBehaviour
             Indications.indicationsLifeWithCamera = true;
             Indications.instance.ChangeToIndicationsOfLife();
         }
+        Destroy(this);
+    }
+    void ChangePriorityCamera4Tutorial()
+    {
+        SetUpTutorial.camera4 = false;
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.Cut;
+        cameraScene.Priority = 0;
+        cameraPlayer.Priority = 1;
+        Time.timeScale = 1;
+        /*Indications.instance.NextIndication();
+        Indications.instance.ActivateIndications();*/
         Destroy(this);
     }
 }

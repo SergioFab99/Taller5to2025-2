@@ -16,7 +16,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     }
     void Start()
     {
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("Canvas (1)");
         canInteract = canvas.transform.Find("InteractBackground").gameObject;
         canInteract.SetActive(false);
         if (SetUpTutorial.checkPoint3)
@@ -91,6 +91,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
                 ManagerEnemiesInTutorial.instance.CallSpawn();
                 unlockFinalEnemies = true;
             }
+            SetUpTutorial.camera4 = true;
         }
         
     }
@@ -118,7 +119,7 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     {
         if(openDoor != null)
         {
-            openDoor.CallStartOpen();
+            openDoor.CallStartPushOpen();
             openDoor.starMoveDoor = true;
         }        
         if (!SetUpTutorial.checkPoint1 && !SetUpTutorial.checkPoint2 && !SetUpTutorial.checkPoint3 && openDoor1)

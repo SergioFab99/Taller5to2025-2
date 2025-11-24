@@ -12,9 +12,10 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] string thisScene;
     private GameObject stairUp;
-    private OpenDoor openDoor;
+    [SerializeField] private OpenDoor openDoor;
     Player playerTp;
-    private bool thisIsTutorial;
+    private bool isHittingDoor, isHittingStair;
+    public static bool thisIsTutorial;
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name;
@@ -25,6 +26,11 @@ public class DisplayInteractHUD : MonoBehaviour
         if(thisScene == "LevelTutorial")
         {
             thisIsTutorial = true;
+            Debug.Log($"thisIsTutorial = {thisIsTutorial}");
+        }
+        else
+        {
+            thisIsTutorial = false;
         }
     }
 
@@ -33,8 +39,9 @@ public class DisplayInteractHUD : MonoBehaviour
         if(cam == null)
         {
             cam = playerCombat.playerCamera._camera.transform;
-
         }
+
+        ActiveInteracts();
     }
     IEnumerator Display(float timeBetween)
     {
@@ -45,28 +52,33 @@ public class DisplayInteractHUD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
-                    var canvas = GameObject.Find("Canvas");
+                    var canvas = GameObject.Find("Canvas (1)");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
                     Debug.Log("S� hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
                     openDoor = hit.collider.gameObject.GetComponent<OpenDoor>();
-                    if(hit.collider.gameObject.name == "StairCollider")
+                    if (hit.collider.gameObject.name == "StairCollider")
                     {
                         var stairHit = hit.collider.gameObject;
                         stairUp = stairHit.transform.Find("StairUp").gameObject;
-                    }                    
-                    ActiveInteracts();
-                    
+                        isHittingStair = true;
+                    }
+                    else isHittingStair = false;
+                    hit.collider.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
+                    isHittingDoor = door;
+
                     yield return new WaitForSeconds(timeBetween);
                 }
                 else
                 {
-                    var canvas = GameObject.Find("Canvas");
+                    var canvas = GameObject.Find("Canvas (1)");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
                     Debug.Log("No hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(false);
+                    isHittingDoor = false;
+                    isHittingStair = false;
                     yield return new WaitForSeconds(timeBetween);
                 }
             }
@@ -76,13 +88,13 @@ public class DisplayInteractHUD : MonoBehaviour
     }
     void ActiveInteracts()
     {
-        if (Input.GetKey(KeyCode.E) && Time.timeScale == 1)
+        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
         {
-            if (openDoor != null)
+            if (openDoor != null && isHittingDoor)
             {
                 Doors();
             }
-            if(stairUp != null)
+            if(stairUp != null && isHittingStair)
             {
                 Stairs();
             }
@@ -103,7 +115,22 @@ public class DisplayInteractHUD : MonoBehaviour
         {
             if (openDoor != null)
             {
-                openDoor.CallStartOpen();
+                openDoor.CallStartJustOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
+    }
+    public void DoorsAttacking()
+    {
+        if (thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartPushOpen();
                 openDoor.starMoveDoor = true;
             }
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1454369048329017314}
   - component: {fileID: 7918817002748752747}
   - component: {fileID: 6432074454182812462}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LeftDoorWood
   m_TagString: Interactuable
   m_Icon: {fileID: 0}
@@ -55,6 +55,8 @@ MonoBehaviour:
   thisIsRightDoor: 0
   pushedDoor: 0
   test: 0
+  isOpening: 0
+  openWhileOpened: 0
 --- !u!65 &6432074454182812462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,8 +76,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8660545, y: 5.7564774, z: 2.9858665}
-  m_Center: {x: -0.93302727, y: 0, z: 0.044828415}
+  m_Size: {x: 2.8660545, y: 5.7564774, z: 1}
+  m_Center: {x: -0.93302727, y: 0, z: 0}
 --- !u!1001 &4994203219081795464
 PrefabInstance:
   m_ObjectHideFlags: 0

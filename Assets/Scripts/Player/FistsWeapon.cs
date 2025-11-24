@@ -102,7 +102,7 @@ public class FistsWeapon : Weapon
             currentHand = CombatHand.None;
         }
     }
-
+    [SerializeField] OpenDoor openDoor;
     public override void PerformOnHit(HitInfo hitInfo)
     {
         //mirar donde esta el componente
@@ -115,11 +115,34 @@ public class FistsWeapon : Weapon
              recv.OnHit(hitInfo);
              return;
         }
+        else if (recv == null)
+        {
+            openDoor = hitInfo.col.GetComponent<OpenDoor>();
+            hitInfo.col.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
+            bool isHittingDoor = door;
+            if (isHittingDoor)
+            {
+                DoorsAttacking();
+            }
+        }
        
                 
     }
-
-
+    public void DoorsAttacking()
+    {
+        if (DisplayInteractHUD.thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartPushOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
+    }
 
     void OnDrawGizmos()
     {
