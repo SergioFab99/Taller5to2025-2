@@ -83,7 +83,7 @@ public class PlayerCamera : MonoBehaviour
         {
             _eulerAngles += new Vector3(-input.Look.y * Gain[0], input.Look.x * Gain[1]) * sensibility;
 
-            _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -70f, 70f);
+            _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -50f, 50f);
             transform.eulerAngles = _eulerAngles;
         }
         else if(_currentTarget != null)
