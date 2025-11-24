@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public enum CombatHand
 {
@@ -115,19 +114,16 @@ public class PlayerCombat : CombatBase
     private Vector2 _moveInput = Vector2.zero;
     public void SetMoveInput(Vector2 move) => _moveInput = move;
 
+    // References filled by Player.Start
     [HideInInspector] public PlayerCharacter playerCharacter;
      public PlayerCamera playerCamera;
+    // Dodge state
     private bool _isDodging = false;
+    // Counter window
     private bool _canCounter = false;
     
     private float _lastDodgeTime = 0f;
     [SerializeField] private float dodgeCooldown = 1.0f;
-    [SerializeField] private float dashDistance = 5f;
-    [SerializeField] private float dashDuration = 0.15f;
-    [SerializeField] private bool useCameraRelativeDash = true;
-    [SerializeField] private AnimationCurve dashCurve = new AnimationCurve(new Keyframe(0f,0f), new Keyframe(0.05f,1f), new Keyframe(1f,1f));
-    [SerializeField] private bool dashGrantsInvulnerability = true;
-    [SerializeField] private float postDashRecoveryTime = 0.05f;
     public void UpdateInput(CombatInput input)
     {
         requestAttack = input.BaseAttack;
@@ -198,6 +194,7 @@ public class PlayerCombat : CombatBase
             if (_state.playerActionState == PlayerActionState.Blocking)
                 _state.playerActionState = PlayerActionState.Normal;
         }
+        //cambiar el metodo de recivir el componente dependiendo de su lugar UWwU
         var recv = GetComponentInChildren<CombatHitReceiver>();
             if (recv != null) recv.isBlocking = false;
         
@@ -261,6 +258,7 @@ public class PlayerCombat : CombatBase
         _state.playerActionState = PlayerActionState.Blocking;
         Debug.Log("Blocking");
 
+        // LO MISMO que en el otro. cambiuar dependiendo de su lugar UwU
         var recv = GetComponentInChildren<CombatHitReceiver>();
         if (recv != null) recv.isBlocking = true;
     }
@@ -295,62 +293,163 @@ public class PlayerCombat : CombatBase
         }
 
     }
+    private Transform FindNearestTargetInFOV(float maxDist, float fovDegrees, LayerMask mask)
+    {
+        
+        int layerMask = (mask.value == 0) ? ~0 : mask.value;
+
+        Collider[] cols = Physics.OverlapSphere(transform.position, maxDist, layerMask, QueryTriggerInteraction.Ignore);
+
+        if (cols == null || cols.Length == 0)
+        {
+            return null;
+        }
+
+        
+        Vector3 forwardRef = cam != null ? cam.forward : transform.forward;
+
+        Transform best = null;
+        float bestDist = float.MaxValue;
+
+        for (int i = 0; i < cols.Length; i++)
+        {
+            var c = cols[i];
+            Vector3 dir = c.transform.position - transform.position;
+            dir.y = 0f;
+            float ang = dir.sqrMagnitude > 0.0001f ? Vector3.Angle(forwardRef, dir.normalized) : 0f;
+
+            if (dir.sqrMagnitude < 0.01f) continue;
+            if (ang <= fovDegrees * 0.5f)
+            {
+                float d = dir.sqrMagnitude;
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    best = c.transform;
+                }
+            }
+        }
+        return best;
+    }
+    
+
+
     void Dodge()
     {
+
         if (playerCharacter == null)
         {
             Debug.LogWarning("Dodge: no PlayerCharacter assigned to PlayerCombat.");
             return;
         }
-        if (Time.time - _lastDodgeTime < dodgeCooldown) return;
-        Vector3 dir;
-        if (useCameraRelativeDash && cam != null)
+        if (Time.time - _lastDodgeTime < dodgeCooldown)
         {
-            Vector3 camForward = cam.forward; camForward.y = 0f; camForward.Normalize();
-            Vector3 camRight = cam.right; camRight.y = 0f; camRight.Normalize();
-            dir = (camRight * _moveInput.x + camForward * _moveInput.y);
+            return;
         }
-        else
+
+
+        float dodgeRange = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDistance : 3f;
+        float fov = (DefaultBlockDodgeCounterSettings as DefaultBlockDodgeCounterSettings) != null && false ? 90f : 120f;
+        Transform target = FindNearestTargetInFOV(dodgeRange, fov, EnemyMask);
+
+        // If the player is explicitly moving, perform a movement-direction dash instead of requiring a target.
+        bool hasMoveInput = _moveInput.sqrMagnitude > 0.01f;
+        if (!hasMoveInput && target == null)
         {
-            dir = new Vector3(_moveInput.x, 0f, _moveInput.y);
+            // No movement input and no nearby target — nothing to dodge towards
+            return;
         }
-        if (dir.sqrMagnitude < 0.01f) dir = playerCharacter.transform.forward;
-        dir.Normalize();
+
+        
+        // Compute duration/range from settings
+        float durationDbg = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDuration : 0.2f;
+        float dodgeDistanceDbg = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDistance : 3f;
+    
 
         _state.isBlocking = false;
         if (_state.playerActionState == PlayerActionState.Blocking)
             _state.playerActionState = PlayerActionState.Normal;
 
-        _isDodging = true;
-        _lastDodgeTime = Time.time;
-        if (dashGrantsInvulnerability) _canCounter = false;
-        StartCoroutine(DashCoroutine(dir));
-    }
 
-    private IEnumerator DashCoroutine(Vector3 dir)
-    {
-        float elapsed = 0f;
-        Vector3 startPos = playerCharacter.transform.position;
-        Rigidbody rb = playerCharacter.GetComponent<Rigidbody>();
-        while (elapsed < dashDuration)
+        float duration = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.dodgeDuration : 0.2f;
+        float range = dodgeRange;
+        _isDodging = true;
+        _state.playerActionState = PlayerActionState.Dodging;
+        _lastDodgeTime = Time.time;
+
+        // If we have significant movement input, do a camera-relative directional dash using that input
+        if (hasMoveInput)
         {
-            float t = Mathf.Clamp01(elapsed / Mathf.Max(0.0001f, dashDuration));
-            float curveVal = dashCurve != null ? dashCurve.Evaluate(t) : t;
-            float currentDist = dashDistance * curveVal;
-            Vector3 targetPos = startPos + dir * currentDist;
-            if (rb != null && rb.isKinematic == false)
+            Vector3 moveDirWorld = Vector3.zero;
+            if (cam != null)
             {
-                rb.MovePosition(targetPos);
+                // camera-relative input: x => right, y => forward
+                moveDirWorld = cam.rotation * new Vector3(_moveInput.x, 0f, _moveInput.y);
             }
             else
             {
-                playerCharacter.transform.position = targetPos;
+                moveDirWorld = new Vector3(_moveInput.x, 0f, _moveInput.y);
             }
-            elapsed += Time.deltaTime;
-            yield return null;
+            moveDirWorld.y = 0f;
+            if (moveDirWorld.sqrMagnitude < 0.0001f)
+                moveDirWorld = transform.forward;
+
+            // Start the new directional dash on the PlayerCharacter
+            _isDodging = true;
+            _lastDodgeTime = Time.time;
+
+            playerCharacter.StartCoroutine(playerCharacter.PerformDirectionalDashCoroutine(moveDirWorld, range, duration, playerCamera, () =>
+            {
+                if (playerCamera != null)
+                {
+                    playerCamera.SetLookLocked(false);
+                    playerCamera.SetLookLockTarget(null);
+                }
+                _isDodging = false;
+                _state.playerActionState = PlayerActionState.Normal;
+            }));
+
+            float counterWindowAlt = DefaultBlockDodgeCounterSettings != null ? DefaultBlockDodgeCounterSettings.counterWindow : 0.5f;
+            StartCoroutine(OpenCounterWindow(counterWindowAlt));
+
+            return;
         }
-        yield return new WaitForSeconds(postDashRecoveryTime);
-        _isDodging = false;
+
+        Vector3 lookDir = target.position - playerCharacter.transform.position;
+        lookDir.y = 0f;
+        if (lookDir.sqrMagnitude > 0.0001f)
+        {
+            playerCharacter.transform.rotation = Quaternion.LookRotation(lookDir.normalized, Vector3.up);
+        }
+
+        
+        int directionOverride = 0;
+        if (Mathf.Abs(_moveInput.x) > 0.15f)
+        {
+            directionOverride = _moveInput.x > 0f ? 1 : -1;
+        }
+
+        if (playerCharacter != null)
+        {
+            if (playerCamera != null)
+            {
+                playerCamera.SetLookLocked(true);
+                playerCamera.SetLookLockTarget(target);
+            }
+
+            playerCharacter.StartCoroutine(playerCharacter.PerformArcMoveCoroutine(target, range, duration, playerCamera, () =>
+        {
+            if (playerCamera != null)
+            {
+                playerCamera.SetLookLocked(false);
+                playerCamera.SetLookLockTarget(null);
+            }
+            _isDodging = false;
+            _state.playerActionState = PlayerActionState.Normal;
+        }, directionOverride));
+        
+        // Counter window already started for the arc-based dodge
+
     }
 
     private IEnumerator EndDodgeAfter(float duration)

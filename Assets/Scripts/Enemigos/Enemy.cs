@@ -7,7 +7,6 @@ public struct EnemyInput
 {
     public Vector3 Direction;
     public Vector3 Move;
-    //public CrouchInput Crouch;
     public bool Jump;
 }
 
@@ -15,23 +14,16 @@ public struct EnemyInput
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyCharacter character;
-    //[SerializeField] EnemyCharacterState _characterState;
-    //[SerializeField] EnemyCharacterState _lastCharacterState;
     [SerializeField] HealthController healthController;
     [SerializeField] EnemyAnimations _animations;
     [SerializeField] EnemyStateHandler _stateHandler;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EnemySettingsList EnemySettings;
-    //[SerializeField] CombatManager
 
 
 
     public Transform testTarget;
 
-
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _stateHandler.Initialize(EnemySettings, character.transform, character, agent);
@@ -54,74 +46,6 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //character.UpdateState(_stateHandler.GetCurrentState());
-        //var enemyInput = new EnemyInput();
-
-        //switch (_stateHandler.GetBehaviourState())
-        //{
-        //    case EnemyBehaviourState.Default:
-        //        {
-        //            float distance = Vector3.Distance(GetTarget(), character.transform.position);
-        //            Vector3 direction = (GetTarget() - character.transform.position).normalized;
-
-        //            if (distance > EnemySettings.AISettings.stopingDistance)
-        //            {
-        //                enemyInput = new EnemyInput
-        //                {
-        //                    Direction = direction,
-        //                    Move = direction
-        //                };
-        //            }
-        //            else
-        //            {
-        //                enemyInput = new EnemyInput
-        //                {
-        //                    Direction = direction,
-        //                    Move = Vector3.zero
-        //                };
-        //            }
-
-        //            character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
-        //            break;
-        //        }
-
-        //    case EnemyBehaviourState.Combat:
-        //        {
-        //            float distance = Vector3.Distance(GetTarget(), character.transform.position);
-        //            Vector3 direction = (GetTarget() - character.transform.position).normalized;
-        //            if (distance > EnemySettings.AISettings.stopingDistance)
-        //            {
-        //                enemyInput = new EnemyInput
-        //                {
-        //                    Direction = direction,
-        //                    Move = direction
-        //                };
-        //            }
-        //            else
-        //            {
-        //                enemyInput = new EnemyInput
-        //                {
-        //                    Direction = direction,
-        //                    Move = Vector3.zero
-        //                };
-        //            }
-
-        //            character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
-        //            break;
-        //        }
-
-        //    case EnemyBehaviourState.Dead:
-        //        enemyInput = new EnemyInput
-        //        {
-        //            Direction = Vector3.zero,
-        //            Move = Vector3.zero
-        //        };
-        //        character.UpdateInputs(enemyInput, _stateHandler.GetBehaviourState());
-        //        break;
-        //}
-
-        //_animations.AnimUpdate(Time.fixedDeltaTime, character);
-
         character.UpdateState(_stateHandler.GetCurrentState());
 
         var enemyInput = new EnemyInput();
@@ -151,7 +75,7 @@ public class Enemy : MonoBehaviour
         {
             var corners = agent.path.corners;
             if (corners != null && corners.Length > 1)
-                return corners[1]; // next corner
+                return corners[1];
             if (corners != null && corners.Length == 1)
                 return corners[0];
         }
@@ -174,6 +98,4 @@ public class Enemy : MonoBehaviour
     {
         return _stateHandler.GetCurrentState();
     }
-
-
 }

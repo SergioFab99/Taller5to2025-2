@@ -4,18 +4,18 @@ using System.Collections.Generic;
 public class ZoneMusicChanger : MonoBehaviour
 {
     [Header("Zone Settings")]
-    [Tooltip("Dimensions of the detection zone (Width, Height, Depth)")]
     public Vector3 zoneSize = new Vector3(5f, 5f, 5f);
 
     [Header("References")]
-    [Tooltip("The player transform to track")]
     public Transform player;
 
-    [Tooltip("List of scripts to enable when inside the zone, and disable when outside")]
-    public List<MonoBehaviour> scriptsToToggle = new List<MonoBehaviour>();
+    [Header("Scripts que se ACTIVAN al entrar")]
+    public List<MonoBehaviour> scriptsToEnableOnEnter = new List<MonoBehaviour>();
+
+    [Header("Scripts que se DESACTIVAN al entrar")]
+    public List<MonoBehaviour> scriptsToDisableOnEnter = new List<MonoBehaviour>();
 
     [Header("Debug")]
-    [Tooltip("Color of the zone gizmo")]
     public Color gizmoColor = new Color(0, 1, 0, 0.4f);
 
     private bool wasInside = false;
@@ -32,19 +32,31 @@ public class ZoneMusicChanger : MonoBehaviour
 
         if (isInside != wasInside)
         {
-            ToggleScripts(isInside);
+            HandleZoneChange(isInside);
             wasInside = isInside;
         }
     }
 
-    void ToggleScripts(bool enable)
+    void HandleZoneChange(bool isInside)
     {
-        foreach (var script in scriptsToToggle)
+        if (isInside)
+        {
+            SetScriptsState(scriptsToEnableOnEnter, true);
+            SetScriptsState(scriptsToDisableOnEnter, false);
+        }
+        else
+        {
+            SetScriptsState(scriptsToEnableOnEnter, false);
+            SetScriptsState(scriptsToDisableOnEnter, true);
+        }
+    }
+
+    void SetScriptsState(List<MonoBehaviour> list, bool state)
+    {
+        foreach (var script in list)
         {
             if (script != null)
-            {
-                script.enabled = enable;
-            }
+                script.enabled = state;
         }
     }
 

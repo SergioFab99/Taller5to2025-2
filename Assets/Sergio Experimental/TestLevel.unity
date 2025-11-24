@@ -1553,18 +1553,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1094771324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e330dbee9480244a9b267bc58cd6dc8, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e6a1fb829766545bbce6f643183c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  policeSirensInterior: {fileID: 0}
-  carNoisesInterior: {fileID: 0}
-  rainInterior: {fileID: 0}
-  policeSourceInterior: {fileID: 0}
-  carSourceInterior: {fileID: 0}
-  rainSourceInterior: {fileID: 0}
-  volume1Interior: 1
-  volume2Interior: 1
-  volume3Interior: 1
+  audio1: {fileID: 0}
+  audio2: {fileID: 0}
+  audio3: {fileID: 0}
 --- !u!1 &1113508474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,15 +1853,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452460432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20f76c7c14e991144a3ed95b22ad1207, type: 3}
+  m_Script: {fileID: 11500000, guid: 24b9876cbca8810409d97a612ece160a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  policeSirens: {fileID: 0}
-  carNoises: {fileID: 0}
-  rain: {fileID: 0}
-  policeSource: {fileID: 0}
-  carSource: {fileID: 0}
-  rainSource: {fileID: 0}
+  clip1: {fileID: 8300000, guid: 336fda52c85535a408b1f2818a7ba1cb, type: 3}
+  clip2: {fileID: 8300000, guid: c7019464da3f3f2459fa724ae9ac61c2, type: 3}
+  clip3: {fileID: 8300000, guid: 8c53cb303c5ffa5409fda96d58477bdd, type: 3}
   volume1: 1
   volume2: 1
   volume3: 1
@@ -2630,10 +2621,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneSize: {x: 10, y: 10, z: 10}
-  player: {fileID: 2264850215554196655}
-  scriptsToToggle:
-  - {fileID: 1452460434}
+  player: {fileID: 3540751824963089178}
+  scriptsToEnableOnEnter:
   - {fileID: 1094771326}
+  scriptsToDisableOnEnter:
+  - {fileID: 1452460434}
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2041840729
 GameObject:
@@ -3050,7 +3042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 2264850215554196655}
-  EnemyBehaviourState: 0
+  EnemyBehaviourState: 1
   detectionRange: 10
   attackRange: 5
   moveSpeed: 3
@@ -5684,7 +5676,7 @@ Transform:
   m_GameObject: {fileID: 2233848875089169471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.509, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8713,7 +8705,36 @@ MonoBehaviour:
   DefaultBlockDodgeCounterSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   playerCharacter: {fileID: 0}
   playerCamera: {fileID: 2248956046382204890}
-  dodgeCooldown: 1.7
+  dodgeCooldown: 2
+  dashDistance: 5
+  dashDuration: 1
+  useCameraRelativeDash: 1
+  dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dashGrantsInvulnerability: 1
+  postDashRecoveryTime: 0.05
 --- !u!1 &6948901944510952817
 GameObject:
   m_ObjectHideFlags: 0
@@ -10295,7 +10316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3540751824963089178}
   - component: {fileID: 3956310478578801340}
-  - component: {fileID: 8845986304571927543}
   - component: {fileID: 2515595844250873069}
   m_Layer: 0
   m_Name: PlayerReal Variant Variant
@@ -10304,22 +10324,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8845986304571927543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8845986304571927542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e70e454b4fe6740b6bfc62981ba6e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 0}
-  detectionRadius: 5
-  fadeSpeed: 2
-  player: {fileID: 0}
 --- !u!1 &8852518578109766732
 GameObject:
   m_ObjectHideFlags: 0

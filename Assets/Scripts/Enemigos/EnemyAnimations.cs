@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 public class EnemyAnimations : MonoBehaviour
 {
     private enum GaitState
@@ -10,11 +11,7 @@ public class EnemyAnimations : MonoBehaviour
         Sprint
     }
 
-  
-
     #region Animation Variable Hashes
-
-   
 
     private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
     private readonly int _currentGaitHash = Animator.StringToHash("CurrentGait");
@@ -98,7 +95,6 @@ public class EnemyAnimations : MonoBehaviour
         _animator.SetBool(_isGroundedHash, _isGrounded);
     }
 
-    // Update is called once per frame
     public void AnimUpdate(float deltaTime, EnemyCharacter character)
     {
         UpdateProperties(character);
@@ -142,7 +138,6 @@ public class EnemyAnimations : MonoBehaviour
         _animator.SetFloat(_fallingDurationHash, fallDuration);
 
     }
-
     public void CheckIsStopped(EnemyCharacter character)
     {
        

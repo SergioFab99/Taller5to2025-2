@@ -466,6 +466,60 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     }
 
 
+    // New directional dash: moves the player along a given horizontal direction for the given distance and duration.
+    // This is used for a player-aimed dash (e.g. SHIFT + movement) instead of the arc-dodge around a target.
+    public IEnumerator PerformDirectionalDashCoroutine(Vector3 direction, float distance, float duration, PlayerCamera cameraTransform, System.Action onComplete)
+    {
+        // Ensure only horizontal movement
+        Vector3 startPos = transform.position;
+        startPos.y = transform.position.y;
+
+        Vector3 dirHorizontal = new Vector3(direction.x, 0f, direction.z);
+        if (dirHorizontal.sqrMagnitude < 0.0001f)
+        {
+            onComplete?.Invoke();
+            yield break;
+        }
+
+        Vector3 normDir = dirHorizontal.normalized;
+        Vector3 targetPos = startPos + normDir * distance;
+        targetPos.y = startPos.y;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float dt = Mathf.Max(Time.deltaTime, 0.0001f);
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // simple ease (smoothstep)
+            float easeT = t * t * (3f - 2f * t);
+            Vector3 desiredPos = Vector3.LerpUnclamped(startPos, targetPos, easeT);
+
+            Vector3 currentMotorPos = motor.TransientPosition;
+            Vector3 desiredVel = (desiredPos - currentMotorPos) / dt;
+
+            motor.BaseVelocity = desiredVel;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        motor.BaseVelocity = Vector3.zero;
+        SetPosition(targetPos, killvelocity: true);
+
+        // Face the dash direction
+        Vector3 lookDir = normDir;
+        lookDir.y = 0f;
+        if (lookDir.sqrMagnitude > 0.0001f)
+        {
+            transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+
+        onComplete?.Invoke();
+    }
+
+
 
     public void SetPosition(Vector3 position, bool killvelocity = true)
     {
