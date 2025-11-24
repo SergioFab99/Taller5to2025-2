@@ -114,6 +114,7 @@ public class ActualDialogue : MonoBehaviour
         dialoguesController.npc2 = false;
         dialoguesController.npc3 = false;
         dialoguesController.npc4 = false;
+        dialoguesController.canStartDialogue = false;
         dialoguesController.UnLockPlayerCamera();
     }
     void ActivateOptions()

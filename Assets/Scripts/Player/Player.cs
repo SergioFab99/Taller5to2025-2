@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         var cameraInput = new CameraInput
         {
             Look = input.Look.ReadValue<Vector2>(),
-            SideStep = input.Dash.WasPressedThisFrame() &&playerCharacter._canSideStep
+            SideStep = input.Dash.WasPressedThisFrame() && playerCharacter._canSideStep && playerCamera.CheckIsViewTarget(playerCharacter.transform)
         };
         playerCamera.UpdateRotation(cameraInput);
 
@@ -118,7 +118,6 @@ public class Player : MonoBehaviour
             Dodge = input.Dash.WasPressedThisFrame()
         };
         playerCombat.UpdateInput(combatInput);
-        playerCombat.CombatTickUpdate(Time.deltaTime);
         playerCharacter.setState(combatInput.Blocking);
 
         if (healthController.health <= healthController.maxHealth / 4)
@@ -137,6 +136,7 @@ public class Player : MonoBehaviour
         }
 #endif
 
+        playerCombat.CombatTickUpdate(Time.deltaTime);
     }
 
     private void LateUpdate()

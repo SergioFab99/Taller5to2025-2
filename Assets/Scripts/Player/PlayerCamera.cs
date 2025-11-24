@@ -73,6 +73,7 @@ public class PlayerCamera : MonoBehaviour
 
         if (_lookLocked) return;
         _requestedSideStep = input.SideStep;
+
         if(_requestedSideStep)
         {
             AllowCameraInput = false;
@@ -147,9 +148,9 @@ public class PlayerCamera : MonoBehaviour
 
     public  bool SetTargetOnView(Transform character)
     {
-        Ray ray = new Ray(character.position, character.forward);
+        Ray ray = new Ray((character.position + character.forward * -2), character.forward);
 
-        if(Physics.SphereCast(ray,1f, out RaycastHit hit, 5f, mask) && hit.collider.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Enemy"))
+        if(Physics.SphereCast(ray,2f, out RaycastHit hit, 5f, mask) && hit.collider.gameObject.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Enemy"))
         {
             _currentTarget = hit.transform;
             return true;

@@ -62,21 +62,36 @@ public class FistsWeapon : Weapon
         timeSinceLastPunch = Time.time;
         StartCoroutine(playerCombat.ResetCanAttack((settings as FistsWeaponSettings).timeBetweenAttacks));
 
+
+        StartCoroutine(MakeAttack((settings as FistsWeaponSettings).AttackDelay));
         /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
          {
              var hitInfo = new HitInfo(hit.collider, hit.point, hit.normal, (settings as FistsWeaponSettings).damague);
              StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay,hitInfo));
          } */
 
+        
+
+
+    }
+
+    public IEnumerator MakeAttack(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DetectAttackandPerform();
+
+    }
+
+    public void DetectAttackandPerform()
+    {
         Collider[] cols = Physics.OverlapBox(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box, playerCombat.cam.transform.rotation, hitMask);
         foreach (Collider col in cols)
         {
             Vector3 fist = ((currentHand == CombatHand.None) || (currentHand == CombatHand.Right)) ? playerCombat.rightPunchPos.transform.position : playerCombat.leftPunchPos.transform.position;
-            var hitInfo = new HitInfo(col, col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague, Wtype,playerCombat);
-            StartCoroutine(PerfomDelay((settings as FistsWeaponSettings).AttackDelay, hitInfo));
+            var hitInfo = new HitInfo(col, col.ClosestPoint(fist), (col.ClosestPoint(fist) - fist), (settings as FistsWeaponSettings).damague, Wtype, playerCombat);
+            PerformOnHit(hitInfo);
+            
         }
-
-
     }
 
   
@@ -87,7 +102,7 @@ public class FistsWeapon : Weapon
             currentHand = CombatHand.None;
         }
     }
-
+    [SerializeField] OpenDoor openDoor;
     public override void PerformOnHit(HitInfo hitInfo)
     {
         //mirar donde esta el componente
@@ -99,11 +114,35 @@ public class FistsWeapon : Weapon
         {
              recv.OnHit(hitInfo);
              return;
-        }              
+        }
+        else if (recv == null)
+        {
+            openDoor = hitInfo.col.GetComponent<OpenDoor>();
+            hitInfo.col.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
+            bool isHittingDoor = door;
+            if (isHittingDoor)
+            {
+                DoorsAttacking();
+            }
+        }
+       
                 
     }
-
-
+    public void DoorsAttacking()
+    {
+        if (DisplayInteractHUD.thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartPushOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
+    }
 
     void OnDrawGizmos()
     {
