@@ -140,8 +140,7 @@ public class PlayerCombat : CombatBase
     
     public void Update()
     {
-       
-        
+           
     }
 
     public bool CheckIfCanAttack()
