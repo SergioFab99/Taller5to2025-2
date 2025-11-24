@@ -5,6 +5,11 @@ public class NPCTrigger : MonoBehaviour
     [SerializeField] bool npc1, npc2, npc3, npc4;
     [SerializeField] DialogueController dialogueController;
     [SerializeField] GameObject spawnPointNpc2, spawnPointNpc3, spawnPointNpc4, prefabEnemy;
+    [SerializeField] BoxCollider boxCollider;
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -15,7 +20,7 @@ public class NPCTrigger : MonoBehaviour
                 dialogueController.npc2 = false;
                 dialogueController.npc3 = false;
                 dialogueController.npc4 = false;
-                dialogueController.NPC1Dialogues();
+                dialogueController.NPC1Dialogues();                
             }
             if (npc2)
             {
@@ -41,9 +46,26 @@ public class NPCTrigger : MonoBehaviour
                 dialogueController.npc4 = true;
                 dialogueController.NPC4Dialogues();
             }
+            
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            var canvas = GameObject.Find("Canvas (1)");
+            var canInteract = canvas.transform.Find("InteractBackground").gameObject;
+            if (Input.GetKey(KeyCode.E) && Time.timeScale == 1 && dialogueController.canStartDialogue)
+            {
+                Debug.Log("InteractionNPC");
+                dialogueController.ActivateDialoguePanel();
+                dialogueController.LockPlayerCamera();
+                canInteract.SetActive(false);
+                Time.timeScale = 0;
+                boxCollider.enabled = false;
+            }
+        }
+    }
     public void CombatOption()
     {
         Debug.Log("CombatWithNPC");

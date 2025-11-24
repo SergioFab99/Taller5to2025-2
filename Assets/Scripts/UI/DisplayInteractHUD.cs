@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class DisplayInteractHUD : MonoBehaviour
 {
     Coroutine coroutine;
@@ -8,12 +9,29 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] float timeBetween;
     [SerializeField] private PlayerCombat playerCombat;    
     [SerializeField] private Transform cam;
+    [SerializeField] private GameObject player;
+    [SerializeField] string thisScene;
+    private GameObject stairUp;
+    [SerializeField] private OpenDoor openDoor;
+    Player playerTp;
+    private bool isHittingDoor, isHittingStair;
+    public static bool thisIsTutorial;
     void Start()
     {
+        thisScene = SceneManager.GetActiveScene().name;
         playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
         cam = playerCombat.playerCamera._camera.transform;
-       
+        playerTp = player.GetComponent<Player>();
         coroutine = StartCoroutine(Display(timeBetween));
+        if(thisScene == "LevelTutorial")
+        {
+            thisIsTutorial = true;
+            Debug.Log($"thisIsTutorial = {thisIsTutorial}");
+        }
+        else
+        {
+            thisIsTutorial = false;
+        }
     }
 
     void Update()
@@ -21,8 +39,9 @@ public class DisplayInteractHUD : MonoBehaviour
         if(cam == null)
         {
             cam = playerCombat.playerCamera._camera.transform;
-
         }
+
+        ActiveInteracts();
     }
     IEnumerator Display(float timeBetween)
     {
@@ -33,25 +52,87 @@ public class DisplayInteractHUD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
-                    var canvas = GameObject.Find("Canvas");
+                    var canvas = GameObject.Find("Canvas (1)");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
                     Debug.Log("S� hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
+                    openDoor = hit.collider.gameObject.GetComponent<OpenDoor>();
+                    if (hit.collider.gameObject.name == "StairCollider")
+                    {
+                        var stairHit = hit.collider.gameObject;
+                        stairUp = stairHit.transform.Find("StairUp").gameObject;
+                        isHittingStair = true;
+                    }
+                    else isHittingStair = false;
+                    hit.collider.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
+                    isHittingDoor = door;
+
                     yield return new WaitForSeconds(timeBetween);
                 }
                 else
                 {
-                    var canvas = GameObject.Find("Canvas");
+                    var canvas = GameObject.Find("Canvas (1)");
                     var canInteract = canvas.transform.Find("InteractBackground").gameObject;
                     Debug.Log("No hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(false);
+                    isHittingDoor = false;
+                    isHittingStair = false;
                     yield return new WaitForSeconds(timeBetween);
                 }
             }
             yield return new WaitForSeconds(0f);
         }
 
+    }
+    void ActiveInteracts()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
+        {
+            if (openDoor != null && isHittingDoor)
+            {
+                Doors();
+            }
+            if(stairUp != null && isHittingStair)
+            {
+                Stairs();
+            }
+        }
+    }
+    void Stairs()
+    {
+        playerTp.Teleport(stairUp.transform.position);
+    }
+
+    void Doors()
+    {
+        if (thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartJustOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
+    }
+    public void DoorsAttacking()
+    {
+        if (thisIsTutorial)
+        {
+            return;
+        }
+        else
+        {
+            if (openDoor != null)
+            {
+                openDoor.CallStartPushOpen();
+                openDoor.starMoveDoor = true;
+            }
+        }
     }
 }

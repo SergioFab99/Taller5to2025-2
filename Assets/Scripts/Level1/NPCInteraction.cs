@@ -34,23 +34,7 @@ public class NPCInteraction : MonoBehaviour
             }*/
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Npc"))
-        {
-            var canvas = GameObject.Find("Canvas (1)");
-            var canInteract = canvas.transform.Find("InteractBackground").gameObject;
-            if (Input.GetKey(KeyCode.E) && Time.timeScale == 1)
-            {
-                Debug.Log("InteractionNPC");
-                dialogueController.ActivateDialoguePanel();
-                dialogueController.LockPlayerCamera();
-                canInteract.SetActive(false);
-                Time.timeScale = 0;
-                other.enabled = false;
-            }
-        }
-    }
+    
     private void OnTriggerExit(Collider other)
     {
          if (other.gameObject.CompareTag("Npc"))
