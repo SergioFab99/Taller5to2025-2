@@ -13,15 +13,18 @@ public class AmbientNoiseAttempt : MonoBehaviour
     [Range(0f, 1f)][SerializeField] private float volume1 = 1f;
     [Range(0f, 1f)][SerializeField] private float volume2 = 1f;
     [Range(0f, 1f)][SerializeField] private float volume3 = 1f;
+
     void Awake()
     {
-        policeSource.clip = carNoises;
+        
+        policeSource.clip = policeSirens;
         policeSource.loop = true;
         policeSource.playOnAwake = false;
         policeSource.volume = volume1;
         policeSource.spatialBlend = 0f;
         policeSource.Play();
 
+        
         carSource.clip = carNoises;
         carSource.loop = true;
         carSource.playOnAwake = false;
@@ -29,12 +32,12 @@ public class AmbientNoiseAttempt : MonoBehaviour
         carSource.spatialBlend = 0f;
         carSource.Play();
 
-        rainSource.clip = carNoises;
+
+        rainSource.clip = rain;
         rainSource.loop = true;
         rainSource.playOnAwake = false;
         rainSource.volume = volume3;
         rainSource.spatialBlend = 0f;
         rainSource.Play();
     }
-
 }

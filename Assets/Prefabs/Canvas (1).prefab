@@ -4224,6 +4224,7 @@ GameObject:
   - component: {fileID: 6035023184360926631}
   - component: {fileID: 1336475959478639534}
   - component: {fileID: 53206150104495319}
+  - component: {fileID: 5372024095210893003}
   m_Layer: 0
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -4378,6 +4379,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
   intuitionTMP: {fileID: 989333788459346185}
+--- !u!114 &5372024095210893003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441679682004620102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f76c7c14e991144a3ed95b22ad1207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  policeSirens: {fileID: 0}
+  carNoises: {fileID: 0}
+  rain: {fileID: 0}
+  policeSource: {fileID: 0}
+  carSource: {fileID: 0}
+  rainSource: {fileID: 0}
+  volume1: 1
+  volume2: 1
+  volume3: 1
 --- !u!1 &3709319439944722165
 GameObject:
   m_ObjectHideFlags: 0

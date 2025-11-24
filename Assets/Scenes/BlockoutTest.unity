@@ -10017,14 +10017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136f76dfc6c5ef4468799abc497f40d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPerEnemy: 500
-  enemyTag: Enemy
-  scoreCanvas: {fileID: 539091825}
-  scoreText: {fileID: 981428736}
-  enemiesToDefeat: 11
-  rankPanel: {fileID: 2041840729}
-  rankPanelTitle: {fileID: 721391804}
-  rankPanelDetails: {fileID: 1602385542}
 --- !u!4 &1163644012
 Transform:
   m_ObjectHideFlags: 0
