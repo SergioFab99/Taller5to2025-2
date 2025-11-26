@@ -13857,7 +13857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  maxTimer: 5
+  maxTimer: 10
   player: {fileID: 0}
   spawnfounds: []
   patrolFounds: []
@@ -13877,7 +13877,7 @@ MonoBehaviour:
   spawnNear1: {fileID: 0}
   spawnNear2: {fileID: 0}
   spawnNear3: {fileID: 0}
-  enemiesMaxCapacity: 18
+  enemiesMaxCapacity: 15
 --- !u!4 &629068589
 Transform:
   m_ObjectHideFlags: 0
