@@ -9,6 +9,8 @@ public class EnemyStateHandler : MonoBehaviour
 {
     [Header("Target / Character Refs")]
     public Transform Target;
+    public Transform TargetPlayer;
+    public Transform TargetPatrol;
     private Transform Character;
 
     [Header("Behaviour / Settings")]
@@ -96,6 +98,10 @@ public class EnemyStateHandler : MonoBehaviour
         {
             Target = GameObject.FindWithTag("Player").transform;
         }
+        if (TargetPlayer == null)
+        {
+            TargetPlayer = GameObject.FindWithTag("Player").transform;
+        }
     }
 
     public void CurrentStateUpdate()
@@ -164,7 +170,7 @@ public class EnemyStateHandler : MonoBehaviour
     // ------------------- VISIBILITY & RANGE CHECKS -------------------
     public bool CheckTargetOnView(Transform target = null)
     {
-        if (target == null) target = Target;
+        if (target == null) target = TargetPlayer;
         if (target == null) return false;
         return Vector3.Distance(Character.position, target.position)
                <= enemySettings.AISettings.detectionDistance;
@@ -172,7 +178,7 @@ public class EnemyStateHandler : MonoBehaviour
 
     public bool CheckTargetOnAttackRange(Transform target = null)
     {
-        if (target == null) target = Target;
+        if (target == null) target = TargetPlayer;
         if (target == null) return false;
         return Vector3.Distance(Character.position, target.position)
                <= enemySettings.AISettings.attackRange;
@@ -231,7 +237,7 @@ public class EnemyStateHandler : MonoBehaviour
     {
         bool useKCC =
             newState == attack || newState == recover ||
-            newState == stunned || newState == block || newState == exposed || newState == idle;
+            newState == stunned || newState == block || newState == exposed;
 
         if (useKCC)
         {

@@ -15,7 +15,7 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] private OpenDoor openDoor;
     Player playerTp;
     private bool isHittingDoor, isHittingStair;
-    public static bool thisIsTutorial;
+    public static bool thisIsTutorial, thisIsLevel1;
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name;
@@ -27,6 +27,11 @@ public class DisplayInteractHUD : MonoBehaviour
         {
             thisIsTutorial = true;
             Debug.Log($"thisIsTutorial = {thisIsTutorial}");
+        }
+        else if(thisScene == "Level1B")
+        {
+            thisIsLevel1 = true;
+            thisIsTutorial = false;
         }
         else
         {
