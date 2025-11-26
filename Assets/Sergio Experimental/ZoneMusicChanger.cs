@@ -1,5 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class ZoneMusicChanger : MonoBehaviour
 {
@@ -9,20 +11,27 @@ public class ZoneMusicChanger : MonoBehaviour
     [Header("References")]
     public Transform player;
 
-    [Header("Scripts que se ACTIVAN al entrar")]
-    public List<MonoBehaviour> scriptsToEnableOnEnter = new List<MonoBehaviour>();
-
-    [Header("Scripts que se DESACTIVAN al entrar")]
-    public List<MonoBehaviour> scriptsToDisableOnEnter = new List<MonoBehaviour>();
+    [Header("Audio")]
+    public AudioSource audioSource; 
+    public AudioClip[] enterClips = new AudioClip[3];  
+    public AudioClip[] exitClips = new AudioClip[3];    
 
     [Header("Debug")]
     public Color gizmoColor = new Color(0, 1, 0, 0.4f);
 
     private bool wasInside = false;
 
+    void Start()
+    {
+    }
+
     void Update()
     {
-        if (player == null) return;
+        if (player == null)
+        {
+            Debug.LogWarning("ZoneMusicChanger: player no asignado");
+            return;
+        }
 
         Vector3 localPos = transform.InverseTransformPoint(player.position);
 
@@ -30,8 +39,11 @@ public class ZoneMusicChanger : MonoBehaviour
                         Mathf.Abs(localPos.y) <= zoneSize.y / 2f &&
                         Mathf.Abs(localPos.z) <= zoneSize.z / 2f;
 
+
+
         if (isInside != wasInside)
         {
+            Debug.Log("ZoneMusicChanger: cambio de estado de zona -> " + isInside);
             HandleZoneChange(isInside);
             wasInside = isInside;
         }
@@ -41,33 +53,41 @@ public class ZoneMusicChanger : MonoBehaviour
     {
         if (isInside)
         {
-            SetScriptsState(scriptsToEnableOnEnter, true);
-            SetScriptsState(scriptsToDisableOnEnter, false);
+            Debug.Log("ZoneMusicChanger: ENTRÓ en la zona");
+
+            PlayClip(enterClips);
         }
         else
         {
-            SetScriptsState(scriptsToEnableOnEnter, false);
-            SetScriptsState(scriptsToDisableOnEnter, true);
+            Debug.Log("ZoneMusicChanger: SALIÓ de la zona");
+
+            PlayClip(exitClips);
         }
     }
 
-    void SetScriptsState(List<MonoBehaviour> list, bool state)
+    void PlayClip(AudioClip[] clips)
     {
-        foreach (var script in list)
+        if (audioSource == null || clips == null || clips.Length == 0)
+            return;
+
+        AudioClip clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        if (clip != null)
         {
-            if (script != null)
-                script.enabled = state;
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.matrix = transform.localToWorldMatrix;
-
         Gizmos.color = gizmoColor;
-        Gizmos.DrawWireCube(Vector3.zero, zoneSize);
+        Gizmos.DrawWireCube(transform.position, zoneSize);
 
         Gizmos.color = new Color(gizmoColor.r, gizmoColor.g, gizmoColor.b, 0.1f);
-        Gizmos.DrawCube(Vector3.zero, zoneSize);
+        Gizmos.DrawCube(transform.position, zoneSize);
+
+#if UNITY_EDITOR
+        zoneSize = Handles.ScaleHandle(zoneSize, transform.position, transform.rotation, HandleUtility.GetHandleSize(transform.position));
+#endif
     }
 }

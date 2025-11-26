@@ -23,6 +23,7 @@ public class ProximityAudio : MonoBehaviour
         if (clip != null)
         {
             audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 
@@ -50,31 +51,21 @@ public class ProximityAudio : MonoBehaviour
 
         if (distance <= detectionRadius)
         {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-            
-            audioSource.volume = Mathf.Lerp(audioSource.volume, 1f, Time.deltaTime * fadeSpeed);
+        
+            float normalizedDistance = distance / detectionRadius;
+            float targetVolume = 1f - normalizedDistance;
+            audioSource.volume = Mathf.Lerp(audioSource.volume, targetVolume, Time.deltaTime * fadeSpeed);
         }
         else
         {
-            if (audioSource.isPlaying)
-            {
-                audioSource.volume = Mathf.Lerp(audioSource.volume, 0f, Time.deltaTime * fadeSpeed);
-
-                if (audioSource.volume < 0.01f)
-                {
-                    audioSource.Stop();
-                    audioSource.volume = 0f;
-                }
-            }
+           
+            audioSource.volume = Mathf.Lerp(audioSource.volume, 0f, Time.deltaTime * fadeSpeed);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius * 2.5f);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

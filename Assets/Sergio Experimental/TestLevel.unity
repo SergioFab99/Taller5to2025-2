@@ -1512,53 +1512,6 @@ MonoBehaviour:
     FrequencyGain: 1
     Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!1 &1094771324
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1094771325}
-  - component: {fileID: 1094771326}
-  m_Layer: 0
-  m_Name: AudioZonal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1094771325
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094771324}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3994653, y: -1.9838039, z: 3.7017524}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1094771326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094771324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e6a1fb829766545bbce6f643183c36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audio1: {fileID: 0}
-  audio2: {fileID: 0}
-  audio3: {fileID: 0}
 --- !u!1 &1113508474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,56 +1765,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1452460432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1452460433}
-  - component: {fileID: 1452460434}
-  m_Layer: 0
-  m_Name: AudioAmbiental
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1452460433
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452460432}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3994653, y: -1.9838039, z: 3.7017524}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1452460434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452460432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b9876cbca8810409d97a612ece160a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip1: {fileID: 8300000, guid: 336fda52c85535a408b1f2818a7ba1cb, type: 3}
-  clip2: {fileID: 8300000, guid: c7019464da3f3f2459fa724ae9ac61c2, type: 3}
-  clip3: {fileID: 8300000, guid: 8c53cb303c5ffa5409fda96d58477bdd, type: 3}
-  volume1: 1
-  volume2: 1
-  volume3: 1
 --- !u!1 &1488401985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,10 +2525,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneSize: {x: 10, y: 10, z: 10}
   player: {fileID: 3540751824963089178}
-  scriptsToEnableOnEnter:
-  - {fileID: 1094771326}
-  scriptsToDisableOnEnter:
-  - {fileID: 1452460434}
+  audioSource: {fileID: 0}
+  enterClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  exitClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2041840729
 GameObject:
@@ -3974,6 +3882,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerAudio: {fileID: 6087133008375463826}
+  openDoor: {fileID: 0}
 --- !u!1 &1636663663811782303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4505,6 +4414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1904027b90482344eadbeee64ba1e1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   _lockHeightOffset: 0.5
   _lockTurnSpeed: 999
   _yawDeadZoneDeg: 0.5
@@ -4514,6 +4426,8 @@ MonoBehaviour:
   - 1
   - 1
   sensibility: 0.1
+  rotSpeed: 0
+  sideStepDuration: 0
 --- !u!4 &2264850215554196655
 Transform:
   m_ObjectHideFlags: 0
@@ -4989,8 +4903,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetween: 0.2
   playerCombat: {fileID: 0}
-  DefaultGrabThrowSettings: {fileID: 0}
   cam: {fileID: 0}
+  player: {fileID: 0}
+  thisScene: 
+  openDoor: {fileID: 0}
 --- !u!95 &2842205424466975884
 Animator:
   serializedVersion: 7
@@ -6798,7 +6714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdd12490460d854792801ad5d8f2fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 6608884637270559707}
+  animArms: {fileID: 0}
+  animBody: {fileID: 0}
   attack: 0
   shakeForceAttack: 0
   velocityAttack: {x: 0, y: 0, z: 0}
@@ -8706,35 +8623,6 @@ MonoBehaviour:
   playerCharacter: {fileID: 0}
   playerCamera: {fileID: 2248956046382204890}
   dodgeCooldown: 2
-  dashDistance: 5
-  dashDuration: 1
-  useCameraRelativeDash: 1
-  dashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  dashGrantsInvulnerability: 1
-  postDashRecoveryTime: 0.05
 --- !u!1 &6948901944510952817
 GameObject:
   m_ObjectHideFlags: 0
@@ -8834,6 +8722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultStandSettings: {fileID: 11400000, guid: 9662340f305252a48b54dbf18ef74bdd, type: 2}
   DefaultBlockSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
+  DefaultSideStepSettings: {fileID: 0}
   DefaultAirSettings: {fileID: 11400000, guid: 896dc30e4ec40f141918f3caddf7f7b0, type: 2}
   BodyStandSettings: {fileID: 11400000, guid: 608cbd82ec67ad945bda34d7fc9f3168, type: 2}
   motor: {fileID: 470450131493982066}
@@ -8845,6 +8734,8 @@ MonoBehaviour:
     BehaviourState: 0
     Velocity: {x: 0, y: 0, z: 0}
     Acceleration: {x: 0, y: 0, z: 0}
+  _canSideStep: 1
+  _requestedSideStep: 0
 --- !u!1 &7146266626995204258
 GameObject:
   m_ObjectHideFlags: 0
@@ -8974,7 +8865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdd12490460d854792801ad5d8f2fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 3442233083047707636}
+  animArms: {fileID: 0}
+  animBody: {fileID: 0}
   attack: 0
   shakeForceAttack: 0
   velocityAttack: {x: 0, y: 0, z: 0}
@@ -10649,5 +10541,3 @@ SceneRoots:
   - {fileID: 2053488260}
   - {fileID: 3540751824963089178}
   - {fileID: 2000342618}
-  - {fileID: 1452460433}
-  - {fileID: 1094771325}
