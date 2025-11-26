@@ -1,21 +1,24 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class EnemyAttackOrder : MonoBehaviour
 {
     public static EnemyAttackOrder Instance { get; private set; }
 
     public float attackZoneRadius = 3.5f;
-    public float standbyZoneRadius = 6f;
-    public int maxAttackers = 3;
-    public int maxStandby = 6;
+    public float frontZoneRadius = 7f;
+    public float maxAggroRadius = 12f;
 
-    private List<EnemyStateHandler> allEnemies = new();
-    private List<EnemyStateHandler> activeAttackers = new();
-    private List<EnemyStateHandler> standbys = new();
+    public int maxAttackers = 2;
+    public int maxFront = 3;
 
     public Transform player;
+
+    private readonly List<EnemyStateHandler> allEnemies = new();
+    private readonly List<EnemyStateHandler> lockedAttackers = new(); 
+    private readonly List<EnemyStateHandler> front = new();
+    private readonly List<EnemyStateHandler> rear = new();
 
     private void Awake()
     {
@@ -25,84 +28,114 @@ public class EnemyAttackOrder : MonoBehaviour
             return;
         }
         Instance = this;
+
+        if (player == null)
+        {
+            var p = GameObject.FindWithTag("Player");
+            if (p != null) player = p.transform;
+        }
     }
 
     private void Update()
     {
         if (player == null) return;
-
-        UpdateZoneAssignments();
+        UpdateSortedGroups();
+        PromoteIfPossible();
     }
 
     public void RegisterEnemy(EnemyStateHandler e)
     {
+        if (e == null) return;
         if (!allEnemies.Contains(e))
+        {
             allEnemies.Add(e);
+            Debug.Log($"EAO: Registered enemy {e.name}");
+        }
     }
 
     public void UnregisterEnemy(EnemyStateHandler e)
     {
         allEnemies.Remove(e);
-        activeAttackers.Remove(e);
-        standbys.Remove(e);
+        lockedAttackers.Remove(e);
+        front.Remove(e);
+        rear.Remove(e);
     }
 
-    private void UpdateZoneAssignments()
+    private void UpdateSortedGroups()
     {
-        foreach (var e in allEnemies.Where(x => x != null && x.Target != null))
+        front.Clear();
+        rear.Clear();
+
+        var valid = allEnemies.Where(e => e != null && e.Target != null).ToList();
+
+        var sorted = valid
+            .Select(e => new
+            {
+                enemy = e,
+                dist = Vector3.Distance(e.character.transform.position, player.position)
+            })
+            .Where(x => x.dist <= maxAggroRadius).OrderBy(x => x.dist).ToList();
+
+        foreach (var entry in sorted)
         {
-            float dist = Vector3.Distance(e.transform.position, player.position);
+            var e = entry.enemy;
+            float d = entry.dist;
 
-            if (dist <= attackZoneRadius)
+            if (lockedAttackers.Contains(e))
+                continue;
+
+            if (Time.time < e.attackTagCooldownEndTime)
             {
-                if (!activeAttackers.Contains(e) && activeAttackers.Count < maxAttackers)
-                {
-                    PromoteToAttack(e);
-                }
+                rear.Add(e);
+                continue;
             }
 
-            else if (dist <= standbyZoneRadius)
-            {
-                if (!standbys.Contains(e) && !activeAttackers.Contains(e))
-                    standbys.Add(e);
-            }
-
+            if (front.Count < maxFront && d <= frontZoneRadius)
+                front.Add(e);
             else
-            {
-                standbys.Remove(e);
-                activeAttackers.Remove(e);
-            }
+                rear.Add(e);
         }
 
-        while (activeAttackers.Count > maxAttackers)
-        {
-            var removed = activeAttackers[0];
-            activeAttackers.RemoveAt(0);
-            if (!standbys.Contains(removed))
-                standbys.Add(removed);
-        }
+        Debug.Log($"[EAO] Attackers: {string.Join(", ", lockedAttackers.Select(x => x.name))}");
     }
 
-    private void PromoteToAttack(EnemyStateHandler e)
+    private void PromoteIfPossible()
     {
-        if (activeAttackers.Contains(e)) return;
-        activeAttackers.Add(e);
-        standbys.Remove(e);
+        if (lockedAttackers.Count >= maxAttackers)
+            return;
 
-        if (e.GetCurrentState() != e.GetAttackState())
+        if (front.Count == 0)
+            return;
+
+        var next = front[0];
+
+        if (Time.time < next.attackTagCooldownEndTime)
         {
-            Debug.Log($"Promoting {e.name} to ATTACK zone");
-            e.SetState(e.GetAttackState());
+            front.Remove(next);
+            rear.Add(next);
+            return;
         }
-    }
 
-    public bool IsAttacking(EnemyStateHandler e) => activeAttackers.Contains(e);
-    public bool IsStandby(EnemyStateHandler e) => standbys.Contains(e);
+        lockedAttackers.Add(next);
+        front.Remove(next);
+
+        Debug.Log($"EAO: PROMOTING {next.name} to attacker");
+        next.SetState(next.GetAttackState());
+    }
 
     public void NotifyAttackFinished(EnemyStateHandler e)
     {
-        activeAttackers.Remove(e);
-        if (!standbys.Contains(e))
-            standbys.Add(e);
+        if (!lockedAttackers.Contains(e)) return;
+
+        lockedAttackers.Remove(e);
+
+        if (!rear.Contains(e))
+            rear.Add(e);
+
+        Debug.Log($"EAO: {e.name} FINISHED. attackers left: {lockedAttackers.Count}");
     }
+
+    public bool IsAttacker(EnemyStateHandler e) => lockedAttackers.Contains(e);
+    public bool IsFront(EnemyStateHandler e) => front.Contains(e);
+    public bool IsRear(EnemyStateHandler e) => rear.Contains(e);
 }

@@ -1416,6 +1416,7 @@ MonoBehaviour:
   stunDuration: 2
   drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
+  attackTagCooldownEndTime: 0
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
@@ -2619,6 +2620,7 @@ MonoBehaviour:
   stunDuration: 2
   drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
+  attackTagCooldownEndTime: 0
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
@@ -2766,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
-      value: KinematicEnemyMelee (2)
+      value: KinematicEnemyMelee Ms 3
       objectReference: {fileID: 0}
     - target: {fileID: 4629790375579077680, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: health
@@ -2851,7 +2853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
-      value: KinematicEnemyMelee (1)
+      value: KinematicEnemyMelee Dr 2
       objectReference: {fileID: 0}
     - target: {fileID: 4629790375579077680, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: health
@@ -3458,10 +3460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78ed376cd0b52f4cb4d9d66e24ec8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackZoneRadius: 5
-  standbyZoneRadius: 10
-  maxAttackers: 3
-  maxStandby: 6
+  attackZoneRadius: 3.5
+  frontZoneRadius: 10
+  maxAggroRadius: 15
+  maxAttackers: 2
+  maxFront: 39
   player: {fileID: 88240166}
 --- !u!4 &1892362505
 Transform:
@@ -3811,7 +3814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
-      value: KinematicEnemyMelee (3)
+      value: KinematicEnemyMelee Lt 4
       objectReference: {fileID: 0}
     - target: {fileID: 4629790375579077680, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: health
@@ -4037,7 +4040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
-      value: KinematicEnemyMelee
+      value: KinematicEnemyMelee Mr 1
       objectReference: {fileID: 0}
     - target: {fileID: 4629790375579077680, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: health

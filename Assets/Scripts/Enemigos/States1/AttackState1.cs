@@ -16,7 +16,8 @@ public class AttackState1 : IEnemyState
     public void OnEnter()
     {
         ai.EnterCombatMode();
-        Debug.Log($"{ai.name}, {attackMode} engaging");
+        bool isAttacker = EnemyAttackOrder.Instance != null && EnemyAttackOrder.Instance.IsAttacker(ai);
+        Debug.Log($"{ai.name} ATTACK ENTER | handler instanceID = {ai.GetInstanceID()}");
     }
 
     public void Update()
@@ -32,7 +33,10 @@ public class AttackState1 : IEnemyState
         if (attackMode.IsFinished)
         {
             ai.QueuedBlock = false;
-            if(attackMode.ForceBlocked)
+
+            ai.nextAttackTime = Time.time + Random.Range(2.0f, 2.6f);
+
+            if (attackMode.ForceBlocked)
             {
                 ai.SetState(ai.GetBlockState());
             }
@@ -40,7 +44,7 @@ public class AttackState1 : IEnemyState
             {
                 ai.SetState(ai.GetStunState());
             }
-            else if (attackMode.Missed == true)
+            else if (attackMode.Missed)
             {
                 ai.SetState(ai.GetExposedState());
             }
@@ -48,12 +52,18 @@ public class AttackState1 : IEnemyState
             {
                 ai.SetState(ai.GetRecoverState());
             }
+
             attackMode.ResetAttackCycle();
             return;
         }
 
         if (attackMode.IsAttacking)
             return;
+
+        if (dist <= attackMode.AttackRange + 0.5f)
+        {
+            attackMode.Execute();
+        }
 
         if (dist > attackMode.AttackRange + disengageBuffer)
         {
@@ -68,10 +78,6 @@ public class AttackState1 : IEnemyState
             return;
         }
 
-        if (dist <= attackMode.AttackRange + 0.5f)
-        {
-            attackMode.Execute();
-        }
         else
         {
             Vector3 dir = (ai.Target.position - ai.character.transform.position).normalized;

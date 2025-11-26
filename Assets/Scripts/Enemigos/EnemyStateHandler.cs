@@ -42,6 +42,7 @@ public class EnemyStateHandler : MonoBehaviour
     public Vector3 drunkRotationOffset = Vector3.zero;
     [NonSerialized] public NavMeshAgent agent;
     public EnemyCharacter character;
+    public float attackTagCooldownEndTime = 0f;
 
     private Vector3 _lastCornerPos;
     private float _cornerTimer;
@@ -80,6 +81,7 @@ public class EnemyStateHandler : MonoBehaviour
 
         var hp = GetComponentInChildren<HealthController>();
         hp.OnLifeChangue += HandleHitEvent;
+
     }
 
     private void Awake()
@@ -88,13 +90,21 @@ public class EnemyStateHandler : MonoBehaviour
         {
             character = GetComponentInChildren<EnemyCharacter>();
         }
-        EnemyAttackOrder.Instance.RegisterEnemy(this);
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+        }
     }
     private void Start()
     {
         if (Target == null)
         {
             Target = GameObject.FindWithTag("Player").transform;
+        }
+        if (EnemyAttackOrder.Instance != null)
+        {
+            EnemyAttackOrder.Instance.RegisterEnemy(this);
+            Debug.Log($"{name} registered");
         }
     }
 
@@ -230,8 +240,7 @@ public class EnemyStateHandler : MonoBehaviour
     public void StateMovement(IEnemyState newState)
     {
         bool useKCC =
-            newState == attack || newState == recover ||
-            newState == stunned || newState == block || newState == exposed || newState == idle;
+            newState == attack || newState == recover ||  newState == stunned || newState == block || newState == exposed;
 
         if (useKCC)
         {
@@ -269,23 +278,32 @@ public class EnemyStateHandler : MonoBehaviour
 
     public void HandleFacing()
     {
-        if (Target == null || isBlind) return;
+        if (Target == null) return;
+        if (agent.enabled || agent != null) return;
 
-        if (character.CurrentMode != MovementMode.NavMesh) return;
-        if (agent != null && agent.enabled && agent.updateRotation) return; 
+        Vector3 toPlayer = Target.position - character.transform.position;
+        toPlayer.y = 0f;
+        if (toPlayer.sqrMagnitude < 0.01f) return;
 
-        float dist = Vector3.Distance(character.transform.position, Target.position);
-        if (dist <= detectionRange)
-        {
-            Vector3 dir = Target.position - character.transform.position;
-            dir.y = 0f;
-            if (dir.sqrMagnitude > 0.01f)
-            {
-                Quaternion lookRot = Quaternion.LookRotation(dir);
-                character.transform.rotation = Quaternion.Lerp(
-                    character.transform.rotation, lookRot, Time.deltaTime * turnSpeed);
-            }
-        }
+        Quaternion desired = Quaternion.LookRotation(toPlayer.normalized, Vector3.up);
+        character.transform.rotation = Quaternion.Slerp(
+            character.transform.rotation,
+            desired,
+            Time.deltaTime * turnSpeed
+        );
+    }
+
+    public void RetreatFromPlayer()
+    {
+        Vector3 toPlayer = (Target.position - character.transform.position).normalized;
+
+        Vector3 side = Vector3.Cross(Vector3.up, toPlayer).normalized;
+        float sideSign = (UnityEngine.Random.value > 0.5f) ? 1f : -1f;
+
+        Vector3 retreatDir = (-toPlayer + side * sideSign * 0.6f).normalized;
+
+        character.UpdateInputs(new EnemyInput { Move = retreatDir, Direction = retreatDir }, GetBehaviourState());
+
     }
 
 

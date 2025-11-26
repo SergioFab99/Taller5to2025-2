@@ -1,10 +1,17 @@
 using UnityEngine;
-using UnityEngine.AI;
+using KinematicCharacterController;
+
 public class RecoverState1 : IEnemyState
 {
     private EnemyStateHandler ai;
+
     private float recoverTimer;
-    private float recoverDuration = 1.0f;
+    private float recoverDuration = 0.8f;
+
+    private float retreatTimer = 0.45f;
+    private Vector3 retreatDir;
+
+    private const float attackCooldown = 1.5f; // fallback 
 
     public RecoverState1(EnemyStateHandler handler)
     {
@@ -15,6 +22,15 @@ public class RecoverState1 : IEnemyState
     {
         recoverTimer = recoverDuration;
 
+        EnemyAttackOrder.Instance.NotifyAttackFinished(ai);
+
+        ai.attackTagCooldownEndTime = Time.time + attackCooldown;
+
+        if (ai.Target != null)
+        {
+            retreatDir = (ai.character.transform.position - ai.Target.position).normalized;
+            retreatDir.y = 0f;
+        }
 
         if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
         {
@@ -24,45 +40,47 @@ public class RecoverState1 : IEnemyState
         }
 
         ai.character.Motor.BaseVelocity = Vector3.zero;
-        ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
 
-        Debug.Log($"{ai.name} is recovering... for {recoverTimer}");
+        Debug.Log($"{ai.name} entered RECOVER — retreating");
     }
 
     public void Update()
     {
-        Transform target = ai.Target;
-        if (target == null)
+
+        recoverTimer -= Time.deltaTime;
+
+        if (retreatTimer > 0f)
         {
-            ai.SetState(ai.GetIdleState());
+            retreatTimer -= Time.deltaTime;
+
+            ai.character.UpdateInputs(
+                new EnemyInput
+                {
+                    Move = retreatDir * 1.1f,
+                    Direction = retreatDir
+                },
+                ai.GetBehaviourState()
+            );
+
             return;
         }
 
-        recoverTimer -= Time.deltaTime;
-        if (recoverTimer > 0f) return;
-
-        float dist = Vector3.Distance(ai.character.transform.position, target.position);
-
-        if (dist <= ai.enemySettings.AISettings.attackRange + 1f)
+        if (recoverTimer <= 0f)
         {
-            ai.EnterCombatMode();
-            ai.SetState(ai.GetAttackState());
-        }
-        else if (ai.CheckTargetOnView())
-        {
-            ai.ExitCombatMode();
             ai.SetState(ai.GetAlertState());
         }
-        else
-        {
-            ai.ExitCombatMode();
-            ai.SetState(ai.GetIdleState());
-        }
     }
+
 
     public void OnExit()
     {
-        ai.GetComponent<IEnemyAttack>()?.ResetAttackCycle();
-        Debug.Log($"{ai.name} finished recovering.");
+        Debug.Log($"{ai.name} exited RECOVER.");
     }
+
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 req, KinematicCharacterMotor motor)
+        => currentRotation;
+
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor,
+        Vector3 move, EnemySettingsList settings, ref float u)
+        => currentVelocity;
 }
