@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6522111205288546833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005069240538910389}
+  - component: {fileID: 8336970665157954523}
+  m_Layer: 0
+  m_Name: "Zona de detecci\xF3n"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1005069240538910389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522111205288546833}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8336970665157954523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522111205288546833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934338aa21adba440b4f40f9c879a332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneSize: {x: 21.9, y: 10, z: 30.69}
+  player: {fileID: 0}
+  enterClips:
+  - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
+  - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
+  - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
+  exitClips:
+  - {fileID: 8300000, guid: 8416229f17d7eae4f8c2dcf7705c5314, type: 3}
+  - {fileID: 8300000, guid: a30901185f3571d4f87a10c5c262e988, type: 3}
+  - {fileID: 8300000, guid: b2f009acb353cad4cb9dc43709329db3, type: 3}
+  gizmoColor: {r: 1, g: 0, b: 0.035839558, a: 1}

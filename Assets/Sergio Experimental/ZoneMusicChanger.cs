@@ -12,17 +12,50 @@ public class ZoneMusicChanger : MonoBehaviour
     public Transform player;
 
     [Header("Audio")]
-    public AudioSource audioSource; 
     public AudioClip[] enterClips = new AudioClip[3];  
-    public AudioClip[] exitClips = new AudioClip[3];    
+    public AudioClip[] exitClips = new AudioClip[3];
 
     [Header("Debug")]
     public Color gizmoColor = new Color(0, 1, 0, 0.4f);
 
     private bool wasInside = false;
+    private AudioSource[] enterAudioSources;
+    private AudioSource[] exitAudioSources;
 
     void Start()
     {
+        // Inicializar AudioSources para enterClips
+        enterAudioSources = new AudioSource[enterClips.Length];
+        for (int i = 0; i < enterClips.Length; i++)
+        {
+            if (enterClips[i] != null)
+            {
+                GameObject enterObj = new GameObject($"EnterAudio_{i}");
+                enterObj.transform.SetParent(transform);
+                enterAudioSources[i] = enterObj.AddComponent<AudioSource>();
+                enterAudioSources[i].clip = enterClips[i];
+                enterAudioSources[i].loop = true;
+                enterAudioSources[i].playOnAwake = false;
+            }
+        }
+
+        // Inicializar AudioSources para exitClips
+        exitAudioSources = new AudioSource[exitClips.Length];
+        for (int i = 0; i < exitClips.Length; i++)
+        {
+            if (exitClips[i] != null)
+            {
+                GameObject exitObj = new GameObject($"ExitAudio_{i}");
+                exitObj.transform.SetParent(transform);
+                exitAudioSources[i] = exitObj.AddComponent<AudioSource>();
+                exitAudioSources[i].clip = exitClips[i];
+                exitAudioSources[i].loop = true;
+                exitAudioSources[i].playOnAwake = true; // Los exitClips empiezan sonando
+                exitAudioSources[i].Play();
+            }
+        }
+
+        Debug.Log("ZoneMusicChanger: Iniciado - ExitClips (exteriores) sonando por defecto");
     }
 
     void Update()
@@ -39,11 +72,9 @@ public class ZoneMusicChanger : MonoBehaviour
                         Mathf.Abs(localPos.y) <= zoneSize.y / 2f &&
                         Mathf.Abs(localPos.z) <= zoneSize.z / 2f;
 
-
-
         if (isInside != wasInside)
         {
-            Debug.Log("ZoneMusicChanger: cambio de estado de zona -> " + isInside);
+            Debug.Log("ZoneMusicChanger: cambio de estado de zona -> " + (isInside ? "DENTRO" : "FUERA"));
             HandleZoneChange(isInside);
             wasInside = isInside;
         }
@@ -53,28 +84,47 @@ public class ZoneMusicChanger : MonoBehaviour
     {
         if (isInside)
         {
-            Debug.Log("ZoneMusicChanger: ENTRÓ en la zona");
+            Debug.Log("ZoneMusicChanger: ENTRÓ en la zona - Activando EnterClips, desactivando ExitClips");
+            
+            // Activar enterClips
+            foreach (AudioSource source in enterAudioSources)
+            {
+                if (source != null && !source.isPlaying)
+                {
+                    source.Play();
+                }
+            }
 
-            PlayClip(enterClips);
+            // Desactivar exitClips
+            foreach (AudioSource source in exitAudioSources)
+            {
+                if (source != null && source.isPlaying)
+                {
+                    source.Stop();
+                }
+            }
         }
         else
         {
-            Debug.Log("ZoneMusicChanger: SALIÓ de la zona");
+            Debug.Log("ZoneMusicChanger: SALIÓ de la zona - Activando ExitClips, desactivando EnterClips");
+            
+            // Activar exitClips
+            foreach (AudioSource source in exitAudioSources)
+            {
+                if (source != null && !source.isPlaying)
+                {
+                    source.Play();
+                }
+            }
 
-            PlayClip(exitClips);
-        }
-    }
-
-    void PlayClip(AudioClip[] clips)
-    {
-        if (audioSource == null || clips == null || clips.Length == 0)
-            return;
-
-        AudioClip clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        if (clip != null)
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
+            // Desactivar enterClips
+            foreach (AudioSource source in enterAudioSources)
+            {
+                if (source != null && source.isPlaying)
+                {
+                    source.Stop();
+                }
+            }
         }
     }
 
