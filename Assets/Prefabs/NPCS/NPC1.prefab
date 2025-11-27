@@ -180,7 +180,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -434,6 +434,13 @@ MonoBehaviour:
   npc3: 0
   npc4: 0
   dialogueController: {fileID: 0}
+  aggerssiveNpc2: {fileID: 0}
+  aggerssiveNpc3: {fileID: 0}
+  aggerssiveNpc4: {fileID: 0}
+  passiveNpc2: {fileID: 0}
+  passiveNpc3: {fileID: 0}
+  passiveNpc4: {fileID: 0}
+  boxCollider: {fileID: 0}
 --- !u!54 &3669975491708965719
 Rigidbody:
   m_ObjectHideFlags: 0

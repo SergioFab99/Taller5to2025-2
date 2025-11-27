@@ -14,11 +14,14 @@ public class DisplayInteractHUD : MonoBehaviour
     private GameObject stairUp;
     [SerializeField] private OpenDoor openDoor;
     Player playerTp;
+    GameObject canvas, canInteract;
     private bool isHittingDoor, isHittingStair;
     public static bool thisIsTutorial, thisIsLevel1;
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name;
+        canvas = GameObject.Find("Canvas (1)");
+        canInteract = canvas.transform.Find("InteractBackground").gameObject;
         playerCombat = GameObject.Find("CombatManager").GetComponent<PlayerCombat>();
         cam = playerCombat.playerCamera._camera.transform;
         playerTp = player.GetComponent<Player>();
@@ -57,8 +60,6 @@ public class DisplayInteractHUD : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
-                    var canvas = GameObject.Find("Canvas (1)");
-                    var canInteract = canvas.transform.Find("InteractBackground").gameObject;
                     Debug.Log("S� hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
@@ -77,8 +78,30 @@ public class DisplayInteractHUD : MonoBehaviour
                 }
                 else
                 {
-                    var canvas = GameObject.Find("Canvas (1)");
-                    var canInteract = canvas.transform.Find("InteractBackground").gameObject;
+                    if (thisIsLevel1 && NPCInteraction.OnTriggerNpc)
+                    {
+                        yield return null;
+                    }
+                    else
+                    {
+                        Debug.Log("No hay");
+                        Debug.Log(canInteract);
+                        canInteract.SetActive(false);
+                        isHittingDoor = false;
+                        isHittingStair = false;
+                        yield return new WaitForSeconds(timeBetween);
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (thisIsLevel1 && NPCInteraction.OnTriggerNpc)
+                {
+                    yield return null;
+                }
+                else
+                {
                     Debug.Log("No hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(false);

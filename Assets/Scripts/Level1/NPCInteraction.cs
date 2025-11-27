@@ -7,6 +7,7 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField] private string nextScene;
     [SerializeField] private DialogueController dialogueController;
     int npcCount;
+    public static bool OnTriggerNpc;
     void Start()
     {
         startFinish += FinishLevel1;
@@ -23,6 +24,7 @@ public class NPCInteraction : MonoBehaviour
             var canvas = GameObject.Find("Canvas (1)");
             var canInteract = canvas.transform.Find("InteractBackground").gameObject;
             canInteract.SetActive(true);
+            OnTriggerNpc = true;
             /*if(Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
             {
                 Debug.Log("InteractionNPC");
@@ -42,6 +44,7 @@ public class NPCInteraction : MonoBehaviour
             var canvas = GameObject.Find("Canvas (1)");
             var canInteract = canvas.transform.Find("InteractBackground").gameObject;
             canInteract.SetActive(false);
+            OnTriggerNpc = false;
         }
     }
     public void NPCCount()
