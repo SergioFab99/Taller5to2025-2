@@ -174,9 +174,8 @@ public class OpenDoor : MonoBehaviour
             if (doorIsOpen)
             {
                 Vector3 playerPos = other.ClosestPoint(other.transform.position);
-                Debug.Log(Vector3.Distance(playerPos, boxCollider.center.normalized));
-                Debug.Log("normalized:" +Vector3.Distance(playerPos, boxCollider.center));
-                if(Vector3.Distance(playerPos.normalized, boxCollider.center.normalized) < 115.1f)
+                Debug.Log(Vector3.Distance(playerPos, boxCollider.center));
+                if(Vector3.Distance(playerPos, boxCollider.center) < 115.1f)
                 {
                     openWhileOpened = true;
                     starMoveDoor = true;

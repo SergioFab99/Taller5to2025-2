@@ -41,10 +41,10 @@ public class NPCInteraction : MonoBehaviour
     {
          if (other.gameObject.CompareTag("Npc"))
         {
+            OnTriggerNpc = false;
             var canvas = GameObject.Find("Canvas (1)");
             var canInteract = canvas.transform.Find("InteractBackground").gameObject;
             canInteract.SetActive(false);
-            OnTriggerNpc = false;
         }
     }
     public void NPCCount()

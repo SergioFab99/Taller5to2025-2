@@ -60,6 +60,7 @@ public class NPCTrigger : MonoBehaviour
                 Debug.Log("InteractionNPC");
                 dialogueController.ActivateDialoguePanel();
                 dialogueController.LockPlayerCamera();
+                NPCInteraction.OnTriggerNpc = false;
                 canInteract.SetActive(false);
                 Time.timeScale = 0;
                 boxCollider.enabled = false;
