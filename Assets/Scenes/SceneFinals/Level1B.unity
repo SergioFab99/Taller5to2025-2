@@ -14324,7 +14324,7 @@ MonoBehaviour:
   spawnNear1: {fileID: 0}
   spawnNear2: {fileID: 0}
   spawnNear3: {fileID: 0}
-  enemiesMaxCapacity: 15
+  enemiesMaxCapacity: 12
 --- !u!4 &629068589
 Transform:
   m_ObjectHideFlags: 0
@@ -20127,7 +20127,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 420521185}
         m_TargetAssemblyTypeName: NPCInteraction, Assembly-CSharp
         m_MethodName: NPCCount
         m_Mode: 1

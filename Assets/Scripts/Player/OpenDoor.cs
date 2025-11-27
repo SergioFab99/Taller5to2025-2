@@ -175,19 +175,47 @@ public class OpenDoor : MonoBehaviour
             {
                 Vector3 playerPos = other.ClosestPoint(other.transform.position);
                 Debug.Log(Vector3.Distance(playerPos, boxCollider.center));
-                if(Vector3.Distance(playerPos, boxCollider.center) < 115.1f)
+                Debug.Log(other.gameObject.name);
+                Vector3 direction = transform.position - other.transform.position;
+                direction.y = 0;
+                direction.Normalize();
+                Vector3 doorDirection = transform.forward;
+                doorDirection.y = 0;
+                doorDirection.Normalize();
+                float angle = Vector3.Angle(doorDirection, direction);
+                if (thisIsLeftDoor)
                 {
-                    openWhileOpened = true;
-                    starMoveDoor = true;
-                    CallStartJustOpen();
+                    if (angle < 90f)
+                    {
+                        openWhileOpened = true;
+                        starMoveDoor = true;
+                        CallStartJustOpen();
+                    }
+                    else if (angle >= 90)
+                    {
+                        openWhileOpened = true;
+                        starMoveDoor = true;
+                        doorIsOpen = false;
+                        CallStartJustOpen();
+                    }
                 }
-                else if (Vector3.Distance(playerPos, boxCollider.center) > 115.1f)
+                if (thisIsRightDoor)
                 {
-                    openWhileOpened = true;
-                    starMoveDoor = true;
-                    doorIsOpen = false;
-                    CallStartJustOpen();
+                    if (angle >= 90f)
+                    {
+                        openWhileOpened = true;
+                        starMoveDoor = true;
+                        CallStartJustOpen();
+                    }
+                    else if (angle < 90)
+                    {
+                        openWhileOpened = true;
+                        starMoveDoor = true;
+                        doorIsOpen = false;
+                        CallStartJustOpen();
+                    }
                 }
+                
             }
         }
     }

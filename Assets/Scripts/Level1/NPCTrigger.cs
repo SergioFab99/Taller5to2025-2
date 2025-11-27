@@ -98,7 +98,7 @@ public class NPCTrigger : MonoBehaviour
     }
     void SpawnEnemyNpc4()
     {
-        SpawnEnemiesLvl1.enemiesCapacity++;
+        SpawnEnemiesLvl1.enemiesCapacity+=4;
         aggerssiveNpc4.SetActive(true);
         passiveNpc4.SetActive(false);
     }
