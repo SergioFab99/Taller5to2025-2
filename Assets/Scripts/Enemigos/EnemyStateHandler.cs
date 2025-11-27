@@ -205,6 +205,7 @@ public class EnemyStateHandler : MonoBehaviour
         if (Target == null || agent == null) return;
         if (!agent.enabled || !agent.isOnNavMesh) return;
 
+     character.SetMovementMode(MovementMode.NavMesh);
         agent.isStopped = false;
         agent.speed = MoveSpeed();
 
@@ -232,7 +233,7 @@ public class EnemyStateHandler : MonoBehaviour
         bool useKCC =
             newState == attack || newState == recover ||
             newState == stunned || newState == block || newState == exposed || newState == idle;
-
+        Debug.Log($"useKCC: {useKCC} - newState: {newState}");
         if (useKCC)
         {
             if (agent != null && agent.enabled)
@@ -255,7 +256,7 @@ public class EnemyStateHandler : MonoBehaviour
                 agent.updatePosition = true;
                 agent.updateRotation = true;
                 agent.isStopped = false;
-                agent.Warp(character.transform.position); 
+                agent.Warp(character.transform.position);; 
             }
             character.SetMovementMode(MovementMode.NavMesh);
         }

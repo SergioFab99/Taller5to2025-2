@@ -568,6 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 4790561755574192830}
+  DefaultAirSettings: {fileID: 11400000, guid: 8c536def6639ccc4e9898859173000c6, type: 2}
   _state:
     Grounded: 1
     MovementState: 0
