@@ -7,10 +7,10 @@ public class AlertState1 : IEnemyState
     private float alertTimer;
     private const float maxAlertTime = 3f;
 
-    private float frontDistance = 6f;
-    private float rearDistance = 8f;
-    private float lateralAmplitudeFront = 1.5f;
-    private float lateralAmplitudeRear = 2.0f;
+    //private float frontDistance = 6f;
+    //private float rearDistance = 8f;
+    //private float lateralAmplitudeFront = 1.5f;
+    //private float lateralAmplitudeRear = 2.0f;
     private float repositionCooldown = 0.5f;
     private float nextRepositionTime = 0f;
 
@@ -27,9 +27,6 @@ public class AlertState1 : IEnemyState
         alertTimer = 0f;
         ai.ExitCombatMode();
         Debug.Log($"{ai.name} entered ALERT.");
-
-        if (ai.Target != null && ai.CheckTargetOnView())
-            ai.MoveTowardsTarget();
     }
 
     public void Update()
@@ -46,7 +43,6 @@ public class AlertState1 : IEnemyState
         var coord = EnemyAttackOrder.Instance;
         if (coord == null)
         {
-            ai.MoveTowardsTarget();
             return;
         }
 
@@ -58,19 +54,24 @@ public class AlertState1 : IEnemyState
             return;
         }
 
-        if (coord.IsFront(ai))
-        {
-            FrontFormationMove(coord.player);
+        if (ai.agent == null || !ai.agent.enabled || !ai.agent.isOnNavMesh)
             return;
-        }
 
-        if (coord.IsRear(ai))
+        if (coord.TryGetFormationDestination(ai, out Vector3 dest))
         {
-            RearFormationMove(coord.player);
-            return;
-        }
+            if (Time.time >= nextRepositionTime)
+            {
+                nextRepositionTime = Time.time + repositionCooldown;
 
-        FrontFormationMove(coord.player); //fallback
+                ai.agent.isStopped = false;
+                ai.agent.speed = ai.MoveSpeed();
+                ai.agent.SetDestination(dest);
+            }
+        }
+        else
+        {
+            ai.MoveTowardsTarget();
+        }
     }
 
     public void OnExit()
@@ -93,56 +94,60 @@ public class AlertState1 : IEnemyState
         }
         else
         {
-            ai.MoveTowardsTarget();
+            Vector3 forward = (ai.Target.position - ai.character.transform.position).normalized;
+            Vector3 newDest = ai.character.transform.position + forward * 0.6f;
+
+            ai.agent.SetDestination(newDest);
         }
     }
-    private void FrontFormationMove(Transform player)
-    {
-        if (ai.agent == null || player == null) return;
 
-        if (Time.time < nextRepositionTime)
-            return;
+    //private void FrontFormationMove(Transform player)
+    //{
+    //    if (ai.agent == null || player == null) return;
 
-        nextRepositionTime = Time.time + repositionCooldown;
+    //    if (Time.time < nextRepositionTime)
+    //        return;
 
-        Vector3 toEnemy = ai.transform.position - player.position;
-        if (toEnemy.sqrMagnitude < 0.01f)
-            toEnemy = -player.forward;
+    //    nextRepositionTime = Time.time + repositionCooldown;
 
-        Vector3 forwardFromPlayer = -toEnemy.normalized; 
-        Vector3 tangent = Vector3.Cross(Vector3.up, forwardFromPlayer).normalized;
+    //    Vector3 toEnemy = ai.transform.position - player.position;
+    //    if (toEnemy.sqrMagnitude < 0.01f)
+    //        toEnemy = -player.forward;
 
-        float lateral = Mathf.Sin(Time.time * 0.8f + phaseOffset) * lateralAmplitudeFront;
+    //    Vector3 forwardFromPlayer = -toEnemy.normalized; 
+    //    Vector3 tangent = Vector3.Cross(Vector3.up, forwardFromPlayer).normalized;
 
-        Vector3 targetPos =
-            player.position +
-            forwardFromPlayer * frontDistance +
-            tangent * lateral;
+    //    float lateral = Mathf.Sin(Time.time * 0.8f + phaseOffset) * lateralAmplitudeFront;
 
-        ai.agent.SetDestination(targetPos);
-    }
+    //    Vector3 targetPos =
+    //        player.position +
+    //        forwardFromPlayer * frontDistance +
+    //        tangent * lateral;
 
-    private void RearFormationMove(Transform player)
-    {
-        if (ai.agent == null || player == null) return;
+    //    ai.agent.SetDestination(targetPos);
+    //}
 
-        if (Time.time < nextRepositionTime)
-            return;
+    //private void RearFormationMove(Transform player)
+    //{
+    //    if (ai.agent == null || player == null) return;
 
-        nextRepositionTime = Time.time + repositionCooldown;
+    //    if (Time.time < nextRepositionTime)
+    //        return;
 
-        Vector3 backDir = -player.forward;
-        Vector3 tangent = Vector3.Cross(Vector3.up, backDir).normalized;
+    //    nextRepositionTime = Time.time + repositionCooldown;
 
-        float lateral = Mathf.Sin(Time.time * 0.6f + phaseOffset) * lateralAmplitudeRear;
+    //    Vector3 backDir = -player.forward;
+    //    Vector3 tangent = Vector3.Cross(Vector3.up, backDir).normalized;
 
-        Vector3 targetPos =
-            player.position +
-            backDir.normalized * rearDistance +
-            tangent * lateral;
+    //    float lateral = Mathf.Sin(Time.time * 0.6f + phaseOffset) * lateralAmplitudeRear;
 
-        ai.agent.SetDestination(targetPos);
-    }
+    //    Vector3 targetPos =
+    //        player.position +
+    //        backDir.normalized * rearDistance +
+    //        tangent * lateral;
+
+    //    ai.agent.SetDestination(targetPos);
+    //}
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {

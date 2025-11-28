@@ -22,8 +22,6 @@ public class RecoverState1 : IEnemyState
     {
         recoverTimer = recoverDuration;
 
-        EnemyAttackOrder.Instance.NotifyAttackFinished(ai);
-
         ai.attackTagCooldownEndTime = Time.time + attackCooldown;
 
         if (ai.Target != null)
@@ -46,21 +44,32 @@ public class RecoverState1 : IEnemyState
 
     public void Update()
     {
-
         recoverTimer -= Time.deltaTime;
 
         if (retreatTimer > 0f)
         {
             retreatTimer -= Time.deltaTime;
 
-            ai.character.UpdateInputs(
-                new EnemyInput
-                {
-                    Move = retreatDir * 1.1f,
-                    Direction = retreatDir
-                },
-                ai.GetBehaviourState()
-            );
+            if (ai.Target != null)
+            {
+                Vector3 toPlayer = ai.Target.position - ai.character.transform.position;
+                toPlayer.y = 0f;
+                Vector3 facing = toPlayer.sqrMagnitude > 0.0001f
+                    ? toPlayer.normalized
+                    : ai.character.transform.forward;
+
+                Vector3 safeDir = ai.GetSafeRetreatDirection();
+                Vector3 smoothed = Vector3.Lerp(ai.character.LastMove, safeDir, Time.deltaTime * 6f);
+
+                ai.character.UpdateInputs(
+                    new EnemyInput
+                    {
+                        Move = smoothed * 0.55f,  
+                        Direction = facing   
+                    },
+                    ai.GetBehaviourState()
+                );
+            }
 
             return;
         }

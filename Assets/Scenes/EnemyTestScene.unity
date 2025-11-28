@@ -1417,6 +1417,7 @@ MonoBehaviour:
   drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
   attackTagCooldownEndTime: 0
+  lockDirectChase: 0
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
@@ -1995,7 +1996,7 @@ Transform:
   m_GameObject: {fileID: 1101102052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.74, y: 0.06, z: 0.1}
+  m_LocalPosition: {x: 15.45, y: 0.06, z: 2.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2621,6 +2622,7 @@ MonoBehaviour:
   drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
   attackTagCooldownEndTime: 0
+  lockDirectChase: 0
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
@@ -3460,11 +3462,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78ed376cd0b52f4cb4d9d66e24ec8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackZoneRadius: 3.5
-  frontZoneRadius: 10
+  attackZoneRadius: 4
   maxAggroRadius: 15
+  innerRingRadius: 6
+  middleRingRadius: 9
+  outerRingRadius: 12
+  twoRingThreshold: 6
+  threeRingThreshold: 12
   maxAttackers: 2
-  maxFront: 39
+  frontArcDegrees: 250
+  globalSpinSpeed: 1.2
+  personalSpinMin: 0.35
+  personalSpinMax: 5
   player: {fileID: 88240166}
 --- !u!4 &1892362505
 Transform:

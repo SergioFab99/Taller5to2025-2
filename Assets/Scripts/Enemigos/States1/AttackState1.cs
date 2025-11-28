@@ -33,6 +33,7 @@ public class AttackState1 : IEnemyState
         if (attackMode.IsFinished)
         {
             ai.QueuedBlock = false;
+            EnemyAttackOrder.Instance.NotifyAttackFinished(ai);
 
             ai.nextAttackTime = Time.time + Random.Range(2.0f, 2.6f);
 
