@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 7200674632617721616}
   - component: {fileID: 359851920969218421}
   - component: {fileID: 7856147728866338547}
+  - component: {fileID: 3324522968077132253}
   m_Layer: 0
   m_Name: MeleeKinematicEnemy
   m_TagString: Enemy
@@ -238,6 +239,22 @@ MonoBehaviour:
   maxCombo: 2
   characterTransform: {fileID: 0}
   currentPhase: 0
+--- !u!114 &3324522968077132253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714045327343607470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e70e454b4fe6740b6bfc62981ba6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  detectionRadius: 5
+  fadeSpeed: 2
+  player: {fileID: 0}
 --- !u!1 &1197399118619939898
 GameObject:
   m_ObjectHideFlags: 0
