@@ -20,6 +20,7 @@ public class CameraManagerTutorial : MonoBehaviour
         {
             StartCameraTour1();
         }
+        SetUpTutorial.camera4 = false;
     }
 
     void Update()

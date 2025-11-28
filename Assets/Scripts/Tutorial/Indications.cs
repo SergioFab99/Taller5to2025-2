@@ -83,7 +83,7 @@ public class Indications : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint3)
         {
-            changeIndications = 6;
+            changeIndications = 7;
             
         }
     }
