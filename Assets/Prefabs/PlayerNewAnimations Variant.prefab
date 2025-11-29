@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3456358830883935169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2920063002100972148}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2920063002100972148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456358830883935169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.9546391, y: -0.044582315, z: -0.18751588, w: 0.22696793}
+  m_LocalPosition: {x: -0.0158, y: -0.0089, z: -0.0176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8779461813664641042}
+  m_LocalEulerAnglesHint: {x: 155.378, y: 24.587997, z: 10.792999}
 --- !u!1 &3822604452028811971
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,12 +259,25 @@ PrefabInstance:
     - {fileID: -8900769999268314379, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
     - {fileID: -1570060540501899255, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
     - {fileID: -4196952040310456772, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3067161188645459639, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2920063002100972148}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5011588482850221636}
   m_SourcePrefab: {fileID: 100100000, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
+--- !u!1 &4081250487642602645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7774857179035998768, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
+  m_PrefabInstance: {fileID: 6000576843370309285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4364311095211844670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8059034345360343707, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
+  m_PrefabInstance: {fileID: 6000576843370309285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6110520090618806606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
@@ -266,6 +310,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &8779461813664641042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3067161188645459639, guid: 2920298c31b66354eba5a5453a7ebcac, type: 3}
+  m_PrefabInstance: {fileID: 6000576843370309285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8528997003148228094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,7 +582,7 @@ PrefabInstance:
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: weaponPos
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3456358830883935169}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: fistWeapon
       value: 
@@ -549,7 +598,7 @@ PrefabInstance:
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: leftPunchPos
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4364311095211844670}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: playerCamera
       value: 
@@ -557,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: rightPunchPos
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4081250487642602645}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: hitMask.m_Bits
       value: 8192
