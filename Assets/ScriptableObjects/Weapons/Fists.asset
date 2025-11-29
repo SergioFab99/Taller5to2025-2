@@ -21,6 +21,8 @@ MonoBehaviour:
   box: {x: 0.76, y: 1.77, z: 0.72}
   rotation: {x: 0, y: 0, z: 0}
   attackDistance: 1.98
-  timeBetweenAttacks: 0.8
+  timeBetweenAttacks: 0.6
   timeToDoublePunch: 3
   AttackDelay: 0.09
+  radius: 0
+  punchDuration: 0
