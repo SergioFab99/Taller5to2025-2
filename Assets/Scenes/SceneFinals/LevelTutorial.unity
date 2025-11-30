@@ -27216,6 +27216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MateoOrder
       objectReference: {fileID: 0}
+    - target: {fileID: 2863862193778693838, guid: a77222cc181697e48bdcd44819675602, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 66350519}
     - target: {fileID: 7829909086619948714, guid: a77222cc181697e48bdcd44819675602, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.628708
@@ -35088,10 +35092,10 @@ MonoBehaviour:
         z: 1.8906918
       Rotation:
         value:
-          x: 0.5404946
-          y: -0.60742575
-          z: 0.32936934
-          w: -0.4800159
+          x: 0.5404947
+          y: -0.6074259
+          z: 0.32936928
+          w: -0.48001593
     - Position:
         x: 5.59
         y: 1.33
