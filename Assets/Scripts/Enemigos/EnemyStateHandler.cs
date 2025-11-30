@@ -110,6 +110,11 @@ public class EnemyStateHandler : MonoBehaviour
             EnemyAttackOrder.Instance.RegisterEnemy(this);
             Debug.Log($"{name} registered");
         }
+        
+        if(TargetPlayer==null)
+        {
+            TargetPlayer = GameObject.FindWithTag("Player").transform;
+        }
     }
 
     public void CurrentStateUpdate()

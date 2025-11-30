@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &313025373307498644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7829909086619948714}
+  - component: {fileID: 2863862193778693838}
+  m_Layer: 0
+  m_Name: MateoOrder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7829909086619948714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313025373307498644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -51.628708, y: 0.8594698, z: 1.5077754}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2863862193778693838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313025373307498644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78ed376cd0b52f4cb4d9d66e24ec8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackZoneRadius: 3.5
+  maxAggroRadius: 12
+  innerRingRadius: 6
+  middleRingRadius: 9
+  outerRingRadius: 12
+  twoRingThreshold: 6
+  threeRingThreshold: 12
+  maxAttackers: 2
+  frontArcDegrees: 140
+  globalSpinSpeed: 1.2
+  personalSpinMin: 0.1
+  personalSpinMax: 0.35
+  player: {fileID: 0}

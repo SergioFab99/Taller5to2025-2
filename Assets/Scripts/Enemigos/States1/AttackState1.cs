@@ -1,6 +1,7 @@
 using UnityEngine;
 using KinematicCharacterController;
 
+
 public class AttackState1 : IEnemyState
 {
     private EnemyStateHandler ai;
@@ -35,7 +36,7 @@ public class AttackState1 : IEnemyState
             ai.QueuedBlock = false;
             EnemyAttackOrder.Instance.NotifyAttackFinished(ai);
 
-            ai.nextAttackTime = Time.time + Random.Range(2.0f, 2.6f);
+            ai.nextAttackTime = Time.time + UnityEngine.Random.Range(2.0f, 2.6f);
 
             if (attackMode.ForceBlocked)
             {

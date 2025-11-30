@@ -16,8 +16,7 @@ public class IdleState1 : IEnemyState
     {
         ai.ExitCombatMode();
         if (DisplayInteractHUD.thisIsLevel1)
-        {
-            Debug.Log("XD Entré");
+        {            
             ai.Target = ai.TargetPatrol;
             spawnEnemiesLvl1 = GameObject.Find("SpawnEnemies").GetComponent<SpawnEnemiesLvl1>();
             patrolFounds = spawnEnemiesLvl1.GetPatrolPoints();
@@ -35,7 +34,7 @@ public class IdleState1 : IEnemyState
         if(ai.TargetPatrol != null && ai.agent != null&& DisplayInteractHUD.thisIsLevel1)
         {
             ai.MoveTowardsTarget();
-            Debug.Log($"{ai.name} is now MovingPatrolling.");
+            
             if (ai.agent.remainingDistance <= ai.agent.stoppingDistance)
             {
                 FoundPatrolPoints();
