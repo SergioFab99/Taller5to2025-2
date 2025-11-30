@@ -233,6 +233,7 @@ public class EnemyStateHandler : MonoBehaviour
         if (!agent.enabled || !agent.isOnNavMesh) return;
         if (lockDirectChase) return;
 
+     character.SetMovementMode(MovementMode.NavMesh);
         agent.isStopped = false;
         agent.speed = MoveSpeed();
 
@@ -282,7 +283,7 @@ public class EnemyStateHandler : MonoBehaviour
                 agent.updatePosition = true;
                 agent.updateRotation = true;
                 agent.isStopped = false;
-                agent.Warp(character.transform.position); 
+                agent.Warp(character.transform.position);; 
             }
             character.SetMovementMode(MovementMode.NavMesh);
         }

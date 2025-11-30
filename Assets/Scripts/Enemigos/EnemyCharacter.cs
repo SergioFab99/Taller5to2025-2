@@ -1,9 +1,11 @@
 using KinematicCharacterController;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.AI;
+using System.Collections;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 
 
 public enum EnemyBehaviourState
@@ -35,6 +37,8 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private KinematicCharacterMotor motor;
     public KinematicCharacterMotor Motor => motor;
 
+    [FoldoutGroup("DefaultMovementBehaviourSettings")]
+    public DefaultAirSettings DefaultAirSettings;  
     private EnemySettingsList default_Settings;
 
 
@@ -48,7 +52,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public Vector3 LastMove { get; private set; } = Vector3.zero;
 
 
-    public EnemyCharacterState _state;
+    public EnemyCharacterState  _state;
     private EnemyCharacterState _lastState;
     private EnemyCharacterState _tempState;
 
@@ -91,13 +95,20 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public void AfterCharacterUpdate(float deltaTime)
     {
         
+      if(CurrentMode== MovementMode.KCC)
+      {
+        Debug.Log("aca");
       _state.Velocity = motor.Velocity;
       _state.Jump = _ungroundedDueToJump && _timeSinceUngrounded < 0.4f;
      _state.MovementState = motor.Velocity.magnitude > 0.1f ? MovementState.Moving : MovementState.Idle;
-          
+      }   
+      else
+        {
+            _state.Velocity = Vector3.one*5;
+            _state.MovementState = _state.Velocity.magnitude > 0.1f ? MovementState.Moving : MovementState.Idle;
+    }
    
     }
-
     public void BeforeCharacterUpdate(float deltaTime)
     {
 
@@ -214,7 +225,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
                     currentVelocity += _externalForces;
                     _externalForces = Vector3.zero;
                 }
-
+                
                 break;
 
             case EnemyBehaviourState.Combat:
@@ -254,6 +265,8 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
             case EnemyBehaviourState.Dead:
                 break;
         }
+        currentVelocity += motor.CharacterUp * DefaultAirSettings.Gravity * deltaTime;
+
     }
 
     public EnemyCharacterState GetState() => _state;
@@ -295,6 +308,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
 
     public void SetMovementMode(MovementMode mode)
     {
+        Debug.Log("SetMovementMode");
         CurrentMode = mode;
 
         if (TryGetComponent(out NavMeshAgent agent))
