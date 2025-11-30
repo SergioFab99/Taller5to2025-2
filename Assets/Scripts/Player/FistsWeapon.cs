@@ -111,8 +111,12 @@ public class FistsWeapon : Weapon
             var cols = Physics.OverlapSphere(pos, (settings as FistsWeaponSettings).radius);
             foreach (Collider col in cols)
             {
-                var hitInfo = new HitInfo(col, col.ClosestPoint(pos), (col.ClosestPoint(pos) - pos), (settings as FistsWeaponSettings).damague, Wtype, playerCombat);
-                PerformOnHit(hitInfo);
+                if(col.TryGetComponent<TagContainer>(out TagContainer tagContainer) && tagContainer.HasTag("Damagable") && !tagContainer.HasTag("Player"))
+                {
+                    var hitInfo = new HitInfo(col, col.ClosestPoint(pos), (col.ClosestPoint(pos) - pos), (settings as FistsWeaponSettings).damague, Wtype, playerCombat);
+                    PerformOnHit(hitInfo);
+                }
+               
             }
         }
         

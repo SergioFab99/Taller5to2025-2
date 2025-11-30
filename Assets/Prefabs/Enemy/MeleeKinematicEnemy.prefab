@@ -206,6 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  TargetPlayer: {fileID: 0}
+  TargetPatrol: {fileID: 0}
   EnemyBehaviourState: 0
   detectionRange: 10
   attackRange: 5
@@ -215,6 +217,8 @@ MonoBehaviour:
   stunDuration: 2
   drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
+  attackTagCooldownEndTime: 0
+  lockDirectChase: 0
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5

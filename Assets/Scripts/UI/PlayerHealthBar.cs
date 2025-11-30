@@ -17,6 +17,19 @@ public class PlayerHealthBar : MonoBehaviour
     private void Awake()
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
+
+        if(playerHealth==null)
+        {
+            playerHealth = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+        }
+    }
+
+    void Update()
+    {
+        if(playerHealth==null)
+        {
+            playerHealth = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+        }
     }
 
     private void OnEnable()
