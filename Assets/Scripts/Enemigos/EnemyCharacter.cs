@@ -45,7 +45,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
     public MovementMode CurrentMode { get; private set; } = MovementMode.NavMesh;
 
     private Vector3 target;
-
+    public Vector3 LastMove { get; private set; } = Vector3.zero;
 
 
     public EnemyCharacterState _state;
@@ -77,6 +77,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
         _requestedRotation = input.Direction;
 
         _requestedMovement = input.Move;
+        LastMove = input.Move;
 
         enemyBehaviourState = state;
         var wasResquestedJump = _requestedJump;
@@ -304,7 +305,7 @@ public class EnemyCharacter : MonoBehaviour, ICharacterController
             if (useNav)
             {
                 agent.updatePosition = true;
-                agent.updateRotation = true;
+                agent.updateRotation = false;
             }
             else
             {

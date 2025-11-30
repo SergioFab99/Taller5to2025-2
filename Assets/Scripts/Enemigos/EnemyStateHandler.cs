@@ -44,6 +44,9 @@ public class EnemyStateHandler : MonoBehaviour
     public Vector3 drunkRotationOffset = Vector3.zero;
     [NonSerialized] public NavMeshAgent agent;
     public EnemyCharacter character;
+    public float attackTagCooldownEndTime = 0f;
+    [NonSerialized] public float lastAttackTime = -999f;
+    public bool lockDirectChase = false;
 
     private Vector3 _lastCornerPos;
     private float _cornerTimer;
@@ -82,6 +85,7 @@ public class EnemyStateHandler : MonoBehaviour
 
         var hp = GetComponentInChildren<HealthController>();
         hp.OnLifeChangue += HandleHitEvent;
+
     }
 
     private void Awake()
@@ -90,7 +94,10 @@ public class EnemyStateHandler : MonoBehaviour
         {
             character = GetComponentInChildren<EnemyCharacter>();
         }
-        
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+        }
     }
     private void Start()
     {
@@ -98,9 +105,10 @@ public class EnemyStateHandler : MonoBehaviour
         {
             Target = GameObject.FindWithTag("Player").transform;
         }
-        if (TargetPlayer == null)
+        if (EnemyAttackOrder.Instance != null)
         {
-            TargetPlayer = GameObject.FindWithTag("Player").transform;
+            EnemyAttackOrder.Instance.RegisterEnemy(this);
+            Debug.Log($"{name} registered");
         }
     }
 
@@ -123,7 +131,19 @@ public class EnemyStateHandler : MonoBehaviour
                 if (_cornerTimer > 1f)
                 {
                     agent.ResetPath();
-                    agent.SetDestination(Target.position);
+
+                    Vector3 dest;
+
+                    if (EnemyAttackOrder.Instance != null &&
+                        EnemyAttackOrder.Instance.TryGetFormationDestination(this, out dest))
+                    {
+                        agent.SetDestination(dest);
+                    }
+                    else if (Target != null)
+                    {
+                        agent.SetDestination(Target.position);
+                    }
+
                     _cornerTimer = 0f;
                 }
             }
@@ -139,6 +159,7 @@ public class EnemyStateHandler : MonoBehaviour
     {
         if (isTransitioning || newState == currentState) return;
 
+        lockDirectChase = (newState == alert || newState == recover || newState == block);
         isTransitioning = true;
         currentState?.OnExit();
         currentState = newState;
@@ -210,6 +231,7 @@ public class EnemyStateHandler : MonoBehaviour
     {
         if (Target == null || agent == null) return;
         if (!agent.enabled || !agent.isOnNavMesh) return;
+        if (lockDirectChase) return;
 
         agent.isStopped = false;
         agent.speed = MoveSpeed();
@@ -236,8 +258,7 @@ public class EnemyStateHandler : MonoBehaviour
     public void StateMovement(IEnemyState newState)
     {
         bool useKCC =
-            newState == attack || newState == recover ||
-            newState == stunned || newState == block || newState == exposed;
+            newState == attack || newState == recover ||  newState == stunned || newState == block || newState == exposed;
 
         if (useKCC)
         {
@@ -275,24 +296,66 @@ public class EnemyStateHandler : MonoBehaviour
 
     public void HandleFacing()
     {
-        if (Target == null || isBlind) return;
-
+        if (Target == null) return;
         if (character.CurrentMode != MovementMode.NavMesh) return;
-        if (agent != null && agent.enabled && agent.updateRotation) return; 
 
-        float dist = Vector3.Distance(character.transform.position, Target.position);
-        if (dist <= detectionRange)
+        Vector3 toPlayer = Target.position - character.transform.position;
+        toPlayer.y = 0f;
+        if (toPlayer.sqrMagnitude < 0.01f) return;
+
+        Quaternion desired = Quaternion.LookRotation(toPlayer.normalized, Vector3.up);
+        character.transform.rotation = Quaternion.Slerp(
+            character.transform.rotation,
+            desired,
+            Time.deltaTime * turnSpeed
+        );
+    }
+
+    public Vector3 GetSafeRetreatDirection()
+    {
+        //me mato si no funca
+        if (Target == null)
+            return -character.transform.forward;
+
+        Vector3 toPlayer = Target.position - character.transform.position;
+        toPlayer.y = 0f;
+        if (toPlayer.sqrMagnitude < 0.01f)
+            return -character.transform.forward;
+
+        Vector3 facingToPlayer = toPlayer.normalized;
+        Vector3 retreat = -facingToPlayer;
+
+        Vector3 tangent = Vector3.Cross(Vector3.up, facingToPlayer).normalized;
+        float sideSign = UnityEngine.Random.value > 0.5f ? 1f : -1f;
+        retreat += tangent * sideSign * 0.35f;
+
+        var eao = EnemyAttackOrder.Instance;
+        if (eao != null)
         {
-            Vector3 dir = Target.position - character.transform.position;
-            dir.y = 0f;
-            if (dir.sqrMagnitude > 0.01f)
+            foreach (var attacker in eao.LockedAttackers)
             {
-                Quaternion lookRot = Quaternion.LookRotation(dir);
-                character.transform.rotation = Quaternion.Lerp(
-                    character.transform.rotation, lookRot, Time.deltaTime * turnSpeed);
+                if (attacker == null || attacker == this) continue;
+
+                float dist = Vector3.Distance(
+                    attacker.character.transform.position,
+                    character.transform.position
+                );
+
+                if (dist < 1.2f)
+                {
+                    Vector3 away = (character.transform.position - attacker.character.transform.position).normalized;
+                    retreat += away * 0.75f;
+                }
             }
         }
+
+        retreat.y = 0f;
+        if (retreat.sqrMagnitude < 0.001f)
+            retreat = -facingToPlayer;
+
+        return retreat.normalized;
     }
+
 
 
     // ------------------- STATUS -------------------
