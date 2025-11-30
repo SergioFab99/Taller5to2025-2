@@ -83,15 +83,17 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         if (other.gameObject.CompareTag("CheckPoint3"))
         {
             bat2.SetActive(true);
+            if(!SetUpTutorial.checkPoint3) SetUpTutorial.camera4 = true;
             SetUpTutorial.checkPoint3 = true;
             SetUpTutorial.enemyDefeatCount = 0;
+            Debug.Log($"EnemiesDeafeatCount {SetUpTutorial.enemyDefeatCount}");
             if (!unlockFinalEnemies)
             {
                 UnlockDoors.instance.CanUnlocMoreEnemies();
                 ManagerEnemiesInTutorial.instance.CallSpawn();
                 unlockFinalEnemies = true;
             }
-            SetUpTutorial.camera4 = true;
+            
         }
         
     }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class IdleState1 : IEnemyState
 {
     private EnemyStateHandler ai;
-
+    PatrolPointsForEnemies[] patrolFounds;
+    [SerializeField] private SpawnEnemiesLvl1 spawnEnemiesLvl1;
     public IdleState1(EnemyStateHandler main)
     {
         ai = main;
@@ -14,19 +15,54 @@ public class IdleState1 : IEnemyState
     public void OnEnter()
     {
         ai.ExitCombatMode();
+        if (DisplayInteractHUD.thisIsLevel1)
+        {
+            Debug.Log("XD Entré");
+            ai.Target = ai.TargetPatrol;
+            spawnEnemiesLvl1 = GameObject.Find("SpawnEnemies").GetComponent<SpawnEnemiesLvl1>();
+            patrolFounds = spawnEnemiesLvl1.GetPatrolPoints();
+        }
+        
         Debug.Log($"{ai.name} is now idle.");
     }
 
     public void Update()
     {
-        if (ai.Target != null && ai.CheckTargetOnView())
+        if (ai.TargetPlayer != null && ai.CheckTargetOnView())
         {
             ai.SetState(ai.GetAlertState());
         }
+        if(ai.TargetPatrol != null && ai.agent != null&& DisplayInteractHUD.thisIsLevel1)
+        {
+            ai.MoveTowardsTarget();
+            Debug.Log($"{ai.name} is now MovingPatrolling.");
+            if (ai.agent.remainingDistance <= ai.agent.stoppingDistance)
+            {
+                FoundPatrolPoints();
+            }
+        }
     }
-
+    void FoundPatrolPoints()
+    {
+        if (patrolFounds.Length > 0)
+        {
+            PatrolPointsForEnemies pointNear1 = patrolFounds[0];
+            float distancePointNear1 = Vector3.Distance(ai.transform.position, pointNear1.transform.position);
+            foreach (PatrolPointsForEnemies point in patrolFounds)
+            {
+                float distanceOfPoint = Vector3.Distance(ai.transform.position, point.transform.position);
+                if (distancePointNear1 > distanceOfPoint)
+                {
+                    pointNear1 = point;
+                    distancePointNear1 = distanceOfPoint;
+                }
+            }
+            ai.TargetPatrol = pointNear1.gameObject.transform;
+        }
+    }
     public void OnExit()
     {
+        ai.Target = ai.TargetPlayer;
         Debug.Log($"{ai.name} left idle state.");
     }
 

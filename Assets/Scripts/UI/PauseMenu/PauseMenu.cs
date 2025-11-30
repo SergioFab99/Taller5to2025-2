@@ -4,9 +4,13 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel, pauseMenu, shopMenu;
     [SerializeField] private PlayerCamera playerCamera;
-    void Start()
+    private void Awake()
     {
         pausePanel.SetActive(false);
+    }
+    void Start()
+    {
+        
     }
     private void Update()
     {

@@ -4,7 +4,7 @@ public class NPCTrigger : MonoBehaviour
 {
     [SerializeField] bool npc1, npc2, npc3, npc4;
     [SerializeField] DialogueController dialogueController;
-    [SerializeField] GameObject spawnPointNpc2, spawnPointNpc3, spawnPointNpc4, prefabEnemy;
+    [SerializeField] GameObject aggerssiveNpc2, aggerssiveNpc3, aggerssiveNpc4, passiveNpc2, passiveNpc3, passiveNpc4;
     [SerializeField] BoxCollider boxCollider;
     private void Start()
     {
@@ -60,6 +60,7 @@ public class NPCTrigger : MonoBehaviour
                 Debug.Log("InteractionNPC");
                 dialogueController.ActivateDialoguePanel();
                 dialogueController.LockPlayerCamera();
+                NPCInteraction.OnTriggerNpc = false;
                 canInteract.SetActive(false);
                 Time.timeScale = 0;
                 boxCollider.enabled = false;
@@ -85,14 +86,20 @@ public class NPCTrigger : MonoBehaviour
 
     void SpawnEnemyNpc2()
     {
-        Instantiate(prefabEnemy, spawnPointNpc2.transform.position, spawnPointNpc2.transform.rotation);
+        SpawnEnemiesLvl1.enemiesCapacity++;
+        aggerssiveNpc2.SetActive(true);
+        passiveNpc2.SetActive(false);
     }
     void SpawnEnemyNpc3()
     {
-        Instantiate(prefabEnemy, spawnPointNpc3.transform.position, spawnPointNpc3.transform.rotation);
+        SpawnEnemiesLvl1.enemiesCapacity++;
+        aggerssiveNpc3.SetActive(true);
+        passiveNpc3.SetActive(false);
     }
     void SpawnEnemyNpc4()
     {
-        Instantiate(prefabEnemy, spawnPointNpc4.transform.position, spawnPointNpc4.transform.rotation);
+        SpawnEnemiesLvl1.enemiesCapacity+=4;
+        aggerssiveNpc4.SetActive(true);
+        passiveNpc4.SetActive(false);
     }
 }

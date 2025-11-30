@@ -83,7 +83,7 @@ public class Indications : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint3)
         {
-            changeIndications = 6;
+            changeIndications = 7;
             
         }
     }
@@ -149,6 +149,7 @@ public class Indications : MonoBehaviour
                 indicationsLifeWithCamera = false;
             }
         }
+        Debug.Log("ChangeIndications = " + changeIndications);
         if(changeIndications == 8)
         {
             SetUpTutorial.checkPoint1 = false;
