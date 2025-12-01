@@ -29,9 +29,9 @@ public class BottleWeapon : Weapon
         Debug.Log("Attack");
         OnCrateAttack?.Invoke();
         playerCombat._state.CanAttack = false;
-
-
         StartCoroutine(playerCombat.ResetCanAttack((settings as CrateWeaponSettings).timeBetweenSwings));
+
+
         var direc2 = new Vector3(-0.15f, -0.1f, -0.05f);
         StartCoroutine(MakeShake((settings as CrateWeaponSettings).shakeForce, (settings as CrateWeaponSettings).AttackDelay, direc2));
         /* if (Physics.Raycast(playerCombat.playerCamera._camera.transform.position, playerCombat.playerCamera._camera.transform.forward, out RaycastHit hit, (settings as FistsWeaponSettings).attackDistance, hitMask))
