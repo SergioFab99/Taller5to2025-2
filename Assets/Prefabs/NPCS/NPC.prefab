@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3038467565324531584
 Transform:
   m_ObjectHideFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterText: 
   letterHUD: {fileID: 0}
+  playerCamera: {fileID: 0}
   letterTMP: {fileID: 0}
 --- !u!54 &2062753231620796443
 Rigidbody:
@@ -147,10 +148,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &6510059170920226148
 GameObject:
@@ -336,3 +337,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: {fileID: 3932229615968644712}
+  npcInteraction: {fileID: 0}

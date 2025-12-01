@@ -3,7 +3,7 @@ using UnityEngine;
 public class NPCDead : MonoBehaviour
 {
     HealthController health;
-    [SerializeField]GameObject letter;
+    [SerializeField] GameObject letter;
     [SerializeField] NPCInteraction npcInteraction;
     void Start()
     {
@@ -23,7 +23,7 @@ public class NPCDead : MonoBehaviour
 
     private void OnDestroy()
     {
-        letter.transform.position = transform.position;
+        letter.transform.position = new Vector3(gameObject.transform.position.x, letter.transform.position.y, gameObject.transform.position.z);
         letter.SetActive(true);
         npcInteraction.NPCCount();
     }
