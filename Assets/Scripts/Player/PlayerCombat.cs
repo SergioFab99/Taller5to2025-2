@@ -178,7 +178,7 @@ public class PlayerCombat : CombatBase
 
                 currentWeapon.Throw(cam.forward);
                 LinkWeapon(fistWeapon);
-            }
+            } 
 
         }
 
@@ -232,21 +232,12 @@ public class PlayerCombat : CombatBase
     void Attack()
     {
         int number =3;
-        if (_canCounter)
-        {
-            Debug.Log("Performing counter attack");
-            
-            currentWeapon.Attack();       
-            _canCounter = false;
-        
-            
-        }
         if(currentWeapon.Wtype == WeaponType.Fist)
         {
             if ((currentWeapon as FistsWeapon).currentHand == CombatHand.None || (currentWeapon as FistsWeapon).currentHand ==  CombatHand.Left)
             {
                 number = 0;
-            OnAttack?.Invoke(number);
+                OnAttack?.Invoke(number);
             }
             else if((currentWeapon as FistsWeapon).currentHand == CombatHand.Right)
             {
@@ -261,7 +252,20 @@ public class PlayerCombat : CombatBase
             number = 2;
             OnAttack?.Invoke(number);
         }
-        currentWeapon.Attack();       
+
+        if (_canCounter)
+        {
+            Debug.Log("Performing counter attack");
+            
+            currentWeapon.Attack();       
+            _canCounter = false;
+
+
+        }
+        else
+        {
+            currentWeapon.Attack();       
+        }
 
     }
 
@@ -293,7 +297,7 @@ public class PlayerCombat : CombatBase
             var Oldweapon = currentWeapon.gameObject;
             UnLinkWeapon();
             currentWeapon = weapon;
-            if (Oldweapon != null)
+            if (Oldweapon != null && Oldweapon != fistWeapon)
             {
                 Destroy(Oldweapon);
             }
