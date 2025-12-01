@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1158589162495316986, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
   m_PrefabInstance: {fileID: 66350518}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 66350520}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3c1f4902841cd249824372510187ca6, type: 3}
@@ -2157,13 +2157,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4119200912320418418, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 66350521}
   m_SourcePrefab: {fileID: 100100000, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
 --- !u!4 &66350519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6827160789051965030, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
   m_PrefabInstance: {fileID: 66350518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &66350520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4119200912320418418, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+  m_PrefabInstance: {fileID: 66350518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &66350521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66350520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72aab0d4646411a49a4f3301c32bf130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  canInteract: {fileID: 0}
+  bat2: {fileID: 0}
+  onTrigger: 0
+  openDoor1: 0
+  openDoor2: 0
+  unlockFinalEnemies: 0
 --- !u!1001 &69639464
 PrefabInstance:
   m_ObjectHideFlags: 0
