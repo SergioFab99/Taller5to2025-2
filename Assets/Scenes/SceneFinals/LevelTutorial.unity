@@ -24496,11 +24496,11 @@ MonoBehaviour:
   indicationsText: {fileID: 1146809370}
   indicationsTitle: {fileID: 566343466}
   textsForTitle:
-  - Movement and Jump
+  - Movement
   - Base Attack
   - Blockade
   - Sidestep
-  - Counterattack
+  - Sidestep
   - Interactuable Objects
   - Bate
   - Score and Upgrades
@@ -24511,7 +24511,7 @@ MonoBehaviour:
   - '"Left click" to attack.'
   - '"Right click" to block.'
   - '"Shift" to evade.'
-  - Upon successful evasion, quickly attack to trigger a successful counterattack
+  - 
   - '"E" to interact.'
   - '"E" to interact, "Left click" to attack.'
   - 'By eliminating enemies you earn points and when you complete a level these are
@@ -25781,10 +25781,10 @@ MonoBehaviour:
         z: 0
       Rotation:
         value:
-          x: 0.20744635
-          y: -0.000000003941289
+          x: 0.20744638
+          y: -0.000000007882578
           z: -0.25213224
-          w: 0.9451959
+          w: 0.945196
     m_MetaData:
     - Mode: 2
       Tension: 0.5
@@ -33898,7 +33898,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.4450866
+          x: -0.44508657
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -37294,8 +37294,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.6074258
-          z: 0.32936937
+          y: -0.60742575
+          z: 0.32936934
           w: -0.4800159
     - Position:
         x: 5.59
@@ -37864,6 +37864,10 @@ PrefabInstance:
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888436155508674662, guid: b41c1c5cd4e45f947b211d91880ddc78, type: 3}
       propertyPath: m_TagString
