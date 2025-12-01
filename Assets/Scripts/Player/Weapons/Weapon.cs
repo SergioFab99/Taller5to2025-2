@@ -9,16 +9,22 @@ public enum WeaponType
     Knife,
     Bat,
     Crate,
-
+    Bottle,
+    Beer,
+    BrassKnukles,
+    Brick,
+    Chair,
+    Desk,
+    Dinamite,
+    Stone,
+    WoodPlank,
 }
 
 
 public abstract class Weapon : MonoBehaviour
-{
-    
+{    
     public delegate void OnHitEvent(HitInfo info);
     public event OnHitEvent OnHit;
-
     public WeaponSettings settings;
     public WeaponType Wtype;
 

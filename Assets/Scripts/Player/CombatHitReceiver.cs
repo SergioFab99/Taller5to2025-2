@@ -90,6 +90,19 @@ public class CombatHitReceiver : MonoBehaviour
 
                 break;
 
+                case WeaponType.Beer:
+                    conexions.type = WeaponType.Beer;                    
+                    if (healthController != null)
+                    {
+                        healthController.AddHealth(Mathf.Abs(info.damague));
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"CombatHitReceiver: healthController null on {gameObject.name}");
+                    }
+                break;
+
+
 
 
         }
