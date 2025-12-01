@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2420732866875263207}
   - component: {fileID: 3604926231039609095}
   - component: {fileID: 5926677121349456480}
+  - component: {fileID: 8474282269072156364}
   m_Layer: 14
   m_Name: RightDoorWood
   m_TagString: Interactuable
@@ -78,6 +79,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8660545, y: 5.7564774, z: 1}
   m_Center: {x: -0.93302715, y: 0, z: 0}
+--- !u!114 &8474282269072156364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631645240662370270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - {fileID: 11400000, guid: 23882b482681bbc4ba315af5c093efdf, type: 2}
 --- !u!1001 &413617461089654921
 PrefabInstance:
   m_ObjectHideFlags: 0
