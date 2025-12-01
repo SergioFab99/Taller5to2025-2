@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: {fileID: 0}
-  Wtype: 4
-  Prefab: {fileID: 7974840344245759416, guid: 09a98a0be0015294bbc2906fce1edd5f, type: 3}
+  Wtype: 7
+  Prefab: {fileID: 7974840344245759416, guid: 82eb5ce6ccfb4984e9f867eca6ca4a67, type: 3}
   settings: {fileID: 11400000, guid: 8e103cb791b2b70499734c5a5019219c, type: 2}
   hitMask:
     serializedVersion: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
   point2: {fileID: 0}
   model: {fileID: 0}
   BrokenModel: {fileID: 0}
-  internalobject: {fileID: 235482736240872486, guid: 6de2020cfb1a7444e8c6b115c880c7a8, type: 3}
+  internalobject: {fileID: 0}
   hited: 1
 --- !u!54 &6232814622647065083
 Rigidbody:
@@ -121,8 +121,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.44821072, y: 0.46357346, z: 0.45887637}
-  m_Center: {x: -0.002755642, y: -0.0048291683, z: 0.008571386}
+  m_Size: {x: 0.08650941, y: 0.023635767, z: 0.0631593}
+  m_Center: {x: 0.00007900596, y: 0.0019740053, z: 0.0012012944}
 --- !u!1001 &5634435160370591495
 PrefabInstance:
   m_ObjectHideFlags: 0
