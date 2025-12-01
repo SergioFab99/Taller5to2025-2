@@ -2066,6 +2066,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1422847162}
+    - target: {fileID: 6837953310053227795, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: sideStepDuration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7464995353948142975, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: player
       value: 
@@ -49277,8 +49281,8 @@ SceneRoots:
   - {fileID: 889034852}
   - {fileID: 851554857}
   - {fileID: 1783029772}
-  - {fileID: 1060788809}
   - {fileID: 708744134}
+  - {fileID: 1060788809}
   - {fileID: 184358162}
   - {fileID: 1016451669}
   - {fileID: 1366627352}

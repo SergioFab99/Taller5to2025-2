@@ -182,10 +182,10 @@ public class FistsWeapon : Weapon
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        if (playerCombat != null)
+        if (playerCombat != null )
         {
-            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as FistsWeaponSettings).box);
-
+            Gizmos.DrawWireSphere(playerCombat.leftPunchPos.transform.position, (settings as FistsWeaponSettings).radius);
+            Gizmos.DrawWireSphere(playerCombat.rightPunchPos.transform.position, (settings as FistsWeaponSettings).radius);
         }
     }
 
