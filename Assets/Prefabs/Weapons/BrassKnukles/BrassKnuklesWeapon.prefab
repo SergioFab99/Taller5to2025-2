@@ -132,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: []
+  tags:
+  - {fileID: 11400000, guid: da4b763777ca6044d891a919c0aeafa1, type: 2}
 --- !u!114 &5847196366032386890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 8e103cb791b2b70499734c5a5019219c, type: 2}
   Wtype: 7
   tagContainer: {fileID: 4076772435169572201}
-  force: 0
+  force: 20
   throwWeapon: {fileID: 7974840344245759416, guid: f9a603537933125429a17ba3657993a7, type: 3}
   hitMask:
     serializedVersion: 2
