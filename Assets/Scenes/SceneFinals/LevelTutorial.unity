@@ -2066,6 +2066,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1422847162}
+    - target: {fileID: 6837953310053227795, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: sideStepDuration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7464995353948142975, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: player
       value: 
@@ -25477,10 +25481,10 @@ MonoBehaviour:
         z: 0
       Rotation:
         value:
-          x: 0.20744635
-          y: -0.000000003941289
+          x: 0.20744638
+          y: -0.000000007882578
           z: -0.25213224
-          w: 0.9451959
+          w: 0.945196
     m_MetaData:
     - Mode: 2
       Tension: 0.5
@@ -33678,7 +33682,7 @@ MonoBehaviour:
         z: 2.6750786
       Rotation:
         value:
-          x: -0.4450866
+          x: -0.44508657
           y: 0.1808558
           z: -0.07252316
           w: 0.8740306
@@ -36918,8 +36922,8 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.5404946
-          y: -0.60742575
-          z: 0.32936934
+          y: -0.6074258
+          z: 0.32936937
           w: -0.4800159
     - Position:
         x: 5.59

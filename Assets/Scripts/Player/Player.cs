@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
             Rotation = playerCamera._camera.transform.rotation,
             Move = input.Move.ReadValue<Vector2>(),
             Jump = false,
-            SideStep = input.Dash.WasPressedThisFrame() && playerCamera.CheckIsViewTarget(playerCharacter.transform)
+            SideStep = input.Dash.WasPressedThisFrame() 
         };
         playerCombat.SetMoveInput(characterInput.Move);
         playerCharacter.UpdateInput(characterInput);
@@ -159,29 +159,7 @@ public class Player : MonoBehaviour
         playerCharacter.SetPosition(position);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.collider.CompareTag("Enemy"))
-        {
-            ApplyContactDamage();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            ApplyContactDamage();
-        }
-    }
-
-    private void ApplyContactDamage()
-    {
-        if (healthController != null && contactDamage > 0f)
-        {
-            healthController.TakeDamague(contactDamage);
-        }
-    }
+  
     private void OnHealthChanged(float delta)
     {
         if (playerAudio == null) return;
