@@ -1945,12 +1945,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4257008274836238655, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1190346953}
     - targetCorrespondingSourceObject: {fileID: 4119200912320418418, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 443029439}
+    - targetCorrespondingSourceObject: {fileID: 4119200912320418418, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 443029449}
   m_SourcePrefab: {fileID: 100100000, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
 --- !u!4 &66350519 stripped
 Transform:
@@ -10389,6 +10389,20 @@ MonoBehaviour:
   openDoor1: 0
   openDoor2: 0
   unlockFinalEnemies: 0
+--- !u!114 &443029449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443029429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1150ffcce57b9b4fa2ec00da8e127ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSound: {fileID: 8300000, guid: 40abc99bbf56e464eaa582cd7b5c0913, type: 3}
+  punchSound: {fileID: 8300000, guid: 8d01258d4ea994543a4de2a21c970a15, type: 3}
 --- !u!1001 &445018626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26052,20 +26066,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4257008274836238655, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
   m_PrefabInstance: {fileID: 66350518}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1190346953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190346949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e800bf2f0d0cec040b112093df9b6160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSound: {fileID: 8300000, guid: 40abc99bbf56e464eaa582cd7b5c0913, type: 3}
-  punchSound: {fileID: 8300000, guid: 0496e50e36c8c744cb162143a46cc34d, type: 3}
 --- !u!1001 &1193417028
 PrefabInstance:
   m_ObjectHideFlags: 0
