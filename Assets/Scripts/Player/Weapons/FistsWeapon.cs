@@ -1,13 +1,13 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
-//using UnityEditor.Animations;
+
 using UnityEngine;
 
 
 public class FistsWeapon : Weapon
 {
-    //public AnimatorController controller;
+    
 
     public CombatHand currentHand;
     
