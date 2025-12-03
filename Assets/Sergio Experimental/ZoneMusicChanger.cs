@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -7,6 +8,8 @@ public class ZoneMusicChanger : MonoBehaviour
 {
     [Header("Zone Settings")]
     public Vector3 zoneSize = new Vector3(5f, 5f, 5f);
+    [Tooltip("Duration of the crossfade in seconds")]
+    public float fadeDuration = 2.0f;
 
     [Header("References")]
     public Transform player;
@@ -21,10 +24,10 @@ public class ZoneMusicChanger : MonoBehaviour
     private bool wasInside = false;
     private AudioSource[] enterAudioSources;
     private AudioSource[] exitAudioSources;
+    private Coroutine currentFadeCoroutine;
 
     void Start()
     {
-        // Inicializar AudioSources para enterClips
         enterAudioSources = new AudioSource[enterClips.Length];
         for (int i = 0; i < enterClips.Length; i++)
         {
@@ -36,10 +39,10 @@ public class ZoneMusicChanger : MonoBehaviour
                 enterAudioSources[i].clip = enterClips[i];
                 enterAudioSources[i].loop = true;
                 enterAudioSources[i].playOnAwake = false;
+                enterAudioSources[i].volume = 0f;
             }
         }
 
-        // Inicializar AudioSources para exitClips
         exitAudioSources = new AudioSource[exitClips.Length];
         for (int i = 0; i < exitClips.Length; i++)
         {
@@ -50,7 +53,8 @@ public class ZoneMusicChanger : MonoBehaviour
                 exitAudioSources[i] = exitObj.AddComponent<AudioSource>();
                 exitAudioSources[i].clip = exitClips[i];
                 exitAudioSources[i].loop = true;
-                exitAudioSources[i].playOnAwake = true; // Los exitClips empiezan sonando
+                exitAudioSources[i].playOnAwake = true;
+                exitAudioSources[i].volume = 1f;
                 exitAudioSources[i].Play();
             }
         }
@@ -82,48 +86,78 @@ public class ZoneMusicChanger : MonoBehaviour
 
     void HandleZoneChange(bool isInside)
     {
+        if (currentFadeCoroutine != null)
+        {
+            StopCoroutine(currentFadeCoroutine);
+        }
+
         if (isInside)
         {
             Debug.Log("ZoneMusicChanger: ENTRÓ en la zona - Activando EnterClips, desactivando ExitClips");
-            
-            // Activar enterClips
-            foreach (AudioSource source in enterAudioSources)
-            {
-                if (source != null && !source.isPlaying)
-                {
-                    source.Play();
-                }
-            }
-
-            // Desactivar exitClips
-            foreach (AudioSource source in exitAudioSources)
-            {
-                if (source != null && source.isPlaying)
-                {
-                    source.Stop();
-                }
-            }
+            currentFadeCoroutine = StartCoroutine(CrossFade(enterAudioSources, exitAudioSources));
         }
         else
         {
             Debug.Log("ZoneMusicChanger: SALIÓ de la zona - Activando ExitClips, desactivando EnterClips");
-            
-            // Activar exitClips
-            foreach (AudioSource source in exitAudioSources)
+            currentFadeCoroutine = StartCoroutine(CrossFade(exitAudioSources, enterAudioSources));
+        }
+    }
+
+    IEnumerator CrossFade(AudioSource[] toFadeIn, AudioSource[] toFadeOut)
+    {
+        float timer = 0f;
+
+        foreach (AudioSource source in toFadeIn)
+        {
+            if (source != null)
             {
-                if (source != null && !source.isPlaying)
-                {
-                    source.Play();
-                }
+                if (!source.isPlaying) source.Play();
+            }
+        }
+
+        float[] startVolIn = new float[toFadeIn.Length];
+        for (int i = 0; i < toFadeIn.Length; i++)
+        {
+            if (toFadeIn[i] != null) startVolIn[i] = toFadeIn[i].volume;
+        }
+
+        float[] startVolOut = new float[toFadeOut.Length];
+        for (int i = 0; i < toFadeOut.Length; i++)
+        {
+            if (toFadeOut[i] != null) startVolOut[i] = toFadeOut[i].volume;
+        }
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / fadeDuration;
+
+            for (int i = 0; i < toFadeIn.Length; i++)
+            {
+                if (toFadeIn[i] != null)
+                    toFadeIn[i].volume = Mathf.Lerp(startVolIn[i], 1f, t);
             }
 
-            // Desactivar enterClips
-            foreach (AudioSource source in enterAudioSources)
+            for (int i = 0; i < toFadeOut.Length; i++)
             {
-                if (source != null && source.isPlaying)
-                {
-                    source.Stop();
-                }
+                if (toFadeOut[i] != null)
+                    toFadeOut[i].volume = Mathf.Lerp(startVolOut[i], 0f, t);
+            }
+
+            yield return null;
+        }
+
+        foreach (AudioSource source in toFadeIn)
+        {
+            if (source != null) source.volume = 1f;
+        }
+
+        foreach (AudioSource source in toFadeOut)
+        {
+            if (source != null)
+            {
+                source.volume = 0f;
+                source.Stop();
             }
         }
     }

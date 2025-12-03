@@ -9,6 +9,21 @@ public class SoundWalkandPunch : MonoBehaviour
     [Header("Audio Sources")]
     private AudioSource walkAudioSource;
     private AudioSource punchAudioSource;
+    private static float lastPunchTime = -1f;
+    private static SoundWalkandPunch instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -48,11 +63,10 @@ public class SoundWalkandPunch : MonoBehaviour
             walkAudioSource.Stop();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && (lastPunchTime == -1f || Time.time - lastPunchTime >= 0.6f))
         {
-            punchAudioSource.Stop();
-            punchAudioSource.clip = punchSound;
-            punchAudioSource.Play();
+            punchAudioSource.PlayOneShot(punchSound);
+            lastPunchTime = Time.time;
         }
     }
 }
