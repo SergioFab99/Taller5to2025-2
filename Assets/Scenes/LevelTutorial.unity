@@ -22948,63 +22948,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136613882}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &650731444042934612
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.495
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.094
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553516384663411909, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6655372163052494738, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
-      propertyPath: m_Name
-      value: Basurero de metal 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7ba5d619fff18ab41aa3574676f0a111, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -23046,4 +22989,3 @@ SceneRoots:
   - {fileID: 154855951}
   - {fileID: 85168907}
   - {fileID: 902339040}
-  - {fileID: 650731444042934612}
