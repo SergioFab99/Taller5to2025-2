@@ -242,8 +242,19 @@ public class EnemyStateHandler : MonoBehaviour
             agent.SetDestination(Target.position);
     }
 
+    bool isKnockback=false;
+
+    IEnumerator KnockbackCooldown()
+    {
+        isKnockback = true;
+        yield return new WaitForSeconds(0.3f);
+        isKnockback = false;
+    }
+
     public void Knockback(Vector3 hitDirection, float forceMultiplier = 1f)
     {
+        return;
+        StartCoroutine(KnockbackCooldown());
         Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce * forceMultiplier}");
 
         if (currentState == block)
