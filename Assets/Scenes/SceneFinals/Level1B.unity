@@ -39183,10 +39183,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 411057210547438714, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 82b067a19623285448dfb55b94d6c731, type: 2}
     - target: {fileID: 4257008274836238655, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: m_Name
       value: PlayerNewAnimations Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4636429141159310969, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 923b877c6fa7a9140babf3cba814621b, type: 2}
+    - target: {fileID: 4923690623764393277, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 923b877c6fa7a9140babf3cba814621b, type: 2}
     - target: {fileID: 6291444344917235705, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: hitMask.m_Bits
       value: 16768
@@ -39195,6 +39207,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 415999816}
+    - target: {fileID: 7549779412144433652, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 923b877c6fa7a9140babf3cba814621b, type: 2}
     - target: {fileID: 8139104947959785939, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
