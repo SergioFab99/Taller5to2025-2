@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacker: {fileID: 0}
   Wtype: 4
-  Prefab: {fileID: 7974840344245759416, guid: 09a98a0be0015294bbc2906fce1edd5f, type: 3}
+  Prefab: {fileID: 0}
   settings: {fileID: 11400000, guid: 8e103cb791b2b70499734c5a5019219c, type: 2}
   hitMask:
     serializedVersion: 2
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   point2: {fileID: 5300959620528804001}
   model: {fileID: 3548422819793116476}
   BrokenModel: {fileID: 6029190115915224376}
-  internalobject: {fileID: 235482736240872486, guid: 6de2020cfb1a7444e8c6b115c880c7a8, type: 3}
+  internalobject: {fileID: 0}
   hited: 1
 --- !u!54 &6232814622647065083
 Rigidbody:
