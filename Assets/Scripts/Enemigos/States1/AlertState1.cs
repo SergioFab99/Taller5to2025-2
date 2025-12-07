@@ -6,14 +6,8 @@ public class AlertState1 : IEnemyState
     private EnemyStateHandler ai;
     private float alertTimer;
     private const float maxAlertTime = 3f;
-
-    //private float frontDistance = 6f;
-    //private float rearDistance = 8f;
-    //private float lateralAmplitudeFront = 1.5f;
-    //private float lateralAmplitudeRear = 2.0f;
     private float repositionCooldown = 0.5f;
     private float nextRepositionTime = 0f;
-
     private float phaseOffset;
 
     public AlertState1(EnemyStateHandler main)
@@ -27,6 +21,24 @@ public class AlertState1 : IEnemyState
         alertTimer = 0f;
         ai.ExitCombatMode();
         Debug.Log($"{ai.name} entered ALERT.");
+
+        if (ai.Target != null && ai.character != null)
+        {
+            Vector3 direction = (ai.Target.position - ai.character.transform.position).normalized;
+            direction.y = 0f;
+
+            Vector3 moveInput = direction * 0.1f;
+
+            var enemyInput = new EnemyInput
+            {
+                Direction = direction,
+                Move = moveInput
+            };
+            
+            ai.character.UpdateInputs(enemyInput, ai.GetBehaviourState());
+            ai.character._state.Velocity = moveInput;
+            ai.character._state.MovementState = MovementState.Moving;
+        }
     }
 
     public void Update()
@@ -56,6 +68,21 @@ public class AlertState1 : IEnemyState
 
         if (ai.agent == null || !ai.agent.enabled || !ai.agent.isOnNavMesh)
             return;
+
+        Vector3 direction = (ai.Target.position - ai.character.transform.position).normalized;
+        direction.y = 0f;
+
+        float stopDistance = ai.enemySettings.AISettings.stopingDistance;
+        Vector3 moveInput = (dist > stopDistance + 0.5f) ? direction : Vector3.zero;
+
+        var enemyInput = new EnemyInput
+        {
+            Direction = direction,
+            Move = moveInput
+        };
+        ai.character.UpdateInputs(enemyInput, ai.GetBehaviourState());
+        ai.character._state.Velocity = moveInput;
+        ai.character._state.MovementState = moveInput.magnitude > 0.01f ? MovementState.Moving : MovementState.Idle;
 
         if (coord.TryGetFormationDestination(ai, out Vector3 dest))
         {
@@ -100,54 +127,6 @@ public class AlertState1 : IEnemyState
             ai.agent.SetDestination(newDest);
         }
     }
-
-    //private void FrontFormationMove(Transform player)
-    //{
-    //    if (ai.agent == null || player == null) return;
-
-    //    if (Time.time < nextRepositionTime)
-    //        return;
-
-    //    nextRepositionTime = Time.time + repositionCooldown;
-
-    //    Vector3 toEnemy = ai.transform.position - player.position;
-    //    if (toEnemy.sqrMagnitude < 0.01f)
-    //        toEnemy = -player.forward;
-
-    //    Vector3 forwardFromPlayer = -toEnemy.normalized; 
-    //    Vector3 tangent = Vector3.Cross(Vector3.up, forwardFromPlayer).normalized;
-
-    //    float lateral = Mathf.Sin(Time.time * 0.8f + phaseOffset) * lateralAmplitudeFront;
-
-    //    Vector3 targetPos =
-    //        player.position +
-    //        forwardFromPlayer * frontDistance +
-    //        tangent * lateral;
-
-    //    ai.agent.SetDestination(targetPos);
-    //}
-
-    //private void RearFormationMove(Transform player)
-    //{
-    //    if (ai.agent == null || player == null) return;
-
-    //    if (Time.time < nextRepositionTime)
-    //        return;
-
-    //    nextRepositionTime = Time.time + repositionCooldown;
-
-    //    Vector3 backDir = -player.forward;
-    //    Vector3 tangent = Vector3.Cross(Vector3.up, backDir).normalized;
-
-    //    float lateral = Mathf.Sin(Time.time * 0.6f + phaseOffset) * lateralAmplitudeRear;
-
-    //    Vector3 targetPos =
-    //        player.position +
-    //        backDir.normalized * rearDistance +
-    //        tangent * lateral;
-
-    //    ai.agent.SetDestination(targetPos);
-    //}
 
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
     {

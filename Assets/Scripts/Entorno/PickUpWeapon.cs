@@ -82,12 +82,15 @@ public class PickUpWeapon : MonoBehaviour
         if (!hited) return;
         if (model == null || BrokenModel == null) return;
         model.SetActive(false);
-        BrokenModel.SetActive(true); 
+        BrokenModel.SetActive(true);
+        var tag = this.GetComponent<TagContainer>();
+        Destroy(tag);
         if(Wtype==WeaponType.Crate)
                     {
                         Wood();
                     }     
-        Destroy(this.gameObject, 6f);
+        Destroy(this.gameObject, 3f);
+
     }
 
     public void Wood()
