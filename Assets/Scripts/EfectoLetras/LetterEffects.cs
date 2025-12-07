@@ -3,34 +3,42 @@ using TMPro;
 
 public class LetterEffects : MonoBehaviour
 {
-    [Header("Configuración del Efecto (Color)")]
+    [Header("Configuración del Efecto (Máquina de Escribir Antigua)")]
     [SerializeField] private TMP_Text textComponent;
-    [Tooltip("Velocidad de la animación de color")]
-    [SerializeField] private float speed = 4.0f; 
-    [Tooltip("Frecuencia de la onda de color")]
-    [SerializeField] private float waveFrequency = 0.5f; 
-    [Tooltip("Opacidad mínima para el efecto tenue")]
-    [SerializeField] [Range(0f, 1f)] private float minAlpha = 0.2f; 
-    [Tooltip("Opacidad máxima")]
-    [SerializeField] [Range(0f, 1f)] private float maxAlpha = 1.0f; 
+    [Tooltip("Tiempo entre la aparición de cada letra")]
+    [SerializeField] private float revealSpeed = 0.1f; 
+    [Tooltip("Opacidad mínima para letras no reveladas")]
+    [SerializeField] [Range(0f, 1f)] private float minAlpha = 0.0f; 
+    [Tooltip("Opacidad máxima para letras reveladas")]
+    [SerializeField] [Range(0f, 1f)] private float maxAlpha = 1.0f;
+    [Tooltip("Velocidad del parpadeo después de revelar")]
+    [SerializeField] private float blinkSpeed = 2.0f;
+    [Tooltip("Espaciado del degradado de parpadeo")]
+    [SerializeField] private float blinkSpacing = 0.5f;
 
-    [Header("Configuración de Deformación (Bandera)")]
-    [Tooltip("Amplitud de la onda física (altura)")]
-    [SerializeField] private float warpAmplitude = 5.0f;
-    [Tooltip("Frecuencia de la onda física (ancho)")]
-    [SerializeField] private float warpFrequency = 0.05f;
-    [Tooltip("Velocidad de la onda física")]
-    [SerializeField] private float warpSpeed = 5.0f;
+    private float startTime;
+    private string lastText;
 
     void Awake()
     {
         if (textComponent == null)
             textComponent = GetComponent<TMP_Text>();
+        if (textComponent != null)
+        {
+            lastText = textComponent.text;
+            startTime = Time.time;
+        }
     }
 
     void Update()
     {
         if (textComponent == null) return;
+
+        if (textComponent.text != lastText)
+        {
+            startTime = Time.time;
+            lastText = textComponent.text;
+        }
 
         textComponent.ForceMeshUpdate();
         
@@ -38,6 +46,8 @@ public class LetterEffects : MonoBehaviour
         int characterCount = textInfo.characterCount;
 
         if (characterCount == 0) return;
+
+        int revealedCount = Mathf.Min(characterCount, Mathf.FloorToInt((Time.time - startTime) / revealSpeed));
 
         for (int i = 0; i < characterCount; i++)
         {
@@ -51,12 +61,24 @@ public class LetterEffects : MonoBehaviour
             
             Color32[] newVertexColors = textInfo.meshInfo[materialIndex].colors32;
 
-            float offset = (characterCount - i) * waveFrequency;
-            float wave = Mathf.Sin(Time.time * speed + offset);
-            
-            float t = (wave + 1f) * 0.5f;
-
-            byte alpha = (byte)(Mathf.Lerp(minAlpha, maxAlpha, t) * 255);
+            byte alpha;
+            if (revealedCount < characterCount)
+            {
+                if (i < revealedCount)
+                {
+                    alpha = (byte)(maxAlpha * 255);
+                }
+                else
+                {
+                    alpha = (byte)(minAlpha * 255);
+                }
+            }
+            else
+            {
+                float phase = Time.time * blinkSpeed - i * blinkSpacing;
+                float t = (Mathf.Sin(phase) + 1f) * 0.5f;
+                alpha = (byte)(Mathf.Lerp(minAlpha, maxAlpha, t) * 255);
+            }
 
             Color32 c0 = newVertexColors[vertexIndex + 0];
             Color32 c1 = newVertexColors[vertexIndex + 1];
@@ -72,19 +94,8 @@ public class LetterEffects : MonoBehaviour
             newVertexColors[vertexIndex + 1] = c1;
             newVertexColors[vertexIndex + 2] = c2;
             newVertexColors[vertexIndex + 3] = c3;
-
-            
-            Vector3[] vertices = textInfo.meshInfo[materialIndex].vertices;
-
-            for (int j = 0; j < 4; j++)
-            {
-                Vector3 orig = vertices[vertexIndex + j];
-                orig.y += Mathf.Sin(Time.time * warpSpeed + orig.x * warpFrequency) * warpAmplitude;
-                vertices[vertexIndex + j] = orig;
-            }
         }
 
         textComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
-        textComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices);
     }
 }
