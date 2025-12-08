@@ -3723,6 +3723,10 @@ MonoBehaviour:
           y: 0.9984403
           z: 0.05582852
           w: -0.000012662646
+          x: -0.000000842329
+          y: 0.9984403
+          z: 0.05582852
+          w: -0.000012664966
     - Position:
         x: 0.00032806396
         y: 0.45521903
@@ -9712,6 +9716,14 @@ PlayableDirector:
     value: {fileID: 1206987689}
   - key: {fileID: -3937141243035726270, guid: 297734128010fb742b3aa213e1ffc54a, type: 2}
     value: {fileID: 1207917050}
+  - key: {fileID: 0}
+    value: {fileID: 138926636}
+  - key: {fileID: 0}
+    value: {fileID: 2003715409}
+  - key: {fileID: 0}
+    value: {fileID: 869160323}
+  - key: {fileID: 0}
+    value: {fileID: 849376163}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &1207917050
@@ -10835,6 +10847,8 @@ PlayableDirector:
     value: {fileID: 869160323}
   - key: {fileID: -8520580358975183141, guid: 3752357863c5b8741bff344af9ed6497, type: 2}
     value: {fileID: 2003715409}
+  - key: {fileID: 6564380715688890439, guid: 3752357863c5b8741bff344af9ed6497, type: 2}
+    value: {fileID: 138926636}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1294903727
