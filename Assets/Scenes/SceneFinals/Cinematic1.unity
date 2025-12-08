@@ -3719,14 +3719,10 @@ MonoBehaviour:
         z: 0.5743909
       Rotation:
         value:
-          x: -0.0000008843494
+          x: -0.0000008838382
           y: 0.9984403
           z: 0.05582852
-          w: -0.000012662618
-          x: -0.0000008542646
-          y: 0.9984403
-          z: 0.05582852
-          w: -0.000012664301
+          w: -0.000012662646
     - Position:
         x: 0.00032806396
         y: 0.45521903
@@ -9756,6 +9752,7 @@ MonoBehaviour:
   nameText: {fileID: 230484013}
   panelDialogues: {fileID: 67936211}
   timeLineCinematic: {fileID: 1207917049}
+  timeLineAnimation: {fileID: 1294903726}
   actualLines:
   - "Buenas noches Edward, que te trae por aqu\xED tan tarde."
   - Buenos noches Hendrick, he venido por un asunto urgente. Se trata de Albert.
@@ -18410,7 +18407,6 @@ SceneRoots:
   - {fileID: 1693112845}
   - {fileID: 1317327426}
   - {fileID: 1207917048}
-  - {fileID: 1239950469}
   - {fileID: 592195985}
   - {fileID: 54611715}
   - {fileID: 1294903727}

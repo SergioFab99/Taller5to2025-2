@@ -4216,6 +4216,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8038313540561035895, guid: 1a71294f398714c4e961bb192d4db70d, type: 3}
   m_PrefabInstance: {fileID: 851706552}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &877616441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 877616443}
+  - component: {fileID: 877616442}
+  m_Layer: 0
+  m_Name: Animation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &877616442
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877616441}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 086c92eba7a5ff8488b5d04653b8d6f0, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &877616443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877616441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &877750344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4552,6 +4601,7 @@ MonoBehaviour:
   nameText: {fileID: 2112551548}
   panelDialogues: {fileID: 1911367992}
   timeLineCinematic: {fileID: 911317776}
+  timeLineAnimation: {fileID: 877616442}
   actualLines:
   - "Cuanto tiempo Hendrick \xBFNo vas a pedir nada?"
   - "Buenas noches Carlotta. No pensaba pedir nada, pero el olor a caf\xE9 me ha
@@ -7842,7 +7892,7 @@ Transform:
   m_GameObject: {fileID: 1567142895}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0007931753, y: 0.48752704, z: 0.00044289438, w: 0.87310743}
-  m_LocalPosition: {x: 0.47891617, y: -0.111184835, z: 4.685116}
+  m_LocalPosition: {x: 0.54999924, y: -0.11100006, z: 4.790001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12164,3 +12214,4 @@ SceneRoots:
   - {fileID: 365069992}
   - {fileID: 911317775}
   - {fileID: 1085377114}
+  - {fileID: 877616443}
