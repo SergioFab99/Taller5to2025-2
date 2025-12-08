@@ -230,17 +230,21 @@ public class PlayerCombat : CombatBase
 
     void Attack()
     {
+        // Diagnóstico: ver arma y estado al empezar Attack
+        Debug.Log($"[Diag] PlayerCombat.Attack() currentWeapon={(currentWeapon!=null?currentWeapon.Wtype.ToString():"null")} CanAttack={_state.CanAttack}");
         int number =3;
         if(currentWeapon.Wtype == WeaponType.Fist)
         {
             if ((currentWeapon as FistsWeapon).currentHand == CombatHand.None || (currentWeapon as FistsWeapon).currentHand ==  CombatHand.Left)
             {
                 number = 0;
+                Debug.Log($"[Diag] Invoking OnAttack: side={number} (weapon={currentWeapon?.Wtype})");
                 OnAttack?.Invoke(number);
             }
             else if((currentWeapon as FistsWeapon).currentHand == CombatHand.Right)
             {
                 number = 1;
+                Debug.Log($"[Diag] Invoking OnAttack: side={number} (weapon={currentWeapon?.Wtype})");
                 OnAttack?.Invoke(number);
             }
            
@@ -249,13 +253,14 @@ public class PlayerCombat : CombatBase
         else if (currentWeapon.Wtype == WeaponType.Bat)
         {
             number = 2;
+            Debug.Log($"[Diag] Invoking OnAttack: side={number} (weapon={currentWeapon?.Wtype})");
             OnAttack?.Invoke(number);
         }
 
         if (_canCounter)
         {
             Debug.Log("Performing counter attack");
-            
+            Debug.Log($"[Diag] Calling currentWeapon.Attack() for weapon={currentWeapon?.Wtype}");
             currentWeapon.Attack();       
             _canCounter = false;
 
@@ -263,6 +268,7 @@ public class PlayerCombat : CombatBase
         }
         else
         {
+            Debug.Log($"[Diag] Calling currentWeapon.Attack() for weapon={currentWeapon?.Wtype}");
             currentWeapon.Attack();       
         }
 
@@ -309,31 +315,43 @@ public class PlayerCombat : CombatBase
     public void LinkWeapon(GameObject obj)
     {
         Debug.Log("LinkWeapon");
-        var weapon = obj.GetComponent<Weapon>();
-        if (weapon.Wtype == WeaponType.Fist)
+        if (obj == null)
         {
-            weapon.gameObject.SetActive(true);
-            var Oldweapon = currentWeapon.gameObject;
-            UnLinkWeapon();
-            currentWeapon = weapon;
-            if (Oldweapon != null && Oldweapon != fistWeapon)
-            {
-                Destroy(Oldweapon);
-            }
-            currentWeapon = weapon;
-
-            currentWeapon.Initialize(this);
+            Debug.LogWarning("LinkWeapon: obj is null");
+            return;
+        }
+        
+        GameObject instance = null;
+        if (obj.scene.IsValid())
+        {
+            instance = obj;
         }
         else
         {
-            UnLinkWeapon();
-            var weaponObj = Instantiate(obj, weaponPos.transform);
-            Debug.Log("InstantieWeapon");
-            var weaponScript = weaponObj.GetComponent<Weapon>();
-            currentWeapon = weaponScript;
-
-            currentWeapon.Initialize(this);
+            instance = Instantiate(obj, weaponPos.transform);
+            instance.transform.localPosition = Vector3.zero;
+            instance.transform.localRotation = Quaternion.identity;
         }
+
+        var weapon = instance.GetComponent<Weapon>();
+        if (weapon == null)
+        {
+            Debug.LogWarning("LinkWeapon: provided object does not contain a Weapon component: " + obj.name);
+            return;
+        }
+        
+        GameObject oldWeaponGO = currentWeapon != null ? currentWeapon.gameObject : null;
+        UnLinkWeapon();
+
+        currentWeapon = weapon;
+        currentWeapon.Initialize(this);
+
+        if (oldWeaponGO != null && oldWeaponGO != currentWeapon.gameObject)
+        {
+            Destroy(oldWeaponGO);
+        }
+
+        _state.CanAttack = true;
 
     }
     private Transform FindNearestTargetInFOV(float maxDist, float fovDegrees, LayerMask mask)
@@ -478,14 +496,17 @@ public class PlayerCombat : CombatBase
 
     public void UnLinkWeapon()
     {
+        if (currentWeapon == null) return;
+
         if (currentWeapon.Wtype == WeaponType.Fist)
         {
-            currentWeapon.gameObject.SetActive(false);
+            if (currentWeapon.gameObject != null)
+                currentWeapon.gameObject.SetActive(false);
             currentWeapon = null;
         }
         else
         {
-            currentWeapon = null;      
+            currentWeapon = null;
         }
     }
 

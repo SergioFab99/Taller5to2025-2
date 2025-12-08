@@ -9999,8 +9999,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336040515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06652623, y: -0.010296124, z: 0.00068651984, w: 0.9977313}
-  m_LocalPosition: {x: -19.739328, y: 0.95478106, z: 38.582275}
+  m_LocalRotation: {x: 0.3298212, y: -0.40048796, z: 0.15719162, w: 0.84030837}
+  m_LocalPosition: {x: -29.582329, y: 1.9277811, z: 28.553276}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12073,11 +12073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2418263170243750057, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.w
-      value: -0.000012662683
+      value: -0.000012662685
       objectReference: {fileID: 0}
     - target: {fileID: 2418263170243750057, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.x
-      value: -0.0000008832027
+      value: -0.00000088315693
       objectReference: {fileID: 0}
     - target: {fileID: 2545832728877035831, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_SceneBindings.Array.size
