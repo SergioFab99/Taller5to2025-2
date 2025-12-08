@@ -4,7 +4,7 @@ public class NPCTrigger : MonoBehaviour
 {
     [SerializeField] bool npc1, npc2, npc3, npc4;
     [SerializeField] DialogueController dialogueController;
-    [SerializeField] GameObject aggerssiveNpc2, aggerssiveNpc3, aggerssiveNpc4, passiveNpc2, passiveNpc3, passiveNpc4;
+    [SerializeField] GameObject aggerssiveNpc2, aggerssiveNpc3, aggerssiveNpc4, aggerssiveNpc4Extra1, aggerssiveNpc4Extra2, aggerssiveNpc4Extra3, passiveNpc2, passiveNpc3, passiveNpc4;
     [SerializeField] BoxCollider boxCollider;
     private void Start()
     {
@@ -100,6 +100,9 @@ public class NPCTrigger : MonoBehaviour
     {
         SpawnEnemiesLvl1.enemiesCapacity+=4;
         aggerssiveNpc4.SetActive(true);
+        aggerssiveNpc4Extra1.SetActive(true);
+        aggerssiveNpc4Extra2.SetActive(true);
+        aggerssiveNpc4Extra3.SetActive(true);
         passiveNpc4.SetActive(false);
     }
 }

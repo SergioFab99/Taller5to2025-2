@@ -6042,14 +6042,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1699048199}
-    - targetCorrespondingSourceObject: {fileID: 3270258339972143186, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      insertIndex: 2
       addedObject: {fileID: 1207700193}
-    - targetCorrespondingSourceObject: {fileID: 3270258339972143186, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      insertIndex: 3
       addedObject: {fileID: 1497170375}
-    - targetCorrespondingSourceObject: {fileID: 3270258339972143186, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      insertIndex: 4
       addedObject: {fileID: 1242256324}
     - targetCorrespondingSourceObject: {fileID: 3270258339972143186, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
       insertIndex: -1
@@ -12322,7 +12322,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 408157402}
+    m_TransformParent: {fileID: 1989014572}
     m_Modifications:
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
@@ -12330,7 +12330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12377,6 +12377,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+--- !u!1 &477676581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+  m_PrefabInstance: {fileID: 477676580}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &478515218
 GameObject:
   m_ObjectHideFlags: 0
@@ -41947,7 +41952,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 408157402}
+    m_TransformParent: {fileID: 1989014572}
     m_Modifications:
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
@@ -41955,7 +41960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42002,6 +42007,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+--- !u!1 &1730414449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+  m_PrefabInstance: {fileID: 1730414448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1731948311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48423,7 +48433,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 408157402}
+    m_TransformParent: {fileID: 1989014572}
     m_Modifications:
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_Name
@@ -48431,7 +48441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5708308289308665293, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48478,6 +48488,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+--- !u!1 &1979579611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 714045327343607470, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+  m_PrefabInstance: {fileID: 1979579610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1980064048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51032,6 +51047,18 @@ PrefabInstance:
       propertyPath: dialogueController
       value: 
       objectReference: {fileID: 964301985}
+    - target: {fileID: 444447735717542441, guid: f83ce10fc66075241804b99fb031e4e6, type: 3}
+      propertyPath: aggerssiveNpc4Extra1
+      value: 
+      objectReference: {fileID: 477676581}
+    - target: {fileID: 444447735717542441, guid: f83ce10fc66075241804b99fb031e4e6, type: 3}
+      propertyPath: aggerssiveNpc4Extra2
+      value: 
+      objectReference: {fileID: 1730414449}
+    - target: {fileID: 444447735717542441, guid: f83ce10fc66075241804b99fb031e4e6, type: 3}
+      propertyPath: aggerssiveNpc4Extra3
+      value: 
+      objectReference: {fileID: 1979579611}
     - target: {fileID: 691531516560130864, guid: f83ce10fc66075241804b99fb031e4e6, type: 3}
       propertyPath: m_Name
       value: NPC1
