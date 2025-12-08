@@ -594,7 +594,7 @@ PrefabInstance:
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: fistWeapon
       value: 
-      objectReference: {fileID: 5673314932724495531}
+      objectReference: {fileID: 8087014963757297967, guid: 94f1d39ad36ca6d4a987b358269915cc, type: 3}
     - target: {fileID: 6332060388536341452, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: holdpoint2
       value: 
@@ -988,11 +988,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5570666785982006465, guid: c8f31c6acc2078247995333c7520620f, type: 3}
   m_PrefabInstance: {fileID: 8528997003148228094}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5673314932724495531 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4100171539347079509, guid: c8f31c6acc2078247995333c7520620f, type: 3}
-  m_PrefabInstance: {fileID: 8528997003148228094}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6340581806712205580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2423869100366742770, guid: c8f31c6acc2078247995333c7520620f, type: 3}
@@ -1003,7 +998,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3454665594819527305, guid: c8f31c6acc2078247995333c7520620f, type: 3}
   m_PrefabInstance: {fileID: 8528997003148228094}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5673314932724495531}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
