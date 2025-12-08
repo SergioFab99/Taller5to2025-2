@@ -8,7 +8,7 @@ public class DialogueCinematics : MonoBehaviour
     public TMP_Text dialogueText;
     public TMP_Text nameText;
     [SerializeField] private GameObject panelDialogues;
-    [SerializeField] private PlayableDirector timeLineCinematic, timeLineAnimation;
+    [SerializeField] private PlayableDirector timeLineCinematic;
     [TextArea(4, 6)] public string[] actualLines;
     [TextArea(4, 6)] public string[] nameLines;
 
@@ -106,14 +106,12 @@ public class DialogueCinematics : MonoBehaviour
     public void PauseTimeLine()
     {
         canChangeLines = true;
-        timeLineCinematic.Pause();
-        timeLineAnimation.Pause();
+        timeLineCinematic.Pause();       
     }
     public void NextDialogueLine()
     {
         canChangeLines = false;
-        timeLineCinematic.Resume();
-        timeLineAnimation.Resume();
+        timeLineCinematic.Resume();        
         index++;
         ChangeName();
         if (index < actualLines.Length)
