@@ -150,7 +150,7 @@ public class Indications : MonoBehaviour
             }
         }
         Debug.Log("ChangeIndications = " + changeIndications);
-        if(changeIndications == 8)
+        if(changeIndications == 7)
         {
             SetUpTutorial.checkPoint1 = false;
             SetUpTutorial.checkPoint2 = false;
