@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755660316043718937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3194401, y: -0.020925114, z: 0.59184045, w: 0.7397602}
-  m_LocalPosition: {x: -0.253, y: 0.02, z: 0.128}
+  m_LocalRotation: {x: -0.60959244, y: -0.06097722, z: -0.07866753, w: 0.78644156}
+  m_LocalPosition: {x: 0.1, y: 0.129, z: -0.474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 594918455024854443}
-  m_Father: {fileID: 6719248308375686903}
-  m_LocalEulerAnglesHint: {x: 29.827, y: 23.589, z: 83.689}
+  m_Father: {fileID: 1772994027928672535}
+  m_LocalEulerAnglesHint: {x: -75.56, y: 0, z: -11.425}
 --- !u!33 &2624226468643467388
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -87,6 +87,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1071066699238839975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1772994027928672535}
+  m_Layer: 12
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1772994027928672535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071066699238839975}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.12669969, y: 0.4423287, z: 0.45543218, w: 0.76215094}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8469660530285519019}
+  m_Father: {fileID: 6719248308375686903}
+  m_LocalEulerAnglesHint: {x: -12.109, y: 413.864, z: -304.447}
 --- !u!1 &3347038105483639050
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8469660530285519019}
+  - {fileID: 1772994027928672535}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3425228111090895577
@@ -183,7 +215,7 @@ MonoBehaviour:
   Wtype: 3
   tagContainer: {fileID: 3425228111090895577}
   force: 20
-  throwWeapon: {fileID: 6222481651229147237, guid: 137689b7d9db05b438668a0a8f96a2d8, type: 3}
+  throwWeapon: {fileID: 6222481651229147237, guid: 6b2889c4874bfe6419985122ea0f64fb, type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 256
