@@ -28,7 +28,7 @@ public class DialogueCinematics : MonoBehaviour
         panelDialogues.SetActive(false);
         ChangeName();
     }
-    public void Update()
+    public void FixedUpdate()
     {
         if (Time.timeScale == 0f || Time.timeScale == 1f)
         {
