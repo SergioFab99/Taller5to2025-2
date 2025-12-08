@@ -5983,6 +5983,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 205689281}
     m_Modifications:
+    - target: {fileID: 1115544160346458281, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      propertyPath: letterText
+      value: "Informaci\xF3n sobre Hendrick:\r\n\r\nHombre de 36 a\xF1os, ex Teniente
+        de la polic\xEDa y actualmente detective privado, separado de Carlotta.\r\n\r\nHendrick
+        se separ\xF3 de su esposa y se fue de la polic\xEDa con motivos aun desconocidos.
+        Particip\xF3 en la guerra. No le gusta el caf\xE9 ni madrugar."
+      objectReference: {fileID: 0}
     - target: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.23
@@ -13981,6 +13988,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 205689281}
     m_Modifications:
+    - target: {fileID: 1115544160346458281, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      propertyPath: letterText
+      value: "Informaci\xF3n sobre Albert:\r\n\r\nHombre de 40 a\xF1os, oficial de
+        polic\xEDa, divorciado y con pareja.\r\n\r\nPas\xF3 varios a\xF1os en un
+        caso para descubrir la desaparici\xF3n de sus padres; pero nunca lo resolvi\xF3. 
+        En esa \xE9poca en lo que investigaba este caso su esposa le fue infiel por
+        lo que se divorciaron."
+      objectReference: {fileID: 0}
     - target: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.39
@@ -54141,6 +54156,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 205689281}
     m_Modifications:
+    - target: {fileID: 1115544160346458281, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
+      propertyPath: letterText
+      value: "Informaci\xF3n sobre Carlotta:\r\n\r\nMujer de 33 a\xF1os, miembro
+        importante de la organizaci\xF3n LaCour, separada de Hendrick.\r\n\r\nCarlotta
+        perdi\xF3 a su madre a los  14 a\xF1os, as\xED que su padre, l\xEDder de
+        LaCour, la tuvo que cuidar y la oblig\xF3 a ser parte de la organizaci\xF3n.
+        Estuvo casada 5 a\xF1os con Hendrick, aunque su padre nunca estuvo a favor
+        de este matrimonio."
+      objectReference: {fileID: 0}
     - target: {fileID: 5184751801987853605, guid: 5281f7e145729db48b9abacdd88e87c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -119.459
