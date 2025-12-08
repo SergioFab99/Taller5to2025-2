@@ -40,7 +40,7 @@ public class SpawnEnemiesLvl1 : MonoBehaviour
         if(enemiesCapacity < enemiesMaxCapacity)
         {
             timer -= Time.fixedDeltaTime;
-            timeTMP.text = $"Enemies Spawn in {timer}";
+            //timeTMP.text = $"Enemies Spawn in {timer}";
             if (timer <= 0)
             {
                 FindSpawnPoint();
