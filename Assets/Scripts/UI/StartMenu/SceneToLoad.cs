@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneToLoad : MonoBehaviour
 {
-    public static string sceneSaved = "LevelTutorial";
+    public static string sceneSaved = "Cinematic1";
 
     private void Awake()
     {

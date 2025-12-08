@@ -68,27 +68,81 @@ public class CombatHitReceiver : MonoBehaviour
 
                 break;
                 
-                case WeaponType.Crate:
-                    conexions.type = WeaponType.Crate;
-                    if (isBlocking)
+            case WeaponType.Crate:
+                conexions.type = WeaponType.Crate;
+                if (isBlocking)
+                {
+                    healthController.TakeDamague(info.damague/2);
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
                     {
-                        healthController.TakeDamague(info.damague/2);
-                        if (conexions.type == WeaponType.None || info.type == conexions.type)
-                        {
-                            conexions.counter += 0.5f;
-                        }
+                        conexions.counter += 0.5f;
                     }
-                    else
-                    {      
-                        healthController.TakeDamague(info.damague);         
-                        if (conexions.type == WeaponType.None || info.type == conexions.type)
-                        {
-                            conexions.counter++;
-                        }     
-                    }              
+                }
+                else
+                {      
+                    healthController.TakeDamague(info.damague);         
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
+                    {
+                        conexions.counter++;
+                    }     
+                }              
                     
 
                 break;
+
+            case WeaponType.Beer:
+                conexions.type = WeaponType.Beer;                    
+                if (healthController != null)
+                {
+                    healthController.AddHealth(Mathf.Abs(info.damague));
+                }
+                else
+                {
+                    Debug.LogWarning($"CombatHitReceiver: healthController null on {gameObject.name}");
+                }
+
+                break;
+            
+            case WeaponType.Stone:
+                conexions.type = WeaponType.Stone;
+                 if (isBlocking)
+                {
+                    healthController.TakeDamague(info.damague/2);
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
+                    {
+                        conexions.counter += 0.5f;
+                    }
+                }
+                else
+                {      
+                    healthController.TakeDamague(info.damague);         
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
+                    {
+                        conexions.counter++;
+                    }     
+                } 
+            break;
+
+            case WeaponType.Bottle:
+                conexions.type = WeaponType.Bottle;
+                 if (isBlocking)
+                {
+                    healthController.TakeDamague(info.damague/2);
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
+                    {
+                        conexions.counter += 0.5f;
+                    }
+                }
+                else
+                {      
+                    healthController.TakeDamague(info.damague);         
+                    if (conexions.type == WeaponType.None || info.type == conexions.type)
+                    {
+                        conexions.counter++;
+                    }     
+                } 
+            break; 
+
 
 
 

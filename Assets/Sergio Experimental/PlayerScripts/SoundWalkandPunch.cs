@@ -2,13 +2,50 @@ using UnityEngine;
 
 public class SoundWalkandPunch : MonoBehaviour
 {
+    [Header("Audio Clips")]
     public AudioClip walkSound;
     public AudioClip punchSound;
-    private AudioSource audioSource;
+
+    [Header("Audio Sources")]
+    private AudioSource walkAudioSource;
+    private AudioSource punchAudioSource;
+    private static float lastPunchTime = -1f;
+    private static SoundWalkandPunch instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        AudioSource[] sources = GetComponents<AudioSource>();
+
+        if (sources.Length >= 2)
+        {
+            walkAudioSource = sources[0];
+            punchAudioSource = sources[1];
+        }
+        else
+        {
+            walkAudioSource = gameObject.AddComponent<AudioSource>();
+            punchAudioSource = gameObject.AddComponent<AudioSource>();
+            
+            punchAudioSource.playOnAwake = false;
+            punchAudioSource.loop = false;
+        }
+
+        walkAudioSource.clip = walkSound;
+        walkAudioSource.loop = true;
+        walkAudioSource.playOnAwake = false;
     }
 
     void Update()
@@ -17,20 +54,19 @@ public class SoundWalkandPunch : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         bool isMoving = Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f;
 
-        if (isMoving && !audioSource.isPlaying)
+        if (isMoving && !walkAudioSource.isPlaying)
         {
-            audioSource.clip = walkSound;
-            audioSource.loop = true;
-            audioSource.Play();
+            walkAudioSource.Play();
         }
-        else if (!isMoving && audioSource.isPlaying && audioSource.clip == walkSound)
+        else if (!isMoving && walkAudioSource.isPlaying)
         {
-            audioSource.Stop();
+            walkAudioSource.Stop();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && (lastPunchTime == -1f || Time.time - lastPunchTime >= 0.6f))
         {
-            audioSource.PlayOneShot(punchSound);
+            punchAudioSource.PlayOneShot(punchSound);
+            lastPunchTime = Time.time;
         }
     }
 }

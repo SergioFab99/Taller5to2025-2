@@ -63,7 +63,7 @@ public class Indications : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint1)
         {
-            changeIndications = 5;
+            changeIndications = 4;
             
             if (!SetUpTutorial.camera2)
             {
@@ -73,7 +73,7 @@ public class Indications : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint2)
         {
-            changeIndications = 6;
+            changeIndications = 5;
             
             if (!SetUpTutorial.camera3)
             {
@@ -83,13 +83,13 @@ public class Indications : MonoBehaviour
         }
         if (SetUpTutorial.checkPoint3)
         {
-            changeIndications = 7;
+            changeIndications = 6;
             
         }
     }
     void ChangeIndications()
     {
-        changeIndications = Mathf.Clamp(changeIndications, 0, 8);
+        changeIndications = Mathf.Clamp(changeIndications, 0, 7);
         indicationsTitle.text = textsForTitle[changeIndications];
         indicationsText.text = textsForIndications[changeIndications];
     }
@@ -107,12 +107,12 @@ public class Indications : MonoBehaviour
     }
     void ActiveExtras()
     {
-        if(changeIndications == 0 || changeIndications == 1 || changeIndications == 4 || changeIndications == 5 || changeIndications == 6 || changeIndications == 8)
+        if(changeIndications == 0 || changeIndications == 1 || changeIndications == 3 || changeIndications == 4 || changeIndications == 5 || changeIndications == 7)
         {
             close.SetActive(true);
             next.SetActive(false);
         }
-        if(changeIndications == 3 || changeIndications == 4 || changeIndications == 8)
+        if(changeIndications == 3 || changeIndications == 7)
         {
             back.SetActive(true);
             next.SetActive(false);
@@ -121,7 +121,7 @@ public class Indications : MonoBehaviour
         {
             back.SetActive(false);
         }
-        if(changeIndications == 2 || changeIndications == 3 || changeIndications == 7)
+        if(changeIndications == 2 || changeIndications == 6)
         {
             next.SetActive(true);
             close.SetActive(false);

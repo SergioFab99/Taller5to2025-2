@@ -193,11 +193,10 @@ public class PlayerCombat : CombatBase
             _state.isBlocking = false;
             if (_state.playerActionState == PlayerActionState.Blocking)
                 _state.playerActionState = PlayerActionState.Normal;
+            SyncCombatHitReceivers(false);
         }
-        //cambiar el metodo de recivir el componente dependiendo de su lugar UWwU
-        var recv = GetComponentInChildren<CombatHitReceiver>();
-            if (recv != null) recv.isBlocking = false;
-        
+        SyncCombatHitReceivers(_state.isBlocking);
+
         if (requestDodge && !_isDodging)
         {
          //   Dodge();
@@ -282,11 +281,31 @@ public class PlayerCombat : CombatBase
         _state.playerActionState = PlayerActionState.Blocking;
         Debug.Log("Blocking");
 
-        // LO MISMO que en el otro. cambiuar dependiendo de su lugar UwU
-        var recv = GetComponentInChildren<CombatHitReceiver>();
-        if (recv != null) recv.isBlocking = true;
+        SyncCombatHitReceivers(true);
     }
+    private void SyncCombatHitReceivers(bool value)
+    {
+        var seen = new System.Collections.Generic.HashSet<CombatHitReceiver>();
+        var parents = GetComponentsInParent<CombatHitReceiver>(true);
+        foreach (var p in parents)
+        {
+            if (p != null && !seen.Contains(p))
+            {
+                p.isBlocking = value;
+                seen.Add(p);
+            }
+        }
 
+        var children = GetComponentsInChildren<CombatHitReceiver>(true);
+        foreach (var c in children)
+        {
+            if (c != null && !seen.Contains(c))
+            {
+                c.isBlocking = value;
+                seen.Add(c);
+            }
+        }
+    }
     public void LinkWeapon(GameObject obj)
     {
         Debug.Log("LinkWeapon");

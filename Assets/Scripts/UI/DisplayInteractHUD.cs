@@ -13,9 +13,10 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] string thisScene;
     private GameObject stairUp;
     [SerializeField] private OpenDoor openDoor;
+    [SerializeField] private Letter openLetter;
     Player playerTp;
     GameObject canvas, canInteract;
-    private bool isHittingDoor, isHittingStair;
+    private bool isHittingDoor, isHittingStair, isHittingLetter;
     public static bool thisIsTutorial, thisIsLevel1;
     void Start()
     {
@@ -56,24 +57,14 @@ public class DisplayInteractHUD : MonoBehaviour
         while (!startCoroutine)
         {
             Ray ray = new Ray(cam.position, cam.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, 2.5f)) 
+            if (Physics.Raycast(ray, out RaycastHit hit, 5f)) 
             {
                 if (hit.collider.CompareTag("Interactuable") || hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("PickUpWeapon"))
                 {
                     Debug.Log("S� hay");
                     Debug.Log(canInteract);
                     canInteract.SetActive(true);
-                    openDoor = hit.collider.gameObject.GetComponent<OpenDoor>();
-                    if (hit.collider.gameObject.name == "StairCollider")
-                    {
-                        var stairHit = hit.collider.gameObject;
-                        stairUp = stairHit.transform.Find("StairUp").gameObject;
-                        isHittingStair = true;
-                    }
-                    else isHittingStair = false;
-                    hit.collider.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
-                    isHittingDoor = door;
-
+                    Hits(hit);
                     yield return new WaitForSeconds(timeBetween);
                 }
                 else
@@ -89,6 +80,7 @@ public class DisplayInteractHUD : MonoBehaviour
                         canInteract.SetActive(false);
                         isHittingDoor = false;
                         isHittingStair = false;
+                        isHittingLetter = false;
                         yield return new WaitForSeconds(timeBetween);
                     }
                     
@@ -107,12 +99,31 @@ public class DisplayInteractHUD : MonoBehaviour
                     canInteract.SetActive(false);
                     isHittingDoor = false;
                     isHittingStair = false;
+                    isHittingLetter = false;
                     yield return new WaitForSeconds(timeBetween);
                 }
             }
             yield return new WaitForSeconds(0f);
         }
 
+    }
+    void Hits(RaycastHit hit)
+    {        
+        if (hit.collider.gameObject.name == "StairCollider")
+        {
+            var stairHit = hit.collider.gameObject;
+            stairUp = stairHit.transform.Find("StairUp").gameObject;
+            isHittingStair = true;
+        }
+        else isHittingStair = false;
+
+        hit.collider.gameObject.TryGetComponent<OpenDoor>(out OpenDoor door);
+        isHittingDoor = door;
+        if(isHittingDoor) openDoor = hit.collider.gameObject.GetComponent<OpenDoor>();
+
+        hit.collider.gameObject.TryGetComponent<Letter>(out Letter letter);
+        isHittingLetter = letter;
+        if (isHittingLetter) openLetter = hit.collider.gameObject.GetComponent<Letter>();
     }
     void ActiveInteracts()
     {
@@ -125,6 +136,10 @@ public class DisplayInteractHUD : MonoBehaviour
             if(stairUp != null && isHittingStair)
             {
                 Stairs();
+            }
+            if(openLetter != null && isHittingLetter)
+            {
+                Letters();
             }
         }
     }
@@ -162,5 +177,10 @@ public class DisplayInteractHUD : MonoBehaviour
                 openDoor.starMoveDoor = true;
             }
         }
+    }
+
+    void Letters()
+    {
+        openLetter.OpenLetter();
     }
 }

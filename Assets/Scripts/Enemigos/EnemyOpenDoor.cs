@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class EnemyOpenDoor : MonoBehaviour
 {
-    [SerializeField] string thisScene;
     private OpenDoor openDoor;
     private void OnTriggerEnter(Collider other)
     {
