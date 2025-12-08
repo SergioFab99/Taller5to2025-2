@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine.Playables;
 public class DialogueCinematics : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class DialogueCinematics : MonoBehaviour
     [SerializeField] private PlayableDirector timeLineCinematic;
     [TextArea(4, 6)] public string[] actualLines;
     [TextArea(4, 6)] public string[] nameLines;
-
+    [SerializeField] private CinemachineBrain cinemachineBrain;
     public float textSpeed = 0.02f;
 
     public int index;
@@ -24,6 +25,8 @@ public class DialogueCinematics : MonoBehaviour
     }
     private void Start()
     {
+        index = 0;
+        cinemachineBrain = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
         timeLineCinematic = GetComponent<PlayableDirector>();
         panelDialogues.SetActive(false);
         ChangeName();
@@ -50,9 +53,21 @@ public class DialogueCinematics : MonoBehaviour
             }
         }
     }
+    public void ChangeBrainToEasyOut()
+    {
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.EaseInOut;
+    }
+    public void ChangeBrainToCut()
+    {
+        cinemachineBrain.DefaultBlend.Style = CinemachineBlendDefinition.Styles.Cut;
+    }
     public void ActivePanel()
     {
         panelDialogues.SetActive(true);
+    }
+    public void DeActivePanel()
+    {
+        panelDialogues.SetActive(false);
     }
     public void StartDialogue()
     {
@@ -88,15 +103,15 @@ public class DialogueCinematics : MonoBehaviour
         }
         if (thisIsCinematic3)
         {
-            if (index == 1 || index == 3)
+            if (index == 2 || index == 4)
             {
                 nameText.text = nameLines[0];
             }
-            if (index == 0)
+            if (index == 0 || index == 1)
             {
                 nameText.text = nameLines[1];
             }
-            if (index == 2 || index == 4)
+            if (index == 3 || index == 5)
             {
                 nameText.text = nameLines[2];
             }
