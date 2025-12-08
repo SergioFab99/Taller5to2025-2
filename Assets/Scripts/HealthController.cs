@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class HealthController : MonoBehaviour
 {
@@ -12,6 +13,15 @@ public class HealthController : MonoBehaviour
     public event Live OnDead;
     public delegate void Live();
     public event Action<float, float> OnHealthUpdated;
+    public event Action<float> OnPlayerDamaged;
+
+    [Header("Blood Canvas")]
+    [SerializeField] GameObject bloodCanvas;
+    [SerializeField] float bloodVisibleTime = 0.5f;
+    [SerializeField, Range(0f, 1f)] float minimumBloodAlpha = 0.2f;
+
+    float bloodTimer;
+    CanvasGroup bloodCanvasGroup;
 
     [Header("Hit Audio")]
     [SerializeField] AudioSource hitAudioSource;
@@ -21,6 +31,15 @@ public class HealthController : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0f, maxHealth);
         RaiseFullUpdate();
+        InitializeBloodCanvas();
+    }
+
+    void Start()
+    {
+        if (bloodCanvas != null)
+        {
+            StartCoroutine(ForceDeactivateOnFirstFrame());
+        }
     }
 
     public void AddHealth(float amount)
@@ -44,12 +63,14 @@ public class HealthController : MonoBehaviour
 
         float before = health;
         health = Mathf.Max(health - amount, 0f);
-        float delta = health - before;   // será < 0 si perdió vida
+        float delta = health - before; 
 
-        // Cada vez que se reduce la vida, reproducir sonido
+        
         if (delta < 0f)
         {
             PlayHitSound();
+            ShowBloodHitEffect();
+            OnPlayerDamaged?.Invoke(GetNormalizedHealth());
         }
 
         OnLifeChangue?.Invoke(delta);
@@ -85,8 +106,89 @@ public class HealthController : MonoBehaviour
         hitAudioSource.PlayOneShot(hitClip);
     }
 
+    void Update()
+    {
+        if (bloodCanvas == null || !bloodCanvas.activeSelf)
+            return;
+
+        bloodTimer -= Time.deltaTime;
+
+        if (bloodTimer <= 0f)
+        {
+            HideBloodCanvas();
+        }
+    }
+
     void RaiseFullUpdate()
     {
         OnHealthUpdated?.Invoke(health, maxHealth);
+    }
+
+    void InitializeBloodCanvas()
+    {
+        if (bloodCanvas == null)
+            return;
+
+        EnsureBloodCanvasGroup();
+        HideBloodCanvas();
+    }
+
+    IEnumerator ForceDeactivateOnFirstFrame()
+    {
+        yield return null;
+        HideBloodCanvas();
+    }
+
+    void ShowBloodHitEffect()
+    {
+        if (bloodCanvas == null)
+            return;
+
+        EnsureBloodCanvasGroup();
+
+        bloodCanvas.SetActive(true);
+        bloodTimer = bloodVisibleTime;
+
+        if (bloodCanvasGroup != null)
+        {
+            float normalizedHealth = GetNormalizedHealth();
+            float opacity = Mathf.Lerp(minimumBloodAlpha, 1f, 1f - normalizedHealth);
+            bloodCanvasGroup.alpha = opacity;
+        }
+    }
+
+    void HideBloodCanvas()
+    {
+        if (bloodCanvas == null)
+            return;
+
+        if (bloodCanvasGroup != null)
+        {
+            bloodCanvasGroup.alpha = 0f;
+        }
+
+        bloodCanvas.SetActive(false);
+        bloodTimer = 0f;
+    }
+
+    void EnsureBloodCanvasGroup()
+    {
+        if (bloodCanvas == null || bloodCanvasGroup != null)
+            return;
+
+        bloodCanvasGroup = bloodCanvas.GetComponent<CanvasGroup>();
+
+        if (bloodCanvasGroup == null)
+        {
+            bloodCanvasGroup = bloodCanvas.AddComponent<CanvasGroup>();
+        }
+    }
+
+    float GetNormalizedHealth()
+    {
+        if (maxHealth <= 0f)
+            return 0f;
+
+        return Mathf.Clamp01(health / maxHealth);
     }
 }
