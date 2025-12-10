@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Thrower : MonoBehaviour, IEnemyAttack
+public class Thrower : MonoBehaviour
 {
     [Header("Throw Settings")]
     public float attackRange = 12f;

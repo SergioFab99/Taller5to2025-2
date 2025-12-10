@@ -5,7 +5,7 @@ public class ExposedState1 : IEnemyState
 {
     private EnemyStateHandler ai;
     private float timer;
-    private const float duration = 1.5f;
+    private const float duration = 1.25f;
 
     public ExposedState1(EnemyStateHandler main)
     {
@@ -15,7 +15,6 @@ public class ExposedState1 : IEnemyState
     public void OnEnter()
     {
         timer = duration;
-        ai.ExitCombatMode();
 
         if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
         {
@@ -27,7 +26,7 @@ public class ExposedState1 : IEnemyState
         ai.character.Motor.BaseVelocity = Vector3.zero;
         ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
 
-        Debug.Log($"{ai.name} is EXPOSED!");
+        Debug.Log($"{ai.name} EXPOSED");
     }
 
     public void Update()
@@ -35,10 +34,10 @@ public class ExposedState1 : IEnemyState
         timer -= Time.deltaTime;
         if (timer > 0f) return;
 
-        if (ai.Target != null && ai.CheckTargetOnView())
-            ai.SetState(ai.GetAlertState());
+        if (ai.Target == null || !ai.CheckTargetOnView())
+            ai.SetState(ai.GetIdleState()); 
         else
-            ai.SetState(ai.GetIdleState());
+            ai.SetState(ai.GetAlertState());  
     }
 
     public void OnExit()
@@ -46,11 +45,10 @@ public class ExposedState1 : IEnemyState
         Debug.Log($"{ai.name} recovered from exposure.");
     }
 
-    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public Quaternion UpdateRotation(Quaternion currentRotation, float dt, Vector3 req, KinematicCharacterMotor motor)
         => currentRotation;
 
-    public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
-    {
-        return currentVelocity;
-    }
+    public Vector3 UpdateVelocity(Vector3 vel, float dt, KinematicCharacterMotor motor,
+        Vector3 req, EnemySettingsList s, ref float u)
+        => vel;
 }

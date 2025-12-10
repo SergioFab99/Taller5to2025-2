@@ -2,57 +2,69 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour, IEnemyAttack
 {
-    public float attackRange = 2f;
-
-    public float windupTime = 0.4f;
-    public float punchActiveTime = 0.2f;
-    public float comboGap = 0.3f;
-    public int maxCombo = 2;
-
-    private EnemyStateHandler handler;
-    private EnemyMain ai;
-    [SerializeField] private Transform characterTransform;
-    private int currentPunch = 0;
-
-    private bool isAttacking = false;
-    private bool finished = false;
-    private bool interrupted = false;
-    public bool Missed { get; private set; }
-    public bool ForceBlocked { get; private set; }
-
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 2.0f;
     public float AttackRange => attackRange;
-    public bool IsAttacking => isAttacking;
-    public bool IsFinished => finished;
-    public bool WasInterrupted => interrupted;
+
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float hitRadius = 1.2f;
+    [SerializeField] private LayerMask hitMask;
+
+    [Header("Timings")]
+    [SerializeField] private float windupTime = 0.4f;
+    [SerializeField] private float punchActiveTime = 0.2f;
+    [SerializeField] private float comboGap = 0.3f;
+    [SerializeField] private int maxCombo = 2; 
+    public bool IsAttacking { get; private set; }
+    public bool IsFinished { get; private set; }
+    public bool WasInterrupted { get; private set; }
+    public bool ForceBlocked { get; private set; }
+    public bool Missed { get; private set; }
+
+    private EnemyStateHandler ai;
+    private Transform characterTransform;
+
+    private int currentPunch = 0;
 
     private enum AttackPhase { None, Windup, Active, Recovery }
     [SerializeField] private AttackPhase currentPhase = AttackPhase.None;
 
-    void Awake()
+    private void Awake()
     {
-        handler = GetComponent<EnemyStateHandler>();
-        ai = GetComponent<EnemyMain>();
+        ai = GetComponentInParent<EnemyStateHandler>();
+        if (ai != null && ai.character != null)
+            characterTransform = ai.character.transform;
+    }
 
-        if (handler != null)
-            characterTransform = handler.GetComponentInChildren<EnemyCharacter>().transform;
+    public void BeginAttack(EnemyStateHandler handler)
+    {
+        ai = handler;
+        if (ai != null && ai.character != null)
+            characterTransform = ai.character.transform;
+
+        ResetAttackCycle();
     }
 
     public void Execute()
     {
-        Transform target = handler.Target;
-        if (target == null) return;
-        if (isAttacking || (!finished && currentPunch > 0))
+        if (ai == null || ai.Target == null)
+            return;
+
+        if (IsAttacking || (!IsFinished && currentPunch > 0))
             return;
 
         if (currentPhase != AttackPhase.None)
             return;
 
-        float dist = Vector3.Distance(characterTransform.position, handler.Target.position);
-        if (dist > attackRange) return;
+        float dist = Vector3.Distance(characterTransform.position, ai.Target.position);
+        if (dist > attackRange)
+            return;
 
         currentPunch = 0;
-        finished = false;
-        interrupted = false;
+        IsFinished = false;
+        WasInterrupted = false;
+        ForceBlocked = false;
+        Missed = false;
 
         Windup();
     }
@@ -61,17 +73,20 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
     {
         if (currentPunch >= maxCombo)
         {
-            finished = true;
+            IsAttacking = false;
+            IsFinished = true;
+            currentPhase = AttackPhase.None;
             return;
         }
 
         currentPhase = AttackPhase.Windup;
-        isAttacking = true;
+        IsAttacking = true;
         currentPunch++;
 
-        if (handler != null) handler.StopMovement();
-        if (ai != null) ai.StopMovement();
-        Debug.Log($"windup for punch {currentPunch}");
+        ai.StopMovement();
+        ai.character.UpdateInputs(new EnemyInput { Direction = ai.character.transform.forward, Move = ai.character.transform.forward * 0.35f }, ai.GetBehaviourState()
+);
+        Debug.Log($"[{name}] Windup for punch {currentPunch}");
 
         Invoke(nameof(PerformPunch), windupTime);
     }
@@ -88,9 +103,9 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
             if (hit.CompareTag("Player"))
             {
                 Debug.Log($"punch {currentPunch} hit");
-                
-                var recv = hit.GetComponent<CombatHitReceiver>() 
-                   ?? hit.GetComponentInChildren<CombatHitReceiver>() 
+
+                var recv = hit.GetComponent<CombatHitReceiver>()
+                   ?? hit.GetComponentInChildren<CombatHitReceiver>()
                    ?? hit.GetComponentInParent<CombatHitReceiver>();
 
                 if (recv != null)
@@ -120,31 +135,62 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
     {
         currentPhase = AttackPhase.Recovery;
 
-        if(handler.QueuedBlock)
+        if (ai != null && ai.QueuedBlock)
         {
             ForceCancel(false, true);
-            
+            return;
         }
-        if (currentPunch < maxCombo && !interrupted)
+
+        if (currentPunch < maxCombo && !WasInterrupted && !ForceBlocked)
         {
-            isAttacking = true; 
             Invoke(nameof(Windup), comboGap);
         }
         else
         {
-            isAttacking = false;
-            finished = true;
+            IsAttacking = false;
+            IsFinished = true;
+            currentPhase = AttackPhase.None;
         }
     }
 
-    public void ForceCancel(bool interrupt, bool block)
+    private void FinishAsMiss()
+    {
+        CancelInvoke();
+        IsAttacking = false;
+        IsFinished = true;
+        Missed = true;
+        currentPhase = AttackPhase.None;
+    }
+
+    public void ManualUpdate()
+    {
+        // wip
+    }
+
+    public bool TryInterrupt()
+    {
+        if (IsAttacking && currentPhase == AttackPhase.Windup)
+        {
+            Debug.Log($"{name} attack INTERRUPTED during windup");
+            ForceCancel(true, false);
+            return true;
+        }
+        return false;
+    }
+
+    public void ForceCancel(bool interrupted, bool blocked)
     {
         CancelInvoke();
         StopAllCoroutines();
-        isAttacking = false;
-        finished = true;
-        interrupted = interrupt;
-        ForceBlocked = block; 
+
+        IsAttacking = false;
+        IsFinished = true;
+        WasInterrupted = interrupted;
+        ForceBlocked = blocked;
+
+        if (!interrupted && !blocked)
+            Missed = true;
+
         currentPhase = AttackPhase.None;
     }
 
@@ -152,22 +198,35 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
     {
         CancelInvoke();
         StopAllCoroutines();
+
         currentPunch = 0;
-        finished = false;
-        interrupted = false;
+        IsAttacking = false;
+        IsFinished = false;
+        WasInterrupted = false;
         ForceBlocked = false;
-        isAttacking = false;
+        Missed = false;
+
         currentPhase = AttackPhase.None;
     }
 
-    public bool TryInterrupt()
+    private void OnDrawGizmosSelected()
     {
-        if (isAttacking && currentPhase == AttackPhase.Windup)
-        {
-            Debug.Log($"{name} attack interrupted during windup");
-            ForceCancel(true, false);
-            return true;
-        }
-        return false;
+        if (characterTransform == null)
+            return;
+
+        Vector3 center = characterTransform.position + characterTransform.forward * 1.4f + Vector3.up * 1.0f;
+
+        float radius = 1.0f;
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(center, radius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(characterTransform.position + Vector3.up * 1.0f, center);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(characterTransform.position, AttackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(characterTransform.position + Vector3.up * 1f, 0.05f);
     }
 }

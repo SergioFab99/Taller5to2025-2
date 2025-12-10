@@ -9,10 +9,13 @@ public class BlockState1 : IEnemyState
     private const float baseBlockDuration = 2f;
     private const float extensionOnHit = 1f;
 
+    private bool exiting = false;
+
     public BlockState1(EnemyStateHandler main) => ai = main;
 
     public void OnEnter()
     {
+        exiting = false;
         blockTimer = baseBlockDuration;
 
         if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
@@ -23,57 +26,71 @@ public class BlockState1 : IEnemyState
         }
 
         ai.character.Motor.BaseVelocity = Vector3.zero;
-        ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
+        ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState()
+        );
 
         Debug.Log($"{ai.name} raised guard");
     }
 
     public void Update()
     {
+        if (exiting) return;
+
         blockTimer -= Time.deltaTime;
 
         if (blockTimer <= 0f)
         {
+            exiting = true;
             ai.StartCoroutine(ExitBlockDelay());
         }
     }
 
     public void ExtendBlock()
     {
-        blockTimer += extensionOnHit;
+        if (!exiting)
+            blockTimer += extensionOnHit;
+
         Debug.Log($"{ai.name} extended block ({blockTimer:F2}s remaining)");
     }
 
     public void OnExit()
     {
+        exiting = false;
         Debug.Log($"{ai.name} lowered guard.");
     }
 
     private IEnumerator ExitBlockDelay()
     {
-        blockTimer = float.MaxValue;
-        yield return new WaitForSeconds(0.2f); 
-        if (ai.Target != null && ai.CheckTargetOnView())
-            ai.SetState(ai.GetAlertState());
-        else
+        yield return new WaitForSeconds(0.15f);
+
+        if (ai.Target == null || !ai.CheckTargetOnView())
+        {
             ai.SetState(ai.GetIdleState());
+            yield break;
+        }
+
+        ai.SetState(ai.GetAlertState());
     }
 
-    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
+    public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _reqRot, KinematicCharacterMotor motor)
     {
         if (ai.Target == null) return currentRotation;
-        Vector3 toTarget = (ai.Target.position - ai.character.transform.position);
-        toTarget.y = 0f;
-        if (toTarget.sqrMagnitude < 0.001f) return currentRotation;
-        Quaternion desired = Quaternion.LookRotation(toTarget.normalized, motor.CharacterUp);
-        return Quaternion.Slerp(currentRotation, desired, deltaTime * 10f);
+
+        Vector3 toPlayer = ai.Target.position - ai.character.transform.position;
+        toPlayer.y = 0;
+
+        if (toPlayer.sqrMagnitude < 0.01f)
+            return currentRotation;
+
+        Quaternion desired = Quaternion.LookRotation(toPlayer.normalized, motor.CharacterUp);
+
+        return Quaternion.Slerp(currentRotation, desired, deltaTime * 3f);
     }
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor,
-        Vector3 _requestedMovement, EnemySettingsList settings, ref float _timeSinceUngrounded)
+        Vector3 _requestedMovement, EnemySettingsList settings, ref float _ungrounded)
     {
-        Vector3 vel = motor.BaseVelocity;
-        vel = Vector3.Lerp(vel, Vector3.zero, deltaTime * 2f);
-        return vel;
+        // Solid block stance = no movement
+        return Vector3.zero;
     }
 }

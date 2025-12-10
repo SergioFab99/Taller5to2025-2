@@ -1,17 +1,18 @@
 using UnityEngine;
 using KinematicCharacterController;
+using System.Linq;
 
 public class RecoverState1 : IEnemyState
 {
     private EnemyStateHandler ai;
 
     private float recoverTimer;
-    private float recoverDuration = 0.8f;
+    private const float recoverDuration = 0.8f;
 
-    private float retreatTimer = 0.45f;
-    private Vector3 retreatDir;
+    private float retreatTimer;
+    private const float retreatDuration = 0.45f;
 
-    private const float attackCooldown = 1.5f; // fallback 
+    private bool shouldRetreat = false;
 
     public RecoverState1(EnemyStateHandler handler)
     {
@@ -21,14 +22,9 @@ public class RecoverState1 : IEnemyState
     public void OnEnter()
     {
         recoverTimer = recoverDuration;
+        retreatTimer = retreatDuration;
 
-        ai.attackTagCooldownEndTime = Time.time + attackCooldown;
-
-        if (ai.Target != null)
-        {
-            retreatDir = (ai.character.transform.position - ai.Target.position).normalized;
-            retreatDir.y = 0f;
-        }
+        shouldRetreat = DetermineIfRetreatIsSafe();
 
         if (ai.agent != null && ai.agent.enabled && ai.agent.isOnNavMesh)
         {
@@ -39,40 +35,41 @@ public class RecoverState1 : IEnemyState
 
         ai.character.Motor.BaseVelocity = Vector3.zero;
 
-        Debug.Log($"{ai.name} entered RECOVER — retreating");
+        Debug.Log($"{ai.name} RECOVER (retreat = {shouldRetreat})");
+    }
+
+    private bool DetermineIfRetreatIsSafe()
+    {
+        var order = EnemyAttackOrder.Instance;
+        if (order == null) return true; 
+
+        var frontliners =
+            order.formation
+            .Where(kv => kv.Value.ringIndex == 0 &&
+                         kv.Value.inFrontArc &&
+                         kv.Key != ai &&
+                         kv.Key != null &&
+                         !order.IsAttacker(kv.Key))
+            .ToList();
+
+        return frontliners.Count > 0;
     }
 
     public void Update()
     {
         recoverTimer -= Time.deltaTime;
 
-        if (retreatTimer > 0f)
+        if (shouldRetreat && retreatTimer > 0f)
         {
             retreatTimer -= Time.deltaTime;
 
-            if (ai.Target != null)
-            {
-                Vector3 toPlayer = ai.Target.position - ai.character.transform.position;
-                toPlayer.y = 0f;
-                Vector3 facing = toPlayer.sqrMagnitude > 0.0001f
-                    ? toPlayer.normalized
-                    : ai.character.transform.forward;
-
-                Vector3 safeDir = ai.GetSafeRetreatDirection();
-                Vector3 smoothed = Vector3.Lerp(ai.character.LastMove, safeDir, Time.deltaTime * 6f);
-
-                ai.character.UpdateInputs(
-                    new EnemyInput
-                    {
-                        Move = smoothed * 0.55f,  
-                        Direction = facing   
-                    },
-                    ai.GetBehaviourState()
-                );
-            }
+            Vector3 dir = ai.GetSafeRetreatDirection();
+            ai.character.Motor.BaseVelocity = dir * 2.2f;
 
             return;
         }
+
+        ai.character.Motor.BaseVelocity = Vector3.zero;
 
         if (recoverTimer <= 0f)
         {
@@ -80,9 +77,9 @@ public class RecoverState1 : IEnemyState
         }
     }
 
-
     public void OnExit()
     {
+        ai.character.Motor.BaseVelocity = Vector3.zero;
         Debug.Log($"{ai.name} exited RECOVER.");
     }
 

@@ -7,6 +7,7 @@ public class StunState1 : IEnemyState
     private EnemyStateHandler ai;
     private float stunTimer;
     private float stunDuration = 1.5f;
+    private Quaternion frozenRotation;
 
     public StunState1(EnemyStateHandler handler)
     {
@@ -18,6 +19,8 @@ public class StunState1 : IEnemyState
         stunTimer = stunDuration;
         ai.ExitCombatMode();
         ai.attackComponent.ResetAttackCycle();
+
+        frozenRotation = ai.character.transform.rotation;
 
         if (ai.TryGetComponent(out UnityEngine.AI.NavMeshAgent agent))
         {
@@ -58,11 +61,19 @@ public class StunState1 : IEnemyState
     public void OnExit()
     {
         ai.nextAttackTime = Time.time + Random.Range(0.8f, 1.4f);
+
+        Vector3 lookDir = ai.Target.position - ai.character.transform.position;
+        lookDir.y = 0f;
+        if (lookDir.sqrMagnitude > 0.01f)
+            ai.character.transform.rotation = Quaternion.LookRotation(lookDir);
+
         Debug.Log($"{ai.name} recovered from stun.");
     }
-
+    
     public Quaternion UpdateRotation(Quaternion currentRotation, float deltaTime, Vector3 _requestedRotation, KinematicCharacterMotor motor)
-        => currentRotation;
+    {
+        return frozenRotation;
+    }
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
