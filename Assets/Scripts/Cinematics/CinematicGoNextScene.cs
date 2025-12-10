@@ -6,6 +6,10 @@ public class CinematicGoNextScene : MonoBehaviour
     {
         SceneManager.LoadScene("Cinematic2");
     }
+    void GoSceneCinematic3()
+    {
+        SceneManager.LoadScene("Cinematic3");
+    }
     void GoSceneTutorial()
     {
         SceneManager.LoadScene("LevelTutorial");
