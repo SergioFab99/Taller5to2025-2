@@ -3,22 +3,24 @@ using System;
 using System.Collections;
 
 using UnityEngine;
+using GameJolt.UI;
+using GameJolt.API;
 
 
 public class FistsWeapon : Weapon
 {
-    
+
 
     public CombatHand currentHand;
-    
+
     public LayerMask hitMask;
 
-  
+
     private bool hitDone;
     [SerializeField] PlayerAudio playerAudio;
 
 
-  
+
     private PlayerCombat playerCombat;
     private float timeSinceLastPunch;
     private int arm;
@@ -34,6 +36,25 @@ public class FistsWeapon : Weapon
 
     public override void Attack()
     {
+        int count = PlayerPrefs.GetInt("Punch", 0);
+        count++;
+        PlayerPrefs.SetInt("Punch", count);
+
+        Scores.Add(count, $"Golpeo {count} veces", 1048425, "", (success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Score add");
+            }
+            else
+            {
+                Debug.Log("Not add score");
+            }
+
+        });
+
+        Trophies.Unlock(285507);
+
         Debug.Log("Attacking");
         playerCombat._state.CanAttack = false;
         switch (currentHand)
