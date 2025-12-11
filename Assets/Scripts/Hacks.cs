@@ -29,6 +29,14 @@ public class Hacks : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F5))
         {
+            SceneManager.LoadScene("Cinematic2");
+        }
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            SceneManager.LoadScene("Cinematic3");
+        }
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
             SceneManager.LoadScene("StartMenu");
         }
     }
