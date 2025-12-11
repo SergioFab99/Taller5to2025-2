@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 public class Hacks : MonoBehaviour
 {
     public HealthController health;
+    public bool cantheal;
     void Start()
     {
         
@@ -19,7 +20,7 @@ public class Hacks : MonoBehaviour
         {
             SceneManager.LoadScene("Level1B");
         }
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F3) && !cantheal)
         {
             health.AddHealth(1000000000000);
         }

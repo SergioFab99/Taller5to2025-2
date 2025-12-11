@@ -2646,6 +2646,7 @@ GameObject:
   - component: {fileID: 386567962}
   - component: {fileID: 386567961}
   - component: {fileID: 386567960}
+  - component: {fileID: 386567964}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2736,6 +2737,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &386567964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386567959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98415d481656f15418c258cc46d00f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  cantheal: 1
 --- !u!1001 &388302850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16800,9 +16815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6143b1dd1e02844d9f0a3bc330b3cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: {fileID: 0}
-  nameText: {fileID: 0}
-  panelDialogues: {fileID: 0}
+  dialogueText: {fileID: 1158154253}
+  nameText: {fileID: 736741765}
+  panelDialogues: {fileID: 332901251}
   timeLineCinematic: {fileID: 1797085586}
   actualLines:
   - "\t\t\t\t\t\t\t\t\t\t  ..."
@@ -16888,6 +16903,26 @@ PlayableDirector:
     value: {fileID: 1177505422}
   - key: {fileID: -7858702460496915500, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
     value: {fileID: 2038544455}
+  - key: {fileID: -8928983647297244688, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8730631984977667203, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -764860100001863808, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1191477408817770008, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8447093102067309562, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5726536124060950243, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6843229548260245265, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5347658106406337051, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6154749272704152953, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -434914716232065942, guid: 86e0ee5a1cd71024395289a104cb213b, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1797085587

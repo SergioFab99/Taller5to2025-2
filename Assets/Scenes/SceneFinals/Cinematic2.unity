@@ -6271,9 +6271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6143b1dd1e02844d9f0a3bc330b3cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: {fileID: 0}
-  nameText: {fileID: 0}
-  panelDialogues: {fileID: 0}
+  dialogueText: {fileID: 1816818359}
+  nameText: {fileID: 98752748}
+  panelDialogues: {fileID: 1967988527}
   timeLineCinematic: {fileID: 911317776}
   actualLines:
   - "Cuanto tiempo Hendrick \xBFNo vas a pedir nada?"
@@ -7197,6 +7197,7 @@ GameObject:
   - component: {fileID: 1085377113}
   - component: {fileID: 1085377112}
   - component: {fileID: 1085377111}
+  - component: {fileID: 1085377115}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -7287,6 +7288,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1085377115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085377110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98415d481656f15418c258cc46d00f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  cantheal: 1
 --- !u!1001 &1086064618
 PrefabInstance:
   m_ObjectHideFlags: 0
