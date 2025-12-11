@@ -435,6 +435,14 @@ PrefabInstance:
       propertyPath: playerCombat
       value: 
       objectReference: {fileID: 2414750503998236210}
+    - target: {fileID: 1541510181475124186, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6827160789051965030}
+    - target: {fileID: 1541510181475124186, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+      propertyPath: prefabBate
+      value: 
+      objectReference: {fileID: 6222481651229147237, guid: 137689b7d9db05b438668a0a8f96a2d8, type: 3}
     - target: {fileID: 1749928280981810371, guid: c8f31c6acc2078247995333c7520620f, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1008,6 +1016,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36a94546face6842898893988d66ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6827160789051965030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2946452590443858840, guid: c8f31c6acc2078247995333c7520620f, type: 3}
+  m_PrefabInstance: {fileID: 8528997003148228094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6837953310053227795 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2934200553639028973, guid: c8f31c6acc2078247995333c7520620f, type: 3}

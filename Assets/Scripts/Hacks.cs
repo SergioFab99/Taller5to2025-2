@@ -4,6 +4,8 @@ public class Hacks : MonoBehaviour
 {
     public HealthController health;
     public bool cantheal;
+    public GameObject prefabBate;
+    public Transform player;
     void Start()
     {
         
@@ -39,6 +41,14 @@ public class Hacks : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F7))
         {
             SceneManager.LoadScene("StartMenu");
+        }
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene("Level2B");
+        }
+        if(Input.GetKeyDown(KeyCode.F9) && !cantheal)
+        {
+            Instantiate(prefabBate, player);
         }
     }
 }

@@ -14,4 +14,8 @@ public class CinematicGoNextScene : MonoBehaviour
     {
         SceneManager.LoadScene("LevelTutorial");
     }
+    void GoSceneStartMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
 }

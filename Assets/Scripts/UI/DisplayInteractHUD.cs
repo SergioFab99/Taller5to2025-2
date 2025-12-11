@@ -18,7 +18,7 @@ public class DisplayInteractHUD : MonoBehaviour
     GameObject canvas, canInteract;
     bool _input;
     private bool isHittingDoor, isHittingStair, isHittingLetter;
-    public static bool thisIsTutorial, thisIsLevel1;
+    public static bool thisIsTutorial, thisIsLevel1, thisIsLevel2;
     void Start()
     {
         thisScene = SceneManager.GetActiveScene().name;
@@ -36,6 +36,11 @@ public class DisplayInteractHUD : MonoBehaviour
         else if(thisScene == "Level1B")
         {
             thisIsLevel1 = true;
+            thisIsTutorial = false;
+        }
+        else if(thisScene == "Level2B")
+        {
+            thisIsLevel2 = true;
             thisIsTutorial = false;
         }
         else

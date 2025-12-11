@@ -20,7 +20,7 @@ public class IdleState1 : IEnemyState
         ai.StopAllMovement();
         ai.character.SetMovementMode(MovementMode.NavMesh);
 
-        if (DisplayInteractHUD.thisIsLevel1)
+        if (DisplayInteractHUD.thisIsLevel1 || DisplayInteractHUD.thisIsLevel2)
         {
             ai.Target = ai.TargetPatrol;
 
