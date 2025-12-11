@@ -66,6 +66,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 8368722655750445499, guid: bee4dafedce978544bbe6a4db9d42c09, type: 3}
+  - {fileID: 2100000, guid: 231382d22023721408bfd1cdeb833f20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -163,6 +164,8 @@ MonoBehaviour:
   thisIsRightDoor: 0
   pushedDoor: 0
   test: 0
+  isOpening: 0
+  openWhileOpened: 0
 --- !u!65 &380866329362138596
 BoxCollider:
   m_ObjectHideFlags: 0
