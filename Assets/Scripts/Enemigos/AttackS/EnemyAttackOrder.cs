@@ -26,7 +26,7 @@ public class EnemyAttackOrder : MonoBehaviour
     public float attackerDelayMin = 0.25f;
     public float attackerDelayMax = 0.6f;
 
-    [Header("Idle")]
+    [Header("Standby")]
     public float personalSpinMin = 0.1f;
     public float personalSpinMax = 0.3f;
     public float globalSpinSpeed = 0.8f;    
@@ -70,7 +70,7 @@ public class EnemyAttackOrder : MonoBehaviour
 
     private void Update()
     {
-        CleanupNulls();
+        Cleanup();
 
         if (!player) return;
 
@@ -229,27 +229,14 @@ public class EnemyAttackOrder : MonoBehaviour
         if (formation.Count == 0)
             return;
 
-        var candidates = formation
-            .Where(kv =>
-                kv.Value.ringIndex == 0 &&
-                kv.Value.inFrontArc &&
-                kv.Key != null &&
-                !lockedAttackers.Contains(kv.Key) &&
-                kv.Value.dist <= attackZoneRadius * 1.35f)
-            .Select(kv => kv.Key)
-            .ToList();
+        var candidates = formation.Where(kv => kv.Value.ringIndex == 0 && kv.Value.inFrontArc && kv.Key != null && !lockedAttackers.Contains(kv.Key) && kv.Value.dist <= attackZoneRadius * 1.35f).Select(kv => kv.Key).ToList();
 
         if (candidates.Count == 0)
             return;
 
-        var fresh = candidates
-            .Where(c => !recentAttackers.Contains(c))
-            .OrderBy(c => Vector3.Distance(c.transform.position, player.position))
-            .ToList();
+        var fresh = candidates.Where(c => !recentAttackers.Contains(c)).OrderBy(c => Vector3.Distance(c.transform.position, player.position)).ToList();
 
-        EnemyStateHandler chosen = fresh.Count > 0 ?
-            fresh[0] :
-            candidates.OrderBy(c => Vector3.Distance(c.transform.position, player.position)).First();
+        EnemyStateHandler chosen = fresh.Count > 0 ? fresh[0] : candidates.OrderBy(c => Vector3.Distance(c.transform.position, player.position)).First();
 
         pendingPromotions[chosen] = Time.time + Random.Range(attackerDelayMin, attackerDelayMax);
     }
@@ -259,10 +246,7 @@ public class EnemyAttackOrder : MonoBehaviour
     {
         float now = Time.time;
 
-        var ready = pendingPromotions
-            .Where(kv => kv.Value <= now)
-            .Select(kv => kv.Key)
-            .ToList();
+        var ready = pendingPromotions.Where(kv => kv.Value <= now).Select(kv => kv.Key).ToList();
 
         foreach (var e in ready)
         {
@@ -273,12 +257,7 @@ public class EnemyAttackOrder : MonoBehaviour
             bool recentlyAttacked = recentAttackers.Contains(e);
 
             bool someoneElseAvailable =
-                formation.Keys.Any(x =>
-                    x != e &&
-                    !recentAttackers.Contains(x) &&
-                    !lockedAttackers.Contains(x) &&
-                    formation[x].ringIndex == 0 &&
-                    formation[x].inFrontArc);
+                formation.Keys.Any(x => x != e && !recentAttackers.Contains(x) && !lockedAttackers.Contains(x) && formation[x].ringIndex == 0 && formation[x].inFrontArc);
 
             if (recentlyAttacked && someoneElseAvailable)
                 continue;
@@ -287,21 +266,25 @@ public class EnemyAttackOrder : MonoBehaviour
         }
     }
 
-    private void CleanupNulls()
+    private void Cleanup()
     {
         allEnemies.RemoveAll(e => e == null);
         lockedAttackers.RemoveAll(e => e == null);
 
-        var deadKeys = pendingPromotions.Where(kv => kv.Key == null)
-                                        .Select(kv => kv.Key)
-                                        .ToList();
-        foreach (var k in deadKeys)
-            pendingPromotions.Remove(k);
+        var deadKeys = pendingPromotions.Where(kv => kv.Key == null).Select(kv => kv.Key).ToList();
 
-        var fDead = formation.Where(kv => kv.Key == null)
-                             .Select(kv => kv.Key).ToList();
+        foreach (var k in deadKeys)
+        {
+            pendingPromotions.Remove(k);
+        }
+
+        var fDead = formation.Where(kv => kv.Key == null).Select(kv => kv.Key).ToList();
+
         foreach (var k in fDead)
+        {
             formation.Remove(k);
+        }
+
     }
 
     private void TryPromoteReplacement()
@@ -312,27 +295,14 @@ public class EnemyAttackOrder : MonoBehaviour
         if (formation.Count == 0)
             return;
 
-        var candidates = formation
-            .Where(kv =>
-                kv.Value.ringIndex == 0 &&
-                kv.Value.inFrontArc &&
-                kv.Key != null &&
-                !lockedAttackers.Contains(kv.Key))
-            .Select(kv => kv.Key)
-            .ToList();
+        var candidates = formation.Where(kv =>kv.Value.ringIndex == 0 && kv.Value.inFrontArc && kv.Key != null && !lockedAttackers.Contains(kv.Key)).Select(kv => kv.Key).ToList();
 
         if (candidates.Count == 0)
             return;
 
-        var fresh = candidates
-            .Where(c => !recentAttackers.Contains(c))
-            .OrderBy(c => Vector3.Distance(c.transform.position, player.position))
-            .ToList();
+        var fresh = candidates.Where(c => !recentAttackers.Contains(c)).OrderBy(c => Vector3.Distance(c.transform.position, player.position)).ToList();
 
-        EnemyStateHandler chosen = fresh.Count > 0 ?
-            fresh[0] :
-            candidates.OrderBy(c => Vector3.Distance(c.transform.position, player.position))
-                      .First();
+        EnemyStateHandler chosen = fresh.Count > 0 ? fresh[0] : candidates.OrderBy(c => Vector3.Distance(c.transform.position, player.position)).First();
 
         lockedAttackers.Add(chosen);
     }

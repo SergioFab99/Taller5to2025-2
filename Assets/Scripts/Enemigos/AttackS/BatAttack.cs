@@ -63,7 +63,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
 
         ai.StopMovement();
 
-        Debug.Log($"[{name}] BAT WINDUP START");
+        Debug.Log($"{name} BAT WINDUP START");
 
         Invoke(nameof(StartSwing), windupTime);
     }
@@ -78,7 +78,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             return;
         }
 
-        Debug.Log($"[{name}] BAT SWING {currentHit + 1}");
+        Debug.Log($"{name} BAT HIT {currentHit + 1}");
 
         phase = Phase.Active;
         hitConnectedThisSwing = false;
@@ -114,7 +114,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     private void BeginRecovery()
     {
         phase = Phase.Recovery;
-        Debug.Log($"[{name}] BAT RECOVERY");
+        Debug.Log($"{name} BAT RECOVERY");
 
         Invoke(nameof(FinishAttack), recoveryTime);
     }
@@ -125,7 +125,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         IsFinished = true;
         phase = Phase.None;
 
-        Debug.Log($"[{name}] BAT FINISHED | Missed={Missed} Interrupted={WasInterrupted} Blocked={ForceBlocked}");
+        Debug.Log($"{name} BAT FINISHED | Missed={Missed} Interrupted={WasInterrupted} Blocked={ForceBlocked}");
     }
 
     private void PerformArcHit()
@@ -170,8 +170,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         if (Time.time < nextSwatTime) return;
         if (ai == null || ai.character == null) return;
 
-        Collider[] incoming =
-            Physics.OverlapSphere(ai.character.transform.position, swatRadius, projectileMask);
+        Collider[] incoming = Physics.OverlapSphere(ai.character.transform.position, swatRadius, projectileMask);
 
         foreach (var proj in incoming)
         {
@@ -189,7 +188,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
                 }
 
                 nextSwatTime = Time.time + swatCooldown;
-                Debug.Log($"[{name}] BAT DEFLECT PROJECTILE");
+                Debug.Log($"{name} BAT DEFLECT");
                 return;
             }
         }
@@ -199,7 +198,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     {
         if (phase == Phase.Windup)
         {
-            Debug.Log($"[{name}] INTERRUPTED");
+            Debug.Log($"{name} INTERRUPTED");
             WasInterrupted = true;
             IsFinished = true;
             IsAttacking = false;

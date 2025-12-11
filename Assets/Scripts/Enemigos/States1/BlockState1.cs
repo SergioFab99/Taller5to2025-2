@@ -26,8 +26,7 @@ public class BlockState1 : IEnemyState
         }
 
         ai.character.Motor.BaseVelocity = Vector3.zero;
-        ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState()
-        );
+        ai.character.UpdateInputs(new EnemyInput {Move = Vector3.zero, Direction = Vector3.zero}, ai.GetBehaviourState());
 
         Debug.Log($"{ai.name} raised guard");
     }
@@ -90,7 +89,6 @@ public class BlockState1 : IEnemyState
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor,
         Vector3 _requestedMovement, EnemySettingsList settings, ref float _ungrounded)
     {
-        // Solid block stance = no movement
         return Vector3.zero;
     }
 }

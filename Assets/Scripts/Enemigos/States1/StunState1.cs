@@ -31,7 +31,7 @@ public class StunState1 : IEnemyState
         ai.character.Motor.BaseVelocity = Vector3.zero;
         ai.character.UpdateInputs(new EnemyInput { Move = Vector3.zero, Direction = Vector3.zero }, ai.GetBehaviourState());
 
-        Debug.Log($"{ai.name} is stunned");
+        Debug.Log($"{ai.name} STUN");
     }
 
     public void Update()
@@ -54,7 +54,7 @@ public class StunState1 : IEnemyState
     public void ExtendStun(float extraTime)
     {
         stunTimer = Mathf.Min(stunTimer + extraTime, 4f);
-        Debug.Log($"{ai.name}: Stun extended by {extraTime:F1}s (remaining = {stunTimer:F1})");
+        Debug.Log($"{ai.name}: stun extended by {extraTime:F1}s (remaining = {stunTimer:F1})");
     }
 
 
