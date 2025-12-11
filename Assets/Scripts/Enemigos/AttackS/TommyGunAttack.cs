@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TommyGunAttack : MonoBehaviour, IEnemyAttack
+public class TommyGunAttack : MonoBehaviour
 {
     public float attackRange = 20f;
     public float meleeRange = 2.5f;

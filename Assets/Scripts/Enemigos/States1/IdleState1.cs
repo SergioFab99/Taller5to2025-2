@@ -16,12 +16,22 @@ public class IdleState1 : IEnemyState
     public void OnEnter()
     {
         ai.ExitCombatMode();
-        
+
+        ai.StopAllMovement();
+        ai.character.SetMovementMode(MovementMode.NavMesh);
+
         if (DisplayInteractHUD.thisIsLevel1)
         {
             ai.Target = ai.TargetPatrol;
-            spawnEnemiesLvl1 = GameObject.Find("SpawnEnemies")?.GetComponent<SpawnEnemiesLvl1>();
-            patrolFounds = spawnEnemiesLvl1?.GetPatrolPoints();
+
+            if (!spawnEnemiesLvl1)
+            {
+                GameObject spawner = GameObject.Find("SpawnEnemies");
+                if (spawner)
+                    spawnEnemiesLvl1 = spawner.GetComponent<SpawnEnemiesLvl1>();
+            }
+
+            patrolFounds = spawnEnemiesLvl1 ? spawnEnemiesLvl1.GetPatrolPoints() : null;
         }
 
         Debug.Log($"{ai.name} entered IDLE.");
@@ -37,19 +47,19 @@ public class IdleState1 : IEnemyState
 
         if (DisplayInteractHUD.thisIsLevel1 && ai.TargetPatrol != null && ai.agent != null)
         {
-            Vector3 direction = (ai.TargetPatrol.position - ai.character.transform.position).normalized;
-            direction.y = 0f;
+            Vector3 dir = (ai.TargetPatrol.position - ai.character.transform.position).normalized;
+            dir.y = 0f;
 
-            float distance = Vector3.Distance(ai.character.transform.position, ai.TargetPatrol.position);
-            float stopDistance = ai.agent.stoppingDistance;
-            Vector3 moveInput = (distance > stopDistance + 0.5f) ? direction : Vector3.zero;
+            float dist = Vector3.Distance(ai.character.transform.position, ai.TargetPatrol.position);
+            float stopDist = ai.agent.stoppingDistance;
 
-            var enemyInput = new EnemyInput
+            bool shouldMove = dist > stopDist + 0.5f;
+
+            ai.character.UpdateInputs(new EnemyInput
             {
-                Direction = direction,
-                Move = moveInput
-            };
-            ai.character.UpdateInputs(enemyInput, ai.GetBehaviourState());
+                Direction = dir,
+                Move = shouldMove ? dir : Vector3.zero
+            }, ai.GetBehaviourState());
 
             ai.MoveTowardsTarget();
 
@@ -64,20 +74,20 @@ public class IdleState1 : IEnemyState
     {
         if (patrolFounds == null || patrolFounds.Length == 0) return;
 
-        PatrolPointsForEnemies nearestPoint = patrolFounds[0];
-        float nearestDistance = Vector3.Distance(ai.transform.position, nearestPoint.transform.position);
+        PatrolPointsForEnemies nearest = patrolFounds[0];
+        float nearestDist = Vector3.Distance(ai.transform.position, nearest.transform.position);
 
-        foreach (PatrolPointsForEnemies point in patrolFounds)
+        foreach (var p in patrolFounds)
         {
-            float dist = Vector3.Distance(ai.transform.position, point.transform.position);
-            if (dist < nearestDistance)
+            float dist = Vector3.Distance(ai.transform.position, p.transform.position);
+            if (dist < nearestDist)
             {
-                nearestPoint = point;
-                nearestDistance = dist;
+                nearest = p;
+                nearestDist = dist;
             }
         }
 
-        ai.TargetPatrol = nearestPoint.transform;
+        ai.TargetPatrol = nearest.transform;
     }
 
     public void OnExit()
@@ -93,6 +103,6 @@ public class IdleState1 : IEnemyState
 
     public Vector3 UpdateVelocity(Vector3 currentVelocity, float deltaTime, KinematicCharacterMotor motor, Vector3 _requestedMovement, EnemySettingsList Settings, ref float _timeSinceUngrounded)
     {
-        return Vector3.zero;
+        return currentVelocity;
     }
 }

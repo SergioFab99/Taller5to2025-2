@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Incendiary : MonoBehaviour, IEnemyAttack
+public class Incendiary : MonoBehaviour
 {
     [Header("Molotov Settings")]
     public float attackRange = 12f;

@@ -85,6 +85,8 @@ MonoBehaviour:
   _stateHandler: {fileID: 2425512085894206269}
   agent: {fileID: 3557529093066070415}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
+  melee: {fileID: 0}
+  bat: {fileID: 5454063011830949721}
   testTarget: {fileID: 0}
 --- !u!114 &2425512085894206269
 MonoBehaviour:
@@ -101,22 +103,25 @@ MonoBehaviour:
   Target: {fileID: 0}
   TargetPlayer: {fileID: 0}
   TargetPatrol: {fileID: 0}
-  EnemyBehaviourState: 0
-  detectionRange: 10
-  attackRange: 2
-  moveSpeed: 3
-  turnSpeed: 8
-  knockbackForce: 6
-  stunDuration: 2
-  drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
+  EnemyBehaviourState: 0
+  agent: {fileID: 0}
+  turnSpeed: 8
+  detectionRange: 10
+  moveSpeed: 3
+  attackRange: 2
+  lastAttackTime: -999
   attackTagCooldownEndTime: 0
+  nextAttackTime: 0
   lockDirectChase: 0
+  knockBackForce: 5
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
   drunkWeakness: 1.3
+  drunkRotationOffset: {x: 0, y: 0, z: 0}
   isBlind: 0
+  suppressOnHit: 0
 --- !u!114 &5454063011830949721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,21 +135,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  damage: 20
-  maxCombo: 3
-  windupTime: 1.5
-  swingActiveTime: 0.5
-  recoveryTime: 1.5
-  knockbackForce: 12
-  swingArc: 120
-  hittableLayers:
+  Damage: 22
+  ArcAngle: 120
+  ArcRadius: 2.5
+  hitMask:
     serializedVersion: 2
-    m_Bits: 512
-  reflectRadius: 4.5
-  reflectForce: 15
-  reflectCooldown: 0.5
-  characterTransform: {fileID: 3619669152637874651}
-  currentPhase: 0
+    m_Bits: 0
+  projectileMask:
+    serializedVersion: 2
+    m_Bits: 0
+  swatArcAngle: 130
+  swatRadius: 3
+  swatCooldown: 0.3
+  windupTime: 1.5
+  swingTime: 0.3
+  recoveryTime: 1.5
+  totalHits: 3
 --- !u!1 &8842089319415816435
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: f4df6096304f1a347be6ca5512b09314, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: eb1040d4d18861f499f09f5c582c77b5, type: 2}
+      objectReference: {fileID: 9100000, guid: 58bf71bdcfa25bb46911c28892ed95bd, type: 2}
     - target: {fileID: 6240733294840144465, guid: f4df6096304f1a347be6ca5512b09314, type: 3}
       propertyPath: m_Layer
       value: 7

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour, IEnemyAttack
+public class RangedAttack : MonoBehaviour
 {
     public float attackRange = 15f;
     public float meleeRange = 2f;

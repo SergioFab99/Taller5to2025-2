@@ -1,9 +1,10 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
-using System.Collections;
+using KinematicCharacterController;
 
 public class EnemyStateHandler : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class EnemyStateHandler : MonoBehaviour
     public Transform Target;
     public Transform TargetPlayer;
     public Transform TargetPatrol;
-    private Transform Character;
+    public EnemyCharacter character;
+    private Transform CharacterTF;
 
     [Header("Behaviour / Settings")]
     public EnemyBehaviourState EnemyBehaviourState = EnemyBehaviourState.Default;
@@ -19,10 +21,9 @@ public class EnemyStateHandler : MonoBehaviour
     [NonSerialized] public IEnemyAttack attackComponent;
 
     private IEnemyState currentState;
+    private IEnemyState pendingState;
     private bool isTransitioning;
-    public bool QueuedBlock { get; set; }
 
-    [Header("States")]
     private IdleState1 idle;
     private AlertState1 alert;
     private AttackState1 attack;
@@ -33,39 +34,40 @@ public class EnemyStateHandler : MonoBehaviour
     private DeadState1 dead;
 
     [Header("Movement")]
-    public float detectionRange = 10f;
-    public float attackRange = 5f;
-    [NonSerialized] public float nextAttackTime = 0f;
-    public float moveSpeed = 3f;
+    public NavMeshAgent agent;
     public float turnSpeed = 8f;
-    public float knockbackForce = 5f;
-    public float stunDuration = 2f;
-    private float drunkSwayTimer = 0f;
-    public Vector3 drunkRotationOffset = Vector3.zero;
-    [NonSerialized] public NavMeshAgent agent;
-    public EnemyCharacter character;
+    public float detectionRange = 10f;
+    public float moveSpeed = 3f;
+    public float attackRange = 5f;
+    public float lastAttackTime = -999f;
     public float attackTagCooldownEndTime = 0f;
-    [NonSerialized] public float lastAttackTime = -999f;
+    public float nextAttackTime = 0f;
     public bool lockDirectChase = false;
+    public float knockBackForce = 5f;
+    private bool isKnockback = false;
 
     private Vector3 _lastCornerPos;
     private float _cornerTimer;
 
-    [Header("Status Effects")]
-    private Dictionary<StatusEffect, float> activeEffects = new Dictionary<StatusEffect, float>();
+    private readonly Dictionary<StatusEffect, float> activeEffects = new();
     public float bleedSpeedMultiplier = 0.7f;
     public float bleedDamageMultiplier = 0.8f;
     public float drunkDamageMultiplier = 1.5f;
     public float drunkWeakness = 1.3f;
+    private float drunkSwayTimer;
+    public Vector3 drunkRotationOffset = Vector3.zero;
     public bool isBlind = false;
-    [NonSerialized] public bool suppressOnHit = false;
+    public bool suppressOnHit = false;
+
+    public bool QueuedBlock { get; set; }
 
     public void Initialize(EnemySettingsList settings, Transform characterTransform, EnemyCharacter charac, NavMeshAgent agent1)
     {
-        Character = characterTransform;
-        enemySettings = settings;
-        agent = agent1;
+        CharacterTF = characterTransform;
         character = charac;
+        agent = agent1;
+
+        enemySettings = settings;
         attackComponent = GetComponent<IEnemyAttack>();
 
         idle = new IdleState1(this);
@@ -77,7 +79,8 @@ public class EnemyStateHandler : MonoBehaviour
         exposed = new ExposedState1(this);
         dead = new DeadState1(this);
 
-        SetState(idle);
+        currentState = idle;
+        currentState.OnEnter();
 
         var hp = GetComponentInChildren<HealthController>();
         if (hp != null)
@@ -86,10 +89,10 @@ public class EnemyStateHandler : MonoBehaviour
 
     private void Awake()
     {
-        if (character == null)
+        if (!character)
             character = GetComponentInChildren<EnemyCharacter>();
 
-        if (agent != null)
+        if (agent)
         {
             agent.updateRotation = false;
             agent.updateUpAxis = true;
@@ -98,17 +101,13 @@ public class EnemyStateHandler : MonoBehaviour
 
     private void Start()
     {
-        if (Target == null)
-            Target = GameObject.FindWithTag("Player")?.transform;
-
-        if (EnemyAttackOrder.Instance != null)
-        {
-            EnemyAttackOrder.Instance.RegisterEnemy(this);
-            Debug.Log($"{name} registered to attack order.");
-        }
-
         if (TargetPlayer == null)
             TargetPlayer = GameObject.FindWithTag("Player")?.transform;
+        if (Target == null)
+            Target = TargetPlayer;
+
+        if (EnemyAttackOrder.Instance != null)
+            EnemyAttackOrder.Instance.RegisterEnemy(this);
     }
 
     public void CurrentStateUpdate()
@@ -117,13 +116,17 @@ public class EnemyStateHandler : MonoBehaviour
         StatusTimers();
         HandleFacing();
 
-        Debug.DrawLine(transform.position, transform.position + transform.forward * 2f,
-            (character.CurrentMode == MovementMode.KCC) ? Color.red : Color.green);
+        Debug.DrawLine(transform.position,
+            transform.position + transform.forward * 2f,
+            character.CurrentMode == MovementMode.KCC ? Color.red : Color.green);
     }
 
     private void LateUpdate()
     {
-        if (character.CurrentMode == MovementMode.NavMesh && agent != null && agent.enabled && agent.hasPath)
+        if (character.CurrentMode == MovementMode.NavMesh &&
+            agent != null &&
+            agent.enabled &&
+            agent.hasPath)
         {
             if (Vector3.Distance(character.transform.position, _lastCornerPos) < 0.05f)
             {
@@ -132,16 +135,11 @@ public class EnemyStateHandler : MonoBehaviour
                 {
                     agent.ResetPath();
 
-                    Vector3 dest;
                     if (EnemyAttackOrder.Instance != null &&
-                        EnemyAttackOrder.Instance.TryGetFormationDestination(this, out dest))
-                    {
+                        EnemyAttackOrder.Instance.TryGetFormationDestination(this, out var dest))
                         agent.SetDestination(dest);
-                    }
                     else if (Target != null)
-                    {
                         agent.SetDestination(Target.position);
-                    }
 
                     _cornerTimer = 0f;
                 }
@@ -152,30 +150,45 @@ public class EnemyStateHandler : MonoBehaviour
                 _lastCornerPos = character.transform.position;
             }
         }
+
+        if (pendingState != null && !isTransitioning)
+        {
+            DoStateTransition();
+        }
     }
 
+    // -------------------------------STATES---------------------------------------
     public void SetState(IEnemyState newState)
     {
-        if (isTransitioning || newState == currentState) return;
+        if (newState == currentState) return;
 
-        lockDirectChase = (newState == alert || newState == recover || newState == block);
+        pendingState = newState;
+    }
+
+    private void DoStateTransition()
+    {
         isTransitioning = true;
+
         currentState?.OnExit();
-        currentState = newState;
-        StateMovement(newState);
+        currentState = pendingState;
+        pendingState = null;
+
+        StateMovement(currentState);
         currentState?.OnEnter();
 
         var recv = GetComponentInChildren<CombatHitReceiver>();
         if (recv != null)
-            recv.isBlocking = (newState == block);
+            recv.isBlocking = currentState == block;
 
-        isTransitioning = false;
         QueuedBlock = false;
+        isTransitioning = false;
+
     }
 
     public EnemyBehaviourState GetBehaviourState() => EnemyBehaviourState;
     public void SetBehaviourState(EnemyBehaviourState newBehaviour) => EnemyBehaviourState = newBehaviour;
     public IEnemyState GetCurrentState() => currentState;
+
     public IEnemyState GetIdleState() => idle;
     public IEnemyState GetAlertState() => alert;
     public IEnemyState GetAttackState() => attack;
@@ -185,22 +198,82 @@ public class EnemyStateHandler : MonoBehaviour
     public IEnemyState GetExposedState() => exposed;
     public IEnemyState GetDeadState() => dead;
 
+    public bool IsKnockback => isKnockback;
+
+    // ------------------------------MOVEMENT SETTINGS----------------------------------------
+    public void StateMovement(IEnemyState state)
+    {
+        bool useKCC =
+            state is AttackState1 ||
+            state is RecoverState1 ||
+            state is StunState1 ||
+            state is BlockState1 ||
+            state is ExposedState1;
+
+        if (useKCC)
+        {
+            if (agent != null && agent.enabled)
+            {
+                agent.updatePosition = false;
+                agent.updateRotation = false;
+                agent.velocity = Vector3.zero;
+                agent.isStopped = true;
+            }
+
+
+            character.StartCoroutine(SyncAgentNextFrame());
+            character.Motor.SetPosition(character.transform.position);
+            character.Motor.ForceUnground();
+            character.SetMovementMode(MovementMode.KCC);
+        }
+        else
+        {
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+            {
+                agent.updatePosition = true;
+                agent.updateRotation = true;
+                agent.updateUpAxis = true;
+                agent.isStopped = false;
+
+                agent.Warp(character.transform.position);
+            }
+
+            character.SetMovementMode(MovementMode.NavMesh);
+        }
+    }
+
+    private IEnumerator SyncAgentNextFrame()
+    {
+        yield return null;
+        if (agent != null)
+            agent.nextPosition = character.transform.position;
+    }
+
+
+
+    // --------------------------TARGET CHECKS--------------------------------------------
     public bool CheckTargetOnView(Transform target = null)
     {
         target ??= TargetPlayer;
-        if (target == null) return false;
-        return Vector3.Distance(Character.position, target.position) <= enemySettings.AISettings.detectionDistance;
+        if (target == null || enemySettings == null) return false;
+
+        Transform refTF = CharacterTF != null ? CharacterTF : transform;
+        return Vector3.Distance(refTF.position, target.position) <= enemySettings.AISettings.detectionDistance;
     }
 
     public bool CheckTargetOnAttackRange(Transform target = null)
     {
         target ??= TargetPlayer;
-        if (target == null) return false;
-        return Vector3.Distance(Character.position, target.position) <= enemySettings.AISettings.attackRange;
+        if (target == null || enemySettings == null) return false;
+
+        Transform refTF = CharacterTF != null ? CharacterTF : transform;
+        return Vector3.Distance(refTF.position, target.position) <= enemySettings.AISettings.attackRange;
     }
 
     public void EnterCombatMode() => SetBehaviourState(EnemyBehaviourState.Combat);
     public void ExitCombatMode() => SetBehaviourState(EnemyBehaviourState.Default);
+
+    // --------------------------MOVEMENT--------------------------------------------
 
     public void StopMovement()
     {
@@ -209,6 +282,18 @@ public class EnemyStateHandler : MonoBehaviour
             agent.velocity = Vector3.zero;
             agent.isStopped = true;
             agent.ResetPath();
+        }
+    }
+
+    public void StopAllMovement()
+    {
+        StopMovement();
+
+        if (character != null)
+        {
+            character._state.Velocity = Vector3.zero;
+            if (character.Motor != null)
+                character.Motor.BaseVelocity = Vector3.zero;
         }
     }
 
@@ -226,7 +311,7 @@ public class EnemyStateHandler : MonoBehaviour
         direction.y = 0f;
 
         float distance = Vector3.Distance(character.transform.position, Target.position);
-        float stopDistance = enemySettings.AISettings.stopingDistance;
+        float stopDistance = enemySettings != null ? enemySettings.AISettings.stopingDistance : 1.0f;
         Vector3 moveInput = (distance > stopDistance + 0.5f) ? direction : Vector3.zero;
 
         var enemyInput = new EnemyInput
@@ -241,83 +326,48 @@ public class EnemyStateHandler : MonoBehaviour
         if (!agent.hasPath || Vector3.Distance(agent.destination, Target.position) > 0.25f)
             agent.SetDestination(Target.position);
     }
-
-    bool isKnockback=false;
-
-    IEnumerator KnockbackCooldown()
+    public void MoveToPoint(Vector3 point)
     {
-        isKnockback = true;
-        yield return new WaitForSeconds(0.3f);
-        isKnockback = false;
-    }
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            return;
 
-    public void Knockback(Vector3 hitDirection, float forceMultiplier = 1f)
-    {
-        return;
-        StartCoroutine(KnockbackCooldown());
-        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockbackForce * forceMultiplier}");
+        character.SetMovementMode(MovementMode.NavMesh);
 
-        if (currentState == block)
-            forceMultiplier *= 0.8f;
+        agent.isStopped = false;
+        agent.speed = MoveSpeed();
 
-        StopMovement();
-        hitDirection.y = 0f;
-
-        Vector3 force = hitDirection.normalized * (knockbackForce * forceMultiplier);
-        Debug.Log($"{name}: Adding external force {force}");
-        character.AddExternalForce(force);
-    }
-
-    public void StateMovement(IEnemyState newState)
-    {
-        bool useKCC = newState is AttackState1 or RecoverState1 or StunState1 or BlockState1 or ExposedState1;
-
-        if (useKCC)
+        if (!agent.hasPath || Vector3.Distance(agent.destination, point) > 0.25f)
         {
-            if (agent != null && agent.enabled)
-            {
-                agent.updatePosition = false;
-                agent.updateRotation = false;
-                agent.velocity = Vector3.zero;
-                agent.isStopped = true;
-            }
-
-            character.StartCoroutine(Helper());
-            character.Motor.SetPosition(character.transform.position);
-            character.Motor.ForceUnground();
-            character.SetMovementMode(MovementMode.KCC);
+            agent.SetDestination(point);
         }
-        else
+
+        Vector3 direction = (point - character.transform.position);
+        direction.y = 0;
+
+        Vector3 moveInput = direction.normalized;
+
+        var enemyInput = new EnemyInput
         {
-            if (agent != null && agent.enabled && agent.isOnNavMesh)
-            {
-                agent.updatePosition = true;
-                agent.updateRotation = true;
-                agent.updateUpAxis = true;
-                agent.isStopped = false;
-                agent.Warp(character.transform.position);
-            }
-            character.SetMovementMode(MovementMode.NavMesh);
-        }
-    }
+            Direction = moveInput,
+            Move = moveInput
+        };
 
-    private IEnumerator Helper()
-    {
-        yield return null;
-        if (agent != null)
-            agent.nextPosition = character.transform.position;
+        character.UpdateInputs(enemyInput, EnemyBehaviourState);
+        character._state.Velocity = moveInput;
+        character._state.MovementState =
+            moveInput.magnitude > 0.01f ? MovementState.Moving : MovementState.Idle;
     }
 
     public void HandleFacing()
     {
         if (Target == null) return;
-        if (character.CurrentMode != MovementMode.NavMesh) return;
+        if (character == null || character.CurrentMode != MovementMode.NavMesh) return;
 
-        Vector3 toPlayer = Target.position - character.transform.position;
-        toPlayer.y = 0f;
-        if (toPlayer.sqrMagnitude < 0.01f) return;
+        Vector3 toTarget = Target.position - character.transform.position;
+        toTarget.y = 0f;
+        if (toTarget.sqrMagnitude < 0.01f) return;
 
-        Quaternion desired = Quaternion.LookRotation(toPlayer.normalized, Vector3.up);
+        Quaternion desired = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
         character.transform.rotation = Quaternion.Slerp(
             character.transform.rotation,
             desired,
@@ -365,6 +415,32 @@ public class EnemyStateHandler : MonoBehaviour
         return retreat.normalized;
     }
 
+    public void Knockback(Vector3 hitDirection, float forceMultiplier = 1f)
+    {
+        StartCoroutine(KnockbackCooldown());
+        Debug.Log($"{name}: Knockback called in state {currentState?.GetType().Name}. Direction: {hitDirection}, force: {knockBackForce * forceMultiplier}");
+
+        if (currentState == block)
+            forceMultiplier *= 0.8f;
+
+        StopAllMovement();
+        hitDirection.y = 0f;
+
+        Vector3 force = hitDirection.normalized * (knockBackForce * forceMultiplier);
+
+        character.SetMovementMode(MovementMode.KCC);
+        character.Motor.ForceUnground();
+        character.AddExternalForce(force);
+    }
+
+    private IEnumerator KnockbackCooldown()
+    {
+        isKnockback = true;
+        yield return new WaitForSeconds(0.3f);
+        isKnockback = false;
+    }
+
+    // ------------------------------STATUS EFFECTS----------------------------------------
     public void ApplyStatus(StatusEffect type, float duration)
     {
         Debug.Log($"{name} ApplyStatus called: {type} for {duration}s");
@@ -376,15 +452,17 @@ public class EnemyStateHandler : MonoBehaviour
                 StopCoroutine(nameof(BleedTick));
                 StartCoroutine(BleedTick());
                 break;
+
             case StatusEffect.Drunk:
                 StartCoroutine(DrunkWobble());
                 break;
+
             case StatusEffect.Blind:
                 isBlind = true;
                 attackComponent?.ForceCancel(false, false);
-                StopMovement();
-                if (currentState is AlertState1 or IdleState1) return;
-                SetState(idle);
+                StopAllMovement();
+                if (currentState is not IdleState1 and not AlertState1)
+                    SetState(idle);
                 break;
         }
     }
@@ -400,16 +478,19 @@ public class EnemyStateHandler : MonoBehaviour
 
     public void StatusTimers()
     {
-        var keys = new List<StatusEffect>(activeEffects.Keys);
-        var expired = new List<StatusEffect>();
-
-        foreach (var key in keys)
+        if (activeEffects.Count > 0)
         {
-            if ((activeEffects[key] -= Time.deltaTime) <= 0)
-                expired.Add(key);
-        }
+            var keys = new List<StatusEffect>(activeEffects.Keys);
+            var expired = new List<StatusEffect>();
 
-        expired.ForEach(RemoveStatus);
+            foreach (var key in keys)
+            {
+                if ((activeEffects[key] -= Time.deltaTime) <= 0)
+                    expired.Add(key);
+            }
+
+            expired.ForEach(RemoveStatus);
+        }
 
         if (isBlind)
             StopMovement();
@@ -430,6 +511,8 @@ public class EnemyStateHandler : MonoBehaviour
 
     public float MoveSpeed()
     {
+        if (enemySettings == null) return moveSpeed;
+
         float baseSpeed = enemySettings.AlertEnemySettings.moveSettings.Speed;
         return HasStatus(StatusEffect.Bleeding) ? baseSpeed * bleedSpeedMultiplier : baseSpeed;
     }
@@ -443,15 +526,6 @@ public class EnemyStateHandler : MonoBehaviour
     }
 
     public float DamageTakeMult() => HasStatus(StatusEffect.Drunk) ? drunkWeakness : 1f;
-
-    private void OnDrawGizmosSelected()
-    {
-        if (enemySettings == null) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.detectionDistance);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.attackRange);
-    }
 
     private IEnumerator BleedTick()
     {
@@ -480,7 +554,9 @@ public class EnemyStateHandler : MonoBehaviour
     private void HandleHitEvent(float delta)
     {
         if (delta >= 0f || suppressOnHit || Target == null) return;
-        OnHit((transform.position - Target.position).normalized);
+
+        Vector3 dir = (transform.position - Target.position).normalized;
+        OnHit(dir);
     }
 
     public void OnHit(Vector3 hitDir)
@@ -492,12 +568,12 @@ public class EnemyStateHandler : MonoBehaviour
             case AttackState1:
                 if (attackComponent?.TryInterrupt() == true)
                 {
-                    Debug.Log($"{name}: Attack interrupted → stunned.");
+                    Debug.Log($"{name}: Attack interrupted = stunned.");
                     SetState(stunned);
                     Knockback(hitDir);
                     return;
                 }
-                Debug.Log($"{name}: Attack not interruptible → queuing block.");
+                Debug.Log($"{name}: Attack not interruptible = queuing block.");
                 QueuedBlock = true;
                 attackComponent?.ForceCancel(false, true);
                 return;
@@ -509,27 +585,40 @@ public class EnemyStateHandler : MonoBehaviour
                 return;
 
             case ExposedState1 or RecoverState1:
-                Debug.Log($"{name}: Hit while exposed/recovering → stunned.");
+                Debug.Log($"{name}: Hit while exposed/recovering = stunned.");
                 SetState(stunned);
                 Knockback(hitDir);
                 return;
 
             case StunState1:
-                Debug.Log($"{name}: Already stunned → extending.");
+                Debug.Log($"{name}: Already stunned = extending.");
                 stunned.ExtendStun(0.8f);
                 Knockback(hitDir);
                 return;
 
             default:
-                Debug.Log($"{name}: Regular hit → knockback.");
+                Debug.Log($"{name}: Regular hit = knockback.");
                 Knockback(hitDir);
                 break;
         }
+    }
+
+    //-----------------------CLEANUP-----------------------------------
+    private void OnDrawGizmosSelected()
+    {
+        if (enemySettings == null) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.detectionDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enemySettings.AISettings.attackRange);
     }
 
     private void OnDisable()
     {
         if (TryGetComponent(out HealthController hp))
             hp.OnLifeChangue -= HandleHitEvent;
+
+        if (EnemyAttackOrder.Instance != null)
+            EnemyAttackOrder.Instance.UnregisterEnemy(this);
     }
 }

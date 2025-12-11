@@ -9,7 +9,9 @@ public interface IEnemyAttack
     public bool ForceBlocked { get; }
 
     void Execute();
-    void ForceCancel(bool interrupt, bool block);
+    void ManualUpdate();
+    void BeginAttack(EnemyStateHandler handler);
+    void ForceCancel(bool wasInterrupted, bool wasBlocked);
 
     void ResetAttackCycle();
     bool WasInterrupted { get; }

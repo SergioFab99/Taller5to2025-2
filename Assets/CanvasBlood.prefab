@@ -87,13 +87,14 @@ GameObject:
   - component: {fileID: 4667641420384108908}
   - component: {fileID: 2578193982773947422}
   - component: {fileID: 1126770687422601473}
+  - component: {fileID: 8007633854521688968}
   m_Layer: 5
   m_Name: CanvasBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4029197095939566216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -177,3 +178,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 30719
+--- !u!225 &8007633854521688968
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822381732984416689}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
