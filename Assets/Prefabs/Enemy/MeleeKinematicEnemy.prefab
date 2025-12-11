@@ -192,6 +192,8 @@ MonoBehaviour:
   _stateHandler: {fileID: 359851920969218421}
   agent: {fileID: 5161424549491569845}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
+  melee: {fileID: 7856147728866338547}
+  bat: {fileID: 0}
   testTarget: {fileID: 0}
 --- !u!114 &359851920969218421
 MonoBehaviour:
@@ -208,22 +210,25 @@ MonoBehaviour:
   Target: {fileID: 0}
   TargetPlayer: {fileID: 0}
   TargetPatrol: {fileID: 0}
-  EnemyBehaviourState: 0
-  detectionRange: 10
-  attackRange: 5
-  moveSpeed: 3
-  turnSpeed: 8
-  knockbackForce: 6
-  stunDuration: 2
-  drunkRotationOffset: {x: 0, y: 0, z: 0}
   character: {fileID: 0}
+  EnemyBehaviourState: 0
+  agent: {fileID: 0}
+  turnSpeed: 8
+  detectionRange: 10
+  moveSpeed: 3
+  attackRange: 5
+  lastAttackTime: -999
   attackTagCooldownEndTime: 0
+  nextAttackTime: 0
   lockDirectChase: 0
+  knockBackForce: 5
   bleedSpeedMultiplier: 0.7
   bleedDamageMultiplier: 0.8
   drunkDamageMultiplier: 1.5
   drunkWeakness: 1.3
+  drunkRotationOffset: {x: 0, y: 0, z: 0}
   isBlind: 0
+  suppressOnHit: 0
 --- !u!114 &7856147728866338547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,11 +242,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3
+  damage: 10
+  hitRadius: 1.2
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
   windupTime: 1.5
   punchActiveTime: 0.5
   comboGap: 0.3
   maxCombo: 2
-  characterTransform: {fileID: 0}
   currentPhase: 0
 --- !u!114 &3324522968077132253
 MonoBehaviour:
@@ -713,6 +722,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 1100
+  bloodCanvas: {fileID: 0}
+  bloodVisibleTime: 0.5
+  minimumBloodAlpha: 0.2
   hitAudioSource: {fileID: 8842232047460039334}
   hitClip: {fileID: 8300000, guid: 0496e50e36c8c744cb162143a46cc34d, type: 3}
 --- !u!114 &8092243494369351890
