@@ -84,8 +84,7 @@ public class MeleeAttack : MonoBehaviour, IEnemyAttack
         currentPunch++;
 
         ai.StopMovement();
-        ai.character.UpdateInputs(new EnemyInput { Direction = ai.character.transform.forward, Move = ai.character.transform.forward * 0.35f }, ai.GetBehaviourState()
-);
+        ai.character.UpdateInputs(new EnemyInput { Direction = ai.character.transform.forward, Move = ai.character.transform.forward * 0.35f }, ai.GetBehaviourState());
         Debug.Log($"[{name}] Windup for punch {currentPunch}");
 
         Invoke(nameof(PerformPunch), windupTime);

@@ -16,6 +16,8 @@ public class EnemyAttackOrder : MonoBehaviour
     [Header("Aggro")]
     public float maxAggroRadius = 12f;
     public float frontArcDegrees = 130f;
+    public float enforceDelay = 2.5f;
+    private float noAttackerTimer = 0f;
 
     [Header("Thresholds")]
     public int twoRingThreshold = 5;
@@ -30,7 +32,9 @@ public class EnemyAttackOrder : MonoBehaviour
     public float personalSpinMin = 0.1f;
     public float personalSpinMax = 0.3f;
     public float globalSpinSpeed = 0.8f;    
-    public float lateralShuffleLimit = 0.35f; 
+    public float lateralShuffleLimit = 0.35f;
+
+
 
     public Transform player;
 
@@ -75,6 +79,7 @@ public class EnemyAttackOrder : MonoBehaviour
         if (!player) return;
 
         BuildFormation();
+        Enforcer();
 
         PromoteIfPossible();
         ProcessPendingPromotions();
@@ -305,5 +310,39 @@ public class EnemyAttackOrder : MonoBehaviour
         EnemyStateHandler chosen = fresh.Count > 0 ? fresh[0] : candidates.OrderBy(c => Vector3.Distance(c.transform.position, player.position)).First();
 
         lockedAttackers.Add(chosen);
+    }
+
+    private void Enforcer()
+    {
+        if (lockedAttackers.Count > 0)
+        {
+            noAttackerTimer = 0f;
+            return;
+        }
+
+        if (formation.Count == 0)
+        {
+            noAttackerTimer = 0f;
+            return;
+        }
+
+        noAttackerTimer += Time.deltaTime;
+
+        if (noAttackerTimer < enforceDelay)
+            return;
+
+        var candidates = formation.Keys.Where(e => e != null && !lockedAttackers.Contains(e)).OrderBy(e => Vector3.Distance(e.transform.position, player.position)).ToList();
+
+        if (candidates.Count == 0)
+            return;
+
+        var chosen = candidates[0];
+
+        lockedAttackers.Add(chosen);
+        pendingPromotions.Remove(chosen);
+
+        Debug.Log($"Forced {chosen.name} into attacker role");
+
+        noAttackerTimer = 0f;
     }
 }
