@@ -11399,30 +11399,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e76d26933140040b5a3cccfb910719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 2
   player: {fileID: 420521196}
+  exteriorClips:
+  - {fileID: 8300000, guid: b2f009acb353cad4cb9dc43709329db3, type: 3}
+  - {fileID: 8300000, guid: a30901185f3571d4f87a10c5c262e988, type: 3}
+  - {fileID: 8300000, guid: 8416229f17d7eae4f8c2dcf7705c5314, type: 3}
   zones:
   - center: {x: 0, y: 3.1, z: 0}
-    size: {x: 28.05, y: 10.52, z: 59.23}
-    gizmoColor: {r: 1, g: 0, b: 0, a: 0.3647059}
+    size: {x: 28.05, y: 13.78, z: 59.23}
+    enterClips:
+    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
+    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
+    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
   - center: {x: 0.20000076, y: 3.1, z: -55.91}
-    size: {x: 31.3, y: 10.52, z: 22.5}
-    gizmoColor: {r: 0.56129086, g: 1, b: 0, a: 0}
+    size: {x: 31.3, y: 12.22, z: 22.5}
+    enterClips:
+    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
+    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
+    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
   - center: {x: -37.3, y: 3.1, z: 1.8300018}
-    size: {x: 33.47, y: 10.52, z: 25.27}
-    gizmoColor: {r: 0, g: 0.00015449524, b: 1, a: 0}
+    size: {x: 33.47, y: 14.13, z: 25.27}
+    enterClips:
+    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
+    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
+    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
   - center: {x: 98.7, y: 3.1, z: -55.95}
-    size: {x: 60.3, y: 10.52, z: 20.25}
-    gizmoColor: {r: 1, g: 0.8482038, b: 0, a: 0}
-  enterClips:
-  - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
-  - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
-  - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
-  exitClips:
-  - {fileID: 8300000, guid: 8416229f17d7eae4f8c2dcf7705c5314, type: 3}
-  - {fileID: 8300000, guid: a30901185f3571d4f87a10c5c262e988, type: 3}
-  - {fileID: 8300000, guid: b2f009acb353cad4cb9dc43709329db3, type: 3}
-  gizmoFillAlpha: 0.565
+    size: {x: 60.3, y: 13.25, z: 20.25}
+    enterClips:
+    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
+    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
+    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
+  fadeDuration: 2
 --- !u!4 &441508018
 Transform:
   m_ObjectHideFlags: 0
@@ -39397,6 +39404,18 @@ PrefabInstance:
       propertyPath: bloodCanvas
       value: 
       objectReference: {fileID: 1633028716}
+    - target: {fileID: 1239723311189411367, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: DefaultVelocity.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239723311189411367, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: DefaultVelocity.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239723311189411367, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
+      propertyPath: DefaultVelocity.z
+      value: -0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2414750503998236210, guid: bca010d329f8d60468e57d2ff2e911fd, type: 3}
       propertyPath: fistWeapon
       value: 
