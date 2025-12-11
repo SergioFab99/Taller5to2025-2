@@ -120,8 +120,7 @@ public class AttackState1 : IEnemyState
         return Quaternion.Slerp(currentRotation, desired, dt * 10f);
     }
 
-    public Vector3 UpdateVelocity(Vector3 currentVelocity, float dt, KinematicCharacterMotor motor,
-        Vector3 input, EnemySettingsList settings, ref float ungrounded)
+    public Vector3 UpdateVelocity(Vector3 currentVelocity, float dt, KinematicCharacterMotor motor, Vector3 input, EnemySettingsList settings, ref float ungrounded)
     {
         var style = ai.enemySettings.AISettings.attackStyle;
 
@@ -145,9 +144,7 @@ public class AttackState1 : IEnemyState
     {
         if (motor.GroundingStatus.IsStableOnGround)
         {
-            var groundedMovement =
-                motor.GetDirectionTangentToSurface(input, motor.GroundingStatus.GroundNormal)
-                * input.magnitude;
+            var groundedMovement = motor.GetDirectionTangentToSurface(input, motor.GroundingStatus.GroundNormal) * input.magnitude;
 
             vel = groundedMovement * settings.AlertEnemySettings.moveSettings.Speed;
             ungrounded = 0f;

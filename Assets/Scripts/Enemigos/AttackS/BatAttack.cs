@@ -24,6 +24,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     public float recoveryTime = 1.4f;
     public int totalHits = 3;
 
+    private bool _isAttacking = false;
     public bool IsAttacking { get; private set; }
     public bool IsFinished { get; private set; }
     public bool WasInterrupted { get; private set; }
@@ -131,56 +132,42 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
 
     private void PerformArcHit()
     {
-        if (ai == null || ai.character == null)
-        {
-            Missed = true;
-            return;
-        }
+        if (ai == null || ai.character == null) { Missed = true; return; }
 
-        Vector3 origin = ai.character.transform.position + Vector3.up;
+        Vector3 origin = ai.character.transform.position + Vector3.up * 1.0f;
+
         Vector3 forward = ai.character.transform.forward;
-
-        Collider[] hits = Physics.OverlapSphere(ai.character.transform.position + Vector3.up * 1.0f, ArcRadius, hitMask);
-
+        Collider[] hits = Physics.OverlapSphere(ai.character.transform.position, attackRange);
         bool hitLanded = false;
-
         foreach (Collider hit in hits)
         {
-            if (!hit.CompareTag("Player"))
-                continue;
-
-            Vector3 dir = hit.transform.position - origin;
-            dir.y = 0;
-            float angle = Vector3.Angle(forward, dir);
-
-            if (angle > ArcAngle * 0.5f)
-                continue;
-
-            var recv = hit.GetComponent<CombatHitReceiver>()
-                       ?? hit.GetComponentInChildren<CombatHitReceiver>()
-                       ?? hit.GetComponentInParent<CombatHitReceiver>();
-
-            if (recv != null)
+            if (hit.CompareTag("Player"))
             {
-                Vector3 hitPoint = hit.ClosestPoint(origin);
+                var recv = hit.GetComponent<CombatHitReceiver>()
+                   ?? hit.GetComponentInChildren<CombatHitReceiver>()
+                   ?? hit.GetComponentInParent<CombatHitReceiver>();
 
-                var hitInfo = new HitInfo(hit, hitPoint, (hitPoint - origin), damage: 15f, WeaponType.Fist, null);
-
-                recv.OnHit(hitInfo);
+                if (recv != null)
+                {
+                    Vector3 hitPoint = hit.ClosestPoint(ai.character.transform.position);
+                    var hitInfo = new HitInfo(hit, hitPoint, (hitPoint - ai.character.transform.position), 10f, WeaponType.Fist, null);
+                    recv.OnHit(hitInfo);
+                }
 
                 hitLanded = true;
-                hitConnectedThisSwing = true;
+                Missed = false;
+                break;
             }
-
-            break; 
         }
 
         if (!hitLanded)
         {
+            Debug.Log("or miss, i guess they never miss huh");
             Missed = true;
-            Debug.Log($"{name} BAT MISSED");
+            ForceCancel(false, false);
         }
     }
+
     public void ManualUpdate()
     {
         CheckProjectileSwat();
@@ -261,5 +248,46 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         currentHit = 0;
         phase = Phase.None;
         hitConnectedThisSwing = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (ai == null || ai.character == null)
+            return;
+
+        Vector3 origin = ai.character.transform.position + Vector3.up * 1.1f;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(origin, 0.1f); 
+
+        Vector3 forward = ai.character.transform.forward;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(origin, origin + forward * ArcRadius);
+
+        float halfAngle = ArcAngle * 0.5f;
+        Quaternion leftRot = Quaternion.Euler(0, -halfAngle, 0);
+        Quaternion rightRot = Quaternion.Euler(0, halfAngle, 0);
+
+        Vector3 leftDir = leftRot * forward;
+        Vector3 rightDir = rightRot * forward;
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(origin, origin + leftDir * ArcRadius);
+        Gizmos.DrawLine(origin, origin + rightDir * ArcRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(origin, ArcRadius);
+
+        if (ai.character != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(ai.character.transform.position, Vector3.one * 0.1f);
+        }
+
+        if (ai.transform != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(ai.transform.position, Vector3.one * 0.1f);
+        }
     }
 }
