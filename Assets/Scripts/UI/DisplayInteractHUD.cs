@@ -16,6 +16,7 @@ public class DisplayInteractHUD : MonoBehaviour
     [SerializeField] private Letter openLetter;
     Player playerTp;
     GameObject canvas, canInteract;
+    bool _input;
     private bool isHittingDoor, isHittingStair, isHittingLetter;
     public static bool thisIsTutorial, thisIsLevel1;
     void Start()
@@ -127,7 +128,7 @@ public class DisplayInteractHUD : MonoBehaviour
     }
     void ActiveInteracts()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
+        if (_input && Time.timeScale == 1)
         {
             if (openDoor != null && isHittingDoor)
             {
@@ -182,5 +183,10 @@ public class DisplayInteractHUD : MonoBehaviour
     void Letters()
     {
         openLetter.OpenLetter();
+    }
+
+    public void GetInput(bool input)
+    {
+        this._input = input;
     }
 }

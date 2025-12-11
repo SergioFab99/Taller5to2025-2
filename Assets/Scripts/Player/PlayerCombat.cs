@@ -43,6 +43,8 @@ public struct CombatInput
     public bool Dodge;
 
     public bool Blocking;
+
+    public bool Throw;
 }
 
 public class PlayerCombat : CombatBase
@@ -71,6 +73,7 @@ public class PlayerCombat : CombatBase
 
     public LayerMask EnemyMask;
 
+    public bool _requestedThrow;
     
     public event WeaponPickUp OnWeaponPickUp;
     public delegate void WeaponPickUp(GameObject Prefab);
@@ -130,6 +133,7 @@ public class PlayerCombat : CombatBase
         requestInteract = input.Interact;
         requestBlocking = input.Blocking;
         requestDodge = input.Dodge;
+        _requestedThrow = input.Throw;
 
         if (requestAttack) Debug.Log("Requested Attack");
         if (requestInteract) Debug.Log("Requested Interact");
@@ -172,7 +176,11 @@ public class PlayerCombat : CombatBase
                 return;
             }
 
-           if(currentWeapon != null && currentWeapon.Wtype != WeaponType.Fist && currentWeapon.tagContainer.HasTag("Throwable"))
+
+        }
+        if (_requestedThrow)
+        { 
+            if(currentWeapon != null && currentWeapon.Wtype != WeaponType.Fist && currentWeapon.tagContainer.HasTag("Throwable"))
             {
                 Debug.Log("RequestThrow");
 
@@ -180,9 +188,8 @@ public class PlayerCombat : CombatBase
                 LinkWeapon(fistWeapon);
             } 
 
+        
         }
-
-
 
         if (requestBlocking && !_state.isBlocking && !_isDodging)
         {

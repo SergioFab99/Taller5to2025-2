@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] HealthController healthController;
 
+    [Header("Interact")]
+    [SerializeField] PlayerOpenTutorialDoors doors;
+    [SerializeField] DisplayInteractHUD display; 
 
 
     [Header("Damage Reception")]
@@ -77,6 +80,11 @@ public class Player : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
+        if (doors != null)
+        {
+        doors.GetInput(input.Interact.WasPressedThisFrame());
+        }
+        display.GetInput(input.Interact.WasPressedThisFrame());
         if(playerCamera.CheckIsViewTarget(playerCharacter.transform))
         {
             Debug.Log("TargetOnView");
@@ -99,13 +107,14 @@ public class Player : MonoBehaviour
         };
         playerCamera.UpdateRotation(cameraInput);
 
-        
+
         var combatInput = new CombatInput
         {
             BaseAttack = input.Attack.WasPressedThisFrame(),
             Interact = input.Interact.WasPressedThisFrame(),
             Blocking = input.Block.IsPressed(),
-            Dodge = input.Dash.WasPressedThisFrame()
+            Dodge = input.Dash.WasPressedThisFrame(),
+            Throw = input.Throw.WasPressedThisFrame()
         };
         playerCombat.UpdateInput(combatInput);
         playerCharacter.setState(combatInput.Blocking);
@@ -113,6 +122,7 @@ public class Player : MonoBehaviour
         if (healthController.health <= healthController.maxHealth / 4)
             playerAudio.SetLowHP(true);
         else playerAudio.SetLowHP(false);
+
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
@@ -127,6 +137,7 @@ public class Player : MonoBehaviour
 #endif
 
         playerCombat.CombatTickUpdate(Time.deltaTime);
+
     }
 
     private void LateUpdate()
