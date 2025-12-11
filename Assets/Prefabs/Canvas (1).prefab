@@ -2925,6 +2925,7 @@ GameObject:
   - component: {fileID: 4963148975002672591}
   - component: {fileID: 7668072858832027358}
   - component: {fileID: 1113461780062795026}
+  - component: {fileID: 5874065459104430413}
   m_Layer: 0
   m_Name: BackgroundEnemyHUDBar
   m_TagString: Untagged
@@ -2991,6 +2992,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &5874065459104430413
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126297709791890901}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2148230341169274975
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,7 +5340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1414688170486878397}
-  canvasGroup: {fileID: 6132169228585551278}
+  canvasGroup: {fileID: 5874065459104430413}
   nameLabel: {fileID: 0}
   lifeBar: {fileID: 1684898446969531557}
   targetCamera: {fileID: 0}
