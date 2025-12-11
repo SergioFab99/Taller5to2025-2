@@ -23,5 +23,13 @@ public class Hacks : MonoBehaviour
         {
             health.AddHealth(1000000000000);
         }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            SceneManager.LoadScene("Cinematic1");
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SceneManager.LoadScene("StartMenu");
+        }
     }
 }

@@ -6,6 +6,7 @@ public class PlayerHealthBar : MonoBehaviour
 {
     [SerializeField] private HealthController playerHealth;
     [SerializeField] private Slider slider;
+    [SerializeField] private Image lifeBar;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private bool hideWhenFull = false;
 
@@ -17,8 +18,8 @@ public class PlayerHealthBar : MonoBehaviour
     private void Awake()
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
-
-        if(playerHealth==null)
+        if (lifeBar == null) lifeBar = GetComponent<Image>();
+        if (playerHealth==null)
         {
             playerHealth = GameObject.FindWithTag("Player").GetComponent<HealthController>();
         }
@@ -64,7 +65,7 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void OnHealthUpdated(float current, float max)
     {
-        if (slider != null)
+        /*if (slider != null)
         {
             slider.minValue = 0f;
             slider.maxValue = max;
@@ -73,6 +74,10 @@ public class PlayerHealthBar : MonoBehaviour
         if (hideWhenFull && canvasGroup != null)
         {
             canvasGroup.alpha = current >= max ? 0f : 1f;
+        }*/
+        if (lifeBar != null)
+        {
+            lifeBar.fillAmount = playerHealth.health / max;
         }
     }
 }
