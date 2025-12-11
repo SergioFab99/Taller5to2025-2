@@ -15,6 +15,7 @@ public class EnemyTargetHUD : MonoBehaviour
     [Tooltip("Optional text label for enemy name (can be left null).")]
     [SerializeField] private Text nameLabel; // If you later switch to TextMeshPro just adapt type.
 
+    [SerializeField] private Image lifeBar;
     [Header("Detection")] 
     [Tooltip("Camera used for the center-screen ray. If null, will use Camera.main each frame.")]
     [SerializeField] private Camera targetCamera;
@@ -42,6 +43,7 @@ public class EnemyTargetHUD : MonoBehaviour
     [SerializeField] private bool debugDrawRay = false;
 
     private HealthController _current;
+    
     private float _lastSeenTime;
     private float _nextDetectTime;
     private bool _wantsVisible;
@@ -166,7 +168,7 @@ public class EnemyTargetHUD : MonoBehaviour
 
     private void OnTargetHealthUpdated(float current, float max)
     {
-        if (slider != null)
+        /*if (slider != null)
         {
             slider.maxValue = max;
             slider.value = current;
@@ -174,6 +176,10 @@ public class EnemyTargetHUD : MonoBehaviour
         if (nameLabel != null && _current != null)
         {
             nameLabel.text = _current.gameObject.name; // Placeholder; customize later
+        }*/
+        if (lifeBar != null)
+        {
+            lifeBar.fillAmount = _current.health / max;
         }
     }
 }

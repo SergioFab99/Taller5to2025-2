@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel, pauseMenu, shopMenu;
+    [SerializeField] private GameObject pausePanel, pauseMenu, shopMenu, optionsMenu;
     [SerializeField] private PlayerCamera playerCamera;
     private void Awake()
     {
@@ -43,10 +43,16 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         shopMenu.SetActive(false);
+        optionsMenu.SetActive(false);
     }
     public void ShopButton()
     {
         pauseMenu.SetActive(false);
         shopMenu.SetActive(true);
+    }
+    public void OptionsButton()
+    {
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(true);
     }
 }
