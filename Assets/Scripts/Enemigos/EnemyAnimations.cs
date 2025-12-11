@@ -73,6 +73,11 @@ public class EnemyAnimations : MonoBehaviour
     private float _moveSpeed;
     private GaitState _currentGait;
 
+    private bool _isAttacking;
+
+    private bool _isBlocking;
+
+
     [Header("Speed Thresholds")]
     public float runThreshold = 1.0f;
     public float sprintThreshold = 3.0f;
@@ -98,14 +103,26 @@ public class EnemyAnimations : MonoBehaviour
         _animator.SetBool(_isGroundedHash, _isGrounded);
     }
 
-    public void AnimUpdate(float deltaTime, EnemyCharacter character)
+    public void AnimUpdate(float deltaTime, EnemyCharacter character, MeleeAttack melee, BatAttack bat, EnemyStateHandler handler)
     {
-        UpdateProperties(character);
+        UpdateProperties(character, melee,bat,handler);
         UpdateAnimatorController(character);
     }
 
-    void UpdateProperties(EnemyCharacter character)
+    void UpdateProperties(EnemyCharacter character, MeleeAttack melee, BatAttack bat,EnemyStateHandler handler)
     {
+        if(melee != null)
+        {
+            _isAttacking = melee.IsAttacking;
+        }
+        else
+        {
+            _isAttacking = bat.IsAttacking;
+        }
+        if(handler.GetCurrentState() == handler.GetBlockState())
+        {
+            _isBlocking = true;
+        }
         // Obtenemos el estado actual del personaje
         _isStopped = character._state.MovementState == MovementState.Idle;
         _moveDirection = character._state.Velocity;
@@ -148,6 +165,15 @@ public class EnemyAnimations : MonoBehaviour
         if (_animator == null) return;
 
         // ✅ Actualizamos TODOS los parámetros existentes (evita errores)
+        var a = Random.Range(0, 1);
+        if(_isAttacking)
+        {
+            var name = a == 0 ? "Attacking1" : "Attacking2";
+            _animator.SetBool(name,_isAttacking);
+
+
+        }
+        _animator.SetBool("Blocking", _isBlocking);
         _animator.SetBool(_isGroundedHash, _isGrounded);
         _animator.SetBool(_isStoppedHash, _isStopped);
         _animator.SetFloat(_moveSpeedHash, _moveSpeed);

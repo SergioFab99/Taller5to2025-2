@@ -20,7 +20,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EnemySettingsList EnemySettings;
 
+    public MeleeAttack melee;
 
+    public BatAttack bat;
 
     public Transform testTarget;
 
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour
 
         character.UpdateInputs(enemyInput, behaviour);
 
-        _animations.AnimUpdate(Time.fixedDeltaTime, character);
+        _animations.AnimUpdate(Time.fixedDeltaTime, character,melee,bat, _stateHandler);
     }
 
     public Vector3 GetTarget(EnemyBehaviourState behaviour)
