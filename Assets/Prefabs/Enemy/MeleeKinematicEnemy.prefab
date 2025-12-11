@@ -245,7 +245,7 @@ MonoBehaviour:
   hitRadius: 1.2
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   windupTime: 1.5
   punchActiveTime: 0.5
   comboGap: 0.3
@@ -529,9 +529,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932431212010663614}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.067146555, y: 0.5156841, z: -0.04058518, w: 0.8531788}
   m_LocalPosition: {x: 0, y: 3.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.0193615, y: 2.0193615, z: 2.0193615}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8154641160407112774}
@@ -580,15 +580,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -273014336, guid: aeca1cafcbea2f04c968780e21faabf0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.68266666, y: 0.21068923}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2094462917618879732

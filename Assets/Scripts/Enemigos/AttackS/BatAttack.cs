@@ -62,6 +62,7 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
         phase = Phase.Windup;
 
         ai.StopMovement();
+        ai.character.UpdateInputs(new EnemyInput { Direction = ai.character.transform.forward, Move = ai.character.transform.forward * 0.35f }, ai.GetBehaviourState());
 
         Debug.Log($"{name} BAT WINDUP START");
 
@@ -136,29 +137,49 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
             return;
         }
 
-        Vector3 origin = ai.character.transform.position;
+        Vector3 origin = ai.character.transform.position + Vector3.up;
         Vector3 forward = ai.character.transform.forward;
-        bool hitSomething = false;
 
-        Collider[] cols = Physics.OverlapSphere(origin, ArcRadius, hitMask);
+        Collider[] hits = Physics.OverlapSphere(ai.character.transform.position + Vector3.up * 1.0f, ArcRadius, hitMask);
 
-        foreach (var col in cols)
+        bool hitLanded = false;
+
+        foreach (Collider hit in hits)
         {
-            Vector3 dir = col.transform.position - origin;
-            dir.y = 0;
+            if (!hit.CompareTag("Player"))
+                continue;
 
+            Vector3 dir = hit.transform.position - origin;
+            dir.y = 0;
             float angle = Vector3.Angle(forward, dir);
 
-            if (angle <= ArcAngle / 2f && col.TryGetComponent(out HealthController hp))
+            if (angle > ArcAngle * 0.5f)
+                continue;
+
+            var recv = hit.GetComponent<CombatHitReceiver>()
+                       ?? hit.GetComponentInChildren<CombatHitReceiver>()
+                       ?? hit.GetComponentInParent<CombatHitReceiver>();
+
+            if (recv != null)
             {
-                hp.TakeDamague(ai.EffectiveDamage(Damage));
-                hitSomething = true;
+                Vector3 hitPoint = hit.ClosestPoint(origin);
+
+                var hitInfo = new HitInfo(hit, hitPoint, (hitPoint - origin), damage: 15f, WeaponType.Fist, null);
+
+                recv.OnHit(hitInfo);
+
+                hitLanded = true;
                 hitConnectedThisSwing = true;
             }
+
+            break; 
         }
 
-        if (!hitSomething)
+        if (!hitLanded)
+        {
             Missed = true;
+            Debug.Log($"{name} BAT MISSED");
+        }
     }
     public void ManualUpdate()
     {
