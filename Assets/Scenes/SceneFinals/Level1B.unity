@@ -11370,81 +11370,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434921320}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &441508016
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 441508018}
-  - component: {fileID: 441508017}
-  m_Layer: 0
-  m_Name: ZonasIntyExt
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &441508017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441508016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e76d26933140040b5a3cccfb910719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 420521196}
-  exteriorClips:
-  - {fileID: 8300000, guid: b2f009acb353cad4cb9dc43709329db3, type: 3}
-  - {fileID: 8300000, guid: a30901185f3571d4f87a10c5c262e988, type: 3}
-  - {fileID: 8300000, guid: 8416229f17d7eae4f8c2dcf7705c5314, type: 3}
-  zones:
-  - center: {x: 0, y: 3.1, z: 0}
-    size: {x: 28.05, y: 13.78, z: 59.23}
-    enterClips:
-    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
-    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
-    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
-  - center: {x: 0.20000076, y: 3.1, z: -55.91}
-    size: {x: 31.3, y: 12.22, z: 22.5}
-    enterClips:
-    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
-    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
-    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
-  - center: {x: -37.3, y: 3.1, z: 1.8300018}
-    size: {x: 33.47, y: 14.13, z: 25.27}
-    enterClips:
-    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
-    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
-    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
-  - center: {x: 98.7, y: 3.1, z: -55.95}
-    size: {x: 60.3, y: 13.25, z: 20.25}
-    enterClips:
-    - {fileID: 8300000, guid: 5145181a36669f74fb9a3a7cbe9163ac, type: 3}
-    - {fileID: 8300000, guid: 5bf16914c2f549947999cbcd8800903a, type: 3}
-    - {fileID: 8300000, guid: de95e1c20341cc64e95baa7b62919c60, type: 3}
-  fadeDuration: 2
---- !u!4 &441508018
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441508016}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.2, y: 2.4, z: 67.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &449751041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54268,6 +54193,67 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7650971960033882994, guid: 5e1ce0a535afe404fafa03c529b7c410, type: 3}
+--- !u!1001 &1079250684728030223
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6009071059606382580, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 420521196}
+    - target: {fileID: 6585339464206017072, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_Name
+      value: ZonasIntyExt
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 67.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033313343478725320, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9808bd20281e3e044a402f25508e882c, type: 3}
 --- !u!1001 &1163358970318942809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54685,4 +54671,4 @@ SceneRoots:
   - {fileID: 1582500406}
   - {fileID: 2118232366}
   - {fileID: 1633028715}
-  - {fileID: 441508018}
+  - {fileID: 1079250684728030223}
