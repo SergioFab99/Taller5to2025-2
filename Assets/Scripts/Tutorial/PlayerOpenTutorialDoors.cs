@@ -11,6 +11,8 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
     //[SerializeField] private bool interact;
     [SerializeField] private bool openDoor1, openDoor2, unlockFinalEnemies;
     private OpenDoor openDoor;
+
+    private bool input; 
     private void Awake()
     {
     }
@@ -31,10 +33,16 @@ public class PlayerOpenTutorialDoors : MonoBehaviour
         }
     }
 
+    public void GetInput(bool input)
+    {
+         this.input = input;
+    }
+
+
     void Update()
     {
         //UpdateInput();
-        if(onTrigger && Input.GetKeyDown(KeyCode.E) && Time.timeScale == 1)
+        if(onTrigger && input && Time.timeScale == 1)
         {
             Deactivate();
             ActiveCheckPoints();

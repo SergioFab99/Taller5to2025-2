@@ -56712,6 +56712,7 @@ MonoBehaviour:
   EnemyMask:
     serializedVersion: 2
     m_Bits: 384
+  _requestedThrow: 0
   cam: {fileID: 1291631320180404594}
   DefaultBlockDodgeCounterSettings: {fileID: 11400000, guid: 6357b97b73b71fb48bc922772c1ad34c, type: 2}
   playerCharacter: {fileID: 0}
@@ -71515,6 +71516,8 @@ MonoBehaviour:
   playerAnimation: {fileID: 8977182844544509019}
   playerAudio: {fileID: 1560911709379201261}
   healthController: {fileID: 1158589162456284748}
+  doors: {fileID: 443029439}
+  display: {fileID: 7464995353946837193}
   contactDamage: 1
   _characterState:
     Grounded: 0
