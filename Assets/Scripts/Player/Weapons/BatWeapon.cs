@@ -93,7 +93,7 @@ public class BatWeapon : Weapon
         Gizmos.color = Color.green;
         if (playerCombat != null)
         {
-            Gizmos.DrawCube(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box);
+            Gizmos.DrawWireCube(playerCombat.hitPoint.transform.position, (settings as BatWeaponSettings).box);
 
         }
     }

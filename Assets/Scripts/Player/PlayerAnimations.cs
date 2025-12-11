@@ -23,7 +23,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         _playerCombat = playerCombat;
         _playerCombat.OnAttack += Attack;
-        
+        Debug.Log("[Diag] PlayerAnimation.Initialize: subscribing to OnAttack");
         
         
     }
@@ -37,6 +37,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Attack(int side)
     {
+        Debug.Log($"[Diag] PlayerAnimation.Attack(side={side}) called");
         switch(side)
         {
             case 0:
