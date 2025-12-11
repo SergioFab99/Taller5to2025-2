@@ -80,6 +80,11 @@ public class Player : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
         var input = _inputActions.Player;
+        if (doors != null)
+        {
+        doors.GetInput(input.Interact.WasPressedThisFrame());
+        }
+        display.GetInput(input.Interact.WasPressedThisFrame());
         if(playerCamera.CheckIsViewTarget(playerCharacter.transform))
         {
             Debug.Log("TargetOnView");
@@ -133,8 +138,6 @@ public class Player : MonoBehaviour
 
         playerCombat.CombatTickUpdate(Time.deltaTime);
 
-        doors?.GetInput(input.Interact.WasPressedThisFrame());
-        display?.GetInput(input.Interact.WasPressedThisFrame());
     }
 
     private void LateUpdate()
