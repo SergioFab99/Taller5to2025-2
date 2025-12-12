@@ -24,7 +24,6 @@ public class BatAttack : MonoBehaviour, IEnemyAttack
     public float recoveryTime = 1.4f;
     public int totalHits = 3;
 
-    private bool _isAttacking = false;
     public bool IsAttacking { get; private set; }
     public bool IsFinished { get; private set; }
     public bool WasInterrupted { get; private set; }

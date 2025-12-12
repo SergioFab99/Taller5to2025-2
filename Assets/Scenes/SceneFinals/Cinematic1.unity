@@ -10047,7 +10047,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 14.3
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -10073,8 +10073,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336040515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9999996, z: 0.0008988169, w: 0}
-  m_LocalPosition: {x: -23.764229, y: 2.894781, z: 43.841278}
+  m_LocalRotation: {x: 0.06652623, y: -0.010296124, z: 0.00068651984, w: 0.9977313}
+  m_LocalPosition: {x: -19.739328, y: 0.95478106, z: 38.582275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12147,11 +12147,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2418263170243750057, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.w
-      value: -0.00001266269
+      value: -0.000012662688
       objectReference: {fileID: 0}
     - target: {fileID: 2418263170243750057, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.x
-      value: -0.00000088305757
+      value: -0.00000088305467
       objectReference: {fileID: 0}
     - target: {fileID: 2545832728877035831, guid: 7b5cabf7c05f60a4791fe26af06595cc, type: 3}
       propertyPath: m_SceneBindings.Array.size

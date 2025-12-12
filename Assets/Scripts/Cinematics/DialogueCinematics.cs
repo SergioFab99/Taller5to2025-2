@@ -43,7 +43,7 @@ public class DialogueCinematics : MonoBehaviour
             {
                 NextDialogueLine();
             }*/
-            if (Input.GetKeyDown(KeyCode.Space) || (Input.GetMouseButton(0) || Input.GetMouseButton(1)) && canChangeLines)
+            if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && canChangeLines)
             {
                 NextDialogueLine();
             }

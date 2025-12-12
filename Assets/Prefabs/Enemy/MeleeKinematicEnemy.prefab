@@ -193,6 +193,8 @@ MonoBehaviour:
   _stateHandler: {fileID: 359851920969218421}
   agent: {fileID: 5161424549491569845}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
+  melee: {fileID: 7856147728866338547}
+  bat: {fileID: 0}
   testTarget: {fileID: 0}
 --- !u!114 &359851920969218421
 MonoBehaviour:

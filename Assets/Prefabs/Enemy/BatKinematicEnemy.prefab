@@ -173,6 +173,8 @@ MonoBehaviour:
   _stateHandler: {fileID: 2425512085894206269}
   agent: {fileID: 3557529093066070415}
   EnemySettings: {fileID: 11400000, guid: 1fadfe0db10182e47ad999181c930b76, type: 2}
+  melee: {fileID: 0}
+  bat: {fileID: 5454063011830949721}
   testTarget: {fileID: 0}
 --- !u!114 &2425512085894206269
 MonoBehaviour:
@@ -234,7 +236,7 @@ MonoBehaviour:
   swatRadius: 3
   swatCooldown: 0.3
   windupTime: 1.5
-  swingTime: 0.3
+  swingTime: 1
   recoveryTime: 1.5
   totalHits: 3
 --- !u!114 &-6534006921015950821
@@ -249,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a95a6f3f49d84ea42bfb61f75537a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconRoot: {fileID: 5852480172608776237, guid: 59e9aaa46b3b2bc4ab13c51b05151464, type: 3}
+  iconRoot: {fileID: 7720994654030520323}
   iconRenderer: {fileID: 8023513638774849016}
   idleIcon: {fileID: 749323904, guid: aeca1cafcbea2f04c968780e21faabf0, type: 3}
   alertIcon: {fileID: 1938006202, guid: aeca1cafcbea2f04c968780e21faabf0, type: 3}
@@ -286,7 +288,7 @@ GameObject:
   - component: {fileID: 7528820550147303855}
   - component: {fileID: 1642273879035486970}
   - component: {fileID: 6192589454953771830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -729,10 +731,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f4df6096304f1a347be6ca5512b09314, type: 3}
       propertyPath: m_Name
       value: Neutral Idle
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: f4df6096304f1a347be6ca5512b09314, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1082271958561512970, guid: f4df6096304f1a347be6ca5512b09314, type: 3}
       propertyPath: m_Layer
